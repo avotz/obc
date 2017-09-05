@@ -71,9 +71,14 @@ class RegisterUserController extends Controller
      */
     protected function create(array $data)
     {
-        $partner = User::findOrFail($data['associate_private_code']);
+        $partner = User::whereHas('roles', function($q){
+                        $q->where('name', 'partner');
+                    })->where('active', 1)
+                    ->where('private_code', $data['associate_private_code'])
+                    ->first();
 
         $data['role'] = Role::whereName('user')->first();
+        $data['active'] = 1;
         
         $user = $this->userRepo->store($data);
 

@@ -797,7 +797,7 @@ window.Vue = __webpack_require__(35);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(36));
+Vue.component('check-partner', __webpack_require__(36));
 
 var app = new Vue({
   el: '#app'
@@ -41800,9 +41800,9 @@ var Component = __webpack_require__(37)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\xampp\\htdocs\\obc\\resources\\assets\\js\\components\\Example.vue"
+Component.options.__file = "D:\\xampp\\htdocs\\obc\\resources\\assets\\js\\components\\CheckPartnerPrivateCode.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] CheckPartnerPrivateCode.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -41811,9 +41811,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7d279ffc", Component.options)
+    hotAPI.createRecord("data-v-b9231230", Component.options)
   } else {
-    hotAPI.reload("data-v-7d279ffc", Component.options)
+    hotAPI.reload("data-v-b9231230", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -41932,20 +41932,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+
+            associate_private_code: "",
+            partner: {},
+            loader: false
+
+        };
+    },
+
+    methods: {
+        keydown: function keydown() {
+            console.log(this.associate_private_code);
+
+            if (this.associate_private_code) this.searchPartner(this.associate_private_code);
+        },
+
+        searchPartner: _.debounce(function (search, loading) {
+
+            axios.get("/partners/" + search + "/check/").then(function (response) {
+
+                loading(false);
+            }).catch(function (e) {
+                console.log(e);
+                loading(false);
+            });
+        }, 500)
+    },
     mounted: function mounted() {
-        console.log('Component mounted.');
+        console.log('Component CheckPartnerPrivateCode.');
     }
 });
 
@@ -41954,27 +41972,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_vm._v("\n                    I'm an example component!\n                ")])])])])])
-}]}
+  return _c('div', [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.associate_private_code),
+      expression: "associate_private_code"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "associate_private_code"
+    },
+    domProps: {
+      "value": (_vm.associate_private_code)
+    },
+    on: {
+      "keydown": function($event) {
+        _vm.keydown()
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.associate_private_code = $event.target.value
+      }
+    }
+  })])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7d279ffc", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-b9231230", module.exports)
   }
 }
 

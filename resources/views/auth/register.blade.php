@@ -19,7 +19,9 @@
                         </div>
                         <div class="block-content block-content-full block-content-narrow">
                             <!-- Login Title -->
-                            <h1 class="h2 font-w600 push-30-t push-5">OBC</h1>
+                            <div class="logo">
+                                <h1 class="h2 font-w600 push-5"><img src="/img/logo-obc.png" alt="OBC"></h1>
+                            </div>
                             <p>Welcome to OBC Account Creation</p>
                             <!-- END Login Title -->
 

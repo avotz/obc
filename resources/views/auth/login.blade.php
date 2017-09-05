@@ -20,7 +20,10 @@
                         </div>
                         <div class="block-content block-content-full block-content-narrow">
                             <!-- Login Title -->
-                            <h1 class="h2 font-w600 push-30-t push-5">OBC</h1>
+                            <div class="logo">
+                                <h1 class="h2 font-w600 push-5"><img src="/img/logo-obc.png" alt="OBC"></h1>
+                            </div>
+                            
                             <p>Welcome, please login.</p>
                             <!-- END Login Title -->
 
@@ -74,7 +77,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6 col-md-4">
-                                        <button class="btn btn-block btn-primary" type="submit"><i class="si si-login pull-right"></i> Login</button>
+                                        <button class="btn btn-primary" type="submit"><i class="si si-login pull-right"></i> Login</button>
+                                        <a href="{{ route('register') }}" class="btn btn-success"><i class="si si-user pull-right"></i> Register</a>
                                 
 
                                         <a class="btn btn-link" href="{{ route('password.request') }}">

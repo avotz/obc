@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('profile', 'UserController@profile');
+Route::get('partners/{privateCode}/check', 'UserController@checkPrivateCode');
 //Auth::routes();
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');

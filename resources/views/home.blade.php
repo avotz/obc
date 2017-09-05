@@ -6,7 +6,7 @@
  <div class="row items-push">
      <div class="col-sm-7">
          <h1 class="page-heading">
-             Dashboard <small>Subtitle.</small>
+             Dashboard <small>Admin.</small>
          </h1>
      </div>
      <div class="col-sm-5 text-right hidden-xs">

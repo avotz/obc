@@ -26,7 +26,10 @@ class Partner implements Rule
      */
     public function passes($attribute, $value)
     {
-        return User::find($value);
+        return User::whereHas('roles', function($q){
+                $q->where('name', 'partner');
+            })->where('active', 1)
+            ->where('private_code', $value)->first();
     }
 
     /**
@@ -36,6 +39,6 @@ class Partner implements Rule
      */
     public function message()
     {
-        return 'The :attribute not found like partner';
+        return 'The :attribute not found like partner or is inactive';
     }
 }

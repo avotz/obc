@@ -11,46 +11,9 @@
                             <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
                                 <i class="fa fa-times"></i>
                             </button>
-                            <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
-                            <div class="btn-group pull-right">
-                                <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
-                                    <i class="si si-drop"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
-                                    <li>
-                                        <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
-                                            <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
-                                            <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="theme" data-theme="assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
-                                            <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="theme" data-theme="assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
-                                            <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="theme" data-theme="assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
-                                            <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
-                                            <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a class="h5 text-white" href="start_backend.html">
-                                <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">ne</span>
+                            
+                            <a class="h5 text-white" href="/">
+                                <img src="/img/favicons/favicon-32x32.png" alt="OBC"> <span class="h6 font-w600 sidebar-mini-hide">Online Business Centers</span>
                             </a>
                         </div>
                         <!-- END Side Header -->
@@ -59,19 +22,63 @@
                         <div class="side-content">
                             <ul class="nav-main">
                                 <li>
-                                    <a class="active" href="start_backend.html"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                                    <a class="active" href="/"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Home</span></a>
                                 </li>
-                                <li class="nav-main-heading"><span class="sidebar-mini-hide">Header</span></li>
+                                <li class="nav-main-heading"><span class="sidebar-mini-hide">Menu</span></li>
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Dropdown</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-layers"></i><span class="sidebar-mini-hide">Publications</span></a>
                                     <ul>
                                         <li>
-                                            <a href="start_backend.html">Link #1</a>
+                                            <a href="#">Public Area</a>
                                         </li>
                                         <li>
-                                            <a href="start_backend.html">Link #2</a>
+                                            <a href="#">Private Zone</a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Create Transaction</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Quotation Request</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Credit Application</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Shipping Request</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Purchase Order</a>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Partner List</span></a>
+                                   
+                                </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Commissions Paid</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Unpaid commissions</a>
+                                        </li>
+                                       
+                                        
+                                    </ul>
+                                </li>
+                                
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Manage Account</span></a>
+                                   
+                                </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-call-out"></i><span class="sidebar-mini-hide">IT Support </span></a>
+                                   
                                 </li>
                             </ul>
                         </div>

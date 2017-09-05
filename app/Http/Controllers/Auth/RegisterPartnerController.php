@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Role;
 use App\Repositories\UserRepository;
+use App\Mail\NewPartner;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -40,6 +41,9 @@ class RegisterPartnerController extends Controller
     {
         $this->userRepo = $userRepo;
         $this->middleware('guest');
+        $this->administrators = User::whereHas('roles', function ($query){
+            $query->where('name',  'admin');
+        })->get();
     }
 
     /**
@@ -85,6 +89,15 @@ class RegisterPartnerController extends Controller
         $data['role'] = Role::whereName('partner')->first();
 
         $user = $this->userRepo->store($data);
+
+        try {
+            
+            \Mail::to($this->administrators)->send(new NewPartner($user));
+
+        }catch (\Swift_TransportException $e)  //Swift_RfcComplianceException
+        {
+            \Log::error($e->getMessage());
+        }
         
         return $user;
     }
