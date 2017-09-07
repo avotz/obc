@@ -18,6 +18,22 @@ class User extends Authenticatable
         'activity', 'email', 'password','private_code', 'active'
     ];
 
+    protected $appends = array('public_code');
+    
+    
+    
+        public function getPublicCodeAttribute()
+        {
+            // foreach($this->company->countries as $country)
+            // {
+            //     $countriesCodes[] = $country->code;
+            // }
+            // $countries= implode('|',  $countriesCodes);
+
+            return trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3);
+        }
+       
+         
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -90,5 +106,14 @@ class User extends Authenticatable
     public function company()
     {
         return $this->hasOne(Company::class);
+    }
+
+    public function toArray()
+    {
+        return [
+            
+            'email' => $this->email,
+            'company' => $this->company
+        ];
     }
 }

@@ -17,3 +17,38 @@
         }
     }
 }
+
+.alert{
+	position: fixed;
+	top: 0;
+	left: 0;/*50%;*/
+	right: 0;
+	z-index: 9999;
+	min-width: 100%; /*20%;*/
+	/*transform: translate(-50%, 0);*/
+	text-align:center;
+	margin-bottom:0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+
+#infoBox{
+	display:none;
+}
+.avatar-profile{
+    margin: 0 auto;
+    width: 140px;
+    padding: 3px;
+    /*border: 3px solid #d2d6de;*/
+}
+.UploadButton{
+    margin-top: 10px;
+}
+.UploadButton form{
+	right:0;
+	bottom:0;
+}

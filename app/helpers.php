@@ -20,6 +20,11 @@ function age($birthdate)
 {
 	return $birthdate;
 }
+
+function zerofill($valor, $longitud){
+    $res = str_pad($valor, $longitud, '0', STR_PAD_LEFT);
+    return $res;
+}
 function flash($message, $level = 'info')
 {
 	session()->flash('flash_message',$message);
@@ -73,6 +78,17 @@ function dayName($day)
         $dayName = "Sábado";
 
     return $dayName;
+}
+function getFlag($country)
+{
+   
+    $url = '';
+    
+    $url = "/img/flags/". str_slug($country).".png";
+
+    return $url;
+        
+     
 }
 function getAvatar($user)
 {

@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('checkPrivateCode');
+        $this->middleware('auth');
     }
 
     /**
@@ -26,12 +26,5 @@ class UserController extends Controller
         return view('home');
     }
 
-    public function checkPrivateCode($code)
-    {
-       
-        return User::whereHas('roles', function($q){
-            $q->where('name', 'partner');
-        })->where('active', 1)
-        ->where('private_code', $code)->first();
-    }
+   
 }

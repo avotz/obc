@@ -3,12 +3,13 @@
 use Illuminate\Database\Seeder;
 use App\Role;
 use App\Company;
+use App\Country;
 use App\User;
 use App\Profile;
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
-        'users','profiles','roles','role_user', 'partner_user','companies'
+        'users','profiles','roles','role_user', 'partner_user','companies','countries'
     ];
     /**
      * Run the database seeds.
@@ -62,6 +63,11 @@ class DatabaseSeeder extends Seeder
         ]);
         $company = factory(Company::class, 1)->create([
             'user_id' => $partner->id,
+            
+        ]);
+        $country = factory(Country::class, 1)->create([
+            'name' => 'Costa Rica',
+            'code' => 'CRC'
             
         ]);
         

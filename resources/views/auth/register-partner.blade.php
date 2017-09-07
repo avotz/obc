@@ -1,5 +1,7 @@
 @extends('layouts.login')
-
+@section('css')
+    <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
+@endsection
 @section('content')
 <!-- Register Content -->
 <div class="content overflow-hidden">
@@ -89,8 +91,11 @@
                             <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <select name="country" id="country" class="form-control">
-                                            <option value="Costa Rica">Costa Rica</option>
+                                        <select class="js-select2 form-control" name="country[]" id="country" style="width: 100%;" data-placeholder="Choose country.." multiple>
+                                            <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                                            @foreach($countries as $country)    
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
                                         </select>
                                         <label for="country"> Country</label>
                                         @if ($errors->has('country'))
@@ -101,6 +106,7 @@
                                     </div>
                                 </div>
                             </div>
+                           
                             <div class="form-group{{ $errors->has('towns') ? ' has-error' : '' }}">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
@@ -352,4 +358,10 @@
             </div>
         </div>
         <!-- END Terms Modal -->
+@endsection
+@section('scripts')
+<script src="/js/plugins/select2/select2.full.min.js"></script>
+<script>
+    jQuery('.js-select2').select2();
+</script>
 @endsection

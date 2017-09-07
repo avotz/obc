@@ -16,25 +16,22 @@
                             <h3 class="block-title">Company data</h3>
                         </div>
                         <div class="block-content block-content-full block-content-narrow">
-                            <div class="form-group{{ $errors->has('associate_private_code') ? ' has-error' : '' }} {{ $errors->has('associate_private_code_not_found') ? ' has-error' : '' }}">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-success">
-                                        <!-- <input class="form-control" type="text" id="associate_private_code" name="associate_private_code" > -->
-                                        <check-partner></check-partner>	
-                                        <label for="associate_private_code">Associate private code</label>
-                                        @if ($errors->has('associate_private_code'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('associate_private_code') }}</strong>
-                                            </span>
-                                        @endif
-                                        @if ($errors->has('associate_private_code_not_found'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('associate_private_code_not_found') }} </strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
+                                    
+                            <check-partner></check-partner>
+                            <div class="err-lara {{ $errors->has('applicant_name') ? ' has-error' : '' }}">
+                                @if ($errors->has('associate_private_code'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('associate_private_code') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('associate_private_code_not_found'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('associate_private_code_not_found') }} </strong>
+                                    </span>
+                                @endif	
                             </div>
+                           
+                            
                         
 
                         </div>

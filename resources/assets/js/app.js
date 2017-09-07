@@ -14,9 +14,39 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+Vue.component('alert', require('./components/Alert.vue'));
 Vue.component('check-partner', require('./components/CheckPartnerPrivateCode.vue'));
+Vue.component('update-private-code', require('./components/UpdatePrivateCode.vue'));
+
+window.bus = new Vue();
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        message: {
+          show:false,
+          text: "",
+          type: "info"
+        }
+     },
+     created() {
+       bus.$on('alert', this.alertMessage);
+       
+     },
+     methods:{
+          alertMessage (message, type = "info") {
+           console.log('aler from main app');
+           this.message.text = message;
+           this.message.show = true;
+           this.message.type = type;
+           setTimeout(
+             () => {
+               this.message.show = false,
+               this.message.text = ""
+             },
+             3000
+           )
+         }
+     
+     }
 });

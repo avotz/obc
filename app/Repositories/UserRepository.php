@@ -26,7 +26,10 @@ class UserRepository extends DbRepository{
     {
         
         $data = $this->prepareData($data);
-       
+        
+        $countriesArray = $data['country'];
+        $data['country'] = json_encode($data['country']);
+        
         $user = $this->model->create($data);
 
         $role = (isset($data['role'])) ? $data['role'] : Role::whereName('user')->first();
@@ -36,9 +39,10 @@ class UserRepository extends DbRepository{
 
         $user->profile()->create($data);
         
-        if( $role->name == 'partner')
-            $user->company()->create($data);
-        
+        if( $role->name == 'partner'){
+            $company = $user->company()->create($data);
+            $company->countries()->attach($countriesArray);
+        }
        
         return $user;
     }

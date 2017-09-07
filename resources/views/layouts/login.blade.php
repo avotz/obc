@@ -25,9 +25,11 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
 
     <!-- OneUI CSS framework -->
+    @yield('css')
     <link rel="stylesheet" id="css-main" href="/css/oneui.min.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -44,5 +46,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- <script src="assets/js/core/jquery.min.js"></script> -->
     <script src="/js/oneui.min.js"></script>
+    @yield('scripts')
 </body>
 </html>

@@ -14,9 +14,19 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');
+Route::get('partners/{privateCode}/check', 'PartnerController@checkPrivateCode');
+Route::get('profile', 'ProfileController@show');
 
-Route::get('profile', 'UserController@profile');
-Route::get('partners/{privateCode}/check', 'UserController@checkPrivateCode');
+Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
+{
+    Route::put('/{partner}/privatecode', 'PartnerController@updatePrivateCode');
+    Route::post('/profile/avatars', 'ProfileController@avatar');
+    Route::put('/companies/{company}', 'PartnerController@updateCompany');
+
+});
+
+
+
 //Auth::routes();
 // Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');

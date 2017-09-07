@@ -30,11 +30,11 @@ class HomeController extends Controller
         }
 
         if(auth()->user()->hasRole('partner'))
-            return view('home-partner');
+            return view('partner.home');
 
         if(auth()->user()->hasRole('user')){
     
-            return view('home-user');
+            return view('user.home');
         }
 
         return view('home');

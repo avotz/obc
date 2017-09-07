@@ -62,3 +62,15 @@ $factory->define(App\Company::class, function (Faker $faker) {
       
     ];
 });
+
+$factory->define(App\Country::class, function (Faker $faker) {
+    static $password;
+
+    return [
+        'name'=> $faker->country,
+        'code'=> $faker->countryCode,
+        'currency'=> $faker->currencyCode
+        
+      
+    ];
+});

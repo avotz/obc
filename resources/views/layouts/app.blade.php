@@ -28,12 +28,17 @@
     <!-- Page JS Plugins CSS go here -->
 
     <!-- OneUI CSS framework -->
+    @yield('css')
     <link rel="stylesheet" id="css-main" href="/css/oneui.min.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   
 </head>
 <body>
     <div id="app">
+    
+    
+
     <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
             
             @include('layouts/partials/side-overlay')
@@ -42,7 +47,7 @@
             
             @include('layouts/partials/header')
             
-
+            
             <!-- Main Container -->
             <main id="main-container">
                 @yield('content')
@@ -57,7 +62,12 @@
        
 
 
-        
+    <alert :type="message.type" v-show="message.show" >@{{ message.text }}</alert>
+    @if (session()->has('flash_message'))
+
+      <alert type="{!! session()->get('flash_message_level') !!}" >{!! session()->get('flash_message') !!}</alert>
+
+    @endif
     </div>
 
     <!-- Scripts -->
@@ -66,6 +76,8 @@
     <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
     <script src="/js/plugins/bootstrap.min.js"></script>
     <script src="/js/oneui.min.js"></script>
+
+    @yield('scripts')
 
 </body>
 </html>

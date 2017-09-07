@@ -41,7 +41,7 @@
                           
                             <form class="js-validation-login form-horizontal push-30-t push-50" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary floating">
                                             <input class="form-control" type="text" id="email" name="email" {{ old('email') }}>
@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary floating">
                                             <input class="form-control" type="password" id="password" name="password">
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
                                         <button class="btn btn-primary" type="submit"><i class="si si-login pull-right"></i> Login</button>
                                         <a href="{{ route('register') }}" class="btn btn-success"><i class="si si-user pull-right"></i> Register</a>
                                 

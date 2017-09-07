@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Role;
+use App\Country;
 use App\Repositories\UserRepository;
 use App\Mail\NewPartner;
 use App\Http\Controllers\Controller;
@@ -61,7 +62,7 @@ class RegisterPartnerController extends Controller
             'activity' => 'required',
             'phones' => 'required|string|max:255',
             'physical_address' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'country' => 'required',
             'towns' => 'required|string|max:255',
             'web_address' => 'required|string|max:255',
             'legal_name' => 'required|string|max:255',
@@ -87,7 +88,7 @@ class RegisterPartnerController extends Controller
     {
        
         $data['role'] = Role::whereName('partner')->first();
-
+       
         $user = $this->userRepo->store($data);
 
         try {
@@ -109,8 +110,9 @@ class RegisterPartnerController extends Controller
      */
      public function showRegistrationForm()
      {
- 
-         return view('auth.register-partner');
+          $countries = Country::all();
+
+         return view('auth.register-partner', compact('countries'));
      }
 
 

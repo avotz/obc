@@ -78,7 +78,7 @@ class RegisterUserController extends Controller
                     ->first();
 
         $data['role'] = Role::whereName('user')->first();
-        $data['active'] = 1;
+        
         
         $user = $this->userRepo->store($data);
 
