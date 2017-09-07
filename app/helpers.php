@@ -105,16 +105,16 @@ function getAvatar($user)
         
      
 }
-function getLogo($clinic)
+function getLogo($company)
 {
    
 
     $url = '';
     
-    if(Storage::disk('public')->exists('offices/'. $clinic->id.'/photo.jpg'))
-        $url = Storage::url('offices/'.$clinic->id.'/photo.jpg');
+    if(Storage::disk('public')->exists('companies/'. $company->id.'/logo.jpg'))
+        $url = Storage::url('companies/'.$company->id.'/logo.jpg');
     else
-        $url = "/img/logo.png";
+        $url = "/img/logo-obc.png";
 
     return $url;
         

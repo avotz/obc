@@ -6,6 +6,8 @@ use App\User;
 use App\Role;
 use App\Repositories\UserRepository;
 use App\Rules\Partner;
+use App\Mail\NewUser;
+use App\Mail\NewUserWelcome;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -83,6 +85,18 @@ class RegisterUserController extends Controller
         $user = $this->userRepo->store($data);
 
         $user->addPartner($partner);
+
+        try {
+            
+            \Mail::to($partner)->send(new NewUser($user));
+            \Mail::to($user)->send(new NewUserWelcome($user));
+
+        }catch (\Swift_TransportException $e)  //Swift_RfcComplianceException
+        {
+            \Log::error($e->getMessage());
+        }
+        
+        
         
         return $user;
         

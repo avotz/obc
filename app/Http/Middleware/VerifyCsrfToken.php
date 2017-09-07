@@ -13,5 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/partner/profile/avatars',
+        '/partner/company/logo',
     ];
 }

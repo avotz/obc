@@ -218,7 +218,7 @@
                             </div>
                             <div class="block-content block-content-full block-content-narrow">
                             <div class="form-group{{ $errors->has('applicant_name') ? ' has-error' : '' }}">
-                                            <div class="col-xs-12">
+                                        <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name') }}">
                                                     <label for="applicant_name"> Applicant name</label>

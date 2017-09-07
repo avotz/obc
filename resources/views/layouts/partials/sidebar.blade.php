@@ -55,7 +55,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-users"></i><span class="sidebar-mini-hide">Partner List</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/users"><i class="si si-users"></i><span class="sidebar-mini-hide">Partner List</span></a>
                                    
                                 </li>
                                 <li>
@@ -73,7 +73,7 @@
                                 </li>
                                 
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Manage Account</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/profile"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Manage Account</span></a>
                                    
                                 </li>
                                 <li>

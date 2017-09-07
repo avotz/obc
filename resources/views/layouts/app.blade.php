@@ -43,7 +43,7 @@
             
             @include('layouts/partials/side-overlay')
            
-            @include('layouts/partials/sidebar')
+            @include('layouts/partials/sidebar', ["role" => auth()->user()->roles->first()])
             
             @include('layouts/partials/header')
             

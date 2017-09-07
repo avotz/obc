@@ -12,11 +12,11 @@
            
             <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/partner/profile/avatars">Change</a>
         </div>
-        <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn">Partner ID: {{ $user->public_code }}-@foreach($user->company->countries as $country){{ $country->code }} <img src="{{ getFlag($country->code) }}" alt="{{ $country->code }}">  @endforeach</h2>
-        <h2 class="h5 text-white-op animated zoomIn">Private Code: </h2>
-       
-        <update-private-code :partner-id="{{ $user->id }}" :private-code="'{{ $user->private_code }}'"></update-private-code>    
+        <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>
+        <h2 class="h5 text-white-op animated zoomIn">{{ $user->profile->position_held }}</h2>
+        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->usr_public_code }}</h2>
+        
+    
        
        
         
@@ -28,26 +28,23 @@
 <!-- Stats -->
 <div class="content bg-white border-b">
     <div class="row items-push text-uppercase">
-        <div class="col-xs-6 col-sm-2">
+        <div class="col-xs-6 col-sm-3">
             <div class="font-w700 text-gray-darker animated fadeIn">Quotations</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">17980</a>
         </div>
-        <div class="col-xs-6 col-sm-2">
+        <div class="col-xs-6 col-sm-3">
             <div class="font-w700 text-gray-darker animated fadeIn">Credits</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">27</a>
         </div>
-        <div class="col-xs-6 col-sm-2">
+        <div class="col-xs-6 col-sm-3">
             <div class="font-w700 text-gray-darker animated fadeIn">Shippings</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">1360</a>
         </div>
-        <div class="col-xs-6 col-sm-2">
+        <div class="col-xs-6 col-sm-3">
             <div class="font-w700 text-gray-darker animated fadeIn">Orders</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">1360</a>
         </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Partners</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="/partner/users">10</a>
-        </div>
+       
     </div>
 </div>
 <!-- END Stats -->
@@ -68,181 +65,89 @@
                     <h3 class="block-title"><i class="fa fa-home"></i> Company</h3>
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
-                <div class="col-xs-12 text-center" >
-                            <img src="{{ getLogo($user->company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
+                <div class="form-horizontal push-50">
+                        <div class="col-xs-12 text-center push-30" >
+                            <img src="{{ getLogo($user->partners->first()->company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
                         
-                            <a class="UploadButton UploadButtonLogo btn btn-xs btn-default btn-block" id="UploadLogo" data-url="/partner/company/logo">Change Logo</a>
+                           
                         </div>
-                    <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/partner/companies/{{$user->company->id}}">
-                         <input type="hidden" name="_method" value="PUT">
-                                {{ csrf_field() }}
+                  
                        
-                    <div class="form-group" >
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                {{ $user->company->company_name }}
-                                <label for="company_name">Company Name</label>
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->company_name }}
+                                    <label for="company_name">Company Name</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group" >
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                {{ $user->company->identification_number }}
-                                <label for="identification_number">Company identification number</label>
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->identification_number }}
+                                    <label for="identification_number">Company identification number</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                         
-                    <div class="form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <select name="activity" id="activity"  class="form-control">
-                                    <option value=""></option>
-                                    <option value="1" @if($user->activity == 1) selected="selected" @endif>Consumer</option>
-                                    <option value="2" @if($user->activity == 2) selected="selected" @endif>Supplier</option>
-                                </select>
-                                <label for="activity">  Activity on the OBC platform</label>
-                                @if ($errors->has('activity'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('activity') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->activity }}
+                                    <label for="activity">Activity on the OBC platform</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('phones') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="phones" name="phones" value="{{$user->company->phones }}">
-                                <label for="phones"> Phones</label>
-                                @if ($errors->has('phones'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phones') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->phones }}
+                                    <label for="phones">Phones</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('physical_address') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="physical_address" name="physical_address" value="{{ $user->company->physical_address }}">
-                                <label for="physical_address"> Physical address</label>
-                                @if ($errors->has('physical_address'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('physical_address') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->physical_address }}
+                                    <label for="physical_address">Physical address</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <select class="js-select2 form-control" name="country[]" id="country" style="width: 100%;" data-placeholder="Choose country.." multiple >
-                                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                    @foreach($user->company->countries as $country)    
-                                        <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="country"> Country</label>
-                                @if ($errors->has('country'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('country') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    
+                                        @foreach($user->partners->first()->company->countries as $item)
+                                        <div>
+                                            {{ $item->name }}
+                                        </div>
+                                        @endforeach
+                                    
+                                    <label for="country">Country</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                
-                    <div class="form-group{{ $errors->has('towns') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="towns" name="towns" value="{{ $user->company->towns }}">
-                                <label for="towns"> Towns</label>
-                                @if ($errors->has('towns'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('towns') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->towns }}
+                                    <label for="towns">Towns</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('web_address') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="web_address" name="web_address" value="{{ $user->company->web_address }}">
-                                <label for="web_address"> Web address</label>
-                                @if ($errors->has('web_address'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('web_address') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="form-group" >
+                            <div class="col-xs-12">
+                                <div class="form-material form-material-success">
+                                    {{ $user->partners->first()->company->web_address }}
+                                    <label for="web_address">Web address</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('legal_name') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="legal_name" name="legal_name" value="{{ $user->company->legal_name }}">
-                                <label for="legal_name"> Name of the legal representative</label>
-                                @if ($errors->has('legal_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('legal_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('legal_first_surname') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="legal_first_surname" name="legal_first_surname" value="{{ $user->company->legal_first_surname }}">
-                                <label for="legal_first_surname"> First surname</label>
-                                @if ($errors->has('legal_first_surname'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('legal_first_surname') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('legal_second_surname') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="text" id="legal_second_surname" name="legal_second_surname" value="{{ $user->company->legal_second_surname }}">
-                                <label for="legal_second_surname"> Second surname</label>
-                                @if ($errors->has('legal_second_surname'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('legal_second_surname') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('legal_email') ? ' has-error' : '' }}">
-                        <div class="col-xs-12">
-                            <div class="form-material form-material-success">
-                                <input class="form-control" type="email" id="legal_email" name="legal_email" value="{{ $user->company->legal_email }}">
-                                <label for="legal_email">Email</label>
-                                @if ($errors->has('legal_email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('legal_email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12 col-sm-6 col-md-5">
-                            <button class="btn btn-block btn-success" type="submit">Update</button>
-                        </div>
-                    </div>
-                </form>
+                    
+                </div>
                 </div>
             </div>
-            <!-- END Timeline -->
+            <!-- END Company Data -->
         </div>
         <div class="col-sm-5 col-lg-4">
             <!-- Products -->
@@ -304,6 +209,19 @@
                                 @if ($errors->has('position_held'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('position_held') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                        <div class="col-xs-12">
+                            <div class="form-material form-material-success">
+                                <input class="form-control" type="text" id="phone" name="phone" value="{{ $user->profile->phone }}">
+                                <label for="position_held"> Phone</label>
+                                @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
                             </div>

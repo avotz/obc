@@ -21,7 +21,21 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
 {
     Route::put('/{partner}/privatecode', 'PartnerController@updatePrivateCode');
     Route::post('/profile/avatars', 'ProfileController@avatar');
+    Route::post('/company/logo', 'PartnerController@logoCompany');
     Route::put('/companies/{company}', 'PartnerController@updateCompany');
+    Route::put('/{partner}', 'PartnerController@update');
+    Route::get('/users', 'PartnerController@users');
+    Route::delete('/users/{user}', 'PartnerController@deleteUser');
+    Route::get('/users/{user}/edit', 'PartnerController@edit');
+    Route::put('/users/{user}', 'PartnerController@updatePermissions');
+
+    foreach (['active', 'inactive','trial','notrial'] as $key)
+    {
+        Route::post('/users/{user}/' . $key, array(
+            'as'   => 'users.' . $key,
+            'uses' => 'PartnerController@' . $key,
+        ));
+    }
 
 });
 

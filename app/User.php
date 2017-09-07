@@ -18,20 +18,32 @@ class User extends Authenticatable
         'activity', 'email', 'password','private_code', 'active'
     ];
 
-    protected $appends = array('public_code');
+    protected $appends = array('public_code','usr_public_code');
     
     
     
-        public function getPublicCodeAttribute()
-        {
-            // foreach($this->company->countries as $country)
-            // {
-            //     $countriesCodes[] = $country->code;
-            // }
-            // $countries= implode('|',  $countriesCodes);
+    public function getPublicCodeAttribute()
+    {
+        // foreach($this->company->countries as $country)
+        // {
+        //     $countriesCodes[] = $country->code;
+        // }
+        // $countries= implode('|',  $countriesCodes);
 
-            return trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3);
-        }
+        return trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3);
+    }
+    public function getUsrPublicCodeAttribute()
+    {
+        // foreach($this->company->countries as $country)
+        // {
+        //     $countriesCodes[] = $country->code;
+        // }
+        // $countries= implode('|',  $countriesCodes);
+
+        return 'USR-'. zerofill($this->id,3);
+    }
+
+
        
          
     /**
@@ -42,6 +54,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        if($search){
+
+            return $query->where(function ($query) use ($search)
+            {
+                $query->where('id', 'like', '%'. $search .'%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhereHas('profile' , function ($query) use ($search){
+                        $query->where('applicant_name', 'like', '%' . $search . '%');
+                      });
+                
+            });
+        }
+
+        return $query;
+    }
 
     /**
      * A user may have multiple roles.
@@ -86,19 +116,15 @@ class User extends Authenticatable
      }
  
 
-    public function partners()
+    public function partners() //associates
     {
         return $this->belongsToMany(User::class, 'partner_user', 'user_id', 'partner_id');
     }
-    public function addPartner(User $user)
+    public function collaborators() //users
     {
-        $this->partners()->attach($user->id);
+        return $this->belongsToMany(User::class, 'partner_user', 'partner_id', 'user_id');
     }
-
-    public function removePartner(User $user)
-    {
-        $this->partners()->detach($user->id);
-    }
+    
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -106,6 +132,54 @@ class User extends Authenticatable
     public function company()
     {
         return $this->hasOne(Company::class);
+    }
+    /**
+     * A role may be given various permissions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+     public function permissions()
+     {
+         return $this->belongsToMany(Permission::class);
+     }
+ 
+     /**
+      * Grant the given permission to a role.
+      *
+      * @param  Permission $permission
+      * @return mixed
+      */
+     public function givePermissionTo(Permission $permission)
+     {
+         return $this->permissions()->save($permission);
+     }
+     /**
+     * Determine if the user may perform the given permission.
+     *
+     * @param  Permission $permission
+     * @return boolean
+     */
+    public function hasPermission($permission)
+    {
+        
+        if (is_string($permission)) {
+            return $this->permissions->contains('name', $permission);
+        }
+
+        return !! $permission->intersect($this->permissions)->count();
+       
+    }
+
+    public function addPartner(User $user)
+    {
+        $this->partners()->attach($user->id);
+        
+    }
+
+    public function removePartner(User $user)
+    {
+        $this->partners()->detach($user->id);
+       
     }
 
     public function toArray()

@@ -9,7 +9,16 @@ use App\Profile;
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
-        'users','profiles','roles','role_user', 'partner_user','companies','countries'
+        'users','profiles','roles','role_user', 'partner_user','companies','countries','permissions','permission_user'
+    ];
+    private $permissions = [
+        'view_all_trans_company' => 'View all company transactions',
+        'view_cxp' => 'View Cxp',
+        'do_trans_nac' => 'do national transactions',
+        'do_trans_reg'  => 'do regional transactions', 
+        'do_trans_int'  => 'do international transactions',
+        'do_trans_glo'  => 'do global transactions',
+        'do_trans_priv'  => 'do private transactions'
     ];
     /**
      * Run the database seeds.
@@ -36,6 +45,15 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str_random(10),
         ])->first();
         $partner = factory(User::class, 1)->create()->first(); // partner
+        $profile = factory(Profile::class, 1)->create([
+            'user_id' => $partner->id,
+            
+        ]);
+        $company = factory(Company::class, 1)->create([
+            'user_id' => $partner->id,
+            
+        ]);
+
         $user = factory(User::class, 1)->create([
             'activity' => 2,
             
@@ -53,23 +71,24 @@ class DatabaseSeeder extends Seeder
             ['role_id' => 3, 'user_id' => $user->id]
         );
 
-        $profile = factory(Profile::class, 1)->create([
-            'user_id' => $partner->id,
-            
-        ]);
+       
         $profile = factory(Profile::class, 1)->create([
             'user_id' => $user->id,
             
         ]);
-        $company = factory(Company::class, 1)->create([
-            'user_id' => $partner->id,
-            
-        ]);
+        
         $country = factory(Country::class, 1)->create([
             'name' => 'Costa Rica',
-            'code' => 'CRC'
+            'code' => 'CR'
             
         ]);
+
+        foreach ($this->permissions as $permission) {
+           
+            \DB::table('permissions')->insert(
+                ['name' => $permission->name, 'label' => $permission->label]
+            );
+        }
         
 
 

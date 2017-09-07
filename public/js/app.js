@@ -42161,6 +42161,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -42429,11 +42433,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-12"
   }, [_c('div', {
     staticClass: "form-material form-material-success"
-  }, [_vm._v("\n                " + _vm._s(_vm.company.country) + "\n                "), _c('label', {
+  }, [_vm._l((_vm.company.countries), function(item) {
+    return _c('div', [_vm._v("\n                        " + _vm._s(item.name) + "\n                    ")])
+  }), _vm._v(" "), _c('label', {
     attrs: {
       "for": "country"
     }
-  }, [_vm._v("Country")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Country")])], 2)])]), _vm._v(" "), _c('div', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -42542,7 +42548,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         privateCode: {
             type: String,
-            default: ''
+            default: null
 
         }
     },

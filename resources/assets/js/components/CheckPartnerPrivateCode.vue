@@ -55,7 +55,11 @@
         <div class="form-group" v-show="company.country">
             <div class="col-xs-12">
                 <div class="form-material form-material-success">
-                    {{ company.country }}
+                    
+                        <div v-for="item in company.countries">
+                            {{ item.name }}
+                        </div>
+                    
                     <label for="country">Country</label>
                 </div>
             </div>

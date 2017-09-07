@@ -26,9 +26,13 @@ class UserRepository extends DbRepository{
     {
         
         $data = $this->prepareData($data);
-        
-        $countriesArray = $data['country'];
-        $data['country'] = json_encode($data['country']);
+        $countriesArray = [];
+
+        if(isset($data['country'])){
+            
+            $countriesArray = $data['country'];
+            $data['country'] = json_encode($data['country']);
+        }
         
         $user = $this->model->create($data);
 
@@ -62,6 +66,8 @@ class UserRepository extends DbRepository{
 
         $user->save();
 
+        $user->profile->fill($data);
+        $user->profile->save();
 
         return $user;
     }
