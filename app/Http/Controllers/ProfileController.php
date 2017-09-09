@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Company;
+use App\Country;
+use App\Sector;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -24,9 +27,14 @@ class ProfileController extends Controller
     public function show()
     {
         $user = auth()->user();
-        
-        if($user->hasRole('partner'))
-            return view('partner.profile', compact('user'));
+        $user->load('company.countries');
+        if($user->hasRole('partner')){
+            
+            $sectors = Sector::get()->toTree();
+            $countries = Country::all();
+
+            return view('partner.profile', compact('user','sectors','countries'));
+        }
 
         return view('user.profile', compact('user'));
     }

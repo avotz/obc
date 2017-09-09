@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Kalnoy\Nestedset\NestedSet;
 
 class CreateSectorsTable extends Migration
 {
@@ -15,10 +16,11 @@ class CreateSectorsTable extends Migration
     {
         Schema::create('sectors', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->nullable()->index();
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
+
+            NestedSet::columns($table);
         });
 
         Schema::create('company_sector', function(Blueprint $table)

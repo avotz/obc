@@ -111,6 +111,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="form-material form-material-success">
+                               
+                                    <select name="sectors[]" id="sectors"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector"> 
+                                    @foreach ($sectors as $sector)
+                                            @include('layouts.partials.sector-select', ['company' => $user->company])
+                                        @endforeach
+                                </select>
+                                  
+                                <label for="sectors">  Sectors and subsectors</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group{{ $errors->has('phones') ? ' has-error' : '' }}">
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
@@ -140,10 +154,10 @@
                     <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
-                                <select class="js-select2 form-control" name="country[]" id="country" style="width: 100%;" data-placeholder="Choose country.." multiple >
+                                <select class="form-control" name="country" id="country" >
                                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                    @foreach($user->company->countries as $country)    
-                                        <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
+                                    @foreach($countries as $country)    
+                                        <option value="{{ $country->id }}" @if($user->company->countries->first()->id == $country->id) selected="selected" @endif>{{ $country->name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="country"> Country</label>
@@ -345,108 +359,7 @@
             </div>
             <!-- END Products -->
 
-            <!-- Ratings -->
-            <div class="block">
-                <div class="block-header bg-gray-lighter">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-pencil"></i> Ratings</h3>
-                </div>
-                <div class="block-content">
-                    <ul class="list list-simple">
-                        <li>
-                            <div class="push-5 clearfix">
-                                <div class="text-warning pull-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <a class="font-w600" href="base_pages_profile.html">Tiffany Kim</a>
-                                <span class="text-muted">(5/5)</span>
-                            </div>
-                            <div class="font-s13">Flawless design execution! I'm really impressed with the product, it really helped me build my app so fast! Thank you!</div>
-                        </li>
-                        <li>
-                            <div class="push-5 clearfix">
-                                <div class="text-warning pull-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <a class="font-w600" href="base_pages_profile.html">Lisa Gordon</a>
-                                <span class="text-muted">(5/5)</span>
-                            </div>
-                            <div class="font-s13">Great value for money and awesome support! Would buy again and again! Thanks!</div>
-                        </li>
-                        <li>
-                            <div class="push-5 clearfix">
-                                <div class="text-warning pull-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <a class="font-w600" href="base_pages_profile.html">Craig Stone</a>
-                                <span class="text-muted">(5/5)</span>
-                            </div>
-                            <div class="font-s13">Working great in all my devices, quality and quantity in a great package! Thank you!</div>
-                        </li>
-                    </ul>
-                    <div class="text-center push">
-                        <small><a href="javascript:void(0)">Read More..</a></small>
-                    </div>
-                </div>
-            </div>
-            <!-- END Ratings -->
-
-            <!-- Followers -->
-            <div class="block">
-                <div class="block-header bg-gray-lighter">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-share-alt"></i> Followers</h3>
-                </div>
-                <div class="block-content">
-                    <ul class="nav-users push">
-                        <li>
-                            <a href="base_pages_profile.html">
-                                <img class="img-avatar" src="assets/img/avatars/avatar14.jpg" alt="">
-                                <i class="fa fa-circle text-success"></i> Joshua Munoz
-                                <div class="font-w400 text-muted"><small>Web Developer</small></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="base_pages_profile.html">
-                                <img class="img-avatar" src="assets/img/avatars/avatar4.jpg" alt="">
-                                <i class="fa fa-circle text-success"></i> Tiffany Kim
-                                <div class="font-w400 text-muted"><small>Web Designer</small></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="base_pages_profile.html">
-                                <img class="img-avatar" src="assets/img/avatars/avatar2.jpg" alt="">
-                                <i class="fa fa-circle text-warning"></i> Julia Cole
-                                <div class="font-w400 text-muted"><small>Photographer</small></div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="text-center push">
-                        <small><a href="javascript:void(0)">Load More..</a></small>
-                    </div>
-                </div>
-            </div>
-            <!-- END Followers -->
+           
         </div>
     </div>
 </div>

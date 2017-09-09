@@ -22,4 +22,18 @@ class Company extends Model
     {
         return $this->belongsToMany(Sector::class);
     }
+     /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+      public function hasSector($sector)
+      {
+          if (is_string($sector) || is_numeric($sector)) {
+              return $this->sectors->contains('id', $sector);
+          }
+  
+          return !! $sector->intersect($this->sectors)->count();
+      }
 }

@@ -57,8 +57,8 @@ class RegisterPartnerController extends Controller
     protected function validator(array $data)
     {
         
-        return Validator::make($data, [
-            /*'company_name' => 'required|string|max:255',
+        $v = Validator::make($data, [
+            'company_name' => 'required|string|max:255',
             'identification_number' => 'required|string|max:255',
             'activity' => 'required',
             'phones' => 'required|string|max:255',
@@ -75,8 +75,14 @@ class RegisterPartnerController extends Controller
             'second_surname' => 'required|string|max:255',
             'position_held' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',*/
+            'password' => 'required|string|min:6|confirmed',
         ]);
+
+        $v->sometimes('sectors', 'required', function ($input) {
+            return $input->activity == 2;
+        });
+
+        return $v;
     }
 
     /**
@@ -87,7 +93,7 @@ class RegisterPartnerController extends Controller
      */
     protected function create(array $data)
     {
-       dd($data);
+       
         $data['role'] = Role::whereName('partner')->first();
        
         $user = $this->userRepo->store($data);
@@ -112,8 +118,9 @@ class RegisterPartnerController extends Controller
      public function showRegistrationForm()
      {
           $countries = Country::all();
-          $sectors = Sector::whereNull('parent_id')->with('subsectors')->get();
-        // dd($sectors->toArray());
+          //$sectors = Sector::whereNull('parent_id')->get();//Sector::with('descendants')->get();
+          $sectors = Sector::get()->toTree();
+         //dd($tree->toArray());
          return view('auth.register-partner', compact('countries','sectors'));
      }
 

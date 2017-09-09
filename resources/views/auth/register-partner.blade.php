@@ -51,8 +51,8 @@
                                     <div class="form-material form-material-success">
                                         <select name="activity" id="activity"  class="form-control">
                                             <option value=""></option>
-                                            <option value="1">Consumer</option>
-                                            <option value="2">Supplier</option>
+                                            <option value="1" @if(1 == old('activity')) selected="selected" @endif>Consumer</option>
+                                            <option value="2" @if(2 == old('activity')) selected="selected" @endif>Supplier</option>
                                         </select>
                                         <label for="activity">  Activity on the OBC platform</label>
                                         @if ($errors->has('activity'))
@@ -63,16 +63,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('sectors') ? ' has-error' : '' }}">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <div class="row items-push">    
-                                            @foreach ($sectors as $sector)
-                                                    @include('layouts.partials.sector')
-                                                @endforeach
-                                        </div>
+                                            
+                                            <select name="sectors[]" id="sectors"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector"> 
+                                                @foreach ($sectors as $sector)
+                                                        @include('layouts.partials.sector-select')
+                                                    @endforeach
+                                            </select>
+                                       
                                          <!-- <sector-subsectors :sectors="{{ $sectors }}"></sector-subsectors> -->
                                          <label for="sectors">  Sectors and subsectors</label>
+                                         @if ($errors->has('sectors'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('sectors') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +115,7 @@
                                         <select class="form-control" name="country" id="country">
                                             <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                                             @foreach($countries as $country)    
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                <option value="{{ $country->id }}" @if($country->id == old('country')) selected="selected" @endif>{{ $country->name }}</option>
                                             @endforeach
                                         </select>
                                         <label for="country"> Country</label>

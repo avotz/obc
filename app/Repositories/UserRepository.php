@@ -39,6 +39,9 @@ class UserRepository extends DbRepository{
         if( $role->name == 'partner'){
             $company = $user->company()->create($data);
             $company->countries()->attach($data['country']);
+            
+            if(isset($data['sectors']))
+                $company->sectors()->sync($data['sectors']);
         }
        
         return $user;

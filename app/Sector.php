@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Sector extends Model
 {
+    use NodeTrait;
     protected $fillable = [
-        'name', 'description', 'parent_id'
+        'name', 'description'
     ];
     
     public function companies()
@@ -15,13 +17,4 @@ class Sector extends Model
         return $this->belongsToMany(Company::class);
     }
 
-    public function sector()
-    {
-        return $this->belongsTo(Sector::class, 'parent_id');
-    }
-
-    public function subsectors()
-    {
-        return $this->hasMany(Sector::class, 'parent_id');
-    }
 }

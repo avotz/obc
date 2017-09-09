@@ -6,10 +6,11 @@ use App\Company;
 use App\Country;
 use App\User;
 use App\Profile;
+use App\Sector;
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
-        'users','profiles','roles','role_user', 'partner_user','companies','company_country','countries','country_user','permissions','permission_user'
+        'users','profiles','roles','role_user', 'partner_user','companies','company_country','countries','country_user','permissions','permission_user','sectors','company_sector'
     ];
     private $permissions = [
         [
@@ -42,6 +43,138 @@ class DatabaseSeeder extends Seeder
         ],
        
     ];
+    private $sectorsSubsectors = [
+        [
+            'name' => 'Food & Beverage',
+        
+            'children' => [
+                [
+                    'name' => 'Foods',
+        
+                    'children' => [
+                        [ 'name' => 'Food warehouse' ],
+                        [ 'name' => 'Seafood' ],
+                        [ 'name' => 'Meats' ],
+                        [ 'name' => 'Chicken' ],
+                        [ 'name' => 'Sausages' ],
+                        [ 'name' => 'Dairy products' ],
+                        [ 'name' => 'Fruits and vegetables' ],
+                        [ 'name' => 'Canned products' ],
+                        [ 'name' => 'Poultry foods' ],
+                        
+
+                    ],
+                ],
+                [
+                    'name' => 'Beverages',
+        
+                    'children' => [
+                        [ 'name' => 'Liquor store' ],
+                        [ 'name' => 'Seafood' ],
+                        [ 'name' => 'Wines' ],
+                        [ 'name' => 'Beers' ],
+                        [ 'name' => 'Non-alcoholic beverages' ],
+                        [ 'name' => 'Bottled water' ],
+                    
+                        
+
+                    ],
+                ],
+            ],
+        ],
+        [
+            'name' => 'Goods',
+        
+            'children' => [
+                [ 'name' => 'Amenities, tablecloths, towels, sheets' ],
+                [ 'name' => 'Bath Amenities: Soap, Shampoo, Cream' ],
+                [ 'name' => 'Hardware store' ],
+                [ 'name' => 'Hotel equipment and utensils' ],
+                [ 'name' => 'Refrigerating Equipment' ],
+                [ 'name' => 'Air Conditioning Equipment' ],
+                [ 'name' => 'Pool & Jacuzzis Equipment' ],
+                [ 'name' => 'Sewage treatment plants equipment' ],
+                [ 'name' => 'Electric generators' ],
+                [ 'name' => 'Electrical Devices' ],
+                [ 'name' => 'Sound Equipment' ],
+                [ 'name' => 'Office Equipment' ],
+                [ 'name' => 'Cleaning and disinfection chemicals' ],
+                [ 'name' => 'Laundry Chemicals' ],
+                [ 'name' => 'Chemicals for Kitchen' ],
+                [ 'name' => 'Pool Chemist' ],
+                
+
+            ],
+        ],
+        [
+            'name' => 'Services',
+        
+            'children' => [
+                [ 'name' => 'Consultancies' ],
+                [ 'name' => 'Training' ],
+                [ 'name' => 'Touristic tour' ],
+                [ 'name' => 'Advertising services: graphic art, printing, business cards' ],
+                [ 'name' => 'Repair and Maintenance of Equipment' ],
+                [ 'name' => 'Construction and remodeling' ],
+                [ 'name' => 'Decoration and Painting' ],
+                [ 'name' => 'Systems and telecommunications' ],
+                [ 'name' => 'Microbiological Laboratories' ],
+                [ 'name' => 'Wastewater treatment plants: Operation' ],
+                [ 'name' => 'Artists: Music Bands, Dance Group' ],
+                [ 'name' => 'Security (fire, cameras, guards)' ],
+                [ 'name' => 'Real estate' ],
+                [ 'name' => 'Tourist and personnel transport' ],
+                [ 'name' => 'Taxi Service' ],
+                [ 'name' => 'Equipment and tools rent' ],
+                [ 'name' => 'Fuel: LPG, Gasoline, Diesel' ],
+                [ 'name' => 'Cable TV & closed circuit service' ],
+                
+
+            ],
+        ],
+        [
+            'name' => 'Services',
+        
+            'children' => [
+                [ 
+                  'name' => 'Shipping Services',
+                  'children' => [
+                        [ 'name' => 'Local Shipments' ],
+                        [ 'name' => 'National shipments' ],
+                        [ 'name' => 'International Shipments' ],
+                       
+                    ]
+                ],
+                [ 
+                    'name' => 'Financial Services',
+                    'children' => [
+                          [ 'name' => 'Thirty days financing' ],
+                          [ 'name' => 'Forty five days financing' ],
+                          [ 'name' => 'Sixty days financing' ],
+                          [ 'name' => 'Advertising services: graphic art, printing, business cards' ],
+                          [ 'name' => 'Repair and Maintenance of Equipment' ],
+                          [ 'name' => 'Construction and remodeling' ],
+                          [ 'name' => 'Decoration and Painting' ],
+                      ]
+                  ],
+                  [ 
+                    'name' => 'Contracts',
+                    'children' => [
+                          [ 'name' => 'Annual Contracts' ],
+                          [ 'name' => 'Temporary Contract' ],
+                          [ 'name' => 'Outsourcing' ],
+                          [ 'name' => 'Professional Services' ],
+                          
+                      ]
+                  ],
+                
+                
+
+            ],
+        ],
+
+    ];
+    
     /**
      * Run the database seeds.
      *
@@ -125,8 +258,11 @@ class DatabaseSeeder extends Seeder
                 ['name' => $permission['name'], 'label' => $permission['label']]
             );
         }
-        
-
+        foreach ($this->sectorsSubsectors as $sector) {
+            
+            Sector::create($sector);
+        }
+       
 
     }
     private function cleanDatabase()

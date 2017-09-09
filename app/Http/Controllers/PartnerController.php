@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Repositories\UserRepository;
 use App\Company;
+
 use App\Permission;
 use App\Rules\Partner;
 use Illuminate\Http\Request;
@@ -108,17 +109,7 @@ class PartnerController extends Controller
         return back();
 
     }
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        $user = auth()->user();
-
-        return view('partner.profile', compact('user'));
-    }
+   
 
     public function update($id)
     {
@@ -180,13 +171,12 @@ class PartnerController extends Controller
             );
         
         $data = request()->all();
-        $countriesArray = $data['country'];
-        $data['country'] = json_encode($data['country']);
-
         $company->fill($data);
         $company->save();
 
-        $company->countries()->sync($countriesArray);
+        $company->countries()->sync($data['country']);
+        if(isset($data['sectors']))
+            $company->sectors()->sync($data['sectors']);
 
         flash('Company Updated','success');
         
