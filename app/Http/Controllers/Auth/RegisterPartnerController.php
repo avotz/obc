@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Role;
 use App\Country;
+use App\Sector;
 use App\Repositories\UserRepository;
 use App\Mail\NewPartner;
 use App\Http\Controllers\Controller;
@@ -57,7 +58,7 @@ class RegisterPartnerController extends Controller
     {
         
         return Validator::make($data, [
-            'company_name' => 'required|string|max:255',
+            /*'company_name' => 'required|string|max:255',
             'identification_number' => 'required|string|max:255',
             'activity' => 'required',
             'phones' => 'required|string|max:255',
@@ -74,7 +75,7 @@ class RegisterPartnerController extends Controller
             'second_surname' => 'required|string|max:255',
             'position_held' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed',*/
         ]);
     }
 
@@ -86,7 +87,7 @@ class RegisterPartnerController extends Controller
      */
     protected function create(array $data)
     {
-       
+       dd($data);
         $data['role'] = Role::whereName('partner')->first();
        
         $user = $this->userRepo->store($data);
@@ -111,8 +112,9 @@ class RegisterPartnerController extends Controller
      public function showRegistrationForm()
      {
           $countries = Country::all();
-
-         return view('auth.register-partner', compact('countries'));
+          $sectors = Sector::whereNull('parent_id')->with('subsectors')->get();
+        // dd($sectors->toArray());
+         return view('auth.register-partner', compact('countries','sectors'));
      }
 
 

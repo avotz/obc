@@ -17,7 +17,7 @@ window.Vue = require('vue');
 Vue.component('alert', require('./components/Alert.vue'));
 Vue.component('check-partner', require('./components/CheckPartnerPrivateCode.vue'));
 Vue.component('update-private-code', require('./components/UpdatePrivateCode.vue'));
-
+Vue.component('sector-subsectors', require('./components/SectorSubsectors.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

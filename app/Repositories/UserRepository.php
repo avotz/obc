@@ -26,13 +26,6 @@ class UserRepository extends DbRepository{
     {
         
         $data = $this->prepareData($data);
-        $countriesArray = [];
-
-        if(isset($data['country'])){
-            
-            $countriesArray = $data['country'];
-            $data['country'] = json_encode($data['country']);
-        }
         
         $user = $this->model->create($data);
 
@@ -45,7 +38,7 @@ class UserRepository extends DbRepository{
         
         if( $role->name == 'partner'){
             $company = $user->company()->create($data);
-            $company->countries()->attach($countriesArray);
+            $company->countries()->attach($data['country']);
         }
        
         return $user;

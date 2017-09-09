@@ -18,4 +18,8 @@ class Company extends Model
     {
         return $this->belongsToMany(Country::class);
     }
+    public function sectors()
+    {
+        return $this->belongsToMany(Sector::class);
+    }
 }

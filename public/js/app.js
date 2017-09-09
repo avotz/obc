@@ -870,7 +870,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(49);
+module.exports = __webpack_require__(52);
 
 
 /***/ }),
@@ -896,7 +896,7 @@ window.Vue = __webpack_require__(36);
 Vue.component('alert', __webpack_require__(37));
 Vue.component('check-partner', __webpack_require__(40));
 Vue.component('update-private-code', __webpack_require__(46));
-
+Vue.component('sector-subsectors', __webpack_require__(49));
 window.bus = new Vue();
 
 var app = new Vue({
@@ -42641,6 +42641,160 @@ if (false) {
 
 /***/ }),
 /* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(50),
+  /* template */
+  __webpack_require__(51),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "D:\\xampp\\htdocs\\obc\\resources\\assets\\js\\components\\SectorSubsectors.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SectorSubsectors.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7270c8aa", Component.options)
+  } else {
+    hotAPI.reload("data-v-7270c8aa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['sectors'],
+    data: function data() {
+        return {
+
+            loader: false,
+            shownGroup: null
+            //sectors_subsectors:[]
+
+        };
+    },
+
+
+    methods: {
+        toggleGroup: function toggleGroup(group) {
+            if (this.isGroupShown(group)) {
+                this.shownGroup = null;
+            } else {
+                this.shownGroup = group;
+            }
+        },
+        isGroupShown: function isGroupShown(group) {
+            return this.shownGroup === group;
+        }
+    },
+    created: function created() {
+        // if(this.sectors)
+        //     this.sectors_subsectors = this.sectors
+
+        console.log('Component Sectors.');
+    }
+});
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row items-push"
+  }, _vm._l((_vm.sectors), function(sector) {
+    return _c('div', {
+      staticClass: "col-xs-6"
+    }, [_c('label', {
+      staticClass: "css-input css-checkbox css-checkbox-success"
+    }, [_c('input', {
+      attrs: {
+        "type": "checkbox",
+        "name": "sectors[]"
+      },
+      domProps: {
+        "value": sector.id
+      }
+    }), _c('span'), _vm._v(" " + _vm._s(sector.name) + "\n            ")]), _vm._v(" "), _c('div', _vm._l((sector.subsectors), function(subsector) {
+      return _c('div', {
+        staticClass: "col-xs-12"
+      }, [_c('label', {
+        staticClass: "css-input css-checkbox css-checkbox-success"
+      }, [_c('input', {
+        attrs: {
+          "type": "checkbox",
+          "name": "sectors[]"
+        },
+        domProps: {
+          "value": subsector.id
+        }
+      }), _c('span'), _vm._v(" " + _vm._s(subsector.name) + "\n                    ")])])
+    }))])
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7270c8aa", module.exports)
+  }
+}
+
+/***/ }),
+/* 52 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

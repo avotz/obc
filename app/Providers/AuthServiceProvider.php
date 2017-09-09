@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\Schema;
 use App\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -41,6 +41,10 @@ class AuthServiceProvider extends ServiceProvider
      */
      protected function getPermissions()
      {
-         return Permission::with('users')->get();
+        
+        if(Schema::hasTable("permissions")){ return Permission::with('users')->get(); }
+
+        return [];
+        // return Permission::with('users')->get();
      }
 }

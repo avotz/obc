@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
 @endsection
 @section('content')
+
 <!-- Register Content -->
 <div class="content overflow-hidden">
             <div class="row">
@@ -62,6 +63,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <div class="row items-push">    
+                                            @foreach ($sectors as $sector)
+                                                    @include('layouts.partials.sector')
+                                                @endforeach
+                                        </div>
+                                         <!-- <sector-subsectors :sectors="{{ $sectors }}"></sector-subsectors> -->
+                                         <label for="sectors">  Sectors and subsectors</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('phones') ? ' has-error' : '' }}">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
@@ -91,7 +105,7 @@
                             <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
-                                        <select class="js-select2 form-control" name="country[]" id="country" style="width: 100%;" data-placeholder="Choose country.." multiple>
+                                        <select class="form-control" name="country" id="country">
                                             <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                                             @foreach($countries as $country)    
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -324,6 +338,7 @@
                             </div>
                         </div>
                 </div>
+                
                 </form>
                  <!-- END Register Form -->
             </div>

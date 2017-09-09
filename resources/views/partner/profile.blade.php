@@ -13,7 +13,7 @@
             <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/partner/profile/avatars">Change</a>
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn">Partner ID: {{ $user->public_code }}-@foreach($user->company->countries as $country){{ $country->code }} <img src="{{ getFlag($country->code) }}" alt="{{ $country->code }}">  @endforeach</h2>
+        <h2 class="h5 text-white-op animated zoomIn">Partner ID: {{ $user->public_code }}-{{ $user->company->countries->first()->code }} <img src="{{ getFlag($user->company->countries->first()->code) }}" alt="flag"></h2>
         <h2 class="h5 text-white-op animated zoomIn">Private Code: </h2>
        
         <update-private-code :partner-id="{{ $user->id }}" :private-code="'{{ $user->private_code }}'"></update-private-code>    
