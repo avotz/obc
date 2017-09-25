@@ -29,18 +29,20 @@ class HomeController extends Controller
             return view('inactive-account');
         }
 
-        if(auth()->user()->hasRole('partner'))
-            return view('partner.home');
+        return redirect('/profile');
 
-        if(auth()->user()->hasRole('user')){
+        // if(auth()->user()->hasRole('partner'))
+        //     return view('partner.home');
+
+        // if(auth()->user()->hasRole('user')){
     
-            return view('user.home');
-        }
-        if(auth()->user()->hasRole('superadmin')){
+        //     return view('user.home');
+        // }
+        // if(auth()->user()->hasRole('superadmin')){
             
-            return view('superadmin.home');
-        }
+        //     return view('superadmin.home');
+        // }
 
-        return view('home');
+        // return view('home');
     }
 }

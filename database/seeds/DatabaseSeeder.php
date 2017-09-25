@@ -249,10 +249,12 @@ class DatabaseSeeder extends Seeder
             ['country_id' => $country->id, 'user_id' =>  $partner->id]
         );
 
+       
         $user = factory(User::class, 1)->create([
             'activity' => 2,
             
         ])->first();
+       
         
         $user->AddPartner($partner);
 
@@ -272,6 +274,9 @@ class DatabaseSeeder extends Seeder
         \DB::table('role_user')->insert(
             ['role_id' => 4, 'user_id' => $user->id]
         );
+
+        $partner->generatePublicCode();
+        $user->generatePublicCode();
 
        
         $profile = factory(Profile::class, 1)->create([

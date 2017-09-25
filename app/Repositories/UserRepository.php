@@ -43,14 +43,20 @@ class UserRepository extends DbRepository{
             
             if(isset($data['sectors']))
                 $company->sectors()->sync($data['sectors']);
+
+           
         }
 
         if(isset($data['country']))
             $user->countries()->attach($data['country']);
-            
+
+        
+        $user->generatePublicCode();
        
         return $user;
     }
+
+   
 
     /**
      * Update a user
@@ -77,7 +83,7 @@ class UserRepository extends DbRepository{
        if(isset($data['country']))
            $user->countries()->sync($data['country']);
             
-        
+        $user->generatePublicCode();
 
         return $user;
     }

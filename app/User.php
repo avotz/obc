@@ -15,10 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'activity', 'email', 'password','private_code', 'active'
+        'activity', 'email', 'password','private_code', 'public_code' ,'active'
     ];
 
-    protected $appends = array('public_code','usr_public_code');
+    
+    /*protected $appends = array('public_code','usr_public_code');
     
     
     
@@ -41,8 +42,19 @@ class User extends Authenticatable
         // $countries= implode('|',  $countriesCodes);
 
         return 'USR-'. zerofill($this->id,3);
-    }
+    }*/
 
+    public function generatePublicCode(){
+        
+        if( $this->hasRole('partner')){
+            $this->public_code = trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3).'-'.$this->company->countries->first()->code;
+        }else
+            $this->public_code = 'USR-'. zerofill($this->id,3);
+
+        $user = $this->save();
+
+        return $user;
+    }
 
        
          
@@ -61,7 +73,7 @@ class User extends Authenticatable
 
             return $query->where(function ($query) use ($search)
             {
-                $query->where('id', 'like', '%'. $search .'%')
+                $query->where('public_code', 'like', '%'. $search .'%')
                     ->orWhere('email', 'like', '%' . $search . '%')
                     ->orWhereHas('profile' , function ($query) use ($search){
                         $query->where('applicant_name', 'like', '%' . $search . '%');

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', 'ProfileController@show');
+Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'ProfileController@show');
+Route::get('/home', 'HomeController@index');
 Route::get('partners/{privateCode}/check', 'PartnerController@checkPrivateCode');
 Route::get('profile', 'ProfileController@show');
 

@@ -23,12 +23,12 @@
 
     <!-- Search Section -->
     <div class="content filters">
-        <form action="/admin/users" method="get" class="form-inline">
+        <form action="/admin/users" method="get" class="form-horizontal">
           
             
             <div class="form-group">
                     <div class="input-group input-group-lg">
-                        <input class="form-control" name="q" type="text" placeholder="Name, Email.." value="{{ $search['q'] }}">
+                        <input class="form-control" name="q" type="text" placeholder="Search by Public code, Name, Email.." value="{{ $search['q'] }}">
                         <div class="input-group-btn">
                             <button class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -90,7 +90,7 @@
                         <tbody>
                             @foreach($users as $user)
                             <tr>
-                                <td class="font-w600">{{ $user->id }}</td>
+                                <td class="font-w600">{{ $user->public_code }}</td>
                                 <td class="text-center">
                                     <img class="img-avatar img-avatar48" src="{{ getAvatar($user) }}" alt="User">
                                 </td>

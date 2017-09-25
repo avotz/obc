@@ -63,7 +63,7 @@
                         <tbody>
                             @foreach($users as $user)
                             <tr>
-                                <td class="font-w600">{{ $user->usr_public_code }}</td>
+                                <td class="font-w600">{{ $user->public_code }}</td>
                                 <td class="text-center">
                                     <img class="img-avatar img-avatar48" src="{{ getAvatar($user) }}" alt="User">
                                 </td>

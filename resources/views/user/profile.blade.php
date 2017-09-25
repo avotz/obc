@@ -14,7 +14,7 @@
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>
         <h2 class="h5 text-white-op animated zoomIn">{{ $user->profile->position_held }}</h2>
-        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->usr_public_code }}</h2>
+        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->public_code }}</h2>
         
     
        
