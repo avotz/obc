@@ -76,7 +76,7 @@ class SuperAdminController extends Controller
              $q->where('name', 'admin')
                ->orWhere('name', 'superadmin');
 
-        });
+        })->where('id','<>', auth()->id());
 
         if($search['search_country']){
 
@@ -105,8 +105,22 @@ class SuperAdminController extends Controller
 
        })->get();
         
+       $partners = User::whereHas('roles', function($q){
+        $q->where('name', 'admin')
+          ->orWhere('name', 'superadmin');
+
+      });
+
+  
+
+       $partners = $partners->whereHas('countries', function($q){
+            $q->where('id', auth()->user()->countries->first()->id);
+
+       })->count();
+   
         
-         return view('superadmin.user',compact('user','roles'));
+        
+         return view('superadmin.user',compact('user','roles','partners'));
  
      }
 

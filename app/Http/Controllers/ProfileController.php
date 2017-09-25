@@ -56,7 +56,11 @@ class ProfileController extends Controller
             $partners =  User::whereHas('roles', function($q){
                 $q->where('name', 'partner');
    
-           })->count();
+           });
+           $partners = $partners->whereHas('countries', function($q)use($user){
+                $q->where('id', $user->countries->first()->id);
+
+            })->count();
 
             return view('admin.profile', compact('user','partners'));
         }

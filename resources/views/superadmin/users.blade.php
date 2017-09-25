@@ -110,16 +110,18 @@
                                     </td>
                                     <td class="hidden-xs"><span class="label label-{{ trans('utils.role.'.$user->roles->first()->id) }}">{{ $user->roles->first()->name }}</span></td>
                                     <td class="hidden-xs hidden-sm">
-                                    @if ($user->active)
-                                    
-                                            <button type="submit"  class="btn btn-success btn-xs" form="form-active-inactive" formaction="{!! URL::route('superadmin.users.inactive', [$user->id]) !!}">Active</button>
+                                    @if ($user->id != auth()->id())
+                                        @if ($user->active)
                                         
-        
-                                    @else
-                                        
-                                        <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('superadmin.users.active', [$user->id]) !!}" >Inactive</button>
-        
-                                    @endif
+                                                <button type="submit"  class="btn btn-success btn-xs" form="form-active-inactive" formaction="{!! URL::route('superadmin.users.inactive', [$user->id]) !!}">Active</button>
+                                            
+            
+                                        @else
+                                            
+                                            <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('superadmin.users.active', [$user->id]) !!}" >Inactive</button>
+            
+                                        @endif
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group">
