@@ -85,7 +85,8 @@ class RegisterUserController extends Controller
         $user = $this->userRepo->store($data);
 
         $user->addPartner($partner);
-
+        $user->countries()->attach($partner->countries->first());
+        
         try {
             
             \Mail::to($partner)->send(new NewUser($user));

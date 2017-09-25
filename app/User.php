@@ -133,6 +133,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Company::class);
     }
+    public function countries() //users
+    {
+        return $this->belongsToMany(Country::class);
+    }
     /**
      * A role may be given various permissions.
      *

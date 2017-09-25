@@ -27,13 +27,38 @@ class ProfileController extends Controller
     public function show()
     {
         $user = auth()->user();
+        
         $user->load('company.countries');
+
         if($user->hasRole('partner')){
             
             $sectors = Sector::get()->toTree();
-            $countries = Country::all();
+           
 
-            return view('partner.profile', compact('user','sectors','countries'));
+            return view('partner.profile', compact('user','sectors'));
+        }
+        if($user->hasRole('superadmin')){
+            
+          
+            
+            $admins =  User::whereHas('roles', function($q){
+                $q->where('name', 'admin');
+   
+           })->count();
+
+            return view('superadmin.profile', compact('user','admins'));
+        }
+
+        if($user->hasRole('admin')){
+            
+          
+            
+            $partners =  User::whereHas('roles', function($q){
+                $q->where('name', 'partner');
+   
+           })->count();
+
+            return view('admin.profile', compact('user','partners'));
         }
 
         return view('user.profile', compact('user'));

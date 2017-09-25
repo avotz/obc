@@ -31,7 +31,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
 </head>
-<body>
+<body class="bg">
     <div id="app">
      @yield('content')
     

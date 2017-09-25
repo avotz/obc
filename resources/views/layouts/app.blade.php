@@ -42,8 +42,12 @@
     <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
             
             @include('layouts/partials/side-overlay')
-           
-            @include('layouts/partials/sidebar', ["role" => auth()->user()->roles->first()])
+
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                @include('layouts/partials/sidebar-admin', ["role" => auth()->user()->roles->first()])
+            @else 
+                @include('layouts/partials/sidebar', ["role" => auth()->user()->roles->first()])
+            @endif
             
             @include('layouts/partials/header')
             

@@ -54,10 +54,12 @@
                                         
                                     </ul>
                                 </li>
+                                @if($role->name == 'partner')
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/users"><i class="si si-users"></i><span class="sidebar-mini-hide">Partner List</span></a>
                                    
                                 </li>
+                                @endif
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
                                     <ul>

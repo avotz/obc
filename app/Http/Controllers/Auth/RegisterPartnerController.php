@@ -117,11 +117,11 @@ class RegisterPartnerController extends Controller
      */
      public function showRegistrationForm()
      {
-          $countries = Country::all();
+         
           //$sectors = Sector::whereNull('parent_id')->get();//Sector::with('descendants')->get();
           $sectors = Sector::get()->toTree();
-         //dd($tree->toArray());
-         return view('auth.register-partner', compact('countries','sectors'));
+         
+         return view('auth.register-partner', compact('sectors'));
      }
 
 

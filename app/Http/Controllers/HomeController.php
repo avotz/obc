@@ -36,6 +36,10 @@ class HomeController extends Controller
     
             return view('user.home');
         }
+        if(auth()->user()->hasRole('superadmin')){
+            
+            return view('superadmin.home');
+        }
 
         return view('home');
     }

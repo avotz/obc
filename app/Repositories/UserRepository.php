@@ -39,10 +39,15 @@ class UserRepository extends DbRepository{
         if( $role->name == 'partner'){
             $company = $user->company()->create($data);
             $company->countries()->attach($data['country']);
+           
             
             if(isset($data['sectors']))
                 $company->sectors()->sync($data['sectors']);
         }
+
+        if(isset($data['country']))
+            $user->countries()->attach($data['country']);
+            
        
         return $user;
     }
@@ -64,6 +69,15 @@ class UserRepository extends DbRepository{
 
         $user->profile->fill($data);
         $user->profile->save();
+
+
+       if(isset($data['role']))
+            $user->assignRole($data['role']);
+
+       if(isset($data['country']))
+           $user->countries()->sync($data['country']);
+            
+        
 
         return $user;
     }

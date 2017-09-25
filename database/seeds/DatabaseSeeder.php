@@ -183,6 +183,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->cleanDatabase();
+
+        $country = factory(Country::class, 1)->create([
+            'name' => 'Costa Rica',
+            'code' => 'CR'
+            
+        ])->first();
         
         factory(Role::class, 1)->create([ //superadmin
             'name' => 'superadmin',
@@ -201,13 +207,29 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456'),
             'remember_token' => str_random(10),
+            'active' => 1,
         ])->first();
+
+        $profileSuperAdmin = factory(Profile::class, 1)->create([
+            'user_id' => $superadmin->id,
+            
+        ]);
 
         $admin = factory(User::class, 1)->create([
             'email' => 'mario@admin.com',
             'password' => bcrypt('123456'),
             'remember_token' => str_random(10),
+            'active' => 1,
         ])->first();
+
+        $profileadmin = factory(Profile::class, 1)->create([
+            'user_id' => $admin->id,
+            
+        ]);
+        
+        \DB::table('country_user')->insert(
+            ['country_id' => $country->id, 'user_id' =>  $admin->id]
+        );
 
         $partner = factory(User::class, 1)->create()->first(); // partner
         
@@ -218,7 +240,14 @@ class DatabaseSeeder extends Seeder
         $company = factory(Company::class, 1)->create([
             'user_id' => $partner->id,
             
-        ]);
+        ])->first();
+
+        \DB::table('company_country')->insert(
+            ['country_id' => $country->id, 'company_id' =>  $company->id]
+        );
+        \DB::table('country_user')->insert(
+            ['country_id' => $country->id, 'user_id' =>  $partner->id]
+        );
 
         $user = factory(User::class, 1)->create([
             'activity' => 2,
@@ -226,6 +255,10 @@ class DatabaseSeeder extends Seeder
         ])->first();
         
         $user->AddPartner($partner);
+
+        \DB::table('country_user')->insert(
+            ['country_id' => $country->id, 'user_id' =>  $user->id]
+        );
 
         \DB::table('role_user')->insert(
             ['role_id' => 1, 'user_id' => $superadmin->id]
@@ -246,11 +279,7 @@ class DatabaseSeeder extends Seeder
             
         ]);
         
-        $country = factory(Country::class, 1)->create([
-            'name' => 'Costa Rica',
-            'code' => 'CR'
-            
-        ]);
+       
 
         foreach ($this->permissions as $permission) {
            

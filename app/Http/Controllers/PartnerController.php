@@ -19,7 +19,7 @@ class PartnerController extends Controller
      */
     public function __construct(UserRepository $userRepo)
     {
-        $this->middleware('auth')->except('checkPrivateCode');
+        $this->middleware('authByRole:partner')->except('checkPrivateCode');
         $this->userRepo = $userRepo;
     }
 

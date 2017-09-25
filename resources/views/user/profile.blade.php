@@ -10,7 +10,7 @@
         <div class="push-15-r pull-left animated fadeIn">
             <img src="{{ getAvatar($user) }}" alt="Avatar" id="user-avatar" class="img-avatar img-avatar-thumb" />
            
-            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/partner/profile/avatars">Change</a>
+            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/user/profile/avatars">Change</a>
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>
         <h2 class="h5 text-white-op animated zoomIn">{{ $user->profile->position_held }}</h2>
@@ -156,10 +156,10 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Partner Account</h3>
+                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
-                <form class="js-validation-register form-horizontal push-50" method="POST" action="/partner/{{ $user->id }}">
+                <form class="js-validation-register form-horizontal push-50" method="POST" action="/user/{{ $user->id }}">
                     <input type="hidden" name="_method" value="PUT">
                     {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('applicant_name') ? ' has-error' : '' }}">
@@ -263,108 +263,7 @@
             </div>
             <!-- END Products -->
 
-            <!-- Ratings -->
-            <div class="block">
-                <div class="block-header bg-gray-lighter">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-pencil"></i> Ratings</h3>
-                </div>
-                <div class="block-content">
-                    <ul class="list list-simple">
-                        <li>
-                            <div class="push-5 clearfix">
-                                <div class="text-warning pull-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <a class="font-w600" href="base_pages_profile.html">Tiffany Kim</a>
-                                <span class="text-muted">(5/5)</span>
-                            </div>
-                            <div class="font-s13">Flawless design execution! I'm really impressed with the product, it really helped me build my app so fast! Thank you!</div>
-                        </li>
-                        <li>
-                            <div class="push-5 clearfix">
-                                <div class="text-warning pull-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <a class="font-w600" href="base_pages_profile.html">Lisa Gordon</a>
-                                <span class="text-muted">(5/5)</span>
-                            </div>
-                            <div class="font-s13">Great value for money and awesome support! Would buy again and again! Thanks!</div>
-                        </li>
-                        <li>
-                            <div class="push-5 clearfix">
-                                <div class="text-warning pull-right">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <a class="font-w600" href="base_pages_profile.html">Craig Stone</a>
-                                <span class="text-muted">(5/5)</span>
-                            </div>
-                            <div class="font-s13">Working great in all my devices, quality and quantity in a great package! Thank you!</div>
-                        </li>
-                    </ul>
-                    <div class="text-center push">
-                        <small><a href="javascript:void(0)">Read More..</a></small>
-                    </div>
-                </div>
-            </div>
-            <!-- END Ratings -->
-
-            <!-- Followers -->
-            <div class="block">
-                <div class="block-header bg-gray-lighter">
-                    <ul class="block-options">
-                        <li>
-                            <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
-                        </li>
-                    </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-share-alt"></i> Followers</h3>
-                </div>
-                <div class="block-content">
-                    <ul class="nav-users push">
-                        <li>
-                            <a href="base_pages_profile.html">
-                                <img class="img-avatar" src="assets/img/avatars/avatar14.jpg" alt="">
-                                <i class="fa fa-circle text-success"></i> Joshua Munoz
-                                <div class="font-w400 text-muted"><small>Web Developer</small></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="base_pages_profile.html">
-                                <img class="img-avatar" src="assets/img/avatars/avatar4.jpg" alt="">
-                                <i class="fa fa-circle text-success"></i> Tiffany Kim
-                                <div class="font-w400 text-muted"><small>Web Designer</small></div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="base_pages_profile.html">
-                                <img class="img-avatar" src="assets/img/avatars/avatar2.jpg" alt="">
-                                <i class="fa fa-circle text-warning"></i> Julia Cole
-                                <div class="font-w400 text-muted"><small>Photographer</small></div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="text-center push">
-                        <small><a href="javascript:void(0)">Load More..</a></small>
-                    </div>
-                </div>
-            </div>
-            <!-- END Followers -->
+           
         </div>
     </div>
 </div>
@@ -380,7 +279,7 @@
     $("#UploadPhoto").ajaxUpload({
       url : $("#UploadPhoto").data('url'),
       name: "photo",
-      data: {},
+      data: {_token: $('meta[name="csrf-token"]').attr('content')},
       onSubmit: function() {
           $('#infoBox').html('Uploading ... ');
 
@@ -413,7 +312,7 @@
   $("#UploadLogo").ajaxUpload({
       url : $("#UploadLogo").data('url'),
       name: "photo",
-      data: {},
+      data: {_token: $('meta[name="csrf-token"]').attr('content')},
       onSubmit: function() {
           $('#infoBox').html('Uploading ... ');
 

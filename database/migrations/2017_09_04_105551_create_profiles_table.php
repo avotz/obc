@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('applicant_name');
             $table->string('first_surname');
             $table->string('second_surname');
-            $table->string('position_held');
+            $table->string('position_held')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
         });

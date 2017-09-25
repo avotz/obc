@@ -12,7 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        '/partner/profile/avatars',
-        '/partner/company/logo',
+       /* '/partner/profile/avatars',
+        '/partner/company/logo',*/
     ];
 }

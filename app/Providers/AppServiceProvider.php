@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use App\Country;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        $countries = Country::all();
+
+        View::share('countries', $countries);
+        
+        // view()->composer('layouts.app', function ($view)
+        // {
+        //      $appointments = \App\Appointment::with('user','patient')->where('user_id', auth()->id())->where('status', 0)->where('patient_id','<>',0)->where('viewed', 0)->limit(10);
+               
+            
+
+        //     $newAppointments = $appointments->get();
+
+           
+        //     $view->with('newAppointments', $newAppointments);
+        // });
     }
 
     /**
