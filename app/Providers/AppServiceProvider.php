@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $countries = Country::all();
+        $countries = getCountries();
 
         View::share('countries', $countries);
         
@@ -41,4 +41,18 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+     /**
+     * Fetch the collection of site countries.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+     protected function getCountries()
+     {
+        
+        if(Schema::hasTable("countries")){ return Country::all(); }
+
+        return [];
+        // return Permission::with('users')->get();
+     }
 }
