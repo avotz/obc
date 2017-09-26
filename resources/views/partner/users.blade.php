@@ -6,12 +6,12 @@
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Search Results <small>Vital page found in most web applications.</small>
+                    Search Users <small></small>
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Generic</li>
+                    <li>Users</li>
                     <li><a class="link-effect" href="">Search Results</a></li>
                 </ol>
             </div>
