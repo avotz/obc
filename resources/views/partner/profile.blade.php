@@ -70,9 +70,12 @@
                 <div class="block-content block-content-full block-content-narrow">
                 <div class="col-xs-12 text-center" >
                             <img src="{{ getLogo($user->company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
-                        
-                            <a class="UploadButton UploadButtonLogo btn btn-xs btn-info btn-block" id="UploadLogo" data-url="/partner/company/logo">Change Logo</a>
+                            
+                            
                         </div>
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                                <a class="UploadButton UploadButtonLogo btn btn-xs btn-info btn-block" id="UploadLogo" data-url="/partner/company/logo">Change Logo</a>
+                            </div>
                     <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/partner/companies/{{$user->company->id}}">
                          <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
