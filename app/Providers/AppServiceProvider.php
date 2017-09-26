@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $countries = getCountries();
+        $countries = $this->getCountries();
 
         View::share('countries', $countries);
         
