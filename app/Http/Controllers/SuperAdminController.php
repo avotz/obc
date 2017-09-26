@@ -113,7 +113,7 @@ class SuperAdminController extends Controller
 
   
 
-       $partners = $partners->whereHas('countries', function($q){
+       $partners = $partners->whereHas('countries', function($q) use ($user){
             $q->where('id', $user->countries->first()->id);
 
        })->count();
