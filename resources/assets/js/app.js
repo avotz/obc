@@ -19,6 +19,7 @@ Vue.component('check-partner', require('./components/CheckPartnerPrivateCode.vue
 Vue.component('update-private-code', require('./components/UpdatePrivateCode.vue'));
 Vue.component('sector-subsectors', require('./components/SectorSubsectors.vue'));
 Vue.component('update-country', require('./components/UpdateCountry.vue'));
+Vue.component('delete-avatar-profile', require('./components/DeleteAvatarProfile.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

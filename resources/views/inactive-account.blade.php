@@ -17,7 +17,9 @@
                             <p>Welcome, your account is inactive</p>
                             <!-- END Login Title -->
 
-                            <p> Your request to open a account is being evaluated by the commercial department of OBC, we will respond soon</p> 
+                            <p> Your request to open a account is being evaluated by the commercial department of OBC, we will respond soon.</p> 
+
+                            <a href="/" class="btn btn-success"><i class="si si-login pull-right"></i> Back to home</a>
 
                         </div>
                     </div>

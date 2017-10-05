@@ -333,7 +333,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <label class="css-input switch switch-sm switch-success">
-                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> I agree with usage Policy
+                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span>I agree with <a href="#" data-toggle="modal" data-target="#modal-terms">usage Policy</a> 
                                                 </label>
                                             </div>
                                         </div>
@@ -385,5 +385,12 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script>
     jQuery('.js-select2').select2();
+    jQuery('select[name=activity]').change(function(e){
+        if(jQuery(this).val() == '1'){
+            jQuery('#sectors').attr('disabled','disabled');
+        }else{
+            jQuery('#sectors').attr('disabled',false);
+        }
+    });
 </script>
 @endsection

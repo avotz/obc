@@ -32,6 +32,7 @@
 
                             <div class="text-center">
                             <h3>Choose the account you want to create</h3>
+                            <br>
                             <a class="btn btn-primary" href="/partners/register">
                                 Associate Accounts
                             </a>

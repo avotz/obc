@@ -6,6 +6,7 @@ use App\Company;
 use App\Country;
 use App\Sector;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -88,6 +89,19 @@ class ProfileController extends Controller
          }
  
          return $fileUploaded;
+ 
+     }
+      /**
+     * Guardar avatar del medico
+     */
+     public function deleteAvatar($id)
+     {
+         $directory= "avatars/". $id;
+
+         //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+         Storage::disk('public')->deleteDirectory($directory);
+         
+         return 'ok';
  
      }
 

@@ -21,6 +21,7 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
 {
     
     Route::post('/profile/avatars', 'ProfileController@avatar');
+    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
     Route::get('/users', 'SuperAdminController@users');
     Route::get('/users/create', 'SuperAdminController@create');
     Route::post('/users', 'SuperAdminController@storeUser');
@@ -51,6 +52,7 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
 {
     
     Route::post('/profile/avatars', 'ProfileController@avatar');
+    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
     Route::get('/users', 'AdminController@users');
     Route::get('/users/create', 'AdminController@create');
     Route::post('/users', 'AdminController@storeUser');
@@ -76,6 +78,7 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
 {
     Route::put('/{partner}/privatecode', 'PartnerController@updatePrivateCode');
     Route::post('/profile/avatars', 'ProfileController@avatar');
+    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
     Route::post('/company/logo', 'PartnerController@logoCompany');
     Route::put('/companies/{company}', 'PartnerController@updateCompany');
     Route::put('/{partner}', 'PartnerController@update');
@@ -97,6 +100,7 @@ Route::prefix('user')->middleware('authByRole:user')->group(function ()
 {
  
     Route::post('/profile/avatars', 'ProfileController@avatar');
+    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
     Route::put('/{user}', 'UserController@update');
 
 

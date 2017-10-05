@@ -72,11 +72,7 @@ class SuperAdminController extends Controller
         $search['q'] = request('q');
         $search['search_country'] = request('search_country');
 
-        $users = User::whereHas('roles', function($q){
-             $q->where('name', 'admin')
-               ->orWhere('name', 'superadmin');
-
-        })->where('id','<>', auth()->id());
+        $users = User::where('id','<>', auth()->id());
 
         if($search['search_country']){
 
