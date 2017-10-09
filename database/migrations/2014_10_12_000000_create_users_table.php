@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id'); 
             $table->string('email')->unique();
             $table->string('password');
-            $table->tinyInteger('activity')->default(1); //1 consumer / 2 supplier
+            $table->tinyInteger('activity')->default(0); //1 consumer / 2 supplier
             $table->string('private_code')->nullable();
             $table->string('public_code')->nullable();
             $table->tinyInteger('active')->default(0);

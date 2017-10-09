@@ -42,10 +42,7 @@ class ProfileController extends Controller
             
           
             
-            $admins =  User::whereHas('roles', function($q){
-                $q->where('name', 'admin');
-   
-           })->count();
+            $admins =  User::count();
 
             return view('superadmin.profile', compact('user','admins'));
         }

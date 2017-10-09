@@ -7,10 +7,16 @@ use App\Country;
 use App\User;
 use App\Profile;
 use App\Sector;
+use App\CreditDays;
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
-        'users','profiles','roles','role_user', 'partner_user','companies','company_country','countries','country_user','permissions','permission_user','sectors','company_sector'
+        'users','profiles','roles','role_user', 'partner_user','companies','company_country','countries','country_user','permissions','permission_user','sectors','company_sector','quotation_requests','quotations','purchase_orders','credit_days'
+    ];
+    private $creditDays = [
+        ['days'=> 30],
+        ['days'=> 45],
+        ['days'=> 60]
     ];
     private $permissions = [
         [
@@ -231,7 +237,10 @@ class DatabaseSeeder extends Seeder
             ['country_id' => $country->id, 'user_id' =>  $admin->id]
         );
 
-        $partner = factory(User::class, 1)->create()->first(); // partner
+        $partner = factory(User::class, 1)->create([
+            'activity' => 1,
+            
+        ])->first(); // partner
         
         $profile = factory(Profile::class, 1)->create([
             'user_id' => $partner->id,
@@ -295,6 +304,11 @@ class DatabaseSeeder extends Seeder
         foreach ($this->sectorsSubsectors as $sector) {
             
             Sector::create($sector);
+        }
+
+        foreach ($this->creditDays as $credit) {
+            
+            CreditDays::create($credit);
         }
        
 

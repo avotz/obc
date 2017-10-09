@@ -126,8 +126,19 @@ class User extends Authenticatable
  
          return !! $role->intersect($this->roles)->count();
      }
- 
-
+    
+     public function requests()
+     {
+         return $this->hasMany(QuotationRequest::class);
+     }
+     public function quotations()
+     {
+         return $this->hasMany(Quotation::class);
+     }
+    public function requests_suppliers()
+    {
+         return $this->belongsToMany(QuotationRequest::class);
+    }
     public function partners() //associates
     {
         return $this->belongsToMany(User::class, 'partner_user', 'user_id', 'partner_id');

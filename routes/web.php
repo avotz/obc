@@ -16,6 +16,15 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('partners/{privateCode}/check', 'PartnerController@checkPrivateCode');
 Route::get('profile', 'ProfileController@show');
+Route::get('suppliers', 'QuotationRequestController@suppliers');
+Route::get('private/requests', 'QuotationRequestController@private');
+Route::get('public/requests', 'QuotationRequestController@public');
+Route::get('requests/{request}/quotations', 'QuotationController@index');
+Route::get('requests/{request}/quotations/create', 'QuotationController@create');
+Route::post('requests/{request}/quotations', 'QuotationController@store');
+
+//Route::resource('quotations', 'QuotationController');
+Route::resource('requests', 'QuotationRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {
@@ -95,6 +104,13 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
         ));
     }
 
+    Route::get('/quotations', 'PartnerController@quotations');
+    Route::get('/requests', 'PartnerController@requests');
+
+
+    
+    
+
 });
 Route::prefix('user')->middleware('authByRole:user')->group(function ()
 {
@@ -102,7 +118,8 @@ Route::prefix('user')->middleware('authByRole:user')->group(function ()
     Route::post('/profile/avatars', 'ProfileController@avatar');
     Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
     Route::put('/{user}', 'UserController@update');
-
+    Route::get('/quotations', 'UserController@quotations');
+    Route::get('/requests', 'UserController@requests');
 
  
 

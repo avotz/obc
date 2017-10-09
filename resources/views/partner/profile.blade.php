@@ -30,20 +30,24 @@
 <div class="content bg-white border-b">
     <div class="row items-push text-uppercase">
         <div class="col-xs-6 col-sm-2">
+            <div class="font-w700 text-gray-darker animated fadeIn">Quotation Requests</div>
+            <a class="h2 font-w300 text-primary animated flipInX" href="/partner/requests">{{ auth()->user()->requests->count() }}</a>
+        </div>
+        <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn">Quotations</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">17980</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="/partner/quotations">{{ auth()->user()->quotations->count() }}</a>
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn">Credits</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">27</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn">Shippings</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">1360</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn">Orders</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">1360</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn">Partners</div>

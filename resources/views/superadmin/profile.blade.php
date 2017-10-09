@@ -33,7 +33,7 @@
             <a class="h2 font-w300 text-primary animated flipInX" href="/superadmin/countries">{{ $countries->count() }}</a>
         </div>
         <div class="col-xs-6 col-sm-3">
-            <div class="font-w700 text-gray-darker animated fadeIn">Admin Users</div>
+            <div class="font-w700 text-gray-darker animated fadeIn">Users</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="/superadmin/users">{{ $admins }}</a>
         </div>
         

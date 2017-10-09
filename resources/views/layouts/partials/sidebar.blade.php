@@ -29,10 +29,10 @@
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-layers"></i><span class="sidebar-mini-hide">Publications</span></a>
                                     <ul>
                                         <li>
-                                            <a href="#">Public Area</a>
+                                            <a href="/public/requests">Public Area</a>
                                         </li>
                                         <li>
-                                            <a href="#">Private Zone</a>
+                                            <a href="/private/requests">Private Zone</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -40,7 +40,7 @@
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Create Transaction</span></a>
                                     <ul>
                                         <li>
-                                            <a href="#">Quotation Request</a>
+                                            <a href="/requests/create">Quotation Request</a>
                                         </li>
                                         <li>
                                             <a href="#">Credit Application</a>

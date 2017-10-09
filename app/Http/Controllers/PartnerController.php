@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Repositories\UserRepository;
 use App\Company;
+use App\QuotationRequest;
+use App\Quotation;
 
 use App\Permission;
 use App\Rules\Partner;
@@ -203,4 +205,42 @@ class PartnerController extends Controller
         })->where('active', 1)
         ->where('private_code', $code)->with('company.countries')->first();
     }
+
+     
+      /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function requests()
+    {
+       
+
+        $quotationRequests = auth()->user()->requests();
+
+        
+        $quotationRequests = $quotationRequests->orderBy('created_at','DESC')->paginate(10);
+
+       
+
+
+        return view('partner.requests',compact('quotationRequests'));
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function quotations()
+    {
+      
+
+            $quotations = Quotation::where('user_id',auth()->id());
+            $quotations = $quotations->paginate(10);
+
+            return view('partner.quotations',compact('quotations'));
+
+    
+    }
+
 }
