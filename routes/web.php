@@ -19,6 +19,7 @@ Route::get('profile', 'ProfileController@show');
 Route::get('suppliers', 'QuotationRequestController@suppliers');
 Route::get('private/requests', 'QuotationRequestController@private');
 Route::get('public/requests', 'QuotationRequestController@public');
+Route::post('questions', 'QuestionController@store');
 Route::get('requests/{request}/quotations', 'QuotationController@index');
 Route::get('requests/{request}/quotations/create', 'QuotationController@create');
 Route::post('requests/{request}/quotations', 'QuotationController@store');

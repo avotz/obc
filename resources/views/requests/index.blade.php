@@ -28,7 +28,7 @@
                 @else 
                 <div class="block-content">
                     <div class="row items-push text-center">
-                        <a class="col-xs-4" href="#">
+                        <a class="btn-questions col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $request->user->hasRole('user') ? $request->user->email : '' }}" data-partner="{{ $request->user->hasRole('partner') ? $request->user->email : $request->user->partners->first()->email }}" data-transaction="{{ $request->transaction_id }}" >
                             <div class="push-5"><i class="si si-question fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Questions</div>
                         </a>
@@ -50,13 +50,72 @@
         @endforeach
     </div>
 </div>
+
+@include('layouts.partials.questions-modal')
+
 @endsection
 @section('scripts')
+<!-- <script src="/js/plugins/bootstrap.min.js"></script> -->
     <script>
         $("form[data-confirm]").submit(function() {
             if ( ! confirm($(this).attr("data-confirm"))) {
                 return false;
             }
+        });
+        var modalForm = $('#modal-questions')
+        
+        modalForm.on('shown.bs.modal', function (event) {
+      
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var subject = button.attr('data-transaction');
+                var partner = button.attr('data-partner');
+                var user = button.attr('data-user');
+
+            
+                var modal = $(this);
+
+                    modal.find('#modal-questions-subject').val(subject)
+                    modal.find('#modal-questions-partner').val(partner)
+                    modal.find('#modal-questions-user').val(user)
+       
+        });
+
+
+
+        modalForm.find('.modal-question-btn-send').on('click', function (e) {
+            e.preventDefault();
+            
+            var form = modalForm.find('#modal-questions-form');
+            var formData = form.serializeArray();
+              
+              formData.push({ name: '_token', value:$('meta[name="csrf-token"]').attr('content')});
+            
+            $('body').addClass('loading');
+
+            $.ajax({
+                type: 'POST',
+                url: '/questions',
+                data: formData,
+                success: function (resp) {
+
+                    $('body').removeClass('loading');
+
+                    if(resp == 'ok'){
+                        modalForm.find('#modal-questions-msg').val('');
+
+                        alert('Message sent');
+                    }
+                },
+                error: function () {
+                    
+                    $('body').removeClass('loading');
+
+                    console.log('error  reminder');
+                    
+
+                }
+            });
+        
         });
     </script>
 @endsection

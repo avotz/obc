@@ -78,7 +78,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
-    <script src="/js/plugins/bootstrap.min.js"></script>
+    <!-- <script src="/js/plugins/bootstrap.min.js"></script> -->
     <script src="/js/oneui.min.js"></script>
 
     @yield('scripts')

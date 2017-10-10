@@ -12,10 +12,11 @@
                  @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first(),  'user' =>  $quotation->user->hasRole('user') ? $quotation->user : '' ])
                 <div class="block-content">
                     <div class="row items-push text-center">
-                        <a class="col-xs-4" href="#">
+                        <a class="col-xs-4" href="#" data-toggle="modal" data-target="#modal-fadein" >
                             <div class="push-5"><i class="si si-question fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Questions</div>
                         </a>
+                       
                         <a class="col-xs-4" href="#">
                             <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Download</div>
@@ -44,8 +45,13 @@
         @endforeach
     </div>
 </div>
+
+@include('layouts.partials.questions-modal')
+
+<!-- END question Modal -->
 @endsection
 @section('scripts')
+<script src="/js/plugins/bootstrap.min.js"></script>
     <script>
         $("form[data-confirm]").submit(function() {
             if ( ! confirm($(this).attr("data-confirm"))) {
