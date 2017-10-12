@@ -91,6 +91,7 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <button class="btn btn-block btn-success" type="submit">Save</button>
+            <button class="btn btn-success" type="submit">Save</button>
+            <a class="btn btn-default" href="/public/requests">Back</a>
         </div>
     </div>

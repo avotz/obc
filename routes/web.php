@@ -121,7 +121,7 @@ Route::prefix('user')->middleware('authByRole:user')->group(function ()
     Route::put('/{user}', 'UserController@update');
     Route::get('/quotations', 'UserController@quotations');
     Route::get('/requests', 'UserController@requests');
-
+    Route::delete('/requests/photo/{id}', 'QuotationRequestController@deleteProductPhoto');
  
 
 });

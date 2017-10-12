@@ -56,11 +56,12 @@ class QuotationController extends Controller
     public function create($quotation_request_id)
     {
         $quotationRequest = QuotationRequest::find($quotation_request_id);
-        $user =  $quotationRequest->user->load('profile');
-        
+        $partner =  $quotationRequest->user->hasRole('partner') ? $quotationRequest->user : $quotationRequest->user->partners->first();
+        $user =  $quotationRequest->user->hasRole('user') ? $quotationRequest->user->load('profile') : '';
+    
         $creditDays = CreditDays::all();
 
-        return view('quotations.create', compact('user','creditDays','quotationRequest'));
+        return view('quotations.create', compact('user','partner','creditDays','quotationRequest'));
     }
 
     public function store($quotation_request_id)

@@ -2,7 +2,9 @@
 @section('css')
     <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="/js/plugins/magnific-popup/magnific-popup.min.css">
 @endsection
+
 @section('content')
 <div id="infoBox" class="alert alert-success" ></div>
  <!-- Page Header -->
@@ -51,20 +53,21 @@
                     <div class="block-content block-content-full text-center">
                         <div>
                         
-                            <img src="{{ getLogo($quotationRequest->user->company) }}" alt="Logo" id="company-logo" class="img-company-logo  " />
+                            <img src="{{ getLogo($partner->company) }}" alt="Logo" id="company-logo" class="img-company-logo  " />
                             
                         </div>
                         <div class="h5 push-15-t push-5">Quotation Request #{{ $quotationRequest->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$quotationRequest->public) }}">{{ trans('utils.public.'.$quotationRequest->public) }}</small>
+                        <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getProductPhoto($quotationRequest) }}" class="img-link" >{{ $quotationRequest->product_name }}</a></span> </div>
                     </div>
                     <div class="block-content block-content-mini block-content-full bg-gray-lighter">
-                        <div class=" "><b>Partner name:</b> {{ $quotationRequest->user->company->company_name }}</div>
-                        <div class=" "><b>Partner country:</b> {{ $quotationRequest->user->company->countries->first()->name }} <img src="{{ getFlag($quotationRequest->user->company->countries->first()->code) }}" alt="flag"></div>
-                        <div class=""><b>Supplier sector:</b>  @foreach($quotationRequest->user->company->sectors as $item)
+                        <div class=" "><b>Partner name:</b> {{ $partner->company->company_name }}</div>
+                        <div class=" "><b>Partner country:</b> {{ $partner->company->countries->first()->name }} <img src="{{ getFlag($partner->company->countries->first()->code) }}" alt="flag"></div>
+                        <div class=""><b>Supplier sector:</b>  @foreach($partner->company->sectors as $item)
                                         
                                                 {{ $item->name }},
                                             
                                             @endforeach</div>
-                        <div class=" "><b>Supplier sub-sector:</b> @foreach($quotationRequest->user->company->sectors as $item)
+                        <div class=" "><b>Supplier sub-sector:</b> @foreach($partner->company->sectors as $item)
                                         
                                                 {{ $item->name }},
                                             
@@ -76,10 +79,11 @@
                         <div class=" "><b>Additional comment:</b> {{ $quotationRequest->comments }}</div>
                     </div>
                     <div class="block-content block-content-mini block-content-full bg-gray-lighter">
-                        <div class=" "><b>Partner ID:</b> {{ $quotationRequest->user->public_code }}</div>
-                        <div class=" "><b>Transaction ID:</b> Quotation Request -{{ $quotationRequest->id }}</div>
-                        <div class=""><b>User ID:</b>  {{ $quotationRequest->user->public_code }}</div>
+                        <div class=" "><b>Partner ID:</b> {{ $partner->public_code }} </div>
+                        <div class=" "><b>Transaction ID:</b> {{ $quotationRequest->transaction_id }}</div>
+                        <div class=""><b>User ID:</b> {{ Optional($user)->public_code }}  @if($user) / {{ $user->profile->fullname }} / {{ $user->profile->position_held }}  @endif   </div>
                         <div class=" "><b>Date:</b> {{ $quotationRequest->created_at }} </div>
+                    
                         
                     </div>
                     <div class="block-content">
@@ -102,113 +106,122 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
+<script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
 <script>
-    
-    jQuery('.js-select2').select2();
-    $('#suppliers').select2({
-        ajax: {
-            delay: 300,
-            url: '/suppliers',
-            dataType: 'json',
-            data: function (params) {
-            var query = {
-                q: params.term,
-               
-            }
+    $(function () {
+       
+                // Init page helpers (Magnific Popup plugin)
+                App.initHelpers('magnific-popup');
 
-            // Query parameters will be ?search=[term]&type=public
-            return query;
-            },
-            processResults: function (data) {
-            // Tranforms the top-level key of the response object from 'items' to 'results'
-            return {
-                results: data
-            };
-            }
-        },
-        minimumInputLength: 1,
+                jQuery('.js-select2').select2();
+                $('#suppliers').select2({
+                    ajax: {
+                        delay: 300,
+                        url: '/suppliers',
+                        dataType: 'json',
+                        data: function (params) {
+                        var query = {
+                            q: params.term,
+                        
+                        }
+
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                        },
+                        processResults: function (data) {
+                        // Tranforms the top-level key of the response object from 'items' to 'results'
+                        return {
+                            results: data
+                        };
+                        }
+                    },
+                    minimumInputLength: 1,
+                    });
+
+                jQuery('.suppliersSelectContainer').hide();
+                
+                jQuery('select[name=public]').change(function(e){
+                    if(jQuery(this).val() == '1'){
+                        jQuery('.suppliersSelectContainer').hide();
+                    }else{
+                        jQuery('.suppliersSelectContainer').show();
+                    }
+                });
+
+                jQuery('.js-datepicker').datepicker({
+                        
+                });
+
+                $("#UploadPhoto").ajaxUpload({
+                url : $("#UploadPhoto").data('url'),
+                name: "photo",
+                data: {},
+                onSubmit: function() {
+                    $('#infoBox').html('Uploading ... ');
+
+                },
+                onComplete: function(result) {
+
+                    if(result ==='error'){
+
+                        $('#infoBox').addClass('alert-danger').html('Error al subir archivo. Tipo no permitido!!').show();
+                        setTimeout(function()
+                        { 
+                            $('#infoBox').removeClass('alert-danger').hide();
+                        },3000);
+
+                    return
+
+                    }
+
+                    $('#infoBox').addClass('alert-success').html('La foto se ha guardado con exito!!').show();
+                        setTimeout(function()
+                        { 
+                        $('#infoBox').removeClass('alert-success').hide();
+                        },3000);
+                    d = new Date();
+                    
+                        $('#user-avatar').attr('src','/storage/'+ result+'?'+d.getTime());
+                
+                }
+            });
+            $("#UploadLogo").ajaxUpload({
+                url : $("#UploadLogo").data('url'),
+                name: "photo",
+                data: {},
+                onSubmit: function() {
+                    $('#infoBox').html('Uploading ... ');
+
+                },
+                onComplete: function(result) {
+
+                    if(result ==='error'){
+
+                        $('#infoBox').addClass('alert-danger').html('Error al subir archivo. Tipo no permitido!!').show();
+                        setTimeout(function()
+                        { 
+                            $('#infoBox').removeClass('alert-danger').hide();
+                        },3000);
+
+                    return
+
+                    }
+
+                    $('#infoBox').addClass('alert-success').html('El logo se ha guardado con exito!!').show();
+                        setTimeout(function()
+                        { 
+                        $('#infoBox').removeClass('alert-success').hide();
+                        },3000);
+                    d = new Date();
+                    
+                        $('#company-logo').attr('src','/storage/'+ result+'?'+d.getTime());
+                
+                }
+            });
+
+              
         });
-
-    jQuery('.suppliersSelectContainer').hide();
-    
-    jQuery('select[name=public]').change(function(e){
-        if(jQuery(this).val() == '1'){
-            jQuery('.suppliersSelectContainer').hide();
-        }else{
-            jQuery('.suppliersSelectContainer').show();
-        }
-    });
-
-    jQuery('.js-datepicker').datepicker({
-            
-    });
-
-    $("#UploadPhoto").ajaxUpload({
-      url : $("#UploadPhoto").data('url'),
-      name: "photo",
-      data: {},
-      onSubmit: function() {
-          $('#infoBox').html('Uploading ... ');
-
-      },
-      onComplete: function(result) {
-
-          if(result ==='error'){
-
-            $('#infoBox').addClass('alert-danger').html('Error al subir archivo. Tipo no permitido!!').show();
-              setTimeout(function()
-              { 
-                $('#infoBox').removeClass('alert-danger').hide();
-              },3000);
-
-         return
-
-          }
-
-          $('#infoBox').addClass('alert-success').html('La foto se ha guardado con exito!!').show();
-            setTimeout(function()
-            { 
-              $('#infoBox').removeClass('alert-success').hide();
-            },3000);
-        d = new Date();
-        
-            $('#user-avatar').attr('src','/storage/'+ result+'?'+d.getTime());
-      
-      }
-  });
-  $("#UploadLogo").ajaxUpload({
-      url : $("#UploadLogo").data('url'),
-      name: "photo",
-      data: {},
-      onSubmit: function() {
-          $('#infoBox').html('Uploading ... ');
-
-      },
-      onComplete: function(result) {
-
-          if(result ==='error'){
-
-            $('#infoBox').addClass('alert-danger').html('Error al subir archivo. Tipo no permitido!!').show();
-              setTimeout(function()
-              { 
-                $('#infoBox').removeClass('alert-danger').hide();
-              },3000);
-
-         return
-
-          }
-
-          $('#infoBox').addClass('alert-success').html('El logo se ha guardado con exito!!').show();
-            setTimeout(function()
-            { 
-              $('#infoBox').removeClass('alert-success').hide();
-            },3000);
-        d = new Date();
-        
-            $('#company-logo').attr('src','/storage/'+ result+'?'+d.getTime());
-      
-      }
-  });
+   
 </script>
 @endsection
 

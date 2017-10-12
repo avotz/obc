@@ -1,7 +1,7 @@
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $user->profile->applicant_name }}
+                {{ $partner->profile->applicant_name }}
                 <label for="company_name">Partner Name</label>
             </div>
         </div>
@@ -10,7 +10,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 
-                    @foreach($user->company->countries as $item)
+                    @foreach($partner->company->countries as $item)
                     <div>
                         {{ $item->name }}
                     </div>
@@ -24,8 +24,8 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
               
-                @foreach ($user->company->sectors as $sector)
-                    @include('layouts.partials.sector-select', ['company' => $user->company])
+                @foreach ($partner->company->sectors as $sector)
+                    @include('layouts.partials.sector-select', ['company' => $partner->company])
                 @endforeach
                 <label for="sector">Supplier sector</label>
             </div>
@@ -36,11 +36,18 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <select name="geo_type" id="geo_type"  class="form-control">
-               
-                    <option value="1" @if(isset($quotationRequest) && $quotationRequest->geo_type == 1) selected="selected" @endif>National</option>
-                    <option value="2" @if(isset($quotationRequest) && $quotationRequest->geo_type == 2) selected="selected" @endif>Regional</option>
-                    <option value="3" @if(isset($quotationRequest) && $quotationRequest->geo_type == 3) selected="selected" @endif>International</option>
-                    <option value="4" @if(isset($quotationRequest) && $quotationRequest->geo_type == 4) selected="selected" @endif>Global</option>
+                    @if(auth()->user()->hasPermission('do_trans_nac'))
+                        <option value="1" @if(isset($quotationRequest) && $quotationRequest->geo_type == 1) selected="selected" @endif>National</option>
+                    @endif
+                    @if(auth()->user()->hasPermission('do_trans_reg'))
+                        <option value="2" @if(isset($quotationRequest) && $quotationRequest->geo_type == 2) selected="selected" @endif>Regional</option>
+                    @endif
+                    @if(auth()->user()->hasPermission('do_trans_int'))
+                        <option value="3" @if(isset($quotationRequest) && $quotationRequest->geo_type == 3) selected="selected" @endif>International</option>
+                    @endif
+                    @if(auth()->user()->hasPermission('do_trans_glo'))
+                        <option value="4" @if(isset($quotationRequest) && $quotationRequest->geo_type == 4) selected="selected" @endif>Global</option>
+                    @endif
                 </select>
                 <label for="geo_type">  Transaction Type</label>
                 @if ($errors->has('geo_type'))
@@ -149,6 +156,10 @@
                     </span>
                 @endif
             </div>
+            @if($quotationRequest->product_photo)
+               
+                <delete-photo-product :transaction-id="{{ $quotationRequest->id }}" url-img="{{ getProductPhoto($quotationRequest) }}">Delete Current Photo</delete-photo-product>
+            @endif
         </div>
     </div>
     <div class="form-group{{ $errors->has('public') ? ' has-error' : '' }}">
@@ -157,7 +168,9 @@
                 <select name="public" id="public"  class="form-control">
                 
                     <option value="1" @if(isset($quotationRequest) && $quotationRequest->public == 1) selected="selected" @endif>Public</option>
-                    <option value="0" @if(isset($quotationRequest) && $quotationRequest->public == 0) selected="selected" @endif>Private</option>
+                    @if(auth()->user()->hasPermission('do_trans_priv'))
+                        <option value="0" @if(isset($quotationRequest) && $quotationRequest->public == 0) selected="selected" @endif>Private</option>
+                    @endif
                 </select>
                 <label for="public">  Visibility</label>
                 @if ($errors->has('public'))
@@ -182,6 +195,7 @@
     </div>
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <button class="btn btn-block btn-success" type="submit">Save</button>
+            <button class="btn btn-success" type="submit">Save</button>
+            <a class="btn btn-default" href="/public/requests">Back</a>
         </div>
     </div>

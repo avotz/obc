@@ -8,6 +8,7 @@ use App\CreditDays;
 use App\QuotationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class QuotationRequestController extends Controller
 {
@@ -110,10 +111,10 @@ class QuotationRequestController extends Controller
      */
     public function create()
     {
-        $user = auth()->user();
+        $partner = (auth()->user()->hasRole('partner')) ? auth()->user() : auth()->user()->partners->first();
         $creditDays = CreditDays::all();
 
-        return view('requests.create', compact('user','creditDays'));
+        return view('requests.create', compact('partner','creditDays'));
     }
 
     public function store()
@@ -181,6 +182,90 @@ class QuotationRequestController extends Controller
     }
 
     /**
+     * edit the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $quotationRequest = QuotationRequest::find($id);
+        
+        if(!$quotationRequest->createdBy(auth()->user())) return redirect('/public/requests');
+
+        $partner = (auth()->user()->hasRole('partner')) ? auth()->user() : auth()->user()->partners->first();
+        $creditDays = CreditDays::all();
+
+        return view('requests.edit', compact('partner','creditDays','quotationRequest'));
+    }
+
+    /**
+     * update the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        $this->validate(request(), [
+            'delivery_time' => 'required|string|max:255',
+            'way_of_delivery' => 'required|string|max:255',
+            'way_to_pay' => 'required|string|max:255',
+            'exp_date' => 'required|date',
+            'product_photo' => 'mimes:jpeg,bmp,png,pdf',
+            
+            
+            
+        ]
+        );
+
+        $quotationRequest = QuotationRequest::find($id);
+        $quotationRequest->fill(request()->all());
+        $quotationRequest->save();
+
+        if(request('suppliers'))
+        $quotationRequest->suppliers()->sync(request('suppliers'));
+
+
+        $mimes = ['jpg','jpeg','bmp','png','pdf'];
+        $fileUploaded = "error";
+
+    
+   
+        if(request()->file('product_photo'))
+        {
+        
+            $file = request()->file('product_photo');
+           
+            $name = $file->getClientOriginalName();
+            $ext = $file->guessClientExtension();
+            $onlyName = str_slug(pathinfo($name)['filename'], '-');
+            
+        
+        
+            if(in_array($ext, $mimes)){
+                
+               
+
+                $fileUploaded = $file->storeAs("requests/". $quotationRequest->id ."/product", $quotationRequest->id.'-'.$onlyName.'.'.$ext,'public');
+
+                $quotationRequest->product_photo = $quotationRequest->id.'-'.$onlyName.'.'.$ext;
+                $quotationRequest->save();
+
+               
+            }
+            
+        }
+
+      
+   
+
+    flash('Quotation Request updated','success');
+        
+
+
+        return redirect('/public/requests');
+    }
+
+    /**
      * suppliers list for select.
      *
      * @return \Illuminate\Http\Response
@@ -203,6 +288,21 @@ class QuotationRequestController extends Controller
 
         return $itemsSelect;
     }
+
+    public function deleteProductPhoto($id)
+    {
+        $directory= "requests/". $id;
+        $quotationRequest = QuotationRequest::find($id);
+        $quotationRequest->product_photo = '';
+        $quotationRequest->save();
+        
+        //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+        Storage::disk('public')->deleteDirectory($directory);
+        
+        return 'ok';
+         
+    }
+    
 
     
 

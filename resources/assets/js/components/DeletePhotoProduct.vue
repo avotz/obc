@@ -1,23 +1,27 @@
 <template>
-    
-                
-    <button class="btn btn-danger btn-xs btn-block" type="button" @click="removeAvatar()" v-if="!loader"> <slot>Delete</slot></button>
+    <div v-show="img">
+        <img :src="img" alt="photo" style="height:90px" />            
+        <button class="btn btn-danger btn-xs " type="button" @click="removePhoto()" v-if="!loader"> <slot>Delete</slot></button>
             
  
-    
+    </div>
 </template>
 
 <script>
-
+   
 
     export default {
         //props:['partnerId','privateCode'],
          props: {
+            urlImg: {
+		      type: String,
+		      default: ''
+            },
 		    url: {
 		      type: String,
-		       default: '/superadmin/profile/avatars'
+		       default: '/user/requests/photo'
             },
-             userId: {
+             transactionId: {
               type: Number,
               
 		      
@@ -30,7 +34,7 @@
              
                 loader:false,
                 errors:[],
-              
+                img:''
 
             }
           
@@ -38,15 +42,16 @@
 
         methods:{
            
-            removeAvatar() {
+            removePhoto() {
                 this.loader = true;
-                axios.delete(`${this.url}/${this.userId}`)
+                axios.delete(`${this.url}/${this.transactionId}`)
                     .then(response => {
                         bus.$emit('alert', 'Photo Deleted','success');
                         this.loader = false;
                         this.errors = [];
+                        this.img = ""
                         
-                        window.location.href = "/profile/";
+                       // window.location.href = "/profile/";
                        
                     })
                     .catch(e => {
@@ -61,8 +66,8 @@
 		    }
         },
         created() {
-
-            console.log('Component deleteAvatarProfile.')
+            this.img =  this.urlImg
+            console.log('Component deletePhotoProduct.')
         }
     }
 </script>

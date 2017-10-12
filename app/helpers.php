@@ -120,3 +120,19 @@ function getLogo($company)
         
      
 }
+function getProductPhoto($request)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('requests/'. $request->id.'/product/'. $request->product_photo))
+        $url = Storage::url('requests/'. $request->id.'/product/'. $request->product_photo);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
+

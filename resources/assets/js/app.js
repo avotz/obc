@@ -20,6 +20,7 @@ Vue.component('update-private-code', require('./components/UpdatePrivateCode.vue
 Vue.component('sector-subsectors', require('./components/SectorSubsectors.vue'));
 Vue.component('update-country', require('./components/UpdateCountry.vue'));
 Vue.component('delete-avatar-profile', require('./components/DeleteAvatarProfile.vue'));
+Vue.component('delete-photo-product', require('./components/DeletePhotoProduct.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

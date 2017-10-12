@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('css')
+<link rel="stylesheet" href="/js/plugins/magnific-popup/magnific-popup.min.css">
+@endsection
 @section('content')
  
   <div class="content">
@@ -28,11 +30,19 @@
 </div>
 @endsection
 @section('scripts')
+<script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
+
     <script>
-        $("form[data-confirm]").submit(function() {
-            if ( ! confirm($(this).attr("data-confirm"))) {
-                return false;
-            }
+         $(function () {
+       
+                // Init page helpers (Magnific Popup plugin)
+                App.initHelpers('magnific-popup');
+
+                $("form[data-confirm]").submit(function() {
+                    if ( ! confirm($(this).attr("data-confirm"))) {
+                        return false;
+                    }
+                });
         });
     </script>
 @endsection
