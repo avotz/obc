@@ -2,16 +2,14 @@
 @section('css')
     <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css">
-    <link rel="stylesheet" href="/js/plugins/magnific-popup/magnific-popup.min.css">
 @endsection
-
 @section('content')
 <div id="infoBox" class="alert alert-success" ></div>
  <!-- Page Header -->
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Quotation for Quotation Request -{{ $quotationRequest->id }} </h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn">Edit Quotation</h1>
         
            
     
@@ -31,10 +29,15 @@
         <div class="block">
                 
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/requests/{{ $quotationRequest->id }}/quotations" enctype="multipart/form-data">
-                                        
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/quotations/{{ $quotation->id }}" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT">              
                         {{ csrf_field() }}
-                        @include('quotations/partials/form') 
+                       
+                        @if(!$quotation->purchase) 
+                            @include('quotations/partials/form')
+                        @else
+                            @include('quotations/partials/show') 
+                        @endif 
                     
                     </form>
 
@@ -48,7 +51,7 @@
         </div>
         <div class="col-sm-5 col-lg-4">
             
-            <div class="col-sm-12">
+        <div class="col-sm-12">
                 <div class="block block-link-hover3" href="javascript:void(0)">
                     <div class="block-content block-content-full text-center">
                         <div>
@@ -106,7 +109,7 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
-<script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-<script src="{{ mix('/js/quotations.js') }}"></script>
+<script src="{{ mix('/js/requests.js') }}"></script>
+
 @endsection
 

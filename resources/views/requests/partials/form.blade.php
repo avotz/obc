@@ -147,6 +147,7 @@
     </div>
     <div class="form-group{{ $errors->has('product_photo') ? ' has-error' : '' }}">
         <div class="col-xs-12">
+            @if(!$quotationRequest->quotations->count()) 
             <div class="form-material form-material-success">
                 <input class="form-control" type="file" id="product_photo" name="product_photo">
                 <label for="product_photo">Product Photo</label>
@@ -156,9 +157,10 @@
                     </span>
                 @endif
             </div>
-            @if($quotationRequest->product_photo)
+            @endif
+            @if(isset($quotationRequest) && $quotationRequest->product_photo)
                
-                <delete-photo-product :transaction-id="{{ $quotationRequest->id }}" url-img="{{ getProductPhoto($quotationRequest) }}">Delete Current Photo</delete-photo-product>
+                <delete-photo-product :transaction-id="{{ $quotationRequest->id }}" url-img="{{ getRequestProductPhoto($quotationRequest) }}" :read="{{ $quotationRequest->quotations->count() ? 'true': 'false' }}">Delete Current Photo</delete-photo-product>
             @endif
         </div>
     </div>
@@ -195,7 +197,10 @@
     </div>
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <button class="btn btn-success" type="submit">Save</button>
+            @if(!$quotationRequest->quotations->count()) 
+                <button class="btn btn-success" type="submit">Save</button>
+          @endif
+           
             <a class="btn btn-default" href="/public/requests">Back</a>
         </div>
     </div>

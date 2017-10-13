@@ -120,7 +120,7 @@ function getLogo($company)
         
      
 }
-function getProductPhoto($request)
+function getRequestProductPhoto($request)
 {
    
 
@@ -128,6 +128,36 @@ function getProductPhoto($request)
     
     if(Storage::disk('public')->exists('requests/'. $request->id.'/product/'. $request->product_photo))
         $url = Storage::url('requests/'. $request->id.'/product/'. $request->product_photo);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
+function getQuotationProductPhoto($quotation)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('quotations/'. $quotation->id.'/product/'. $quotation->product_photo))
+        $url = Storage::url('quotations/'. $quotation->id.'/product/'. $quotation->product_photo);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
+function getFilePurchase($purchase)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('purchases/'. $purchase->id.'/files/'. $purchase->file))
+        $url = Storage::url('purchases/'. $purchase->id.'/files/'. $purchase->file);
     else
         $url = "#";
 

@@ -24,18 +24,10 @@
                             <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Download</div>
                         </a>
-                        @if($quotation->purchase)
-                        <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id}}/edit">
-                            <div class="h3 push-5 text-{{ trans('utils.purchase_status_color.'.$quotation->purchase->status) }}"> {{  $quotation->purchase->count() }}</div>
-                            <div class="h5 font-w300 text-muted">Purchase Order </div>
-                        </a>
-                        @else
                         <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/purchases/create">
                             <div class="push-5"><i class="si si-handbag fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted">Purchase Order </div>
-                        </a> 
-                        
-                        @endif
+                            <div class="h5 font-w300 text-muted">Purchase Order</div>
+                        </a>
                         <a class="col-xs-4" href="#">
                             <div class="push-5"><i class="si si-plane fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Shipping</div>

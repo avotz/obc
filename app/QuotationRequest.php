@@ -20,9 +20,9 @@ class QuotationRequest extends Model
        
         $this->transaction_id = 'Quotation Request -'. $this->id;
 
-        $user = $this->save();
+        $quotationRequest = $this->save();
 
-        return $user;
+        return $quotationRequest;
     }
 
     public function user()

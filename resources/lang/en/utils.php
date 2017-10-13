@@ -30,6 +30,20 @@ return [
             ]
            
         ],
+        'purchase_status_color'  => [
+            '0' => 'warning',
+            '1' => 'success',
+            '2' => 'danger',
+            
+           
+        ],
+        'purchase_status'  => [
+            '0' => 'Pending',
+            '1' => 'Granted',
+            '2' => 'Rejected',
+            
+           
+        ],
     
     
     ];

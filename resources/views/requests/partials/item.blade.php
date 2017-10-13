@@ -6,7 +6,7 @@
                         
                     </div>
                     <div class="h5 push-15-t push-5">Quotation Request #{{ $request->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$request->public) }}">{{ trans('utils.public.'.$request->public) }}</small>
-                    <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getProductPhoto($request) }}" class="img-link" >{{ $request->product_name }}</a></span> </div>
+                    <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getRequestProductPhoto($request) }}" class="img-link" >{{ $request->product_name }}</a></span> </div>
                 </div>
                 <div class="block-content block-content-mini block-content-full bg-gray-lighter">
                     <div class=" "><b>Partner name:</b> {{ $partner->company->company_name }}</div>

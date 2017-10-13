@@ -35,18 +35,6 @@
 @endsection
 @section('scripts')
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-
-    <script>
-         $(function () {
-       
-                // Init page helpers (Magnific Popup plugin)
-                App.initHelpers('magnific-popup');
-
-                $("form[data-confirm]").submit(function() {
-                    if ( ! confirm($(this).attr("data-confirm"))) {
-                        return false;
-                    }
-                });
-        });
-    </script>
+<script src="{{ mix('/js/requests.js') }}"></script>
+<script src="{{ mix('/js/questions.js') }}"></script>
 @endsection

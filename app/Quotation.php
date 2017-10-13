@@ -20,9 +20,9 @@ class Quotation extends Model
        
         $this->transaction_id = 'Quotation '. $this->request_id.'-'.$transactions++;
 
-        $user = $this->save();
+        $quotation = $this->save();
 
-        return $user;
+        return $quotation;
     }
 
     public function user()
@@ -38,4 +38,15 @@ class Quotation extends Model
     {
         return $this->hasOne(PurchaseOrder::class);
     }
+    /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+      public function createdBy($user)
+      {
+          
+          return $this->where('user_id',$user->id)->count();
+      }
 }

@@ -23,9 +23,16 @@ Route::post('questions', 'QuestionController@store');
 Route::get('requests/{request}/quotations', 'QuotationController@index');
 Route::get('requests/{request}/quotations/create', 'QuotationController@create');
 Route::post('requests/{request}/quotations', 'QuotationController@store');
+Route::get('quotations/{quotation}/purchases/create', 'PurchaseController@create');
+Route::post('quotations/{quotation}/purchases', 'PurchaseController@store');
+Route::get('purchases/{purchase}/edit', 'PurchaseController@edit');
+Route::delete('/requests/photo/{id}', 'QuotationRequestController@deleteProductPhoto');
+Route::delete('/quotations/photo/{id}', 'QuotationController@deleteProductPhoto');
+Route::delete('/purchases/file/{id}', 'PurchaseController@deleteFilePurchase');
 
-//Route::resource('quotations', 'QuotationController');
 Route::resource('requests', 'QuotationRequestController');
+Route::resource('quotations', 'QuotationController');
+Route::resource('purchases', 'PurchaseController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {
@@ -107,8 +114,7 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
 
     Route::get('/quotations', 'PartnerController@quotations');
     Route::get('/requests', 'PartnerController@requests');
-
-
+    
     
     
 
@@ -121,8 +127,7 @@ Route::prefix('user')->middleware('authByRole:user')->group(function ()
     Route::put('/{user}', 'UserController@update');
     Route::get('/quotations', 'UserController@quotations');
     Route::get('/requests', 'UserController@requests');
-    Route::delete('/requests/photo/{id}', 'QuotationRequestController@deleteProductPhoto');
- 
+   
 
 });
 

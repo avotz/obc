@@ -14,7 +14,12 @@
                     @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first(),  'user' =>  $quotation->user->hasRole('user') ? $quotation->user : '' ])
                     <div class="block-content">
                         <div class="row items-push text-center">
-                            
+                            @if($quotation->purchase && $quotation->purchase->status == 1)
+                                <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id }}/edit">
+                                    <div class="h3 push-5 text-success">1</div>
+                                    <div class="h5 font-w300 text-muted">Purchase Order</div>
+                                </a>
+                            @endif
                             
                         </div>
                     </div>
@@ -27,18 +32,6 @@
 @endsection
 @section('scripts')
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-
-    <script>
-         $(function () {
-       
-                // Init page helpers (Magnific Popup plugin)
-                App.initHelpers('magnific-popup');
-
-                $("form[data-confirm]").submit(function() {
-                    if ( ! confirm($(this).attr("data-confirm"))) {
-                        return false;
-                    }
-                });
-        });
-    </script>
+<script src="{{ mix('/js/quotations.js') }}"></script>
+<script src="{{ mix('/js/questions.js') }}"></script>
 @endsection

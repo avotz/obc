@@ -37,6 +37,7 @@
                         <div class="form-group remove-margin-b">
                             <div class="col-xs-12">
                                 <button class="btn btn-sm btn-primary modal-question-btn-send" type="submit"><i class="fa fa-send push-5-r"></i> Send Message</button>
+                                <span class="fa fa-cog fa-spin"></span>
                             </div>
                         </div>
                     </form>

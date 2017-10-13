@@ -6,9 +6,9 @@
         </div>
         <div class="h5 push-15-t push-5">Quotation #{{ $quotation->id }} Request #{{ $quotation->request->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$quotation->request->public) }}">{{ trans('utils.public.'.$quotation->request->public) }}</small>
         @if($quotation->product_photo)
-            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery label label-danger"><a href="{{ getQuotationProductPhoto($quotation) }}" class="img-link" > {{ $quotation->product_name }}</a></span> </div>
+            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery label label-danger"><a href="{{ getProductPhoto($quotation) }}" class="img-link" > {{ $quotation->product_name }}</a></span> </div>
         @else 
-            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getRequestProductPhoto($quotation->request) }}" class="img-link" >{{ $quotation->request->product_name }}</a></span> </div>
+            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getProductPhoto($quotation->request) }}" class="img-link" >{{ $quotation->request->product_name }}</a></span> </div>
         @endif
     </div>
     <div class="block-content block-content-mini block-content-full bg-gray-lighter">

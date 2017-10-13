@@ -13,3 +13,11 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.js('resources/assets/js/requests.js', 'public/js')
+mix.js('resources/assets/js/quotations.js', 'public/js')
+mix.js('resources/assets/js/questions.js', 'public/js')
+
+mix.version();
+
+

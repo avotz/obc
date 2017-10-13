@@ -1,7 +1,7 @@
 <template>
-    <div v-show="img">
-        <img :src="img" alt="photo" style="height:90px" />            
-        <button class="btn btn-danger btn-xs " type="button" @click="removePhoto()" v-if="!loader && !read"> <slot>Delete</slot></button>
+    <div v-show="name">
+        <a :href="urlFile" target="_blank">{{ name }} </a>     
+        <button class="btn btn-danger btn-xs " type="button" @click="removeFile()" v-if="!loader && !read"> <slot>Delete</slot></button>
             
  
     </div>
@@ -13,13 +13,17 @@
     export default {
         //props:['partnerId','privateCode'],
          props: {
-            urlImg: {
+            urlFile: {
+		      type: String,
+		      default: ''
+            },
+             filename: {
 		      type: String,
 		      default: ''
             },
 		    url: {
 		      type: String,
-		       default: '/requests/photo'
+		       default: '/purchases/file'
             },
              transactionId: {
               type: Number,
@@ -39,7 +43,7 @@
              
                 loader:false,
                 errors:[],
-                img:''
+                name:''
 
             }
           
@@ -47,14 +51,14 @@
 
         methods:{
            
-            removePhoto() {
+            removeFile() {
                 this.loader = true;
                 axios.delete(`${this.url}/${this.transactionId}`)
                     .then(response => {
-                        bus.$emit('alert', 'Photo Deleted','success');
+                        bus.$emit('alert', 'File Deleted','success');
                         this.loader = false;
                         this.errors = [];
-                        this.img = ""
+                        this.name = ""
                         
                        // window.location.href = "/profile/";
                        
@@ -71,8 +75,8 @@
 		    }
         },
         created() {
-            this.img =  this.urlImg
-            console.log('Component deletePhotoProduct.')
+            this.name =  this.filename
+            console.log('Component deleteFilePurchase.')
         }
     }
 </script>

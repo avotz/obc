@@ -17,13 +17,18 @@ class PurchaseOrder extends Model
 
     public function generateTransactionId(){
         
-        $transactions = $this->where('request_id', $this->request_id)->count();
+        $transactions = $this->where('quotation_id', $this->quotation_id)->count();
        
-        $this->transaction_id = 'Quotation '. $this->request_id.'-'.$transactions++;
+        $this->transaction_id = 'Purchase Order '. $this->quotation_id;
 
-        $user = $this->save();
+        $purchase = $this->save();
 
-        return $user;
+        return $purchase;
+    }
+
+    public function isPending()
+    {
+        return $this->status == 0;
     }
 
     public function user()
