@@ -116,6 +116,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'modal_questions_subject' => 'Subject',
+        'modal_questions_msg' => 'Message',
+    ],
 
 ];

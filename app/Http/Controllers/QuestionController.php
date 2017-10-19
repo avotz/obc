@@ -28,6 +28,15 @@ class QuestionController extends Controller
      */
     public function store()
     {
+        $this->validate(request(), [
+            'modal_questions_subject' => 'required|string|max:255',
+            'modal_questions_msg' => 'required|string',
+
+            
+            
+        ]
+        );
+
         $dataMessage = request()->all();
         //dd($dataMessage);
         //$partner = User::find($dataMessage['partner']);

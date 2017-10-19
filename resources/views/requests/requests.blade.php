@@ -22,7 +22,10 @@
                                 <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                                 <div class="h5 font-w300 text-muted">Download</div>
                             </a>
-                        
+                            <a class="col-xs-4" href="/requests/{{ $request->id }}/edit">
+                                <div class="push-5"><i class="si si-list fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted">Edit</div>
+                            </a>
                             
                         </div>
                     </div>
@@ -35,6 +38,10 @@
 @endsection
 @section('scripts')
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-<script src="{{ mix('/js/requests.js') }}"></script>
 <script src="{{ mix('/js/questions.js') }}"></script>
+<script>
+        // Init page helpers (Magnific Popup plugin)
+        App.initHelpers('magnific-popup');
+
+</script>
 @endsection

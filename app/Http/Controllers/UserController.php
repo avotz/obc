@@ -67,7 +67,7 @@ class UserController extends Controller
        
 
 
-        return view('user.requests',compact('quotationRequests'));
+        return view('requests.requests',compact('quotationRequests'));
     }
     /**
      * Show the application dashboard.
@@ -81,7 +81,7 @@ class UserController extends Controller
             $quotations = Quotation::where('user_id',auth()->id());
             $quotations = $quotations->paginate(10);
 
-            return view('user.quotations',compact('quotations'));
+            return view('quotations.quotations',compact('quotations'));
 
     
     }

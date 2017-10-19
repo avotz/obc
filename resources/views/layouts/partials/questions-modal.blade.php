@@ -15,21 +15,32 @@
                     <form class="form-horizontal push-10-t" action="#" method="post" onsubmit="return false;" id="modal-questions-form">
                         <input type="hidden" name="partner" id="modal-questions-partner">
                         <input type="hidden" name="user" id="modal-questions-partner" >
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('modal_questions_subject') ? ' has-error' : '' }}">
                             <div class="col-sm-12">
                                 <div class="form-material form-material-primary input-group">
-                                    <input class="form-control" type="text" id="modal-questions-subject" name="modal-questions-subject" placeholder="">
-                                    <label for="faq-contact-email">Subjet</label>
+                                    <input class="form-control" type="text" id="modal-questions-subject" name="modal_questions_subject" placeholder="">
+                                    <label for="modal_questions_subject">Subjet</label>
                                     <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                    @if ($errors->has('modal_questions_subject'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('modal_questions_subject') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
+
                             </div>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('modal_questions_msg') ? ' has-error' : '' }}">
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary">
-                                    <textarea class="form-control" id="modal-questions-msg" name="modal-questions-msg" rows="7" placeholder="Enter your message.."></textarea>
-                                    <label for="faq-contact-msg">Message</label>
+                                    <textarea class="form-control" id="modal-questions-msg" name="modal_questions_msg" rows="7" placeholder="Enter your message.."></textarea>
+                                    <label for="modal_questions_msg">Message</label>
+                                    @if ($errors->has('modal_questions_msg'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('modal_questions_msg') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                                 
                             </div>

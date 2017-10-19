@@ -1,13 +1,5 @@
 $(function () {
     
-    // Init page helpers (Magnific Popup plugin)
-    App.initHelpers('magnific-popup');
-
-    $("form[data-confirm]").submit(function() {
-        if ( ! confirm($(this).attr("data-confirm"))) {
-            return false;
-        }
-    });
     
     jQuery('.js-select2').select2();
     $('#suppliers').select2({

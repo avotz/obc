@@ -77,6 +77,10 @@
 @endsection
 @section('scripts')
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-<script src="{{ mix('/js/requests.js') }}"></script>
 <script src="{{ mix('/js/questions.js') }}"></script>
+<script>
+        // Init page helpers (Magnific Popup plugin)
+        App.initHelpers('magnific-popup');
+
+</script>
 @endsection

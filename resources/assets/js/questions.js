@@ -46,12 +46,23 @@ $(function () {
                     alert('Message sent');
                 }
             },
-            error: function () {
+            error: function (resp) {
                 
                 $('.fa-spin').hide();
                 button.attr('disabled',false)
+               
+                let errors = resp.responseJSON.errors;
+                let fields = '';
 
-                console.log('error  reminder');
+                if(errors.modal_questions_subject)
+                    fields += errors.modal_questions_subject[0] + ' | '
+
+                if(errors.modal_questions_msg)
+                    fields += errors.modal_questions_msg[0]
+                
+               
+
+                alert(`Errors: ${fields}`)
                 
 
             }

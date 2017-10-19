@@ -77,7 +77,7 @@
     <div class="form-group{{ $errors->has('product_photo') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                @if(!$quotation->purchase) 
+                @if(!isset($quotation) || (isset($quotation) && !$quotation->purchase)) 
                     <input class="form-control" type="file" id="product_photo" name="product_photo">
                     <label for="product_photo">Product Photo</label>
                     @if ($errors->has('product_photo'))
@@ -98,7 +98,7 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-        @if(!$quotation->purchase) 
+        @if(!isset($quotation) || (isset($quotation) && !$quotation->purchase))
                 <button class="btn btn-success" type="submit">Save</button>
           @endif
             <a class="btn btn-default" href="/public/requests">Back</a>

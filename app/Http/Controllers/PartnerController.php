@@ -224,7 +224,7 @@ class PartnerController extends Controller
        
 
 
-        return view('partner.requests',compact('quotationRequests'));
+        return view('requests.requests',compact('quotationRequests'));
     }
     /**
      * Show the application dashboard.
@@ -238,7 +238,7 @@ class PartnerController extends Controller
             $quotations = Quotation::where('user_id',auth()->id());
             $quotations = $quotations->paginate(10);
 
-            return view('partner.quotations',compact('quotations'));
+            return view('quotations.quotations',compact('quotations'));
 
     
     }

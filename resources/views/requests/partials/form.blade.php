@@ -147,7 +147,7 @@
     </div>
     <div class="form-group{{ $errors->has('product_photo') ? ' has-error' : '' }}">
         <div class="col-xs-12">
-            @if(!$quotationRequest->quotations->count()) 
+            @if(!isset($quotationRequest) || (isset($quotationRequest) && !$quotationRequest->quotations->count()))
             <div class="form-material form-material-success">
                 <input class="form-control" type="file" id="product_photo" name="product_photo">
                 <label for="product_photo">Product Photo</label>
@@ -197,7 +197,7 @@
     </div>
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            @if(!$quotationRequest->quotations->count()) 
+            @if(!isset($quotationRequest) || (isset($quotationRequest) && !$quotationRequest->quotations->count())) 
                 <button class="btn btn-success" type="submit">Save</button>
           @endif
            
