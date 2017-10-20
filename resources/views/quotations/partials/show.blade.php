@@ -52,6 +52,6 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <a class="btn btn-default" href="/public/requests">Back</a>
+            <a class="btn btn-default" href="/user/quotations">Back</a>
         </div>
     </div>

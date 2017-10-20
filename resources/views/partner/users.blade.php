@@ -83,7 +83,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="/partner/users/{{ $user->id }}/edit" class="btn btn-xs btn-default"data-toggle="tooltip" title="Edit Client"><i class="fa fa-pencil"></i></a>
+                                        <a href="/partner/users/{{ $user->id }}/edit" class="btn btn-xs btn-default"data-toggle="tooltip" title="Edit User"><i class="fa fa-pencil"></i></a>
                                         <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Client" form="form-delete" formaction="{!! url('/partner/users/'.$user->id) !!}"><i class="fa fa-times"></i></button>
                                     </div>
                                 </td>

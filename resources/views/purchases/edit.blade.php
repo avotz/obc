@@ -35,6 +35,23 @@
                         @include('purchases/partials/form') 
                     
                     </form>
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/purchases/{{ $purchase->id }}/status" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT">              
+                        {{ csrf_field() }}
+                        <h2>Ojo: Boton temporal para aprobar o rechasar orden de compra</h2>
+                        @if(isset($purchase) && $purchase->isPending())
+                            <input type="hidden" value="1" name="status">
+                            <button class="btn btn-success" type="submit">Aproved</button>
+                        @elseif($purchase->status == 2)
+                            <input type="hidden" value="0" name="status"> 
+                            <button class="btn btn-warning" type="submit">Pending</button>
+                        @else 
+                            <input type="hidden" value="2" name="status"> 
+                            <button class="btn btn-danger" type="submit">Reject</button>
+                        @endif
+                    
+                    </form>
+                   
 
                 </div>
         </div>

@@ -11,7 +11,7 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li class="dropdown-header">Profile</li>
+                                <li class="dropdown-header">{{ auth()->user()->profile->applicant_name }} {{ auth()->user()->profile->first_surname }}</li>
                                 <li>
                                     <a tabindex="-1" href="#">
                                         <i class="si si-envelope-open pull-right"></i>

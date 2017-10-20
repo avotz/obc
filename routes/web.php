@@ -29,6 +29,7 @@ Route::get('purchases/{purchase}/edit', 'PurchaseController@edit');
 Route::delete('/requests/photo/{id}', 'QuotationRequestController@deleteProductPhoto');
 Route::delete('/quotations/photo/{id}', 'QuotationController@deleteProductPhoto');
 Route::delete('/purchases/file/{id}', 'PurchaseController@deleteFilePurchase');
+Route::put('purchases/{purchase}/status', 'PurchaseController@update_status');
 
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');
@@ -103,6 +104,8 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
     Route::delete('/users/{user}', 'PartnerController@deleteUser');
     Route::get('/users/{user}/edit', 'PartnerController@edit');
     Route::put('/users/{user}', 'PartnerController@updatePermissions');
+    Route::get('/users/{user}/requests', 'PartnerController@userRequests');
+    Route::get('/users/{user}/quotations', 'PartnerController@userQuotations');
 
     foreach (['active', 'inactive','trial','notrial'] as $key)
     {

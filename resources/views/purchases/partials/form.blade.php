@@ -1,7 +1,7 @@
     
     <div class="form-group{{ $errors->has('purchase_file') ? ' has-error' : '' }}">
         <div class="col-xs-12">
-            @if($purchase->isPending())
+            @if(!isset($purchase) || (isset($purchase) && $purchase->isPending()))
             <div class="form-material form-material-success">
                 <input class="form-control" type="file" id="purchase_file" name="purchase_file">
                 <label for="purchase_file">Purchase Order file</label>
@@ -45,4 +45,6 @@
             <a class="btn btn-default" href="/requests/{{ $quotation->request->id }}/quotations">Back</a>
         </div>
     </div>
+
+    
     

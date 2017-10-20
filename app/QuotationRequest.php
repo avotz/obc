@@ -47,7 +47,7 @@ class QuotationRequest extends Model
       */
       public function createdBy($user)
       {
-          
-          return $this->where('user_id',$user->id)->count();
+         
+          return $this->where('user_id',$user->id)->first();
       }
 }

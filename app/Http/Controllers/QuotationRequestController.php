@@ -49,7 +49,7 @@ class QuotationRequestController extends Controller
        
 
 
-        return view('partner.requests',compact('quotationRequests'));
+        return view('requests.requests',compact('quotationRequests'));
     }
       /**
      * Show the application dashboard.

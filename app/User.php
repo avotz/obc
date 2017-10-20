@@ -126,6 +126,33 @@ class User extends Authenticatable
  
          return !! $role->intersect($this->roles)->count();
      }
+
+      /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+      public function hasRequest($request)
+      {
+          if (is_string($request) || is_numeric($request)) {
+              return $this->requests->contains('id', $request);
+          }
+  
+          return !! $request->intersect($this->requests)->count();
+      }
+
+       /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+      public function isPartner($user)
+      {
+         return $this->collaborators()->where('id', $user->id)->count();
+  
+      }
     
      public function requests()
      {

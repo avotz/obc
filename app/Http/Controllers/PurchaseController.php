@@ -204,5 +204,14 @@ class PurchaseController extends Controller
         return 'ok';
          
     }
+    public function update_status($id)
+    {
+            
+            $purchase = \DB::table('purchase_orders')
+            ->where('id', $id)
+            ->update(['status' => request('status')]); //no asistio a la cita  
+
+        return back();
+    }
     
 }

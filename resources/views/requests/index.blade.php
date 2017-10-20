@@ -13,7 +13,7 @@
         <div class="col-sm-6 col-lg-4">
             <div class="block block-link-hover3" href="javascript:void(0)">
                 @include('requests/partials/item', ['request' => $request, 'partner' =>  $request->user->hasRole('partner') ? $request->user : $request->user->partners->first(),  'user' =>  $request->user->hasRole('user') ? $request->user : '' ])
-                @if($request->createdBy(auth()->user()))
+                @if(auth()->user()->hasRequest($request->id))
                 <div class="block-content">
                     <div class="row items-push text-center">
                         <a class="col-xs-4" href="/requests/{{ $request->id }}/quotations">

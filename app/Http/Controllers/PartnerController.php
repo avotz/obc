@@ -42,7 +42,10 @@ class PartnerController extends Controller
      */
      public function edit(User $user)
      {
-         $permissions = Permission::all();
+        if(!auth()->user()->isPartner($user)) return redirect('/partner/users');
+
+        $permissions = Permission::all();
+
         
          return view('partner.user',compact('user','permissions'));
  
@@ -225,6 +228,41 @@ class PartnerController extends Controller
 
 
         return view('requests.requests',compact('quotationRequests'));
+    }
+     /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userRequests(User $user)
+    {
+       
+
+        $quotationRequests = $user->requests();
+
+        
+        $quotationRequests = $quotationRequests->orderBy('created_at','DESC')->paginate(10);
+
+       
+
+
+        return view('partner.userRequests',compact('user','quotationRequests'));
+    }
+     /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userQuotations(User $user)
+    {
+      
+
+            $quotations = Quotation::where('user_id',$user->id);
+            $quotations = $quotations->paginate(10);
+
+            return view('partner.userQuotations',compact('user','quotations'));
+
+    
     }
     /**
      * Show the application dashboard.

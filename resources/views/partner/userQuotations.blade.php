@@ -6,9 +6,9 @@
  
   <div class="content">
                    
-    <h2 class="content-heading">Quotations</h2>
+    <h2 class="content-heading">{{ $user->profile->applicant_name }} Quotations</h2>
     <div class="row">
-        @foreach($quotations as $quotation)
+        @forelse($quotations as $quotation)
             <div class="col-sm-6 col-lg-4">
                 <div class="block block-link-hover3" href="javascript:void(0)">
                     @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first(),  'user' =>  $quotation->user->hasRole('user') ? $quotation->user : '' ])
@@ -33,7 +33,11 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-sm-12 text-center" >
+                <p>No quotations</p>
+            </div>
+        @endforelse
         
     </div>
 </div>

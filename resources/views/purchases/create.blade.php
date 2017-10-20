@@ -57,7 +57,12 @@
                             
                         </div>
                         <div class="h5 push-15-t push-5">Quotation #{{ $quotation->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$quotation->request->public) }}">{{ trans('utils.public.'.$quotation->request->public) }}</small>
-                        <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getProductPhoto($quotation) }}" class="img-link" >{{ $quotation->product_name }}</a></span> </div>
+                       
+                        @if($quotation->product_photo)
+                            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery label label-danger"><a href="{{ getQuotationProductPhoto($quotation) }}" class="img-link" > {{ $quotation->product_name }}</a></span> </div>
+                        @else 
+                            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getRequestProductPhoto($quotation->request) }}" class="img-link" >{{ $quotation->request->product_name }}</a></span> </div>
+                        @endif
                     </div>
                     <div class="block-content block-content-mini block-content-full bg-gray-lighter">
                         <div class=" "><b>Partner name:</b> {{ $partner->company->company_name }}</div>
@@ -103,10 +108,12 @@
 
 @endsection
 @section('scripts')
-<script src="/js/plugins/select2/select2.full.min.js"></script>
-<script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
+<script>
+        // Init page helpers (Magnific Popup plugin)
+        App.initHelpers('magnific-popup');
 
+</script>
 @endsection
 
