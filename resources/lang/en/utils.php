@@ -14,6 +14,10 @@ return [
             '4' => 'success'
            
         ],
+        'way_to_pay'  => [
+            '0' => 'Cash',
+         
+        ],
         'geo_type'  => [
             '1' => 'National',
             '2' => 'Regional',

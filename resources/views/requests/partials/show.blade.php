@@ -59,7 +59,7 @@
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotationRequest->way_to_pay }}
+                @if( $quotationRequest->way_to_pay ) Credit {{ $quotationRequest->way_to_pay }} Days @else Cash @endif
                 <label for="way_to_pay">Way to pay</label>
             </div>
         </div>

@@ -38,7 +38,7 @@
                                
                                     <select name="sectors[]" id="sectors"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector"> 
                                     @foreach ($sectors as $sector)
-                                            @include('layouts.partials.sector-select', ['company' => $user->company])
+                                            @include('layouts.partials.sector-select', ['element' => $user->company])
                                         @endforeach
                                 </select>
                                   

@@ -1,7 +1,8 @@
 {
-    "/js/app.js": "/js/app.js?id=733dbe376a0e9d87e412",
-    "/css/app.css": "/css/app.css?id=1381d3a99d19a796da75",
-    "/js/requests.js": "/js/requests.js?id=df774afeff82966ae54b",
-    "/js/quotations.js": "/js/quotations.js?id=844d492239f23f906bbf",
-    "/js/questions.js": "/js/questions.js?id=2d8a970ad20e406d0b5d"
+    "/js/app.js": "/js/app.js?id=b0cdb14c4d0d32af9999",
+    "/css/app.css": "/css/app.css?id=15f0ff6db5e25e6dff32",
+    "/js/requests.js": "/js/requests.js?id=9f7d242f8bfef4c41c8d",
+    "/js/quotations.js": "/js/quotations.js?id=75441dd7fe071235b91b",
+    "/js/questions.js": "/js/questions.js?id=260146c18bdecbe5f11c",
+    "/js/purchases.js": "/js/purchases.js?id=1b42db010d26a9d71667"
 }

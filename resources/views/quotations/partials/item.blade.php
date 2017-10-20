@@ -15,18 +15,18 @@
         <div class=" "><b>Partner name:</b> {{ $partner->company->company_name }}</div>
         <div class=" "><b>Partner country:</b> {{ $partner->company->countries->first()->name }} <img src="{{ getFlag($partner->company->countries->first()->code) }}" alt="flag"></div>
         <div class=""><b>Supplier sector:</b>  
-            @if($partner->activity == 2)
-                {{ implode(",", $partner->company->sectors->first()->ancestors->pluck('name')->toArray()) }} 
-            @endif         
-        </div>
-        <div class=" "><b>Supplier sub-sector:</b> 
-        @if($partner->activity == 2)
-            {{ implode(",", $partner->company->sectors->pluck('name')->toArray()) }}
-            @endif   
-        </div>
+        
+              {{ implode(",", $quotation->request->sectors->first()->ancestors->pluck('name')->toArray()) }} 
+             
+       </div>
+      <div class=" "><b>Supplier sub-sector:</b> 
+        
+          {{ implode(",", $quotation->request->sectors->pluck('name')->toArray()) }}
+         
+      </div>
         <div class=" "><b>Delivery time:</b> <span class="{{ ($quotation->request->delivery_time != $quotation->delivery_time) ? 'label label-danger' : '' }}">{{ $quotation->delivery_time }}</span></div>
         <div class=" "><b>Way of delivery:</b> <span class="{{ ($quotation->request->way_of_delivery != $quotation->way_of_delivery) ? 'label label-danger' : '' }}">{{ $quotation->way_of_delivery }}</span></div>
-        <div class=" "><b>Way to pay:</b> <span class="{{ ($quotation->request->way_to_pay != $quotation->way_to_pay) ? 'label label-danger' : '' }}">{{ $quotation->way_to_pay }}</span></div>
+        <div class=" "><b>Way to pay:</b> <span class="{{ ($quotation->request->way_to_pay != $quotation->way_to_pay) ? 'label label-danger' : '' }}">@if( $quotation->way_to_pay ) Credit {{ $quotation->way_to_pay }} Days @else Cash @endif</span></div>
         <div class=" "><b>Request valid until:</b> {{ $quotation->request->exp_date }} </div>
         <div class=" "><b>Additional comment:</b> <span class="{{ ($quotation->request->comments != $quotation->comments) ? 'label label-danger' : '' }}">{{ $quotation->comments }}</span></div>
     </div>

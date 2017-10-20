@@ -14,6 +14,8 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index');
+Route::get('/support', 'HomeController@support');
+Route::post('/support', 'HomeController@sendSupport');
 Route::get('partners/{privateCode}/check', 'PartnerController@checkPrivateCode');
 Route::get('profile', 'ProfileController@show');
 Route::get('suppliers', 'QuotationRequestController@suppliers');

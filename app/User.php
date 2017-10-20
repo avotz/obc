@@ -162,7 +162,7 @@ class User extends Authenticatable
      {
          return $this->hasMany(Quotation::class);
      }
-    public function requests_suppliers()
+    public function requests_suppliers() // private quotation request to supplier
     {
          return $this->belongsToMany(QuotationRequest::class);
     }

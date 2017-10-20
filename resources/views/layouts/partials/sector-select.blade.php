@@ -11,7 +11,7 @@
                     @endforeach
                 </optgroup>
             @else 
-                <option value="{{ $sector->id }}" @if(isset($company) && $company->hasSector($sector->id)) selected="selected" @endif>{{ $sector->name }}</option>
+                <option value="{{ $sector->id }}" @if(isset($element) && $element->hasSector($sector->id)) selected="selected" @endif>{{ $sector->name }}</option>
             @endif
            
     

@@ -1,33 +1,26 @@
-    <div class="form-group" >
+<div class="form-group{{ $errors->has('sectors') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $partner->profile->applicant_name }}
-                <label for="company_name">Partner Name</label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" >
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
+                    
+                    <select name="sectors[]" id="sectors"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector"> 
+                        @if(isset($quotationRequest))
+                            @foreach ($sectors as $sector)
+                                    @include('layouts.partials.sector-select', ['element' => $quotationRequest])
+                                @endforeach
+                        @else 
+                            @foreach ($sectors as $sector)
+                                    @include('layouts.partials.sector-select')
+                                @endforeach
+                        @endif
+                    </select>
                 
-                    @foreach($partner->company->countries as $item)
-                    <div>
-                        {{ $item->name }}
-                    </div>
-                    @endforeach
-                
-                <label for="country">Partner Country</label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" >
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-              
-                @foreach ($partner->company->sectors as $sector)
-                    @include('layouts.partials.sector-select', ['company' => $partner->company])
-                @endforeach
-                <label for="sector">Supplier sector</label>
+                    <!-- <sector-subsectors :sectors="{{ $sectors }}"></sector-subsectors> -->
+                    <label for="sectors">  Sectors and subsectors</label>
+                    @if ($errors->has('sectors'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('sectors') }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
     </div>
@@ -36,16 +29,23 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <select name="geo_type" id="geo_type"  class="form-control">
-                    @if(auth()->user()->hasPermission('do_trans_nac'))
+                    @if(auth()->user()->hasRole('user'))
+                        @if(auth()->user()->hasPermission('do_trans_nac'))
+                            <option value="1" @if(isset($quotationRequest) && $quotationRequest->geo_type == 1) selected="selected" @endif>National</option>
+                        @endif
+                        @if(auth()->user()->hasPermission('do_trans_reg'))
+                            <option value="2" @if(isset($quotationRequest) && $quotationRequest->geo_type == 2) selected="selected" @endif>Regional</option>
+                        @endif
+                        @if(auth()->user()->hasPermission('do_trans_int'))
+                            <option value="3" @if(isset($quotationRequest) && $quotationRequest->geo_type == 3) selected="selected" @endif>International</option>
+                        @endif
+                        @if(auth()->user()->hasPermission('do_trans_glo'))
+                            <option value="4" @if(isset($quotationRequest) && $quotationRequest->geo_type == 4) selected="selected" @endif>Global</option>
+                        @endif
+                    @else 
                         <option value="1" @if(isset($quotationRequest) && $quotationRequest->geo_type == 1) selected="selected" @endif>National</option>
-                    @endif
-                    @if(auth()->user()->hasPermission('do_trans_reg'))
                         <option value="2" @if(isset($quotationRequest) && $quotationRequest->geo_type == 2) selected="selected" @endif>Regional</option>
-                    @endif
-                    @if(auth()->user()->hasPermission('do_trans_int'))
                         <option value="3" @if(isset($quotationRequest) && $quotationRequest->geo_type == 3) selected="selected" @endif>International</option>
-                    @endif
-                    @if(auth()->user()->hasPermission('do_trans_glo'))
                         <option value="4" @if(isset($quotationRequest) && $quotationRequest->geo_type == 4) selected="selected" @endif>Global</option>
                     @endif
                 </select>
@@ -61,7 +61,19 @@
     <div class="form-group{{ $errors->has('delivery_time') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="delivery_time" name="delivery_time" value="{{ isset($quotationRequest) ? $quotationRequest->delivery_time : old('delivery_time') }}" placeholder="Immediate... 3 Days...">
+                <!-- <input class="form-control" type="text" id="delivery_time" name="delivery_time" value="{{ isset($quotationRequest) ? $quotationRequest->delivery_time : old('delivery_time') }}" placeholder="Immediate... 3 Days..."> -->
+                <select name="delivery_time" id="delivery_time"  class="form-control">
+
+                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                    
+                   
+                        <option value="Immediate" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "Immediate") selected="selected" @endif>Immediate</option>
+                        <option value="1 day" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "1 day") selected="selected" @endif>1 day</option>
+                        <option value="2 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "2 days") selected="selected" @endif>2 days</option>
+                        <option value="3 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "3 days") selected="selected" @endif>3 days</option>
+                  
+                   
+                </select>
                 <label for="delivery_time">Delivery time</label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
@@ -75,7 +87,19 @@
     <div class="form-group{{ $errors->has('way_of_delivery') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="way_of_delivery" name="way_of_delivery" value="{{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : old('way_of_delivery') }}">
+                <!-- <input class="form-control" type="text" id="way_of_delivery" name="way_of_delivery" value="{{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : old('way_of_delivery') }}"> -->
+                <select name="way_of_delivery" id="way_of_delivery"  class="form-control">
+
+                        <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                    
+                   
+                        <option value="Pick up" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "Pick up") selected="selected" @endif>Pick up</option>
+                        <option value="At Home" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "At Home") selected="selected" @endif>At Home</option>
+                        <option value="Shipping charge" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "Shipping charge") selected="selected" @endif>Shipping charge</option>
+                        
+                  
+                   
+                </select>
                 <label for="way_of_delivery">Way of delivery</label>
                 @if ($errors->has('way_of_delivery'))
                     <span class="help-block">
@@ -91,6 +115,7 @@
                 <select name="way_to_pay" id="way_to_pay"  class="form-control">
 
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                    <option value="0" @if(isset($quotationRequest) && $quotationRequest->way_to_pay == 0) selected="selected" @endif >Cash</option>
                     @foreach($creditDays as $creditDay)    
                         <option value="{{ $creditDay->days }}" @if(isset($quotationRequest) && $quotationRequest->way_to_pay == $creditDay->days) selected="selected" @endif>Credit {{ $creditDay->days }} days</option>
                     @endforeach
@@ -170,7 +195,11 @@
                 <select name="public" id="public"  class="form-control">
                 
                     <option value="1" @if(isset($quotationRequest) && $quotationRequest->public == 1) selected="selected" @endif>Public</option>
-                    @if(auth()->user()->hasPermission('do_trans_priv'))
+                    @if(auth()->user()->hasRole('user'))
+                        @if(auth()->user()->hasPermission('do_trans_priv'))
+                            <option value="0" @if(isset($quotationRequest) && $quotationRequest->public == 0) selected="selected" @endif>Private</option>
+                        @endif
+                    @else 
                         <option value="0" @if(isset($quotationRequest) && $quotationRequest->public == 0) selected="selected" @endif>Private</option>
                     @endif
                 </select>

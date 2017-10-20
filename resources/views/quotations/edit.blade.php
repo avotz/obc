@@ -2,6 +2,7 @@
 @section('css')
     <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="/js/plugins/magnific-popup/magnific-popup.min.css">
 @endsection
 @section('content')
 <div id="infoBox" class="alert alert-success" ></div>
@@ -66,18 +67,18 @@
                         <div class=" "><b>Partner name:</b> {{ $partner->company->company_name }}</div>
                         <div class=" "><b>Partner country:</b> {{ $partner->company->countries->first()->name }} <img src="{{ getFlag($partner->company->countries->first()->code) }}" alt="flag"></div>
                         <div class=""><b>Supplier sector:</b>  
-                            @if($partner->activity == 2)
-                                {{ implode(",", $partner->company->sectors->first()->ancestors->pluck('name')->toArray()) }} 
-                            @endif         
-                        </div>
-                        <div class=" "><b>Supplier sub-sector:</b> 
-                        @if($partner->activity == 2)
-                            {{ implode(",", $partner->company->sectors->pluck('name')->toArray()) }}
-                            @endif   
-                        </div>
+                        
+                              {{ implode(",", $quotationRequest->sectors->first()->ancestors->pluck('name')->toArray()) }} 
+                             
+                       </div>
+                      <div class=" "><b>Supplier sub-sector:</b> 
+                        
+                          {{ implode(",", $quotationRequest->sectors->pluck('name')->toArray()) }}
+                         
+                      </div>
                         <div class=" "><b>Delivery time:</b> {{ $quotationRequest->delivery_time }}</div>
                         <div class=" "><b>Way of delivery:</b> {{ $quotationRequest->way_of_delivery }}</div>
-                        <div class=" "><b>Way to pay:</b> {{ $quotationRequest->way_to_pay }}</div>
+                        <div class=" "><b>Way to pay:</b>  @if( $quotationRequest->way_to_pay ) Credit {{ $quotationRequest->way_to_pay }} Days @else Cash @endif</div>
                         <div class=" "><b>Request valid until:</b> {{ $quotationRequest->exp_date }} </div>
                         <div class=" "><b>Additional comment:</b> {{ $quotationRequest->comments }}</div>
                     </div>
@@ -109,7 +110,7 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
-<script src="{{ mix('/js/requests.js') }}"></script>
+<script src="{{ mix('/js/quotations.js') }}"></script>
 
 @endsection
 

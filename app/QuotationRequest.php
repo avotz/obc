@@ -38,7 +38,25 @@ class QuotationRequest extends Model
     {
         return $this->belongsToMany(User::class,'request_supplier', 'request_id', 'user_id');
     }
+    public function sectors()
+    {
+        return $this->belongsToMany(Sector::class,'request_sector', 'request_id', 'sector_id');
+    }
 
+    /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+      public function hasSector($sector)
+      {
+          if (is_string($sector) || is_numeric($sector)) {
+              return $this->sectors->contains('id', $sector);
+          }
+  
+          return !! $sector->intersect($this->sectors)->count();
+      }
      /**
       * Determine if the user has the given role.
       *

@@ -13,7 +13,7 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li class="dropdown-header">{{ auth()->user()->profile->applicant_name }} {{ auth()->user()->profile->first_surname }}</li>
                                 <li>
-                                    <a tabindex="-1" href="#">
+                                    <a tabindex="-1" href="/support">
                                         <i class="si si-envelope-open pull-right"></i>
                                         IT Support
                                     </a>

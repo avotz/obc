@@ -79,7 +79,7 @@
                                    
                                 </li>
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-call-out"></i><span class="sidebar-mini-hide">IT Support </span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/support"><i class="si si-call-out"></i><span class="sidebar-mini-hide">IT Support </span></a>
                                    
                                 </li>
                             </ul>

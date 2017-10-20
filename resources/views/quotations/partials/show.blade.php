@@ -19,7 +19,7 @@
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotation->way_to_pay }}
+                @if( $quotation->way_to_pay ) Credit {{ $quotation->way_to_pay }} Days @else Cash @endif
                 <label for="way_to_pay">Way to pay <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }})</span></label>
             </div>
         </div>

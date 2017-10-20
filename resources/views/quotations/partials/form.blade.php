@@ -2,7 +2,19 @@
     <div class="form-group{{ $errors->has('delivery_time') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="delivery_time" name="delivery_time" value="{{ isset($quotation) ? $quotation->delivery_time : $quotationRequest->delivery_time }}" placeholder="Immediate... 3 Days...">
+                <!-- <input class="form-control" type="text" id="delivery_time" name="delivery_time" value="{{ isset($quotation) ? $quotation->delivery_time : $quotationRequest->delivery_time }}" placeholder="Immediate... 3 Days..."> -->
+                <select name="delivery_time" id="delivery_time"  class="form-control">
+
+                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                    
+                   
+                        <option value="Immediate" @if(isset($quotation) && $quotation->delivery_time == "Immediate") selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == "Immediate") selected="selected" @endif @endif>Immediate</option>
+                        <option value="1 day" @if(isset($quotation) && $quotation->delivery_time == "1 day") selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == "1 day") selected="selected" @endif @endif>1 day</option>
+                        <option value="2 days" @if(isset($quotation) && $quotation->delivery_time == "2 days") selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == "2 day") selected="selected" @endif @endif>2 days</option>
+                        <option value="3 days" @if(isset($quotation) && $quotation->delivery_time == "3 days") selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == "3 day") selected="selected" @endif @endif>3 days</option>
+                  
+                   
+                </select>
                 <label for="delivery_time">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span> </label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
@@ -16,7 +28,19 @@
     <div class="form-group{{ $errors->has('way_of_delivery') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="way_of_delivery" name="way_of_delivery" value="{{ isset($quotation) ? $quotation->way_of_delivery : $quotationRequest->way_of_delivery  }}">
+                <!-- <input class="form-control" type="text" id="way_of_delivery" name="way_of_delivery" value="{{ isset($quotation) ? $quotation->way_of_delivery : $quotationRequest->way_of_delivery  }}"> -->
+                <select name="way_of_delivery" id="way_of_delivery"  class="form-control">
+
+                        <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                    
+                   
+                        <option value="Pick up" @if(isset($quotation) && $quotation->way_of_delivery == "Pick up") selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "Pick up") selected="selected" @endif  @endif>Pick up</option>
+                        <option value="At Home" @if(isset($quotation) && $quotation->way_of_delivery == "At Home") selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "At Home") selected="selected" @endif @endif>At Home</option>
+                        <option value="Shipping charge" @if(isset($quotation) && $quotation->way_of_delivery == "Shipping charge") selected="selected"  @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "Shipping charge") selected="selected" @endif @endif>Shipping charge</option>
+                        
+                  
+                   
+                </select>
                 <label for="way_of_delivery">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
                 @if ($errors->has('way_of_delivery'))
                     <span class="help-block">
@@ -32,6 +56,7 @@
                 <select name="way_to_pay" id="way_to_pay"  class="form-control">
 
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                    <option value="0" @if(isset($quotation) && $quotation->way_to_pay == 0) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_to_pay == 0) selected="selected" @endif @endif >Cash</option>
                     @foreach($creditDays as $creditDay)    
                         <option value="{{ $creditDay->days }}" @if(isset($quotation) && $quotation->way_to_pay == $creditDay->days) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_to_pay == $creditDay->days) selected="selected" @endif @endif>Credit {{ $creditDay->days }} days</option>
                     @endforeach

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Mail\NewContact;
 
 class HomeController extends Controller
 {
@@ -14,6 +16,9 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->administrators = User::whereHas('roles', function ($query){
+            $query->where('name',  'admin');
+        })->get();
     }
 
     /**
@@ -44,5 +49,50 @@ class HomeController extends Controller
         // }
 
         // return view('home');
+    }
+
+    public function support()
+    {
+       
+         return view('support.index');
+    }
+
+    public function sendSupport()
+    {
+
+        $this->validate(request(), [
+            'firstname' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'msg' => 'required|string',
+
+            
+            
+        ]
+        );
+
+        $dataMessage = request()->all();
+        //dd($dataMessage);
+        //$partner = User::find($dataMessage['partner']);
+        //$user = User::find($dataMessage['user']);
+
+        $dataMessage['user'] = auth()->user(); 
+
+        try {
+            
+            \Mail::to($this->administrators)->send(new NewContact($dataMessage));
+            
+        
+            flash('Message Sent','success');
+            
+           
+
+        }catch (\Swift_TransportException $e)  //Swift_RfcComplianceException
+        {
+            \Log::error($e->getMessage());
+        }
+
+        return back();
+
     }
 }

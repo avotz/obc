@@ -39,6 +39,16 @@ class CreateQuotationRequestsTable extends Migration
 
             $table->primary(array('request_id', 'user_id'));
         });
+
+        Schema::create('request_sector', function(Blueprint $table)
+        {
+            $table->integer('request_id')->unsigned()->index();
+            $table->foreign('request_id')->references('id')->on('quotation_requests')->onDelete('cascade');
+            $table->integer('sector_id')->unsigned()->index();
+            $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('cascade');
+            $table->primary(['request_id', 'sector_id']);
+            
+        });
     }
 
     /**

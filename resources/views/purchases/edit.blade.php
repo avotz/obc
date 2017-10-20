@@ -2,6 +2,7 @@
 @section('css')
     <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
     <link rel="stylesheet" href="/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="/js/plugins/magnific-popup/magnific-popup.min.css">
 @endsection
 @section('content')
 <div id="infoBox" class="alert alert-success" ></div>
@@ -72,24 +73,28 @@
                             
                         </div>
                         <div class="h5 push-15-t push-5">Quotation #{{ $quotation->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$quotation->request->public) }}">{{ trans('utils.public.'.$quotation->request->public) }}</small>
-                        <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getQuotationProductPhoto($quotation) }}" class="img-link" >{{ $quotation->product_name }}</a></span> </div>
+                        @if($quotation->product_photo)
+                            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery label label-danger"><a href="{{ getQuotationProductPhoto($quotation) }}" class="img-link" > {{ $quotation->product_name }}</a></span> </div>
+                        @else 
+                            <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getRequestProductPhoto($quotation->request) }}" class="img-link" >{{ $quotation->request->product_name }}</a></span> </div>
+                        @endif
                     </div>
                     <div class="block-content block-content-mini block-content-full bg-gray-lighter">
                         <div class=" "><b>Partner name:</b> {{ $partner->company->company_name }}</div>
                         <div class=" "><b>Partner country:</b> {{ $partner->company->countries->first()->name }} <img src="{{ getFlag($partner->company->countries->first()->code) }}" alt="flag"></div>
                         <div class=""><b>Supplier sector:</b>  
-                            @if($partner->activity == 2)
-                                {{ implode(",", $partner->company->sectors->first()->ancestors->pluck('name')->toArray()) }} 
-                            @endif         
-                        </div>
-                        <div class=" "><b>Supplier sub-sector:</b> 
-                        @if($partner->activity == 2)
-                            {{ implode(",", $partner->company->sectors->pluck('name')->toArray()) }}
-                            @endif   
-                        </div>
+                        
+                              {{ implode(",", $quotation->request->sectors->first()->ancestors->pluck('name')->toArray()) }} 
+                             
+                       </div>
+                      <div class=" "><b>Supplier sub-sector:</b> 
+                        
+                          {{ implode(",", $quotation->request->sectors->pluck('name')->toArray()) }}
+                         
+                      </div>
                         <div class=" "><b>Delivery time:</b> {{ $quotation->delivery_time }}</div>
                         <div class=" "><b>Way of delivery:</b> {{ $quotation->way_of_delivery }}</div>
-                        <div class=" "><b>Way to pay:</b> {{ $quotation->way_to_pay }}</div>
+                        <div class=" "><b>Way to pay:</b>  @if( $quotation->way_to_pay ) Credit {{ $quotation->way_to_pay }} Days @else Cash @endif</div>
                         <div class=" "><b>Request valid until:</b> {{ $quotation->request->exp_date }} </div>
                         <div class=" "><b>Additional comment:</b> {{ $quotation->comments }}</div>
                     </div>
@@ -121,7 +126,13 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
-<script src="{{ mix('/js/requests.js') }}"></script>
+<script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
+<script src="{{ mix('/js/purchases.js') }}"></script>
 
+<script>
+        // Init page helpers (Magnific Popup plugin)
+        App.initHelpers('magnific-popup');
+
+</script>
 @endsection
 

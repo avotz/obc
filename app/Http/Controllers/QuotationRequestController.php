@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Repositories\UserRepository;
 use App\CreditDays;
+use App\Sector;
 use App\QuotationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -113,14 +114,16 @@ class QuotationRequestController extends Controller
     {
         $partner = (auth()->user()->hasRole('partner')) ? auth()->user() : auth()->user()->partners->first();
         $creditDays = CreditDays::all();
+        $sectors = Sector::get()->toTree();
 
-        return view('requests.create', compact('partner','creditDays'));
+        return view('requests.create', compact('partner','creditDays','sectors'));
     }
 
     public function store()
     {
 
         $this->validate(request(), [
+            'sectors' => 'required',
             'delivery_time' => 'required|string|max:255',
             'way_of_delivery' => 'required|string|max:255',
             'way_to_pay' => 'required|string|max:255',
@@ -141,6 +144,9 @@ class QuotationRequestController extends Controller
 
         if(request('suppliers'))
             $quotationRequest->suppliers()->sync(request('suppliers'));
+        
+        if(request('sectors'))
+            $quotationRequest->sectors()->sync(request('sectors'));
 
 
             $mimes = ['jpg','jpeg','bmp','png','pdf'];
@@ -194,8 +200,9 @@ class QuotationRequestController extends Controller
 
         $partner = (auth()->user()->hasRole('partner')) ? auth()->user() : auth()->user()->partners->first();
         $creditDays = CreditDays::all();
+        $sectors = Sector::get()->toTree();
 
-        return view('requests.edit', compact('partner','creditDays','quotationRequest'));
+        return view('requests.edit', compact('partner','creditDays','quotationRequest', 'sectors'));
     }
 
     /**
@@ -222,7 +229,10 @@ class QuotationRequestController extends Controller
         $quotationRequest->save();
 
         if(request('suppliers'))
-        $quotationRequest->suppliers()->sync(request('suppliers'));
+            $quotationRequest->suppliers()->sync(request('suppliers'));
+
+        if(request('sectors'))
+            $quotationRequest->sectors()->sync(request('sectors'));
 
 
         $mimes = ['jpg','jpeg','bmp','png','pdf'];
