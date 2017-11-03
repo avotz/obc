@@ -14,10 +14,10 @@
             <delete-avatar-profile :user-id="{{ $user->id }}" url="/partner/profile/avatars"></delete-avatar-profile>
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn">Partner ID: {{ $user->public_code }} <img src="{{ getFlag($user->company->countries->first()->code) }}" alt="flag"></h2>
+        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->public_code }} <img src="{{ getFlag($company->countries->first()->code) }}" alt="flag"></h2>
         <h2 class="h5 text-white-op animated zoomIn">Private Code: </h2>
        
-        <update-private-code :partner-id="{{ $user->id }}" :private-code="'{{ $user->private_code }}'"></update-private-code>    
+        <update-private-code :company-id="{{ $company->id }}" :private-code="'{{ $company->private_code }}'"></update-private-code>    
        
        
         
@@ -50,8 +50,8 @@
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
         <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Partners</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="/partner/users">{{ auth()->user()->collaborators->count() }}</a>
+            <div class="font-w700 text-gray-darker animated fadeIn">Users</div>
+            <a class="h2 font-w300 text-primary animated flipInX" href="/partner/users">{{ $company->users->count() }}</a>
         </div>
     </div>
 </div>
@@ -74,14 +74,14 @@
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
                 <div class="col-xs-12 text-center" >
-                            <img src="{{ getLogo($user->company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
+                            <img src="{{ getLogo($company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
                             
                             
                         </div>
                         <div class="col-xs-12 col-sm-4 col-sm-offset-4">
                                 <a class="UploadButton UploadButtonLogo btn btn-xs btn-info btn-block" id="UploadLogo" data-url="/partner/company/logo">Change Logo</a>
                             </div>
-                    <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/partner/companies/{{$user->company->id}}">
+                    <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/partner/companies/{{$company->id}}">
                          <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
                                 @include('partner/partials/form-company')
@@ -98,7 +98,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Partner Account</h3>
+                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/partner/{{ $user->id }}">

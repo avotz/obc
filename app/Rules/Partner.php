@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\User;
+use App\Company;
 use Illuminate\Contracts\Validation\Rule;
 
 class Partner implements Rule
@@ -26,10 +26,7 @@ class Partner implements Rule
      */
     public function passes($attribute, $value)
     {
-        return User::whereHas('roles', function($q){
-                $q->where('name', 'partner');
-            })->where('active', 1)
-            ->where('private_code', $value)->first();
+        return Company::where('private_code', $value)->first();
     }
 
     /**
@@ -39,6 +36,6 @@ class Partner implements Rule
      */
     public function message()
     {
-        return 'The :attribute not found like partner or is inactive';
+        return 'The :attribute not found like partner';
     }
 }

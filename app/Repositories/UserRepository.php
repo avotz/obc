@@ -37,14 +37,14 @@ class UserRepository extends DbRepository{
         $user->profile()->create($data);
         
         if( $role->name == 'partner'){
-            $company = $user->company()->create($data);
+            $company = $user->companies()->create($data);
             $company->countries()->attach($data['country']);
            
             
             if(isset($data['sectors']))
                 $company->sectors()->sync($data['sectors']);
 
-           
+            $company->generatePublicCode();
         }
 
         if(isset($data['country']))

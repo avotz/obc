@@ -18,11 +18,11 @@ class CreateQuotationRequestsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('transaction_id')->nullable();
-            $table->string('delivery_time');
-            $table->string('way_of_delivery');
+            $table->double('delivery_time');
+            $table->integer('way_of_delivery');
             $table->double('way_to_pay');
             $table->string('exp_date');
-            $table->string('product_name')->nullable();;
+            $table->string('file')->nullable();
             $table->string('product_photo')->nullable();
             $table->text('comments')->nullable();
             $table->tinyInteger('geo_type')->default(1); // 1 Nacional 2 Regional 3 Internacional 4 Global

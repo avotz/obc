@@ -12,7 +12,7 @@
         @forelse($quotationRequests as $request)
         <div class="col-sm-6 col-lg-4">
             <div class="block block-link-hover3" href="javascript:void(0)">
-                @include('requests/partials/item', ['request' => $request, 'partner' =>  $request->user->hasRole('partner') ? $request->user : $request->user->partners->first(),  'user' =>  $request->user->hasRole('user') ? $request->user : '' ])
+                @include('requests/partials/item', ['request' => $request, 'partner' =>  $request->user->companies->first(),  'user' =>  $request->user])
                 @if(auth()->user()->hasRequest($request->id))
                 <div class="block-content">
                     <div class="row items-push text-center">
@@ -35,7 +35,7 @@
                 @else 
                 <div class="block-content">
                     <div class="row items-push text-center">
-                        <a class="btn-questions col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $request->user->hasRole('user') ? $request->user->email : '' }}" data-partner="{{ $request->user->hasRole('partner') ? $request->user->email : $request->user->partners->first()->email }}" data-transaction="{{ $request->transaction_id }}" >
+                        <a class="btn-questions col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $request->user->email }}" data-partner="{{ $request->user->companies->first()->id }}" data-transaction="{{ $request->transaction_id }}" >
                             <div class="push-5"><i class="si si-question fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Questions</div>
                         </a>

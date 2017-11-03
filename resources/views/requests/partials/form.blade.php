@@ -65,12 +65,14 @@
                 <select name="delivery_time" id="delivery_time"  class="form-control">
 
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                    
-                   
-                        <option value="Immediate" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "Immediate") selected="selected" @endif>Immediate</option>
+                     <option value="0" @if(isset($quotationRequest) && $quotationRequest->delivery_time == 0) selected="selected" @endif >{{ trans('utils.immediate') }}</option>
+                         @foreach($deliveryDays as $day)    
+                            <option value="{{ $day }}" @if(isset($quotationRequest) && $quotationRequest->delivery_time == $day) selected="selected" @endif> {{ $day }} {{ trans('utils.days') }}</option>
+                        @endforeach
+                        <!-- <option value="Immediate" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "Immediate") selected="selected" @endif>Immediate</option>
                         <option value="1 day" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "1 day") selected="selected" @endif>1 day</option>
                         <option value="2 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "2 days") selected="selected" @endif>2 days</option>
-                        <option value="3 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "3 days") selected="selected" @endif>3 days</option>
+                        <option value="3 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "3 days") selected="selected" @endif>3 days</option> -->
                   
                    
                 </select>
@@ -93,9 +95,9 @@
                         <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                     
                    
-                        <option value="Pick up" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "Pick up") selected="selected" @endif>Pick up</option>
-                        <option value="At Home" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "At Home") selected="selected" @endif>At Home</option>
-                        <option value="Shipping charge" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == "Shipping charge") selected="selected" @endif>Shipping charge</option>
+                        <option value="1" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 1) selected="selected" @endif>{{ trans('utils.way_of_delivery.1') }}</option>
+                        <option value="2" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 2) selected="selected" @endif>{{ trans('utils.way_of_delivery.2') }}</option>
+                        <option value="3" @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 3) selected="selected" @endif>{{ trans('utils.way_of_delivery.3') }}</option>
                         
                   
                    
@@ -115,9 +117,9 @@
                 <select name="way_to_pay" id="way_to_pay"  class="form-control">
 
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                    <option value="0" @if(isset($quotationRequest) && $quotationRequest->way_to_pay == 0) selected="selected" @endif >Cash</option>
+                    <option value="0" @if(isset($quotationRequest) && $quotationRequest->way_to_pay == 0) selected="selected" @endif >{{ trans('utils.cash') }}</option>
                     @foreach($creditDays as $creditDay)    
-                        <option value="{{ $creditDay->days }}" @if(isset($quotationRequest) && $quotationRequest->way_to_pay == $creditDay->days) selected="selected" @endif>Credit {{ $creditDay->days }} days</option>
+                        <option value="{{ $creditDay->days }}" @if(isset($quotationRequest) && $quotationRequest->way_to_pay == $creditDay->days) selected="selected" @endif>{{ trans('utils.credit') }} {{ $creditDay->days }} {{ trans('utils.days') }}</option>
                     @endforeach
                    
                 </select>
@@ -157,19 +159,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group{{ $errors->has('product_name') ? ' has-error' : '' }}">
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="product_name" name="product_name" value="{{ isset($quotationRequest) ? $quotationRequest->product_name : old('product_name') }}">
-                <label for="product_name">Product Name</label>
-                @if ($errors->has('product_name'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('product_name') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
-    </div>
+
     <div class="form-group{{ $errors->has('product_photo') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             @if(!isset($quotationRequest) || (isset($quotationRequest) && !$quotationRequest->quotations->count()))

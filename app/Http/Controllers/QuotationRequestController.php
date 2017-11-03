@@ -112,11 +112,11 @@ class QuotationRequestController extends Controller
      */
     public function create()
     {
-        $partner = (auth()->user()->hasRole('partner')) ? auth()->user() : auth()->user()->partners->first();
-        $creditDays = CreditDays::all();
-        $sectors = Sector::get()->toTree();
-
-        return view('requests.create', compact('partner','creditDays','sectors'));
+        $partner = auth()->user()->companies->first();
+        // $creditDays = CreditDays::all();
+        // $sectors = Sector::get()->toTree();
+        // $deliveryDays = range(1, 100);
+        return view('requests.create', compact('partner'));
     }
 
     public function store()
@@ -198,11 +198,12 @@ class QuotationRequestController extends Controller
         
         if(!$quotationRequest->createdBy(auth()->user())) return redirect('/public/requests');
 
-        $partner = (auth()->user()->hasRole('partner')) ? auth()->user() : auth()->user()->partners->first();
-        $creditDays = CreditDays::all();
-        $sectors = Sector::get()->toTree();
+        $partner = auth()->user()->companies->first();
+        // $creditDays = CreditDays::all();
+        // $sectors = Sector::get()->toTree();
+        // $deliveryDays = range(1, 100);
 
-        return view('requests.edit', compact('partner','creditDays','quotationRequest', 'sectors'));
+        return view('requests.edit', compact('partner','quotationRequest'));
     }
 
     /**

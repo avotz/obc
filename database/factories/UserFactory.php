@@ -19,7 +19,6 @@ $factory->define(App\User::class, function (Faker $faker) {
     return [
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('123456'),
-        'activity' => 0, //1 consumer / 2 supplier
         'remember_token' => str_random(10),
     ];
 });
@@ -47,7 +46,6 @@ $factory->define(App\Company::class, function (Faker $faker) {
     static $password;
 
     return [
-        'user_id'=> 1,
         'company_name'=> $faker->firstName,
         'identification_number'=> 12345678,
         'phones'=> $faker->phoneNumber,
@@ -58,7 +56,9 @@ $factory->define(App\Company::class, function (Faker $faker) {
         'legal_name'=> $faker->firstName,
         'legal_first_surname'=> $faker->lastName,
         'legal_second_surname'=> $faker->lastName,
-        'legal_email'=> $faker->email
+        'legal_email'=> $faker->email,
+        'activity' => 1, //1 consumer / 2 supplier
+        'private_code' => $faker->word
       
     ];
 });

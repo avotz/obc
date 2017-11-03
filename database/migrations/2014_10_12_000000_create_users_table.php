@@ -17,14 +17,12 @@ class CreateUsersTable extends Migration
             $table->increments('id'); 
             $table->string('email')->unique();
             $table->string('password');
-            $table->tinyInteger('activity')->default(0); //1 consumer / 2 supplier
-            $table->string('private_code')->nullable();
             $table->string('public_code')->nullable();
             $table->tinyInteger('active')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::create('partner_user', function(Blueprint $table)
+        /*Schema::create('partner_user', function(Blueprint $table)
         {
             $table->integer('partner_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -35,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->primary(array('user_id', 'partner_id'));
            
             
-        });
+        });*/
     }
 
     /**

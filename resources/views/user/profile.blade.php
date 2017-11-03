@@ -72,7 +72,7 @@
                 <div class="block-content block-content-full block-content-narrow">
                 <div class="form-horizontal push-50">
                         <div class="col-xs-12 text-center push-30" >
-                            <img src="{{ getLogo($user->partners->first()->company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
+                            <img src="{{ getLogo($company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
                         
                            
                         </div>
@@ -81,7 +81,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->company_name }}
+                                    {{ $company->company_name }}
                                     <label for="company_name">Company Name</label>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->identification_number }}
+                                    {{ $company->identification_number }}
                                     <label for="identification_number">Company identification number</label>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->activity }}
+                                    {{ $company->activity }}
                                     <label for="activity">Activity on the OBC platform</label>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->phones }}
+                                    {{ $company->phones }}
                                     <label for="phones">Phones</label>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->physical_address }}
+                                    {{ $company->physical_address }}
                                     <label for="physical_address">Physical address</label>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
                                     
-                                        @foreach($user->partners->first()->company->countries as $item)
+                                        @foreach($company->countries as $item)
                                         <div>
                                             {{ $item->name }}
                                         </div>
@@ -135,7 +135,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->towns }}
+                                    {{ $company->towns }}
                                     <label for="towns">Towns</label>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $user->partners->first()->company->web_address }}
+                                    {{ $company->web_address }}
                                     <label for="web_address">Web address</label>
                                 </div>
                             </div>

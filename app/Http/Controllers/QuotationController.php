@@ -60,12 +60,12 @@ class QuotationController extends Controller
     public function create($quotation_request_id)
     {
         $quotationRequest = QuotationRequest::find($quotation_request_id);
-        $partner =  $quotationRequest->user->hasRole('partner') ? $quotationRequest->user : $quotationRequest->user->partners->first();
-        $user =  $quotationRequest->user->hasRole('user') ? $quotationRequest->user->load('profile') : '';
+        $partner = $quotationRequest->user->companies->first();
+        $user = $quotationRequest->user->load('profile');
     
-        $creditDays = CreditDays::all();
+       // $creditDays = CreditDays::all();
 
-        return view('quotations.create', compact('user','partner','creditDays','quotationRequest'));
+        return view('quotations.create', compact('user','partner','quotationRequest'));
     }
 
     public function store($quotation_request_id)
@@ -144,13 +144,14 @@ class QuotationController extends Controller
         if(!$quotation->createdBy(auth()->user())) return redirect('/public/requests');
 
         $quotationRequest = $quotation->request;
+        
+        $partner = $quotationRequest->user->companies->first();
+        
+        $user =  $quotationRequest->user->load('profile');
 
-        $partner =  $quotationRequest->user->hasRole('partner') ? $quotationRequest->user : $quotationRequest->user->partners->first();
-        $user =  $quotationRequest->user->hasRole('user') ? $quotationRequest->user->load('profile') : '';
+        //$creditDays = CreditDays::all();
 
-        $creditDays = CreditDays::all();
-
-        return view('quotations.edit', compact('user','partner','creditDays','quotation','quotationRequest'));
+        return view('quotations.edit', compact('user','partner','quotation','quotationRequest'));
     }
     /**
      * update the application dashboard.

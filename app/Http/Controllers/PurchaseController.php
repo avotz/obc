@@ -48,8 +48,9 @@ class PurchaseController extends Controller
         
         if($quotation->purchase) return redirect('/purchases/'.$quotation->purchase->id.'/edit');
 
-        $partner =  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first();
-        $user =  $quotation->user->hasRole('user') ? $quotation->user->load('profile') : '';
+        $partner =  $quotation->user->companies->first();
+
+        $user =  $quotation->user->load('profile');
     
 
 
@@ -128,8 +129,9 @@ class PurchaseController extends Controller
         
         $quotation = $purchase->quotation;
 
-        $partner =  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first();
-        $user =  $quotation->user->hasRole('user') ? $quotation->user->load('profile') : '';
+        $partner = $quotation->user->companies->first();
+        
+        $user = $quotation->user->load('profile');
     
 
 

@@ -14,7 +14,7 @@
     export default {
         //props:['partnerId','privateCode'],
          props: {
-		    partnerId: {
+		    companyId: {
 		      type: Number
 		      
             },
@@ -39,7 +39,7 @@
            
             update() {
                 this.loader = true;
-                axios.put(`/partner/${this.partnerId}/privatecode`,{private_code: this.private_code})
+                axios.put(`/partner/companies/${this.companyId}/privatecode`,{private_code: this.private_code})
                     .then(response => {
                         bus.$emit('alert', 'Private Code Updated','success');
                         this.loader = false;

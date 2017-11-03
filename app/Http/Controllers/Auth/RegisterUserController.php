@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Company;
 use App\Role;
 use App\Repositories\UserRepository;
 use App\Rules\Partner;
@@ -73,23 +74,27 @@ class RegisterUserController extends Controller
      */
     protected function create(array $data)
     {
-        $partner = User::whereHas('roles', function($q){
+      
+
+       $company = Company::where('private_code', $data['associate_private_code'])
+                    ->first();
+
+        $partnerUser = $company->users()->whereHas('roles', function($q){
                         $q->where('name', 'partner');
                     })->where('active', 1)
-                    ->where('private_code', $data['associate_private_code'])
-                    ->first();
+                     ->first();
 
         $data['role'] = Role::whereName('user')->first();
         
         
         $user = $this->userRepo->store($data);
 
-        $user->addPartner($partner);
-        $user->countries()->attach($partner->countries->first());
+        $user->addToCompany($company);
+        $user->countries()->attach($company->countries->first());
         
         try {
             
-            \Mail::to($partner)->send(new NewUser($user));
+            \Mail::to($partnerUser)->send(new NewUser($user));
             \Mail::to($user)->send(new NewUserWelcome($user));
 
         }catch (\Swift_TransportException $e)  //Swift_RfcComplianceException

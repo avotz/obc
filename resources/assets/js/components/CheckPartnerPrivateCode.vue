@@ -114,14 +114,14 @@
                 500),
             searchPartner(private_code) {
                 this.loader = true;
-                axios.get(`/partners/${private_code}/check/`,{
+                axios.get(`/companies/${private_code}/check/`,{
                         params: {
                             associate_private_code: private_code
                         }
                     })
                     .then(response => {
                         
-                        this.company = response.data.company
+                        this.company = response.data
                         this.loader = false;
                         this.errors = [];
                     })

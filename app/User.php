@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'activity', 'email', 'password','private_code', 'public_code' ,'active'
+        'email', 'password', 'public_code' ,'active'
     ];
 
     
@@ -46,10 +46,11 @@ class User extends Authenticatable
 
     public function generatePublicCode(){
         
-        if( $this->hasRole('partner')){
+       /* if( $this->hasRole('partner')){
             $this->public_code = trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3).'-'.$this->company->countries->first()->code;
-        }else
-            $this->public_code = 'USR-'. zerofill($this->id,3);
+        }else*/
+        
+        $this->public_code = 'USR-'. zerofill($this->id,3);
 
         $user = $this->save();
 
@@ -142,17 +143,7 @@ class User extends Authenticatable
           return !! $request->intersect($this->requests)->count();
       }
 
-       /**
-      * Determine if the user has the given role.
-      *
-      * @param  mixed $role
-      * @return boolean
-      */
-      public function isPartner($user)
-      {
-         return $this->collaborators()->where('id', $user->id)->count();
-  
-      }
+     
     
      public function requests()
      {
@@ -166,22 +157,22 @@ class User extends Authenticatable
     {
          return $this->belongsToMany(QuotationRequest::class);
     }
-    public function partners() //associates
+    /*public function partners() //associates
     {
         return $this->belongsToMany(User::class, 'partner_user', 'user_id', 'partner_id');
     }
     public function collaborators() //users
     {
         return $this->belongsToMany(User::class, 'partner_user', 'partner_id', 'user_id');
-    }
+    }*/
     
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
-    public function company()
+    public function companies()
     {
-        return $this->hasOne(Company::class);
+        return $this->belongsToMany(Company::class);
     }
     public function countries() //users
     {
@@ -224,15 +215,15 @@ class User extends Authenticatable
        
     }
 
-    public function addPartner(User $user)
+    public function addToCompany(Company $company)
     {
-        $this->partners()->attach($user->id);
+        $this->companies()->attach($company->id);
         
     }
 
-    public function removePartner(User $user)
+    public function removeCompany(Company $company)
     {
-        $this->partners()->detach($user->id);
+        $this->companies()->detach($company->id);
        
     }
 
@@ -241,7 +232,7 @@ class User extends Authenticatable
         return [
             
             'email' => $this->email,
-            'company' => $this->company
+            'company' => $this->companies->first()
         ];
     }
 }

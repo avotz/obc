@@ -28,15 +28,15 @@ class ProfileController extends Controller
     public function show()
     {
         $user = auth()->user();
+        $company = $user->companies()->first();
         
-        $user->load('company.countries');
+        //$user->load('company.countries');
 
         if($user->hasRole('partner')){
             
             $sectors = Sector::get()->toTree();
-           
 
-            return view('partner.profile', compact('user','sectors'));
+            return view('partner.profile', compact('user','company','sectors'));
         }
         if($user->hasRole('superadmin')){
             
@@ -63,7 +63,7 @@ class ProfileController extends Controller
             return view('admin.profile', compact('user','partners'));
         }
 
-        return view('user.profile', compact('user'));
+        return view('user.profile', compact('user','company'));
     }
 
     /**

@@ -11,7 +11,7 @@
         @forelse($quotations as $quotation)
             <div class="col-sm-6 col-lg-4">
                 <div class="block block-link-hover3" href="javascript:void(0)">
-                    @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first(),  'user' =>  $quotation->user->hasRole('user') ? $quotation->user : '' ])
+                    @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->companies->first(),  'user' => $quotation->user ])
                     <div class="block-content">
                         <div class="row items-push text-center">
                         @if($quotation->purchase && $quotation->purchase->status == 1)

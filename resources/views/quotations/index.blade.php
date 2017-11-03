@@ -12,10 +12,10 @@
         @forelse($quotations as $quotation)
         <div class="col-sm-6 col-lg-4">
             <div class="block block-link-hover3" href="javascript:void(0)">
-                 @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->hasRole('partner') ? $quotation->user : $quotation->user->partners->first(),  'user' =>  $quotation->user->hasRole('user') ? $quotation->user : '' ])
+                 @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->companies->first(),  'user' => $quotation->user ])
                 <div class="block-content">
                     <div class="row items-push text-center">
-                        <a class="col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $quotation->user->hasRole('user') ? $quotation->user->email : '' }}" data-partner="{{ $quotation->user->hasRole('partner') ? $quotation->user->email : $quotation->user->partners->first()->email }}" data-transaction="{{ $quotation->transaction_id }}"  >
+                        <a class="col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $quotation->user->email }}" data-partner="{{ $quotation->user->companies->first()->id }}" data-transaction="{{ $quotation->transaction_id }}"  >
                             <div class="push-5"><i class="si si-question fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Questions</div>
                         </a>

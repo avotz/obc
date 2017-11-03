@@ -16,7 +16,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('/support', 'HomeController@support');
 Route::post('/support', 'HomeController@sendSupport');
-Route::get('partners/{privateCode}/check', 'PartnerController@checkPrivateCode');
+Route::get('companies/{privateCode}/check', 'PartnerController@checkPrivateCode');
 Route::get('profile', 'ProfileController@show');
 Route::get('suppliers', 'QuotationRequestController@suppliers');
 Route::get('private/requests', 'QuotationRequestController@private');
@@ -96,11 +96,12 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
 
 Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
 {
-    Route::put('/{partner}/privatecode', 'PartnerController@updatePrivateCode');
+    
     Route::post('/profile/avatars', 'ProfileController@avatar');
     Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
     Route::post('/company/logo', 'PartnerController@logoCompany');
     Route::put('/companies/{company}', 'PartnerController@updateCompany');
+    Route::put('/companies/{company}/privatecode', 'PartnerController@updatePrivateCode');
     Route::put('/{partner}', 'PartnerController@update');
     Route::get('/users', 'PartnerController@users');
     Route::delete('/users/{user}', 'PartnerController@deleteUser');

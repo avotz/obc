@@ -11,7 +11,7 @@ use App\CreditDays;
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
-        'users','profiles','roles','role_user', 'partner_user','companies','company_country','countries','country_user','permissions','permission_user','sectors','company_sector','quotation_requests','quotations','purchase_orders','credit_days'
+        'users','profiles','roles','role_user', 'company_user','companies','company_country','countries','country_user','permissions','permission_user','sectors','company_sector','quotation_requests','quotations','purchase_orders','credit_days'
     ];
     private $creditDays = [
         ['days'=> 30],
@@ -237,18 +237,14 @@ class DatabaseSeeder extends Seeder
             ['country_id' => $country->id, 'user_id' =>  $admin->id]
         );
 
-        $partner = factory(User::class, 1)->create([
-            'activity' => 1,
-            
-        ])->first(); // partner
+        $partner = factory(User::class, 1)->create()->first(); // partner
         
         $profile = factory(Profile::class, 1)->create([
             'user_id' => $partner->id,
             
         ]);
         $company = factory(Company::class, 1)->create([
-            'user_id' => $partner->id,
-            
+            'activity' => 2
         ])->first();
 
         \DB::table('company_country')->insert(
@@ -259,13 +255,10 @@ class DatabaseSeeder extends Seeder
         );
 
        
-        $user = factory(User::class, 1)->create([
-            'activity' => 2,
-            
-        ])->first();
+        $user = factory(User::class, 1)->create()->first();
        
         
-        $user->AddPartner($partner);
+        $user->AddToCompany($company);
 
         \DB::table('country_user')->insert(
             ['country_id' => $country->id, 'user_id' =>  $user->id]

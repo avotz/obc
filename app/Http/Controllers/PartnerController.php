@@ -28,11 +28,11 @@ class PartnerController extends Controller
     
     public function users()
     {
-        $partner = auth()->user();
+        $company = auth()->user()->companies->first();
 
         $search['q'] = request('q');
 
-        $users = $partner->collaborators()->with('profile')->search($search['q'])->paginate(10);
+        $users = $company->users()->with('profile')->search($search['q'])->paginate(10);
 
         return view('partner.users', compact('users','search'));
     }
@@ -42,7 +42,9 @@ class PartnerController extends Controller
      */
      public function edit(User $user)
      {
-        if(!auth()->user()->isPartner($user)) return redirect('/partner/users');
+        $company = auth()->user()->companies->first();
+
+        if(!$company->isPartner($user)) return redirect('/partner/users');
 
         $permissions = Permission::all();
 
@@ -190,11 +192,11 @@ class PartnerController extends Controller
 
     public function updatePrivateCode($partner_id)
     {
-         $partner = User::find($partner_id);
-         $partner->private_code = request('private_code');
-         $partner->save();
+         $company = Company::find($partner_id);
+         $company->private_code = request('private_code');
+         $company->save();
          
-         return $partner;
+         return $company;
     }
 
     public function checkPrivateCode($code)
@@ -203,10 +205,7 @@ class PartnerController extends Controller
             'associate_private_code' => ['required', new Partner],  
         ]);
         
-        return User::whereHas('roles', function($q){
-            $q->where('name', 'partner');
-        })->where('active', 1)
-        ->where('private_code', $code)->with('company.countries')->first();
+        return Company::where('private_code', $code)->with('countries')->first();
     }
 
      

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Company;
 use App\Mail\NewQuestion;
 use Illuminate\Http\Request;
 
@@ -43,10 +44,15 @@ class QuestionController extends Controller
         //$user = User::find($dataMessage['user']);
 
         $dataMessage['questionUser'] = auth()->user(); 
+        
+        $partners = Company::find($dataMessage['partner'])->users()->whereHas('roles', function($q){
+                 $q->where('name', 'partner');
+
+            })->get();
 
         try {
             
-            \Mail::to($dataMessage['partner'])->send(new NewQuestion($dataMessage));
+            \Mail::to($partners)->send(new NewQuestion($dataMessage));
             
             if($dataMessage['user'])
                 \Mail::to($user)->send(new NewQuestion($dataMessage));

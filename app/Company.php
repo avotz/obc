@@ -7,12 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     protected $fillable = [
-        'company_name', 'identification_number', 'phones','physical_address','country','towns','web_address','legal_name','legal_first_surname','legal_second_surname','legal_email'
+        'company_name', 'identification_number', 'phones','physical_address','country','towns','web_address','legal_name','legal_first_surname','legal_second_surname','legal_email','private_code','activity','public_code'
     ];
+
+    public function generatePublicCode(){
+        
+      
+        $this->public_code = trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3).'-'.$this->countries->first()->code;
+       
+
+        $company = $this->save();
+
+        return $company;
+    }
    
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsToMany(User::class);
     }
     public function countries()
     {
@@ -35,5 +46,23 @@ class Company extends Model
           }
   
           return !! $sector->intersect($this->sectors)->count();
+      }
+    
+        /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+      public function isPartner($user)
+      {
+          if (is_string($user) || is_numeric($user)) {
+              return $this->users->contains('id', $user);
+          }
+  
+          return $user->companies()->where('company_id', $this->id)->count();
+
+        // return $this->companies()->where('user_id', $user->id)->count();
+  
       }
 }
