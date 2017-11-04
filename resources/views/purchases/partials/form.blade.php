@@ -14,7 +14,7 @@
             @endif
             @if(isset($purchase) && $purchase->file)
               
-                <delete-file-purchase :transaction-id="{{ $purchase->id }}" url-file="{{ getFilePurchase($purchase) }}" filename="{{ $purchase->file }}" :read="{{ $purchase->isPending() ? 'false' : 'true' }}">Delete Current File</delete-file-purchase>
+                <delete-file :transaction-id="{{ $purchase->id }}" url-file="{{ getFilePurchase($purchase) }}" filename="{{ $purchase->file }}" :read="{{ $purchase->isPending() ? 'false' : 'true' }}">Delete Current File</delete-file>
               
             @endif
         </div>
@@ -24,6 +24,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="comments" name="comments" value="{{ isset($purchase) ? $purchase->comments : ''  }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
+                 <textarea class="form-control" name="comments" id="comments" cols="30" rows="3" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>{{ isset($purchase) ? $purchase->comments : ''  }}</textarea>
                 <label for="comments">Additional comment</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">

@@ -38,6 +38,10 @@ class Quotation extends Model
     {
         return $this->hasOne(PurchaseOrder::class);
     }
+    public function shippings()
+    {
+        return $this->hasMany(Shipping::class);
+    }
     /**
       * Determine if the user has the given role.
       *

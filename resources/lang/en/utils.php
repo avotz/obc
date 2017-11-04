@@ -71,5 +71,7 @@ return [
         'credit' => 'Credit',
         'immediate' => 'Immediate',
         'cash' => 'Cash',
+        'normal' => 'Normal',
+        'express' => 'Express',
     
     ];

@@ -31,11 +31,21 @@ Route::get('purchases/{purchase}/edit', 'PurchaseController@edit');
 Route::delete('/requests/photo/{id}', 'QuotationRequestController@deleteProductPhoto');
 Route::delete('/quotations/photo/{id}', 'QuotationController@deleteProductPhoto');
 Route::delete('/purchases/file/{id}', 'PurchaseController@deleteFilePurchase');
+Route::delete('/requests/file/{id}', 'QuotationRequestController@deleteFile');
+Route::delete('/quotations/file/{id}', 'QuotationController@deleteFile');
 Route::put('purchases/{purchase}/status', 'PurchaseController@update_status');
+Route::get('quotations/{quotation}/shippings/create', 'ShippingController@create');
+Route::post('quotations/{quotation}/shippings', 'ShippingController@store');
+Route::get('quotations/{quotation}/shippings', 'ShippingController@index');
+Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
+Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
+Route::get('shippings/companies', 'ShippingController@suppliers');
+
 
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');
 Route::resource('purchases', 'PurchaseController');
+Route::resource('shippings', 'PurchaseController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {

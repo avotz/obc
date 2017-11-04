@@ -10,6 +10,23 @@ class Company extends Model
         'company_name', 'identification_number', 'phones','physical_address','country','towns','web_address','legal_name','legal_first_surname','legal_second_surname','legal_email','private_code','activity','public_code'
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        if($search){
+
+            return $query->where(function ($query) use ($search)
+            {
+                $query->where('public_code', 'like', '%'. $search .'%')
+                    ->orWhere('company_name', 'like', '%' . $search . '%');
+                    /*->orWhereHas('profile' , function ($query) use ($search){
+                        $query->where('company_name', 'like', '%' . $search . '%');
+                      });*/
+                
+            });
+        }
+
+        return $query;
+    }
     public function generatePublicCode(){
         
       
@@ -33,6 +50,7 @@ class Company extends Model
     {
         return $this->belongsToMany(Sector::class);
     }
+    
      /**
       * Determine if the user has the given role.
       *

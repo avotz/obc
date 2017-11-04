@@ -120,6 +120,36 @@ function getLogo($company)
         
      
 }
+function getQuotationFile($quotation)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('quotations/'. $quotation->id.'/files/'. $quotation->file))
+        $url = Storage::url('quotations/'. $quotation->id.'/files/'. $quotation->file);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
+function getRequestFile($request)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('requests/'. $request->id.'/files/'. $request->file))
+        $url = Storage::url('requests/'. $request->id.'/files/'. $request->file);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
 function getRequestProductPhoto($request)
 {
    

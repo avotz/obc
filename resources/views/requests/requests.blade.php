@@ -18,7 +18,7 @@
                                 <div class="h3 push-5"> {{ $request->quotations->count() }}</div>
                                 <div class="h5 font-w300 text-muted">Offers</div>
                             </a>
-                            <a class="col-xs-4" href="#">
+                            <a class="col-xs-4" href="{{ getRequestFile($request) }}" target="_blank">
                                 <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                                 <div class="h5 font-w300 text-muted">Download</div>
                             </a>

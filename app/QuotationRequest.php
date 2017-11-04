@@ -36,7 +36,7 @@ class QuotationRequest extends Model
     }
     public function suppliers()
     {
-        return $this->belongsToMany(User::class,'request_supplier', 'request_id', 'user_id');
+        return $this->belongsToMany(User::class,'request_supplier', 'request_id', 'supplier_id');
     }
     public function sectors()
     {

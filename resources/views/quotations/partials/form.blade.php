@@ -79,7 +79,8 @@
     <div class="form-group{{ $errors->has('comments') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="comments" name="comments" value="{{ isset($quotation) ? $quotation->comments : $quotationRequest->comments  }}">
+               
+                <textarea class="form-control" name="comments" id="comments" cols="30" rows="3">{{ isset($quotation) ? $quotation->comments : $quotationRequest->comments  }}</textarea>
                 <label for="comments">Additional comment <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->comments : '' }})</span></label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
@@ -89,7 +90,26 @@
             </div>
         </div>
     </div>
-    
+    <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+        <div class="col-xs-12">
+            <div class="form-material form-material-success">
+                @if(!isset($quotation) || (isset($quotation) && !$quotation->purchase)) 
+                    <input class="form-control" type="file" id="file" name="file">
+                    <label for="file">File</label>
+                    @if ($errors->has('file'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('file') }}</strong>
+                        </span>
+                    @endif
+                @endif 
+            </div>
+                @if(isset($quotation) && $quotation->product_photo)
+               
+                <delete-file :transaction-id="{{ $quotation->id }}" url-file="{{ getQuotationFile($quotation) }}" url="/quotations/file" filename="{{ $quotation->file }}" :read="{{ $quotation->purchase ? 'true': 'false' }}">Delete Current File</delete-file>
+                 @endif
+            
+        </div>
+    </div>
     <div class="form-group{{ $errors->has('product_photo') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">

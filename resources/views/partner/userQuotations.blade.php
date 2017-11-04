@@ -20,7 +20,7 @@
                                 <div class="h5 font-w300 text-muted">Purchase Order</div>
                             </a>
                         @endif
-                            <a class="col-xs-4" href="#">
+                            <a class="col-xs-4" href="{{ getQuotationFile($quotation) }}" target="_blank">
                                 <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                                 <div class="h5 font-w300 text-muted">Download</div>
                             </a>

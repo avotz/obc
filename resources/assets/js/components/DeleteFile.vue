@@ -1,7 +1,7 @@
 <template>
-    <div v-show="img">
-        <img :src="showImage" alt="photo" style="height:60px" />            
-        <button class="btn btn-danger btn-xs " type="button" @click="removePhoto()" v-if="!loader && !read"> <slot>Delete</slot></button>
+    <div v-show="name">
+        <a :href="urlFile" target="_blank"><img :src="showImage" alt="photo" style="height:60px" /></a>     
+        <button class="btn btn-danger btn-xs " type="button" @click="removeFile()" v-if="!loader && !read"> <slot>Delete</slot></button>
             
  
     </div>
@@ -13,13 +13,17 @@
     export default {
         //props:['partnerId','privateCode'],
          props: {
-            urlImg: {
+            urlFile: {
+		      type: String,
+		      default: ''
+            },
+             filename: {
 		      type: String,
 		      default: ''
             },
 		    url: {
 		      type: String,
-		       default: '/requests/photo'
+		       default: '/purchases/file'
             },
              transactionId: {
               type: Number,
@@ -39,7 +43,7 @@
              
                 loader:false,
                 errors:[],
-                img:'',
+                name:'',
                 preview:''
 
             }
@@ -48,14 +52,14 @@
 
         methods:{
            
-            removePhoto() {
+            removeFile() {
                 this.loader = true;
                 axios.delete(`${this.url}/${this.transactionId}`)
                     .then(response => {
-                        bus.$emit('alert', 'Photo Deleted','success');
+                        bus.$emit('alert', 'File Deleted','success');
                         this.loader = false;
                         this.errors = [];
-                        this.img = ""
+                        this.name = ""
                         
                        // window.location.href = "/profile/";
                        
@@ -70,14 +74,14 @@
                  
 
             },
-            readFile(){
+          readFile(){
               let request = new XMLHttpRequest();
-                request.open('GET', this.urlImg, true);
+                request.open('GET', this.urlFile, true);
                 request.responseType = 'blob';
                 request.onload = () => {
-                    let reader = new FileReader();
+                    var reader = new FileReader();
                     reader.readAsDataURL(request.response);
-                    reader.onload = (event) => {
+                    reader.onload =  (event) => {
                         this.preview = event.target.result;
                         
                     };
@@ -90,7 +94,7 @@
             showImage() {
                
                 let image = this.preview || this.value;
-              
+               
                 if (!image) {
                     return null;
                 }
@@ -107,11 +111,21 @@
             }
         },
         created() {
-            this.img =  this.urlImg
             
-            this.readFile();
+            this.name =  this.filename
 
-            console.log('Component deletePhotoProduct.')
+            var extension = this.filename.split('.').pop().toLowerCase();
+            
+            if(extension == 'pdf')
+                this.preview = '/img/pdf.jpg';
+            else if(extension == 'xlsx' || extension == 'xls')
+                this.preview = '/img/excel.jpg';
+            else if(extension == 'docx' || extension == 'doc')
+                this.preview = '/img/word.jpg';
+            else
+                this.readFile();
+           
+            console.log('Component deleteFilePurchase.')
         }
     }
 </script>

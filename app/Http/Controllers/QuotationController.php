@@ -77,6 +77,7 @@ class QuotationController extends Controller
             'delivery_time' => 'required|string|max:255',
             'way_of_delivery' => 'required|string|max:255',
             'way_to_pay' => 'required|string|max:255',
+            'file' => 'mimes:jpeg,bmp,png,pdf',
             'product_photo' => 'mimes:jpeg,bmp,png,pdf',
             
             
@@ -117,6 +118,31 @@ class QuotationController extends Controller
                     $fileUploaded = $file->storeAs("quotations/". $quotation->id ."/product", $quotation->id.'-'.$onlyName.'.'.$ext,'public');
     
                     $quotation->product_photo = $quotation->id.'-'.$onlyName.'.'.$ext;
+                    $quotation->save();
+    
+                   
+                }
+                
+            }
+
+             if(request()->file('file'))
+            {
+            
+                $file = request()->file('file');
+               
+                $name = $file->getClientOriginalName();
+                $ext = $file->guessClientExtension();
+                $onlyName = str_slug(pathinfo($name)['filename'], '-');
+                
+            
+            
+                if(in_array($ext, $mimes)){
+                    
+                   
+    
+                    $fileUploaded = $file->storeAs("quotations/". $quotation->id ."/files", $quotation->id.'-'.$onlyName.'.'.$ext,'public');
+    
+                    $quotation->file = $quotation->id.'-'.$onlyName.'.'.$ext;
                     $quotation->save();
     
                    
@@ -164,7 +190,8 @@ class QuotationController extends Controller
             'delivery_time' => 'required|string|max:255',
             'way_of_delivery' => 'required|string|max:255',
             'way_to_pay' => 'required|string|max:255',
-            'product_photo' => 'mimes:jpeg,bmp,png,pdf',
+            'file' => 'mimes:jpeg,bmp,png,pdf',
+            'product_photo' => 'mimes:jpeg,bmp,png',
             
             
             
@@ -176,7 +203,7 @@ class QuotationController extends Controller
         $quotation->save();
 
 
-        $mimes = ['jpg','jpeg','bmp','png','pdf'];
+        $mimes = ['jpg','jpeg','bmp','png'];
         $fileUploaded = "error";
 
     
@@ -205,6 +232,33 @@ class QuotationController extends Controller
             }
             
         }
+        
+        $mimes = ['jpg','jpeg','bmp','png','pdf'];
+        
+        if(request()->file('file'))
+        {
+        
+            $file = request()->file('file');
+           
+            $name = $file->getClientOriginalName();
+            $ext = $file->guessClientExtension();
+            $onlyName = str_slug(pathinfo($name)['filename'], '-');
+            
+        
+        
+            if(in_array($ext, $mimes)){
+                
+               
+
+                $fileUploaded = $file->storeAs("quotations/". $quotation->id ."/files", $quotation->id.'-'.$onlyName.'.'.$ext,'public');
+
+                $quotation->file = $quotation->id.'-'.$onlyName.'.'.$ext;
+                $quotation->save();
+
+               
+            }
+            
+        }
 
       
    
@@ -218,7 +272,21 @@ class QuotationController extends Controller
 
     public function deleteProductPhoto($id)
     {
-        $directory= "quotations/". $id;
+        $directory= "quotations/". $id."/product";
+        $quotation = Quotation::find($id);
+        $quotation->product_photo = '';
+        $quotation->save();
+        
+        //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+        Storage::disk('public')->deleteDirectory($directory);
+        
+        return 'ok';
+         
+    }
+
+    public function deleteFile($id)
+    {
+        $directory= "quotations/". $id."/files";
         $quotation = Quotation::find($id);
         $quotation->product_photo = '';
         $quotation->save();

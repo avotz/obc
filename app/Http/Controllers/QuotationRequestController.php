@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Company;
 use App\Repositories\UserRepository;
 use App\CreditDays;
 use App\Sector;
@@ -88,10 +89,10 @@ class QuotationRequestController extends Controller
     public function private()
     {
       
-
+        $partner = auth()->user()->companies->first();
         
-        $quotationRequests = QuotationRequest::where('public', 0)->whereHas('suppliers', function($q){
-            $q->where('request_supplier.user_id', auth()->id());
+        $quotationRequests = QuotationRequest::where('public', 0)->whereHas('suppliers', function($q) use($partner){
+            $q->where('request_supplier.supplier_id', $partner->id);
         });
       
 
@@ -128,7 +129,8 @@ class QuotationRequestController extends Controller
             'way_of_delivery' => 'required|string|max:255',
             'way_to_pay' => 'required|string|max:255',
             'exp_date' => 'required|date',
-            'product_photo' => 'mimes:jpeg,bmp,png,pdf',
+            'file' => 'mimes:jpeg,bmp,png,pdf',
+            'product_photo' => 'mimes:jpeg,bmp,png',
             
             
             
@@ -149,7 +151,7 @@ class QuotationRequestController extends Controller
             $quotationRequest->sectors()->sync(request('sectors'));
 
 
-            $mimes = ['jpg','jpeg','bmp','png','pdf'];
+            $mimes = ['jpg','jpeg','bmp','png'];
             $fileUploaded = "error";
     
         
@@ -172,6 +174,33 @@ class QuotationRequestController extends Controller
                     $fileUploaded = $file->storeAs("requests/". $quotationRequest->id ."/product", $quotationRequest->id.'-'.$onlyName.'.'.$ext,'public');
     
                     $quotationRequest->product_photo = $quotationRequest->id.'-'.$onlyName.'.'.$ext;
+                    $quotationRequest->save();
+    
+                   
+                }
+                
+            }
+            
+            $mimes = ['jpg','jpeg','bmp','png','pdf'];
+            
+            if(request()->file('file'))
+            {
+            
+                $file = request()->file('file');
+               
+                $name = $file->getClientOriginalName();
+                $ext = $file->guessClientExtension();
+                $onlyName = str_slug(pathinfo($name)['filename'], '-');
+                
+            
+            
+                if(in_array($ext, $mimes)){
+                    
+                   
+    
+                    $fileUploaded = $file->storeAs("requests/". $quotationRequest->id ."/files", $quotationRequest->id.'-'.$onlyName.'.'.$ext,'public');
+    
+                    $quotationRequest->file = $quotationRequest->id.'-'.$onlyName.'.'.$ext;
                     $quotationRequest->save();
     
                    
@@ -218,7 +247,8 @@ class QuotationRequestController extends Controller
             'way_of_delivery' => 'required|string|max:255',
             'way_to_pay' => 'required|string|max:255',
             'exp_date' => 'required|date',
-            'product_photo' => 'mimes:jpeg,bmp,png,pdf',
+            'file' => 'mimes:jpeg,bmp,png,pdf',
+            'product_photo' => 'mimes:jpeg,bmp,png',
             
             
             
@@ -236,7 +266,7 @@ class QuotationRequestController extends Controller
             $quotationRequest->sectors()->sync(request('sectors'));
 
 
-        $mimes = ['jpg','jpeg','bmp','png','pdf'];
+        $mimes = ['jpg','jpeg','bmp','png'];
         $fileUploaded = "error";
 
     
@@ -265,6 +295,33 @@ class QuotationRequestController extends Controller
             }
             
         }
+        
+        $mimes = ['jpg','jpeg','bmp','png','pdf'];
+
+         if(request()->file('file'))
+        {
+        
+            $file = request()->file('file');
+           
+            $name = $file->getClientOriginalName();
+            $ext = $file->guessClientExtension();
+            $onlyName = str_slug(pathinfo($name)['filename'], '-');
+            
+        
+        
+            if(in_array($ext, $mimes)){
+                
+               
+
+                $fileUploaded = $file->storeAs("requests/". $quotationRequest->id ."/files", $quotationRequest->id.'-'.$onlyName.'.'.$ext,'public');
+
+                $quotationRequest->file = $quotationRequest->id.'-'.$onlyName.'.'.$ext;
+                $quotationRequest->save();
+
+               
+            }
+            
+        }
 
       
    
@@ -283,7 +340,8 @@ class QuotationRequestController extends Controller
      */
     public function suppliers()
     {
-        $suppliers = User::search(request('q'))->where('id','<>',auth()->id())->where('activity', 2)->where('active',1)->get();
+         $suppliers = Company::search(request('q'))->where('activity', 2)->get();
+        //$suppliers = User::search(request('q'))->where('id','<>',auth()->id())->where('activity', 2)->where('active',1)->get();
 
         $itemsSelect = [];
 
@@ -302,9 +360,22 @@ class QuotationRequestController extends Controller
 
     public function deleteProductPhoto($id)
     {
-        $directory= "requests/". $id;
+        $directory= "requests/". $id."/product";
         $quotationRequest = QuotationRequest::find($id);
         $quotationRequest->product_photo = '';
+        $quotationRequest->save();
+        
+        //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+        Storage::disk('public')->deleteDirectory($directory);
+        
+        return 'ok';
+         
+    }
+    public function deleteFile($id)
+    {
+        $directory= "requests/". $id. "/files";
+        $quotationRequest = QuotationRequest::find($id);
+        $quotationRequest->file = '';
         $quotationRequest->save();
         
         //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");

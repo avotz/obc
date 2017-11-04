@@ -61,7 +61,7 @@
     <div class="form-group{{ $errors->has('delivery_time') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <!-- <input class="form-control" type="text" id="delivery_time" name="delivery_time" value="{{ isset($quotationRequest) ? $quotationRequest->delivery_time : old('delivery_time') }}" placeholder="Immediate... 3 Days..."> -->
+               
                 <select name="delivery_time" id="delivery_time"  class="form-control">
 
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
@@ -69,10 +69,7 @@
                          @foreach($deliveryDays as $day)    
                             <option value="{{ $day }}" @if(isset($quotationRequest) && $quotationRequest->delivery_time == $day) selected="selected" @endif> {{ $day }} {{ trans('utils.days') }}</option>
                         @endforeach
-                        <!-- <option value="Immediate" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "Immediate") selected="selected" @endif>Immediate</option>
-                        <option value="1 day" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "1 day") selected="selected" @endif>1 day</option>
-                        <option value="2 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "2 days") selected="selected" @endif>2 days</option>
-                        <option value="3 days" @if(isset($quotationRequest) && $quotationRequest->delivery_time == "3 days") selected="selected" @endif>3 days</option> -->
+                       
                   
                    
                 </select>
@@ -89,7 +86,7 @@
     <div class="form-group{{ $errors->has('way_of_delivery') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <!-- <input class="form-control" type="text" id="way_of_delivery" name="way_of_delivery" value="{{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : old('way_of_delivery') }}"> -->
+                
                 <select name="way_of_delivery" id="way_of_delivery"  class="form-control">
 
                         <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
@@ -149,7 +146,8 @@
     <div class="form-group{{ $errors->has('comments') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="comments" name="comments" value="{{ isset($quotationRequest) ? $quotationRequest->comments : old('comments') }}">
+
+                <textarea class="form-control" name="comments" id="comments" cols="30" rows="3">{{ isset($quotationRequest) ? $quotationRequest->comments : old('comments')  }}</textarea>
                 <label for="comments">Additional comment</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
@@ -159,7 +157,25 @@
             </div>
         </div>
     </div>
-
+    <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+            <div class="col-xs-12">
+                @if(!isset($quotationRequest) || (isset($quotationRequest) && !$quotationRequest->quotations->count()))
+                <div class="form-material form-material-success">
+                    <input class="form-control" type="file" id="file" name="file">
+                    <label for="file">File</label>
+                    @if ($errors->has('file'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('file') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                @endif
+                @if(isset($quotationRequest) && $quotationRequest->file)
+                
+                    <delete-file :transaction-id="{{ $quotationRequest->id }}" url-file="{{ getRequestFile($quotationRequest) }}" filename="{{ $quotationRequest->file }}" :read="{{ $quotationRequest->quotations->count() ? 'true': 'false' }}" url="/requests/file">Delete Current file</delete-file>
+                @endif
+            </div>
+        </div>
     <div class="form-group{{ $errors->has('product_photo') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             @if(!isset($quotationRequest) || (isset($quotationRequest) && !$quotationRequest->quotations->count()))
