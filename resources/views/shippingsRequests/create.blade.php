@@ -11,7 +11,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Shipping for Quotation -{{ $quotation->id }} </h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn">Shipping Request for Quotation -{{ $quotation->id }} </h1>
         
            
     
@@ -31,10 +31,10 @@
         <div class="block">
                 
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shippings-requests/{{ $shippingRequest->id }}/shippings" enctype="multipart/form-data">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/quotations/{{ $quotation->id }}/shippings-requests" enctype="multipart/form-data">
                                         
                         {{ csrf_field() }}
-                        @include('shippings/partials/form') 
+                        @include('shippingsRequests/partials/form') 
                     
                     </form>
 

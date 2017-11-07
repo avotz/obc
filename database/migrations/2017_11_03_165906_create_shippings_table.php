@@ -17,6 +17,7 @@ class CreateShippingsTable extends Migration
             $table->increments('id');
             $table->integer('quotation_id')->unsigned()->index();
             $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');
+            $table->integer('shipping_request_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
             $table->string('transaction_id')->nullable();
             $table->integer('delivery_time'); //1 normal 2 express
@@ -25,7 +26,6 @@ class CreateShippingsTable extends Migration
             $table->string('file')->nullable();
             $table->text('comments')->nullable();
             $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject
-            $table->tinyInteger('public')->default(1); //1 publica //0 privada
             $table->timestamps();
         });
         Schema::create('shipping_supplier', function (Blueprint $table) {
@@ -37,6 +37,21 @@ class CreateShippingsTable extends Migration
             $table->foreign('supplier_id')->references('id')->on('companies')->onDelete('cascade');
 
             $table->primary(array('shipping_id', 'supplier_id'));
+        });
+
+        Schema::create('shipping_requests', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('quotation_id')->unsigned()->index();
+            $table->foreign('quotation_id')->references('id')->on('quotations')->onDelete('cascade');
+            $table->integer('user_id')->unsigned()->index();
+            $table->string('transaction_id')->nullable();
+            $table->integer('delivery_time'); //1 normal 2 express
+            $table->string('date');
+            $table->string('file')->nullable();
+            $table->text('comments')->nullable();
+            $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject
+            $table->tinyInteger('public')->default(1); //1 publica //0 privada
+            $table->timestamps();
         });
     }
 

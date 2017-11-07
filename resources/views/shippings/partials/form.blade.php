@@ -65,7 +65,7 @@
             @endif
             @if(isset($shipping) && $shipping->file)
               
-                <delete-file :transaction-id="{{ $shipping->id }}" url-file="{{ getFileShipping($shipping) }}" filename="{{ $shipping->file }}" :read="{{ $shipping->isPending() ? 'false' : 'true' }}">Delete Current File</delete-file>
+                <delete-file :transaction-id="{{ $shipping->id }}" url-file="{{ getShippingFile($shipping) }}" filename="{{ $shipping->file }}" :read="{{ $shipping->isPending() ? 'false' : 'true' }}">Delete Current File</delete-file>
               
             @endif
         </div>
@@ -86,38 +86,6 @@
         </div>
     </div>
 
-     <div class="form-group{{ $errors->has('public') ? ' has-error' : '' }}">
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-                <select name="public" id="public"  class="form-control">
-                
-                    <option value="0" @if(isset($shipping) && $shipping->public == 0) selected="selected" @endif>All</option>
-                   
-                    <option value="1" @if(isset($shipping) && $shipping->public == 1) selected="selected" @endif>Specific</option>
-                   
-                </select>
-                <label for="public">  Shipping Company</label>
-                @if ($errors->has('public'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('public') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
-    </div>
-    <div class="form-group suppliersSelectContainer">
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-                
-                    <select name="suppliers[]" id="suppliers"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a supplier"> 
-                    
-                </select>
-                    
-                <label for="suppliers"> Shipping Companies</label>
-            </div>
-        </div>
-    </div>
-    
     
     
     

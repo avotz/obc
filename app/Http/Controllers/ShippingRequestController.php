@@ -5,13 +5,12 @@ use App\User;
 use App\Repositories\UserRepository;
 use App\Quotation;
 use App\Company;
-use App\Shipping;
 use App\ShippingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
-class ShippingController extends Controller
+class ShippingRequestController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,42 +24,8 @@ class ShippingController extends Controller
         $this->userRepo = $userRepo;
     }
 
-      /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($quotation_id)
-    {
-        $search['q'] = request('q');
-        $quotation = Quotation::find($quotation_id);
-        $shippings = $quotation->shippings()->search($search['q'])->paginate(10);
-        
-        
-
-        return view('shippings.index', compact('shippings','quotation','search'));
-    
-    }
-
-      /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getShippings($quotation_id)
-    {
-        $search['q'] = request('q');
-        $quotation = Quotation::find($quotation_id);
-        $shippings = $quotation->shippings()->with('quotation.user','user')->search($search['q'])->paginate(10);
-        
-        
-        
-
-        return $shippings;
-    
-    }
-
    
+
 
 
       /**
@@ -68,11 +33,9 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($shippingRequest_id)
+    public function create($quotation_id)
     {
-        $shippingRequest = ShippingRequest::find($shippingRequest_id);
-        
-        $quotation = $shippingRequest->quotation;
+        $quotation = Quotation::find($quotation_id);
         
         $partner =  $quotation->user->companies->first();
 
@@ -82,19 +45,16 @@ class ShippingController extends Controller
 
 
 
-        return view('shippings.create', compact('user','partner','quotation','shippingRequest'));
+        return view('shippingsRequests.create', compact('user','partner','quotation'));
     }
 
-    public function store($shippingRequest_id)
+    public function store($quotation_id)
     {
-        $shippingRequest = ShippingRequest::find($shippingRequest_id);
-        
-        $quotation = $shippingRequest->quotation;
-      
+
+        $quotation = Quotation::find($quotation_id);
         
         $this->validate(request(), [
             'delivery_time' => 'required|string|max:255',
-            'cost' => 'required|numeric',
             'date' => 'required|date',
             'file' => 'mimes:jpeg,bmp,png,pdf',
             
@@ -106,10 +66,10 @@ class ShippingController extends Controller
         $data = request()->all();
 
         $data['user_id'] = auth()->id();
-        $data['shipping_request_id'] = $shippingRequest->id;
 
-        $shipping = $quotation->shippings()->create($data);
-        $shipping->generateTransactionId();
+
+        $shippingRequest = $quotation->shippingsRequests()->create($data);
+        $shippingRequest->generateTransactionId();
 
 
 
@@ -133,10 +93,10 @@ class ShippingController extends Controller
                     
                    
     
-                    $fileUploaded = $file->storeAs("shippings/". $shipping->id ."/files", $shipping->id.'-'.$onlyName.'.'.$ext,'public');
+                    $fileUploaded = $file->storeAs("shippings-requests/". $shippingRequest->id ."/files", $shippingRequest->id.'-'.$onlyName.'.'.$ext,'public');
     
-                    $shipping->file = $shipping->id.'-'.$onlyName.'.'.$ext;
-                    $shipping->save();
+                    $shippingRequest->file = $shippingRequest->id.'-'.$onlyName.'.'.$ext;
+                    $shippingRequest->save();
     
                    
                 }
@@ -151,6 +111,23 @@ class ShippingController extends Controller
         return redirect('quotations/'.$quotation->id.'/shippings');
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getShippingsRequests($quotation_id)
+    {
+        $search['q'] = request('q');
+        $quotation = Quotation::find($quotation_id);
+        $shippingsRequests = $quotation->shippingsRequests()->with('quotation.user','user','shippings')->search($search['q'])->paginate(10);
+        
+        
+
+        return $shippingsRequests;
+    
+    }
+
       /**
      * create the application dashboard.
      *
@@ -158,9 +135,9 @@ class ShippingController extends Controller
      */
     public function edit($id)
     {
-        $shipping = Shipping::find($id);
+        $shippingRequest = ShippingRequest::find($id);
         
-        $quotation = $shipping->quotation;
+        $quotation = $shippingRequest->quotation;
 
         $partner = $quotation->user->companies->first();
         
@@ -168,7 +145,7 @@ class ShippingController extends Controller
     
 
 
-        return view('shippings.edit', compact('user','partner','quotation','shipping'));
+        return view('shippingsRequests.edit', compact('user','partner','quotation','shippingRequest'));
     }
 
     public function update($id)
@@ -181,9 +158,9 @@ class ShippingController extends Controller
         ]
         );
 
-        $shipping = shippingOrder::find($id);
-        $shipping->fill(request()->all());
-        $shipping->save();
+        $shippingRequest = ShippingRequest::find($id);
+        $shippingRequest->fill(request()->all());
+        $shippingRequest->save();
 
 
         $mimes = ['jpg','jpeg','bmp','png','pdf'];
@@ -206,10 +183,10 @@ class ShippingController extends Controller
                 
                
 
-                $fileUploaded = $file->storeAs("shippings/". $shipping->id ."/files", $shipping->id.'-'.$onlyName.'.'.$ext,'public');
+                $fileUploaded = $file->storeAs("shippings-requests/". $shippingRequest->id ."/files", $shippingRequest->id.'-'.$onlyName.'.'.$ext,'public');
 
-                $shipping->file = $shipping->id.'-'.$onlyName.'.'.$ext;
-                $shipping->save();
+                $shippingRequest->file = $shippingRequest->id.'-'.$onlyName.'.'.$ext;
+                $shippingRequest->save();
 
                
             }
@@ -223,15 +200,15 @@ class ShippingController extends Controller
         
 
 
-        return redirect('quotations/'. $shipping->quotation->id.'/shippings');
+        return redirect('quotations/'. $shippingRequest->quotation->id.'/shippings');
     }
 
     public function deleteFileshipping($id)
     {
-        $directory= "shippings/". $id."/files";
-        $shipping = Shipping::find($id);
-        $shipping->file = '';
-        $shipping->save();
+        $directory= "shippings-requests/". $id."/files";
+        $shippingRequest = ShippingRequest::find($id);
+        $shippingRequest->file = '';
+        $shippingRequest->save();
         
         //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
         Storage::disk('public')->deleteDirectory($directory);
@@ -242,7 +219,7 @@ class ShippingController extends Controller
     public function update_status($id)
     {
             
-            $shipping = \DB::table('shippings')
+            $shippingRequest = \DB::table('shipping_requests')
             ->where('id', $id)
             ->update(['status' => request('status')]); //no asistio a la cita  
 
@@ -276,6 +253,34 @@ class ShippingController extends Controller
         }
 
         return $itemsSelect;
+    }
+
+     /**
+     * Eliminar consulta(cita)
+     */
+    public function destroy($id)
+    {
+
+        $shippingRequest = ShippingRequest::find($id)->delete();
+
+        flash('Shipping Request Deleted','success');
+
+        return back();
+
+    }
+
+    public function deleteFile($id)
+    {
+        $directory= "shippings-requests/". $id. "/files";
+        $shippingRequest = ShippingRequest::find($id);
+        $shippingRequest->file = '';
+        $shippingRequest->save();
+        
+        //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+        Storage::disk('public')->deleteDirectory($directory);
+        
+        return 'ok';
+         
     }
 
     

@@ -24,9 +24,9 @@
           {{ implode(",", $quotation->request->sectors->pluck('name')->toArray()) }}
          
       </div>
-        <div class=" "><b>Delivery time:</b> <span class="{{ ($quotation->request->delivery_time != $quotation->delivery_time) ? 'label label-danger' : '' }}">{{ $quotation->delivery_time }}</span></div>
-        <div class=" "><b>Way of delivery:</b> <span class="{{ ($quotation->request->way_of_delivery != $quotation->way_of_delivery) ? 'label label-danger' : '' }}">{{ $quotation->way_of_delivery }}</span></div>
-        <div class=" "><b>Way to pay:</b> <span class="{{ ($quotation->request->way_to_pay != $quotation->way_to_pay) ? 'label label-danger' : '' }}">@if( $quotation->way_to_pay ) Credit {{ $quotation->way_to_pay }} Days @else Cash @endif</span></div>
+        <div class=" "><b>Delivery time:</b> <span class="{{ ($quotation->request->delivery_time != $quotation->delivery_time) ? 'label label-danger' : '' }}">{{ $quotation->delivery_time }} {{ trans('utils.days') }}</span></div>
+        <div class=" "><b>Way of delivery:</b> <span class="{{ ($quotation->request->way_of_delivery != $quotation->way_of_delivery) ? 'label label-danger' : '' }}">{{ trans('utils.way_of_delivery.'.$quotation->way_of_delivery) }}</span></div>
+        <div class=" "><b>Way to pay:</b> <span class="{{ ($quotation->request->way_to_pay != $quotation->way_to_pay) ? 'label label-danger' : '' }}">@if( $quotation->way_to_pay ) {{ trans('utils.credit') }} {{ $quotation->way_to_pay }} {{ trans('utils.days') }} @else Cash @endif</span></div>
         <div class=" "><b>Request valid until:</b> {{ $quotation->request->exp_date }} </div>
         <div class=" "><b>Additional comment:</b> <span class="{{ ($quotation->request->comments != $quotation->comments) ? 'label label-danger' : '' }}">{{ $quotation->comments }}</span></div>
     </div>

@@ -34,18 +34,30 @@ Route::delete('/purchases/file/{id}', 'PurchaseController@deleteFilePurchase');
 Route::delete('/requests/file/{id}', 'QuotationRequestController@deleteFile');
 Route::delete('/quotations/file/{id}', 'QuotationController@deleteFile');
 Route::put('purchases/{purchase}/status', 'PurchaseController@update_status');
-Route::get('quotations/{quotation}/shippings/create', 'ShippingController@create');
-Route::post('quotations/{quotation}/shippings', 'ShippingController@store');
+//Route::get('quotations/{quotation}/shippings/create', 'ShippingController@create');
+//Route::post('quotations/{quotation}/shippings', 'ShippingController@store');
 Route::get('quotations/{quotation}/shippings', 'ShippingController@index');
+Route::get('quotations/{quotation}/shippings/list', 'ShippingController@getShippings');
+Route::get('quotations/{quotation}/shippings-requests/list', 'ShippingRequestController@getShippingsRequests');
+Route::get('quotations/{quotation}/shippings-requests/create', 'ShippingRequestController@create');
+Route::post('quotations/{quotation}/shippings-requests', 'ShippingRequestController@store');
 Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
 Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
 Route::get('shippings/companies', 'ShippingController@suppliers');
-
+Route::get('shippings/list', 'ShippingController@getShippings');
+Route::get('shippings-requests/list', 'ShippingRequestController@getShippingsRequests');
+Route::get('shippings-requests/{shipping}/edit', 'ShippingRequestController@edit');
+Route::put('shippings-requests/{shipping}/status', 'ShippingRequestController@update_status');
+Route::delete('shippings-requests/{shipping}', 'ShippingRequestController@destroy');
+Route::delete('shippings-requests/file/{id}', 'ShippingRequestController@deleteFile');
+Route::get('shippings-requests/{shipping}/shippings/create', 'ShippingController@create');
+Route::post('shippings-requests/{shipping}/shippings', 'ShippingController@store');
 
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');
 Route::resource('purchases', 'PurchaseController');
-Route::resource('shippings', 'PurchaseController');
+Route::resource('shippings', 'ShippingController');
+Route::resource('shippings-requests', 'ShippingRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {

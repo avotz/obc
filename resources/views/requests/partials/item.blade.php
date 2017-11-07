@@ -21,9 +21,9 @@
                         {{ implode(",", $request->sectors->pluck('name')->toArray()) }}
                        
                     </div>
-                    <div class=" "><b>Delivery time:</b> {{ $request->delivery_time }}</div>
-                    <div class=" "><b>Way of delivery:</b> {{ $request->way_of_delivery }}</div>
-                    <div class=" "><b>Way to pay:</b> @if( $request->way_to_pay ) Credit {{ $request->way_to_pay }} Days @else Cash @endif</div>
+                    <div class=" "><b>Delivery time:</b> {{ $request->delivery_time }} {{ trans('utils.days') }}</div>
+                    <div class=" "><b>Way of delivery:</b> {{ trans('utils.way_of_delivery.'.$request->way_of_delivery) }}</div>
+                    <div class=" "><b>Way to pay:</b> @if( $request->way_to_pay ) {{ trans('utils.credit') }} {{ $request->way_to_pay }} {{ trans('utils.days') }} @else Cash @endif</div>
                     <div class=" "><b>Request valid until:</b> {{ $request->exp_date }} </div>
                     <div class=" "><b>Additional comment:</b> {{ $request->comments }}</div>
                 </div>

@@ -66,6 +66,20 @@ return [
             
            
         ],
+        'shipping_status_color'  => [
+            '0' => 'warning',
+            '1' => 'success',
+            '2' => 'danger',
+            
+           
+        ],
+        'shipping_status'  => [
+            '0' => 'Pending',
+            '1' => 'Granted',
+            '2' => 'Rejected',
+            
+           
+        ],
         'day' => 'Day',
         'days' => 'Days',
         'credit' => 'Credit',

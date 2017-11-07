@@ -22,6 +22,7 @@ Vue.component('update-country', require('./components/UpdateCountry.vue'));
 Vue.component('delete-avatar-profile', require('./components/DeleteAvatarProfile.vue'));
 Vue.component('delete-photo-product', require('./components/DeletePhotoProduct.vue'));
 Vue.component('delete-file', require('./components/DeleteFile.vue'));
+Vue.component('shippings', require('./components/Shippings.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

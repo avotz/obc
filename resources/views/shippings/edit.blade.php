@@ -10,7 +10,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Edit Purchase Order </h1><small class="label label-{{ trans('utils.purchase_status_color.'.$purchase->status) }}">{{ trans('utils.purchase_status.'.$purchase->status) }}</small>
+        <h1 class="h2 text-white push-5-t animated zoomIn">Edit Shipping </h1><small class="label label-{{ trans('utils.purchase_status_color.'.$shipping->status) }}">{{ trans('utils.shipping_status.'.$shipping->status) }}</small>
         
            
     
@@ -30,20 +30,20 @@
         <div class="block">
                 
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/purchases/{{ $purchase->id }}" enctype="multipart/form-data">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shippings/{{ $shipping->id }}" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">              
                         {{ csrf_field() }}
-                        @include('purchases/partials/form') 
+                        @include('shippings/partials/form') 
                     
                     </form>
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/purchases/{{ $purchase->id }}/status" enctype="multipart/form-data">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shippings/{{ $shipping->id }}/status" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">              
                         {{ csrf_field() }}
                         <h2>Ojo: Boton temporal para aprobar o rechasar orden de compra</h2>
-                        @if(isset($purchase) && $purchase->isPending())
+                        @if(isset($shipping) && $shipping->isPending())
                             <input type="hidden" value="1" name="status">
                             <button class="btn btn-success" type="submit">Aproved</button>
-                        @elseif($purchase->status == 2)
+                        @elseif($shipping->status == 2)
                             <input type="hidden" value="0" name="status"> 
                             <button class="btn btn-warning" type="submit">Pending</button>
                         @else 
@@ -127,7 +127,7 @@
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-<script src="{{ mix('/js/purchases.js') }}"></script>
+<script src="{{ mix('/js/shippings.js') }}"></script>
 
 <script>
         // Init page helpers (Magnific Popup plugin)

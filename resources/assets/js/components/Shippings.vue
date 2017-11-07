@@ -1,0 +1,227 @@
+ <template>
+ <div>
+ <!-- Search Section -->
+    <div class="content">
+        
+            <div class="input-group input-group-lg">
+                <input class="form-control" name="q" type="text" placeholder="Search user by Transaction ID.." v-model="search" @keyup="onSearch">
+                <div class="input-group-btn">
+                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+      
+    </div>
+    <!-- END Search Section -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <div class="block">
+            <ul class="nav nav-tabs" data-toggle="tabs">
+               
+                <li class="active" @click="currentView('shipping-requests')">
+                    <a href="#search-shippings-request">Shipping Requests</a>
+                </li>
+                <li >
+                    <a href="#search-shippings" @click="currentView('shippings')">Shippings</a>
+                </li>
+               
+               
+            </ul>
+            <div class="block-content tab-content bg-white">
+                
+                <!-- Users -->
+                <div class="tab-pane fade fade-up in active" id="search-shippings-request">
+                    <div class="border-b push-30">
+                        <h2 class="push-10">{{ shippingsRequests.total }} <span class="h5 font-w400 text-muted">Shippings Request Found</span></h2>
+                    </div>
+                    <table class="table table-striped table-vcenter">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
+                                <th>Delivery Time</th>
+                                <th class="hidden-xs" style="width: 30%;">Request Date</th>
+                                <th class="hidden-xs" style="width: 30%;">Offer</th>
+                                <th class="text-center" style="width: 80px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr v-for="requests in shippingsRequests.data">
+                                <td class="font-w600">{{ requests.transaction_id }}</td>
+                                <td class="text-center">
+                                    
+                                    {{ requests.quotation.user.company.public_code }}
+                                </td>
+                                <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
+                                <td class="hidden-xs">{{ requests.date }}</td>
+                                <td class="text-center">
+                                     <a :href="'/shippings-requests/'+ requests.id +'/shippings/create'" class="btn btn-xs btn-success" data-toggle="tooltip" title="Make Offer"><i class="fa fa-pencil"></i></a>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                       <a :href="'/shippings-requests/'+ requests.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
+                                      
+                                        <button v-show="!requests.shippings.length" class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Shipping request" form="form-delete" :formaction="'/shippings-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                          
+                            
+                        </tbody>
+                    </table>
+                    <laravel-pagination :data="shippingsRequests" v-on:pagination-change-page="getShippingsRequests"></laravel-pagination >
+                   
+                   
+                </div>
+                <!-- END Users -->
+                <div class="tab-pane fade fade-up in " id="search-shippings">
+                    <div class="border-b push-30">
+                        <h2 class="push-10">{{ shippings.total }} <span class="h5 font-w400 text-muted">Shippings Found</span></h2>
+                    </div>
+                    <table class="table table-striped table-vcenter">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
+                                <th>Delivery Time</th>
+                                <th class="hidden-xs" style="width: 30%;">Request Date</th>
+                                <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
+                                <th class="text-center" style="width: 80px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr v-for="shipping in shippings.data">
+                                <td class="font-w600">{{ shipping.transaction_id }}</td>
+                                <td class="text-center">
+                                    {{ shipping.quotation.user.company.public_code }}
+                                       
+                                </td>
+                                <td class="font-w600">{{ (shipping.delivery_time) ? 'Normal' : 'Express' }}</td>
+                                <td class="hidden-xs">{{ shipping.date }}</td>
+                                <td class="hidden-xs hidden-sm">
+                                
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                           
+                            
+                        </tbody>
+                    </table>
+                    <laravel-pagination :data="shippings" v-on:pagination-change-page="getShippings"></laravel-pagination >
+                   
+                </div>
+                <!-- END Users -->
+
+               
+            </div>
+        </div>
+    </div>
+    <!-- END Page Content -->
+</div>
+</template>
+
+<script>
+ import LaravelPagination from 'laravel-vue-pagination'
+    export default {
+         components: {
+		    LaravelPagination: LaravelPagination,
+		  
+		  },
+         props: {
+		    urlShippings:{
+                type:String,
+                default:'/shippings'
+            },
+            urlShippingsRequests:{
+                type:String,
+                default:'/shippings/requests'
+            }
+          
+        },
+        
+        data () {
+            return {
+
+                
+                loader:false,
+                errors:[],
+                shippings:{},
+                shippingsRequests:{},
+                search:'',
+                activeView:'shipping-requests'
+
+                
+
+            }
+          
+        },
+
+        methods:{
+            currentView(page) {
+                
+                this.activeView = page
+            },
+            onSearch:_.debounce(function(search) {
+	           
+                if(this.activeView == 'shipping-requests')
+                    this.getShippingsRequests();
+                else
+                   this.getShippings();
+					
+
+		    }, 500),
+            getShippings(page) {
+				if (typeof page === 'undefined') {
+					page = 1;
+				}
+				
+
+				// Using vue-resource as an example
+				axios.get(`${this.urlShippings}?q=${this.search}&page=${page}`).then((response) => {
+                     
+                      this.shippings = response.data;
+                    
+                      
+                    }, (response) => {
+                        console.log(response.data)
+                               
+                    });
+
+				
+            },
+            getShippingsRequests(page) {
+				if (typeof page === 'undefined') {
+					page = 1;
+				}
+				
+
+				// Using vue-resource as an example
+				axios.get(`${this.urlShippingsRequests}?q=${this.search}&page=${page}`).then((response) => {
+                     
+                      this.shippingsRequests = response.data;
+                    
+                      
+                    }, (response) => {
+                        console.log(response.data)
+                               
+                    });
+
+				
+			},
+        },
+        created() {
+           
+            this.getShippings()
+            this.getShippingsRequests()
+
+            console.log('Component Shippings.')
+        }
+    }
+</script>

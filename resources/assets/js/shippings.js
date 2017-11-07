@@ -29,7 +29,7 @@ $(function () {
     jQuery('.suppliersSelectContainer').hide();
 
     jQuery('select[name=public]').change(function (e) {
-        if (jQuery(this).val() == '0') {
+        if (jQuery(this).val() == '1') {
             jQuery('.suppliersSelectContainer').hide();
         } else {
             jQuery('.suppliersSelectContainer').show();

@@ -120,6 +120,36 @@ function getLogo($company)
         
      
 }
+function getShippingRequestFile($shippingRequest)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('shippings-requests/'. $shippingRequest->id.'/files/'. $shippingRequest->file))
+        $url = Storage::url('shippings-requests/'. $shippingRequest->id.'/files/'. $shippingRequest->file);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
+function getShippingFile($shipping)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('shippings/'. $shipping->id.'/files/'. $shipping->file))
+        $url = Storage::url('shippings/'. $shipping->id.'/files/'. $shipping->file);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
 function getQuotationFile($quotation)
 {
    

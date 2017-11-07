@@ -4,15 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shipping extends Model
+class ShippingRequest extends Model
 {
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'transaction_id','user_id','quotation_id','shipping_request_id', 'file', 'comments','cost','date','delivery_time'
+        'transaction_id','user_id', 'file', 'comments','date','delivery_time'
     ];
 
     public function scopeSearch($query, $search)
@@ -58,12 +53,12 @@ class Shipping extends Model
     {
         return $this->belongsTo(Quotation::class);
     }
-    public function shippingRequest()
-    {
-        return $this->belongsTo(ShippingRequest::class,'shipping_request_id');
-    }
      public function suppliers()
     {
         return $this->belongsToMany(User::class,'shipping_supplier', 'shipping_id', 'supplier_id');
+    }
+     public function shippings()
+    {
+        return $this->hasMany(Shipping::class);
     }
 }
