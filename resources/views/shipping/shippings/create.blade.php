@@ -31,7 +31,7 @@
         <div class="block">
                 
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shippings-requests/{{ $shippingRequest->id }}/shippings" enctype="multipart/form-data">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shipping/shipping-requests/{{ $shippingRequest->id }}/shippings" enctype="multipart/form-data">
                                         
                         {{ csrf_field() }}
                         @include('shipping/shippings/partials/form') 

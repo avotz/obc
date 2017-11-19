@@ -52,7 +52,7 @@
             @endif
             @if(isset($shippingRequest) && $shippingRequest->file)
               
-                <delete-file :transaction-id="{{ $shippingRequest->id }}" url-file="{{ getShippingRequestFile($shippingRequest) }}" filename="{{ $shippingRequest->file }}" :read="{{ $shippingRequest->isPending() ? 'false' : 'true' }}" url="/shippings-requests/file">Delete Current File</delete-file>
+                <delete-file :transaction-id="{{ $shippingRequest->id }}" url-file="{{ getShippingRequestFile($shippingRequest) }}" filename="{{ $shippingRequest->file }}" :read="{{ !$shippingRequest->shippings->count() ? 'false' : 'true' }}" url="/shippings-requests/file">Delete Current File</delete-file>
               
             @endif
         </div>
@@ -110,7 +110,7 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-        @if(isset($shippingRequest) && $shippingRequest->isPending() || !isset($shippingRequest))
+        @if(isset($shippingRequest) && !$shippingRequest->shippings->count() || !isset($shippingRequest))
             <button class="btn btn-success" type="submit">Save</button>
         @endif
             <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/shippings">Back</a>

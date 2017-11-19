@@ -41,7 +41,7 @@ class ShippingController extends Controller
         
         $shippings =  Shipping::search($search['q'])->whereHas('suppliers', function($q) use($partner){
             $q->where('shipping_supplier.supplier_id', $partner->id);
-        })->paginate(10);
+        })->with('quotation.user','user','shippingRequest')->paginate(10);
         
 
         return $shippings;
@@ -139,9 +139,9 @@ class ShippingController extends Controller
           
        
 
-        flash('Shipping request Saved','success');
+        flash('Shipping Saved','success');
         
-        return redirect('quotations/'.$quotation->id.'/shippings');
+        return redirect('shipping/shipping-requests');
     }
 
       /**
@@ -161,7 +161,7 @@ class ShippingController extends Controller
     
 
 
-        return view('shippings.edit', compact('user','partner','quotation','shipping'));
+        return view('shipping.shippings.edit', compact('user','partner','quotation','shipping'));
     }
 
     public function update($id)
@@ -174,7 +174,7 @@ class ShippingController extends Controller
         ]
         );
 
-        $shipping = shippingOrder::find($id);
+        $shipping = Shipping::find($id);
         $shipping->fill(request()->all());
         $shipping->save();
 
@@ -212,11 +212,11 @@ class ShippingController extends Controller
       
    
 
-       flash('shipping order updated','success');
+       flash('shipping  updated','success');
         
 
 
-        return redirect('quotations/'. $shipping->quotation->id.'/shippings');
+        return redirect('shipping/shipping-requests');
     }
 
     public function deleteFileshipping($id)
@@ -270,6 +270,26 @@ class ShippingController extends Controller
 
         return $itemsSelect;
     }
+
+    /**
+     * suppliers list for select.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+         $shipping = Shipping::find($id);
+         $directory= "shippings/". $id."/files";
+          
+         $shipping->delete();
+
+          //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+         Storage::disk('public')->deleteDirectory($directory);
+        
+        return back();
+         
+    }
+
 
 
    

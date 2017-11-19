@@ -37,7 +37,7 @@ class Shipping extends Model
         
         //$transactions = $this->where('quotation_id', $this->quotation_id)->count();
        
-        $this->transaction_id = 'Shipping Request '. $this->id;
+        $this->transaction_id = 'Shipping '. $this->id;
 
         $shipping = $this->save();
 

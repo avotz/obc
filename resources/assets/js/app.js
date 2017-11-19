@@ -23,6 +23,7 @@ Vue.component('delete-avatar-profile', require('./components/DeleteAvatarProfile
 Vue.component('delete-photo-product', require('./components/DeletePhotoProduct.vue'));
 Vue.component('delete-file', require('./components/DeleteFile.vue'));
 Vue.component('shippings', require('./components/Shippings.vue'));
+Vue.component('shipping-requests', require('./components/ShippingRequests.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

@@ -52,11 +52,13 @@ Route::get('quotations/{quotation}/shippings/list', 'ShippingController@getShipp
 Route::get('quotations/{quotation}/shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
 Route::get('quotations/{quotation}/shipping-requests/create', 'ShippingRequestController@create');
 Route::post('quotations/{quotation}/shipping-requests', 'ShippingRequestController@store');
-Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
-Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
+//Route::get('quotations/{quotation}/shipping-requests/{request}/edit', 'ShippingRequestController@edit');
+//Route::put('quotations/{quotation}/shipping-requests/{request}', 'ShippingRequestController@update');
+//Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
+//Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
 Route::get('shippings/companies', 'ShippingController@suppliers');
-Route::get('shippings/list', 'ShippingController@getShippings');
-Route::get('shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
+//Route::get('shippings/list', 'ShippingController@getShippings');
+//Route::get('shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
 Route::get('shipping-requests/{shipping}/edit', 'ShippingRequestController@edit');
 Route::put('shipping-requests/{shipping}/status', 'ShippingRequestController@update_status');
 Route::delete('shipping-requests/{shipping}', 'ShippingRequestController@destroy');
@@ -148,8 +150,8 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
         ));
     }
 
-    Route::get('shipping-requests/list', 'Partner\ShippingRequestController@getShippingsRequests');
-    Route::get('shippings/list', 'Partner\ShippingController@getShippings');
+    //Route::get('shipping-requests/list', 'Partner\ShippingRequestController@getShippingsRequests');
+    //Route::get('shippings/list', 'Partner\ShippingController@getShippings');
 
 
     Route::get('/quotations', 'Partner\QuotationController@index');
@@ -169,6 +171,10 @@ Route::prefix('shipping')->middleware('authByRole:shipping')->group(function ()
     Route::put('shipping-requests/{shipping}/status', 'Shipping\ShippingRequestController@update_status');
     Route::get('shipping-requests/{shipping}/shippings/create', 'Shipping\ShippingController@create');
     Route::post('shipping-requests/{shipping}/shippings', 'Shipping\ShippingController@store');
+    Route::get('shippings/{shipping}/edit', 'Shipping\ShippingController@edit');
+    Route::put('shippings/{shipping}/status', 'Shipping\ShippingController@update_status');
+
+    Route::resource('shippings', 'Shipping\ShippingController');
     
     
 
@@ -186,8 +192,8 @@ Route::prefix('user')->middleware('authByRole:user')->group(function ()
     Route::get('/quotations', 'User\QuotationController@index');
     Route::get('/requests', 'User\QuotationRequestController@index');
 
-    Route::get('shipping-requests/list', 'User\ShippingRequestController@getShippingsRequests');
-    Route::get('shippings/list', 'User\ShippingController@getShippings');
+    //Route::get('shipping-requests/list', 'User\ShippingRequestController@getShippingsRequests');
+    //Route::get('shippings/list', 'User\ShippingController@getShippings');
   
    
 

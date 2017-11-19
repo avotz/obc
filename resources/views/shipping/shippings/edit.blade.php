@@ -30,13 +30,13 @@
         <div class="block">
                 
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shippings/{{ $shipping->id }}" enctype="multipart/form-data">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shipping/shippings/{{ $shipping->id }}" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">              
                         {{ csrf_field() }}
                         @include('shipping/shippings/partials/form') 
                     
                     </form>
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/shippings/{{ $shipping->id }}/status" enctype="multipart/form-data">
+                    <!-- <form class="js-validation-register form-horizontal push-50" method="POST" action="/shipping/shippings/{{ $shipping->id }}/status" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">              
                         {{ csrf_field() }}
                         <h2>Ojo: Boton temporal para aprobar o rechasar orden de compra</h2>
@@ -51,7 +51,7 @@
                             <button class="btn btn-danger" type="submit">Reject</button>
                         @endif
                     
-                    </form>
+                    </form> -->
                    
 
                 </div>

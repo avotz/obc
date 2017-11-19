@@ -41,7 +41,7 @@
                                 <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
                                 <th>Delivery Time</th>
                                 <th class="hidden-xs" style="width: 30%;">Request Date</th>
-                                <th class="hidden-xs" style="width: 30%;">Offer</th>
+                                <th class="hidden-xs" style="width: 30%;">Shippings</th>
                                 <th class="text-center" style="width: 80px;">Actions</th>
                             </tr>
                         </thead>
@@ -56,11 +56,11 @@
                                 <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
                                 <td class="text-center">
-                                     <a :href="urlShippingsRequests +'/'+ requests.id +'/shippings/create'" class="btn btn-xs btn-success" data-toggle="tooltip" title="Make Offer">Make a shipping</a>
+                                     <a :href="urlShippingsRequests +'/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.shippings.length }} Shipping</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                       <a :href="urlShippingsRequests +'/'+ requests.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
+                                       <a v-show="!requests.shippings.length" :href="'/shipping-requests/'+ requests.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
                                       
                                         <button v-show="!requests.shippings.length" class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Shipping request" form="form-delete" :formaction="'/shippings-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
                                         
@@ -110,9 +110,9 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a :href="urlShippings +'/'+ shipping.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
+                                        <a :href="urlShippings +'/'+ shipping.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-eye"></i></a>
                                       
-                                        <button v-show="shipping.status == 0" class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Shipping" form="form-delete" :formaction="urlShippings+'/'+ shipping.id" ><i class="fa fa-times"></i></button>
+                                        
                                         
                                     </div>
                                 </td>
