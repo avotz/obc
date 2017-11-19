@@ -7,7 +7,7 @@
  
   <div class="content">
                    
-    <h2 class="content-heading">Requests quotations</h2>
+    <h2 class="content-heading">Quotation Requests</h2>
     <div class="row">
         @forelse($quotationRequests as $request)
         <div class="col-sm-6 col-lg-4">
@@ -39,7 +39,7 @@
                             <div class="push-5"><i class="si si-question fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Questions</div>
                         </a>
-                        <a class="col-xs-4" href="#">
+                        <a class="col-xs-4" href="{{ getRequestFile($request) }}" target="_blank">
                             <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Download</div>
                         </a>

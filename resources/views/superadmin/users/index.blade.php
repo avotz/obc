@@ -8,7 +8,7 @@
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Search Admins 
+                    Search Users 
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
@@ -108,7 +108,11 @@
                                         <update-country :user-id="{{ $user->id }}" :current-country="{{ $user->countries->first() }}" :countries="{{ $countries }}"></update-country>   
                                     @endif
                                     </td>
-                                    <td class="hidden-xs"><span class="label label-{{ trans('utils.role.'.$user->roles->first()->id) }}">{{ $user->roles->first()->name }}</span></td>
+                                    <td class="hidden-xs">
+                                    @foreach($user->roles as $role)
+                                        <span class="label label-{{ trans('utils.role.'.$role->id) }}">{{ $role->name }}</span>
+                                     @endforeach
+                                    </td>
                                     <td class="hidden-xs hidden-sm">
                                     @if ($user->id != auth()->id())
                                         @if ($user->active)

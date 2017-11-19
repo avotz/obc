@@ -8,6 +8,8 @@
                             <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
 
                                 <img src="{{ getAvatar(auth()->user()) }}" alt="Avatar">
+                                <span class="avatar-name"> {{ auth()->user()->profile->applicant_name }} {{ auth()->user()->profile->first_surname }}</span>
+                               
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-right">

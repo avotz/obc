@@ -22,37 +22,10 @@ class QuotationRequestController extends Controller
     public function __construct(UserRepository $userRepo)
     {
         $this->middleware('auth');
-       
+        
         $this->userRepo = $userRepo;
     }
 
-     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-       // $search['q'] = request('q');
-        //$search['search_country'] = request('search_country');
-
-        $quotationRequests = auth()->user()->requests();
-
-        /*if($search['search_country']){
-
-           $quotationRequests = $quotationRequests->whereHas('countries', function($q)use($search){
-                 $q->where('id', $search['search_country']);
-
-            });
-        }*/
-        
-        $quotationRequests = $quotationRequests->orderBy('created_at','DESC')->paginate(10);
-
-       
-
-
-        return view('requests.requests',compact('quotationRequests'));
-    }
       /**
      * Show the application dashboard.
      *
@@ -60,18 +33,9 @@ class QuotationRequestController extends Controller
      */
     public function public()
     {
-       // $search['q'] = request('q');
-        //$search['search_country'] = request('search_country');
-
+       
         $quotationRequests = QuotationRequest::where('public', 1);
 
-        /*if($search['search_country']){
-
-           $quotationRequests = $quotationRequests->whereHas('countries', function($q)use($search){
-                 $q->where('id', $search['search_country']);
-
-            });
-        }*/
         
         $quotationRequests = $quotationRequests->orderBy('created_at','DESC')->paginate(10);
 
@@ -81,7 +45,7 @@ class QuotationRequestController extends Controller
         return view('requests.index',compact('quotationRequests'));
     }
 
-     /**
+       /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -105,6 +69,8 @@ class QuotationRequestController extends Controller
 
         return view('requests.index',compact('quotationRequests'));
     }
+
+   
 
      /**
      * Show the application dashboard.
@@ -225,7 +191,7 @@ class QuotationRequestController extends Controller
     {
         $quotationRequest = QuotationRequest::find($id);
         
-        if(!$quotationRequest->createdBy(auth()->user())) return redirect('/public/requests');
+        if(!$quotationRequest || !$quotationRequest->createdBy(auth()->user())) return redirect('/public/requests');
 
         $partner = auth()->user()->companies->first();
         // $creditDays = CreditDays::all();

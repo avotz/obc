@@ -78,3 +78,13 @@
   line-height: 40px !important;
 }
 
+.avatar-name {
+  display: none;
+}
+
+@media all and (min-width: 540px) {
+  .avatar-name {
+    display: inline;
+  }
+}
+

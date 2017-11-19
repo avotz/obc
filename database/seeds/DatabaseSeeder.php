@@ -206,7 +206,12 @@ class DatabaseSeeder extends Seeder
         factory(Role::class, 1)->create([ //user
             'name' => 'user',
         ]);
-               
+        factory(Role::class, 1)->create([ //shipping
+            'name' => 'shipping',
+        ]);
+        factory(Role::class, 1)->create([ //credit
+            'name' => 'credit',
+        ]);
         
         
         $superadmin = factory(User::class, 1)->create([

@@ -15,7 +15,7 @@
          props: {
 		    url: {
 		      type: String,
-		       default: '/superadmin/profile/avatars'
+		       default: '/profile/avatars'
             },
              userId: {
               type: Number,

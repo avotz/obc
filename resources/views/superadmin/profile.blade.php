@@ -10,7 +10,7 @@
         <div class="push-15-r pull-left animated fadeIn">
             <img src="{{ getAvatar($user) }}" alt="Avatar" id="user-avatar" class="img-avatar img-avatar-thumb" />
            
-            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/superadmin/profile/avatars">Change</a>
+            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/profile/avatars">Change</a>
             <delete-avatar-profile :user-id="{{ $user->id }}"></delete-avatar-profile> 
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>

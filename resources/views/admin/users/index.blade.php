@@ -8,12 +8,12 @@
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Search Partners 
+                    Search Users 
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Partners</li>
+                    <li>Users</li>
                     <li><a class="link-effect" href="">Search Results</a></li>
                 </ol>
             </div>
@@ -97,7 +97,10 @@
                                 <td class="font-w600">{{ Optional($user->profile)->applicant_name}}</td>
                                 <td class="hidden-xs">{{ $user->email }}</td>
                                 
-                                <td class="hidden-xs"><span class="label label-{{ trans('utils.role.'.$user->roles->first()->id) }}">{{ $user->roles->first()->name }}</span></td>
+                                <td class="hidden-xs">
+                                 @foreach($user->roles as $role)
+                                        <span class="label label-{{ trans('utils.role.'.$role->id) }}">{{ $role->name }}</span>
+                                     @endforeach</span></td>
                                 <td class="hidden-xs hidden-sm">
                                 @if ($user->active)
                                 

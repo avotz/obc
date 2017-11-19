@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Mail\NewContact;
-
+use App\Sector;
 class HomeController extends Controller
 {
     /**
@@ -34,21 +34,28 @@ class HomeController extends Controller
             return view('inactive-account');
         }
 
+        
+
         return redirect('/profile');
+       /* if(auth()->user()->hasRole('credit'))
+            return redirect('/credit/profile');
 
-        // if(auth()->user()->hasRole('partner'))
-        //     return view('partner.home');
+        if(auth()->user()->hasRole('shipping'))
+            return redirect('/shipping/profile');
 
-        // if(auth()->user()->hasRole('user')){
+        if(auth()->user()->hasRole('partner'))
+            return redirect('/partner/profile');
+
+        if(auth()->user()->hasRole('user')){
     
-        //     return view('user.home');
-        // }
-        // if(auth()->user()->hasRole('superadmin')){
+            return redirect('/user/profile');
+        }
+        if(auth()->user()->hasRole('superadmin')){
             
-        //     return view('superadmin.home');
-        // }
+            return redirect('/superadmin/profile');
+        }*/
 
-        // return view('home');
+        //return view('home');
     }
 
     public function support()

@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 use App\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\QuotationRequest;
 use App\Quotation;
-class UserController extends Controller
+use App\Http\Controllers\Controller;
+class AccountController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,15 +21,7 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        return view('home');
-    }
+ 
 
     public function update($id)
     {

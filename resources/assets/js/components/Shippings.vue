@@ -56,11 +56,11 @@
                                 <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
                                 <td class="text-center">
-                                     <a :href="'/shippings-requests/'+ requests.id +'/shippings/create'" class="btn btn-xs btn-success" data-toggle="tooltip" title="Make Offer"><i class="fa fa-pencil"></i></a>
+                                     <a :href="urlShippingsRequests +'/'+ requests.id +'/shippings/create'" class="btn btn-xs btn-success" data-toggle="tooltip" title="Make Offer">Make a shipping<i class="fa fa-pencil"></i></a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                       <a :href="'/shippings-requests/'+ requests.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
+                                       <a :href="urlShippingsRequests +'/'+ requests.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
                                       
                                         <button v-show="!requests.shippings.length" class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Shipping request" form="form-delete" :formaction="'/shippings-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
                                         
@@ -141,7 +141,7 @@
             },
             urlShippingsRequests:{
                 type:String,
-                default:'/shippings/requests'
+                default:'/shipping-requests'
             }
           
         },
@@ -184,7 +184,7 @@
 				
 
 				// Using vue-resource as an example
-				axios.get(`${this.urlShippings}?q=${this.search}&page=${page}`).then((response) => {
+				axios.get(`${this.urlShippings}/list?q=${this.search}&page=${page}`).then((response) => {
                      
                       this.shippings = response.data;
                     
@@ -203,7 +203,7 @@
 				
 
 				// Using vue-resource as an example
-				axios.get(`${this.urlShippingsRequests}?q=${this.search}&page=${page}`).then((response) => {
+				axios.get(`${this.urlShippingsRequests}/list?q=${this.search}&page=${page}`).then((response) => {
                      
                       this.shippingsRequests = response.data;
                     

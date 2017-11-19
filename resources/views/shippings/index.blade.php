@@ -20,7 +20,7 @@
     </div>
     <!-- END Page Header -->
 
-    <shippings url-shippings="/quotations/{{ $quotation->id }}/shippings/list" url-shippings-requests="/quotations/{{ $quotation->id }}/shippings-requests/list"></shippings>    
+    <shippings url-shippings="/quotations/{{ $quotation->id }}/shippings" url-shippings-requests="/quotations/{{ $quotation->id }}/shipping-requests"></shippings>    
     
 <form method="post" id="form-delete" data-confirm="Estas Seguro?">
   <input name="_method" type="hidden" value="DELETE">{{ csrf_field() }}

@@ -36,7 +36,7 @@ class QuotationController extends Controller
       
 
             $quotationRequest = QuotationRequest::find($quotation_request_id);
-            if(!$quotationRequest->createdBy(auth()->user())) return redirect('/public/requests');
+            if(!$quotationRequest || !$quotationRequest->createdBy(auth()->user())) return redirect('/public/requests');
             
 
             $quotations = $quotationRequest->quotations();

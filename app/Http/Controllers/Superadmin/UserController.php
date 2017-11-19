@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Superadmin;
 use App\User;
 use App\Country;
 use App\Role;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
-class SuperAdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,16 +23,7 @@ class SuperAdminController extends Controller
     }
     
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        return view('home');
-    }
-
+  
     public function create()
     {
         
@@ -41,10 +33,10 @@ class SuperAdminController extends Controller
 
        })->get();
 
-        return view('superadmin.create',compact('roles'));
+        return view('superadmin.users.create',compact('roles'));
     }
 
-    public function storeUser()
+    public function store()
     {
 
         $this->validate(request(), [
@@ -66,7 +58,7 @@ class SuperAdminController extends Controller
         
         return redirect('/superadmin/users');
     }
-    public function users()
+    public function index()
     {
 
         $search['q'] = request('q');
@@ -86,7 +78,7 @@ class SuperAdminController extends Controller
       
 
 
-        return view('superadmin.users', compact('users','search'));
+        return view('superadmin.users.index', compact('users','search'));
     }
 
      /**
@@ -95,13 +87,9 @@ class SuperAdminController extends Controller
      public function edit(User $user)
      {
        
-        $roles = Role::where(function($q){
-            $q->where('name', 'admin')
-              ->orWhere('name', 'superadmin');
-
-       })->get();
+        $roles = Role::all();
         
-       $partners = User::whereHas('roles', function($q){
+      /* $partners = User::whereHas('roles', function($q){
         $q->where('name', 'admin')
           ->orWhere('name', 'superadmin');
 
@@ -112,34 +100,17 @@ class SuperAdminController extends Controller
        $partners = $partners->whereHas('countries', function($q) use ($user){
             $q->where('id', $user->countries->first()->id);
 
-       })->count();
+       })->count();*/
    
         
         
-         return view('superadmin.user',compact('user','roles','partners'));
+         return view('superadmin.users.edit',compact('user','roles'));
  
      }
 
+    
+
      public function update($id)
-     {
-        $this->validate(request(), [
-            'applicant_name' => 'required|string|max:255',
-            'first_surname' => 'required|string|max:255',
-            'second_surname' => 'required|string|max:255',
-            'email' => ['required','email', Rule::unique('users')->ignore($id)],
-            
-            
-        ]
-        );
-
-        $user = $this->userRepo->update($id, request()->all());
-        
-        flash('Profile Updated','success');
-          
-        return Redirect('/profile');
-     }
-
-     public function updateUser($id)
      {
         $this->validate(request(), [
             'applicant_name' => 'required|string|max:255',
@@ -193,7 +164,7 @@ class SuperAdminController extends Controller
       /**
      * Eliminar consulta(cita)
      */
-    public function deleteUser($id)
+    public function delete($id)
     {
 
         $user = $this->userRepo->destroy($id);

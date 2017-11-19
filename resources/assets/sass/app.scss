@@ -68,3 +68,13 @@
 .filters .select2-container--default .select2-selection--single .select2-selection__rendered{
     line-height: 40px !important;
 }
+.avatar-name{
+        display: none;
+    }
+@media all and (min-width: 540px){
+
+    .avatar-name{
+        display: inline;
+    }
+
+}

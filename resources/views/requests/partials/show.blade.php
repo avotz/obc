@@ -1,7 +1,7 @@
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $partner->profile->applicant_name }}
+                {{ $partner->company_name }}
                 <label for="company_name">Partner Name</label>
             </div>
         </div>
@@ -10,7 +10,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 
-                    @foreach($partner->company->countries as $item)
+                    @foreach($partner->countries as $item)
                     <div>
                         {{ $item->name }}
                     </div>
@@ -24,7 +24,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
               
-                @foreach ($partner->company->sectors as $sector)
+                @foreach ($partner->sectors as $sector)
                     @include('layouts.partials.sector-select', ['company' => $partner->company])
                 @endforeach
                 <label for="sector">Supplier sector</label>
@@ -81,11 +81,13 @@
             </div>
         </div>
     </div> 
+   
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotationRequest->product_name }}
-                <label for="product_name">Product Name</label>
+            <delete-file :transaction-id="{{ $quotationRequest->id }}" url-file="{{ getRequestFile($quotationRequest) }}" filename="{{ $quotationRequest->file }}" :read="{{ $quotationRequest->quotations->count() ? 'true': 'false' }}" url="/requests/file" :read="true">Delete Current file</delete-file>
+                
+                <label for="product_name">File</label>
             </div>
         </div>
     </div>

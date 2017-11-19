@@ -31,7 +31,7 @@
                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/superadmin/users">
                                         
                         {{ csrf_field() }}
-                        @include('superadmin/partials/form')
+                        @include('superadmin/users/partials/form')
                     
                     </form>
 

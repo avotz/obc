@@ -1824,7 +1824,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         url: {
             type: String,
-            default: '/superadmin/profile/avatars'
+            default: '/profile/avatars'
         },
         userId: {
             type: Number
@@ -2337,7 +2337,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         urlShippingsRequests: {
             type: String,
-            default: '/shippings/requests'
+            default: '/shipping-requests'
         }
 
     },
@@ -2374,7 +2374,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             // Using vue-resource as an example
-            axios.get(this.urlShippings + '?q=' + this.search + '&page=' + page).then(function (response) {
+            axios.get(this.urlShippings + '/list?q=' + this.search + '&page=' + page).then(function (response) {
 
                 _this.shippings = response.data;
             }, function (response) {
@@ -2389,7 +2389,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             // Using vue-resource as an example
-            axios.get(this.urlShippingsRequests + '?q=' + this.search + '&page=' + page).then(function (response) {
+            axios.get(this.urlShippingsRequests + '/list?q=' + this.search + '&page=' + page).then(function (response) {
 
                 _this2.shippingsRequests = response.data;
             }, function (response) {
@@ -32845,7 +32845,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('a', {
       staticClass: "btn btn-xs btn-success",
       attrs: {
-        "href": '/shippings-requests/' + requests.id + '/shippings/create',
+        "href": _vm.urlShippingsRequests + '/' + requests.id + '/shippings/create',
         "data-toggle": "tooltip",
         "title": "Make Offer"
       }
@@ -32858,7 +32858,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('a', {
       staticClass: "btn btn-xs btn-default",
       attrs: {
-        "href": '/shippings-requests/' + requests.id + '/edit',
+        "href": _vm.urlShippingsRequests + '/' + requests.id + '/edit',
         "data-toggle": "tooltip",
         "title": "Edit Shipping"
       }

@@ -31,6 +31,12 @@ class ProfileController extends Controller
         $company = $user->companies()->first();
         
         //$user->load('company.countries');
+         if($user->hasRole('shipping')){
+            
+            $sectors = Sector::get()->toTree();
+
+            return view('shipping.profile', compact('user','company','sectors'));
+        }
 
         if($user->hasRole('partner')){
             

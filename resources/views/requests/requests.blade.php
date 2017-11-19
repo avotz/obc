@@ -6,7 +6,7 @@
  
   <div class="content">
                    
-    <h2 class="content-heading">Your Requests quotations</h2>
+    <h2 class="content-heading">Your quotation requests</h2>
     <div class="row">
         @foreach($quotationRequests as $request)
             <div class="col-sm-6 col-lg-4">

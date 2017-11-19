@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\User;
 use App\Country;
 use App\Company;
@@ -9,8 +9,9 @@ use App\Sector;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,27 +25,17 @@ class AdminController extends Controller
     }
     
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        return view('home');
-    }
-
-   
 
     
-    public function users()
+    public function index()
     {
 
         $search['q'] = request('q');
        
 
         $users = User::whereHas('roles', function($q){
-             $q->where('name', 'partner');
+             $q->where('name', 'partner')
+             ->orWhere('name', 'user');
 
         });
 
@@ -60,7 +51,7 @@ class AdminController extends Controller
       
 
 
-        return view('admin.users', compact('users','search'));
+        return view('admin.users.index', compact('users','search'));
     }
 
      /**
@@ -69,6 +60,11 @@ class AdminController extends Controller
      public function edit(User $user)
      {
        
+        if($user->countries->first()->id != auth()->user()->countries->first()->id) //si el usuario a editar no es del mismo pais que el admin del pais sacarlo
+       {
+           return Redirect('/admin/users');
+       }
+
         $roles = Role::where(function($q){
             $q->where('name', 'partner')
               ->orWhere('name', 'user');
@@ -77,46 +73,31 @@ class AdminController extends Controller
         
        $sectors = Sector::get()->toTree();
         
-         return view('admin.user',compact('user','roles','sectors'));
+         return view('admin.users.edit',compact('user','roles','sectors'));
  
      }
 
+    
+
      public function update($id)
-     {
-        $this->validate(request(), [
-            'applicant_name' => 'required|string|max:255',
-            'first_surname' => 'required|string|max:255',
-            'second_surname' => 'required|string|max:255',
-            'email' => ['required','email', Rule::unique('users')->ignore($id)],
-            
-            
-        ]
-        );
-
-        $user = $this->userRepo->update($id, request()->all());
-        
-        flash('Profile Updated','success');
-          
-        return Redirect('/profile');
-     }
-
-     public function updateUser($id)
      {
          $this->validate(request(), [
              'applicant_name' => 'required|string|max:255',
              'first_surname' => 'required|string|max:255',
              'second_surname' => 'required|string|max:255',
-             'position_held' => 'required|string|max:255',
+             //'position_held' => 'required|string|max:255',
              'email' => ['required','email', Rule::unique('users')->ignore($id) ],
+             'role' => 'required',
+            
              
          ]
       );
          
          $user = $this->userRepo->update($id, request()->all());
  
-         flash('Partner Updated','success');
+         flash('User Updated','success');
          
-         return redirect()->back();
+         return Redirect('/admin/users');
          
      }
 
@@ -184,7 +165,7 @@ class AdminController extends Controller
       /**
      * Eliminar consulta(cita)
      */
-    public function deleteUser($id)
+    public function delete($id)
     {
 
         $user = $this->userRepo->destroy($id);

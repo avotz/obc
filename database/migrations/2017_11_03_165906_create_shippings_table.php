@@ -28,16 +28,7 @@ class CreateShippingsTable extends Migration
             $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject
             $table->timestamps();
         });
-        Schema::create('shipping_supplier', function (Blueprint $table) {
-        
-            $table->integer('shipping_id')->unsigned()->index();
-            $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
-
-            $table->integer('supplier_id')->unsigned()->index();
-            $table->foreign('supplier_id')->references('id')->on('companies')->onDelete('cascade');
-
-            $table->primary(array('shipping_id', 'supplier_id'));
-        });
+       
 
         Schema::create('shipping_requests', function (Blueprint $table) {
             $table->increments('id');
@@ -53,6 +44,28 @@ class CreateShippingsTable extends Migration
             $table->tinyInteger('public')->default(1); //1 publica //0 privada
             $table->timestamps();
         });
+
+         Schema::create('shipping_request_supplier', function (Blueprint $table) {
+        
+            $table->integer('request_id')->unsigned()->index();
+            $table->foreign('request_id')->references('id')->on('shipping_requests')->onDelete('cascade');
+
+            $table->integer('supplier_id')->unsigned()->index();
+            $table->foreign('supplier_id')->references('id')->on('companies')->onDelete('cascade');
+
+            $table->primary(array('request_id', 'supplier_id'));
+        });
+
+         Schema::create('shipping_supplier', function (Blueprint $table) {
+        
+            $table->integer('shipping_id')->unsigned()->index();
+            $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
+
+            $table->integer('supplier_id')->unsigned()->index();
+            $table->foreign('supplier_id')->references('id')->on('companies')->onDelete('cascade');
+
+            $table->primary(array('shipping_id', 'supplier_id'));
+        });
     }
 
     /**
@@ -62,7 +75,9 @@ class CreateShippingsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('shipping_request_supplier');
         Schema::dropIfExists('shipping_supplier');
+        Schema::dropIfExists('shipping_requests');
         Schema::dropIfExists('shippings');
     }
 }

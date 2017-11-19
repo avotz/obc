@@ -157,6 +157,10 @@ class User extends Authenticatable
     {
          return $this->belongsToMany(QuotationRequest::class);
     }
+    public function shippings()
+     {
+         return $this->hasMany(Shippings::class);
+     }
     /*public function partners() //associates
     {
         return $this->belongsToMany(User::class, 'partner_user', 'user_id', 'partner_id');

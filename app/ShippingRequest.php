@@ -55,7 +55,7 @@ class ShippingRequest extends Model
     }
      public function suppliers()
     {
-        return $this->belongsToMany(User::class,'shipping_supplier', 'shipping_id', 'supplier_id');
+        return $this->belongsToMany(Company::class,'shipping_request_supplier', 'request_id', 'supplier_id');
     }
      public function shippings()
     {

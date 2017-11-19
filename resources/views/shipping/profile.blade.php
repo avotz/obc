@@ -10,13 +10,14 @@
         <div class="push-15-r pull-left animated fadeIn">
             <img src="{{ getAvatar($user) }}" alt="Avatar" id="user-avatar" class="img-avatar img-avatar-thumb" />
            
-           
+            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/profile/avatars">Change</a>
+            <delete-avatar-profile :user-id="{{ $user->id }}" url="/profile/avatars"></delete-avatar-profile>
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn">Partner ID: {{ $user->public_code }}-{{ $user->company->countries->first()->code }} <img src="{{ getFlag($user->company->countries->first()->code) }}" alt="flag"></h2>
-        <h2 class="h5 text-white-op animated zoomIn">Private Code: {{ $user->private_code }}</h2>
+        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->public_code }} <img src="{{ getFlag($company->countries->first()->code) }}" alt="flag"></h2>
+        <h2 class="h5 text-white-op animated zoomIn">Private Code: </h2>
        
-       
+        <update-private-code :company-id="{{ $company->id }}" :private-code="'{{ $company->private_code }}'"></update-private-code>    
        
        
         
@@ -29,25 +30,15 @@
 <div class="content bg-white border-b">
     <div class="row items-push text-uppercase">
         <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Quotations</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">17980</a>
+            <div class="font-w700 text-gray-darker animated fadeIn">Shipping Requests</div>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Credits</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">27</a>
-        </div>
+       
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn">Shippings</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">1360</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Orders</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">1360</a>
-        </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Partners</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="/admin/users">10</a>
-        </div>
+        
     </div>
 </div>
 <!-- END Stats -->
@@ -69,11 +60,14 @@
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
                 <div class="col-xs-12 text-center" >
-                            <img src="{{ getLogo($user->company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
-                        
+                            <img src="{{ getLogo($company) }}" alt="Logo" id="company-logo" class="img-company-logo" />
+                            
                             
                         </div>
-                    <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/admin/companies/{{$user->company->id}}">
+                        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                                <a class="UploadButton UploadButtonLogo btn btn-xs btn-info btn-block" id="UploadLogo" data-url="/partner/company/logo">Change Logo</a>
+                            </div>
+                    <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/partner/companies/{{$company->id}}">
                          <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
                                 @include('partner/partials/form-company')
@@ -90,10 +84,10 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Partner Account</h3>
+                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users/{{ $user->id }}">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/partner/{{ $user->id }}">
                         <input type="hidden" name="_method" value="PUT">
                         {{ csrf_field() }}
                          @include('partner/partials/form-profile')

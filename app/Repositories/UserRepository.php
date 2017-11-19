@@ -41,8 +41,25 @@ class UserRepository extends DbRepository{
             $company->countries()->attach($data['country']);
            
             
-            if(isset($data['sectors']))
+            if(isset($data['sectors'])){
+                
                 $company->sectors()->sync($data['sectors']);
+
+                $shippingSectors = array_where($data['sectors'], function ($value, $key) {
+                    return $value == 56 || $value == 57 || $value == 58 || $value == 59;
+                });
+
+              
+
+                if($shippingSectors){
+
+                    $roleShipping =  Role::whereName('shipping')->first();
+                    $user->assignRole($roleShipping);
+                }
+        
+               
+               
+            }
 
             $company->generatePublicCode();
         }

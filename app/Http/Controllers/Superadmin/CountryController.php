@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Superadmin;
 use App\User;
 use App\Country;
 use App\Role;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 class CountryController extends Controller
 {
     /**

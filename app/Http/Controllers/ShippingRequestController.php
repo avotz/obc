@@ -71,6 +71,22 @@ class ShippingRequestController extends Controller
         $shippingRequest = $quotation->shippingsRequests()->create($data);
         $shippingRequest->generateTransactionId();
 
+         if(!$shippingRequest->public && request('suppliers')){
+
+            $shippingRequest->suppliers()->sync(request('suppliers'));
+         }
+        //  }else{
+            
+        //     $shippingCompaniesIds = Company::whereHas('sectors', function ($q)
+        //     {
+        //         $q->whereIn('id',[56,57,58,59]); // shipping sectors
+
+        //     })->pluck('id');
+
+        //     $shippingRequest->suppliers()->sync($shippingCompaniesIds);
+
+        //  }
+
 
 
             $mimes = ['jpg','jpeg','bmp','png','pdf'];
@@ -235,7 +251,7 @@ class ShippingRequestController extends Controller
     {
          $shippingCompanies = Company::search(request('q'))->whereHas('sectors', function ($q)
         {
-            $q->whereIn('id',[56,57,58,59,4]); // shipping sectors
+            $q->whereIn('id',[56,57,58,59]); // shipping sectors
 
         })->get();
         //$suppliers = User::search(request('q'))->where('id','<>',auth()->id())->where('activity', 2)->where('active',1)->get();

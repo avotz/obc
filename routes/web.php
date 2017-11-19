@@ -12,103 +12,110 @@
 */
 
 Route::get('/', 'HomeController@index');
-
 Route::get('/home', 'HomeController@index');
+
 Route::get('/support', 'HomeController@support');
 Route::post('/support', 'HomeController@sendSupport');
+
 Route::get('companies/{privateCode}/check', 'PartnerController@checkPrivateCode');
+
 Route::get('profile', 'ProfileController@show');
+Route::post('profile/avatars', 'ProfileController@avatar');
+Route::delete('profile/avatars/{id}', 'ProfileController@deleteAvatar');
+
 Route::get('suppliers', 'QuotationRequestController@suppliers');
-Route::get('private/requests', 'QuotationRequestController@private');
 Route::get('public/requests', 'QuotationRequestController@public');
+Route::get('private/requests', 'QuotationRequestController@private');
+
 Route::post('questions', 'QuestionController@store');
+
 Route::get('requests/{request}/quotations', 'QuotationController@index');
 Route::get('requests/{request}/quotations/create', 'QuotationController@create');
 Route::post('requests/{request}/quotations', 'QuotationController@store');
+
 Route::get('quotations/{quotation}/purchases/create', 'PurchaseController@create');
 Route::post('quotations/{quotation}/purchases', 'PurchaseController@store');
 Route::get('purchases/{purchase}/edit', 'PurchaseController@edit');
+
 Route::delete('/requests/photo/{id}', 'QuotationRequestController@deleteProductPhoto');
 Route::delete('/quotations/photo/{id}', 'QuotationController@deleteProductPhoto');
+
 Route::delete('/purchases/file/{id}', 'PurchaseController@deleteFilePurchase');
 Route::delete('/requests/file/{id}', 'QuotationRequestController@deleteFile');
+
 Route::delete('/quotations/file/{id}', 'QuotationController@deleteFile');
 Route::put('purchases/{purchase}/status', 'PurchaseController@update_status');
-//Route::get('quotations/{quotation}/shippings/create', 'ShippingController@create');
-//Route::post('quotations/{quotation}/shippings', 'ShippingController@store');
+
+
 Route::get('quotations/{quotation}/shippings', 'ShippingController@index');
 Route::get('quotations/{quotation}/shippings/list', 'ShippingController@getShippings');
-Route::get('quotations/{quotation}/shippings-requests/list', 'ShippingRequestController@getShippingsRequests');
-Route::get('quotations/{quotation}/shippings-requests/create', 'ShippingRequestController@create');
-Route::post('quotations/{quotation}/shippings-requests', 'ShippingRequestController@store');
+Route::get('quotations/{quotation}/shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
+Route::get('quotations/{quotation}/shipping-requests/create', 'ShippingRequestController@create');
+Route::post('quotations/{quotation}/shipping-requests', 'ShippingRequestController@store');
 Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
 Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
 Route::get('shippings/companies', 'ShippingController@suppliers');
 Route::get('shippings/list', 'ShippingController@getShippings');
-Route::get('shippings-requests/list', 'ShippingRequestController@getShippingsRequests');
-Route::get('shippings-requests/{shipping}/edit', 'ShippingRequestController@edit');
-Route::put('shippings-requests/{shipping}/status', 'ShippingRequestController@update_status');
-Route::delete('shippings-requests/{shipping}', 'ShippingRequestController@destroy');
-Route::delete('shippings-requests/file/{id}', 'ShippingRequestController@deleteFile');
-Route::get('shippings-requests/{shipping}/shippings/create', 'ShippingController@create');
-Route::post('shippings-requests/{shipping}/shippings', 'ShippingController@store');
+Route::get('shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
+Route::get('shipping-requests/{shipping}/edit', 'ShippingRequestController@edit');
+Route::put('shipping-requests/{shipping}/status', 'ShippingRequestController@update_status');
+Route::delete('shipping-requests/{shipping}', 'ShippingRequestController@destroy');
+Route::delete('shipping-requests/file/{id}', 'ShippingRequestController@deleteFile');
+
 
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');
 Route::resource('purchases', 'PurchaseController');
 Route::resource('shippings', 'ShippingController');
-Route::resource('shippings-requests', 'ShippingRequestController');
+Route::resource('shipping-requests', 'ShippingRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {
     
-    Route::post('/profile/avatars', 'ProfileController@avatar');
-    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
-    Route::get('/users', 'SuperAdminController@users');
-    Route::get('/users/create', 'SuperAdminController@create');
-    Route::post('/users', 'SuperAdminController@storeUser');
-    Route::delete('/users/{user}', 'SuperAdminController@deleteUser');
-    Route::put('/users/{user}', 'SuperAdminController@updateUser');
-    Route::get('/users/{user}/edit', 'SuperAdminController@edit');
-    Route::put('/users/{user}/country', 'SuperAdminController@updateCountry');
-    Route::put('/{admin}', 'SuperAdminController@update');
+    Route::put('/{admin}', 'Superadmin\AccountController@update');
+
+    Route::get('/users', 'Superadmin\UserController@index');
+    Route::get('/users/create', 'Superadmin\UserController@create');
+    Route::post('/users', 'Superadmin\UserController@store');
+    Route::delete('/users/{user}', 'Superadmin\UserController@delete');
+    Route::put('/users/{user}', 'Superadmin\UserController@update');
+    Route::get('/users/{user}/edit', 'Superadmin\UserController@edit');
+    Route::put('/users/{user}/country', 'Superadmin\UserController@updateCountry');
 
     foreach (['active', 'inactive','trial','notrial'] as $key)
     {
         Route::post('/users/{user}/' . $key, array(
             'as'   => 'superadmin.users.' . $key,
-            'uses' => 'SuperAdminController@' . $key,
+            'uses' => 'Superadmin\UserController@' . $key,
         ));
     }
 
-    Route::get('/countries', 'CountryController@index');
-    Route::get('/countries/create', 'CountryController@create');
-    Route::post('/countries', 'CountryController@store');
-    Route::delete('/countries/{country}', 'CountryController@delete');
-    Route::get('/countries/{country}/edit', 'CountryController@edit');
-    Route::put('/countries/{country}', 'CountryController@update');
+    Route::get('/countries', 'Superadmin\CountryController@index');
+    Route::get('/countries/create', 'Superadmin\CountryController@create');
+    Route::post('/countries', 'Superadmin\CountryController@store');
+    Route::delete('/countries/{country}', 'Superadmin\CountryController@delete');
+    Route::get('/countries/{country}/edit', 'Superadmin\CountryController@edit');
+    Route::put('/countries/{country}', 'Superadmin\CountryController@update');
 
 });
 
 Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
 {
     
-    Route::post('/profile/avatars', 'ProfileController@avatar');
-    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
-    Route::get('/users', 'AdminController@users');
-    Route::get('/users/create', 'AdminController@create');
-    Route::post('/users', 'AdminController@storeUser');
-    Route::delete('/users/{user}', 'AdminController@deleteUser');
-    Route::put('/users/{user}', 'AdminController@updateUser');
-    Route::get('/users/{user}/edit', 'AdminController@edit');
-    Route::put('/companies/{company}', 'AdminController@updateCompany');
-    Route::put('/{admin}', 'AdminController@update');
+    Route::put('/{admin}', 'Admin\AccountController@update');
+    Route::get('/users', 'Admin\UserController@index');
+    Route::get('/users/create', 'Admin\UserController@create');
+    Route::post('/users', 'Admin\UserController@store');
+    Route::delete('/users/{user}', 'Admin\UserController@delete');
+    Route::put('/users/{user}', 'Admin\UserController@update');
+    Route::get('/users/{user}/edit', 'Admin\UserController@edit');
+    Route::put('/companies/{company}', 'Admin\UserController@updateCompany');
 
     foreach (['active', 'inactive','trial','notrial'] as $key)
     {
         Route::post('/users/{user}/' . $key, array(
             'as'   => 'admin.users.' . $key,
-            'uses' => 'AdminController@' . $key,
+            'uses' => 'Admin\UserController@' . $key,
         ));
     }
 
@@ -119,29 +126,55 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
 Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
 {
     
-    Route::post('/profile/avatars', 'ProfileController@avatar');
-    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
-    Route::post('/company/logo', 'PartnerController@logoCompany');
-    Route::put('/companies/{company}', 'PartnerController@updateCompany');
-    Route::put('/companies/{company}/privatecode', 'PartnerController@updatePrivateCode');
-    Route::put('/{partner}', 'PartnerController@update');
-    Route::get('/users', 'PartnerController@users');
-    Route::delete('/users/{user}', 'PartnerController@deleteUser');
-    Route::get('/users/{user}/edit', 'PartnerController@edit');
-    Route::put('/users/{user}', 'PartnerController@updatePermissions');
-    Route::get('/users/{user}/requests', 'PartnerController@userRequests');
-    Route::get('/users/{user}/quotations', 'PartnerController@userQuotations');
+    
+
+    Route::post('/company/logo', 'Partner\AccountController@logoCompany');
+    Route::put('/companies/{company}', 'Partner\AccountController@updateCompany');
+    Route::put('/companies/{company}/privatecode', 'Partner\AccountController@updatePrivateCode');
+    Route::put('/{partner}', 'Partner\AccountController@update');
+
+    Route::get('/users', 'Partner\UserController@index');
+    Route::delete('/users/{user}', 'Partner\UserController@delete');
+    Route::get('/users/{user}/edit', 'Partner\UserController@edit');
+    Route::put('/users/{user}', 'Partner\UserController@updatePermissions');
+    Route::get('/users/{user}/requests', 'Partner\UserController@quotationRequests');
+    Route::get('/users/{user}/quotations', 'Partner\UserController@quotations');
 
     foreach (['active', 'inactive','trial','notrial'] as $key)
     {
         Route::post('/users/{user}/' . $key, array(
             'as'   => 'users.' . $key,
-            'uses' => 'PartnerController@' . $key,
+            'uses' => 'Partner\UserController@' . $key,
         ));
     }
 
-    Route::get('/quotations', 'PartnerController@quotations');
-    Route::get('/requests', 'PartnerController@requests');
+    Route::get('shipping-requests/list', 'Partner\ShippingRequestController@getShippingsRequests');
+    Route::get('shippings/list', 'Partner\ShippingController@getShippings');
+
+
+    Route::get('/quotations', 'Partner\QuotationController@index');
+    Route::get('/requests', 'Partner\QuotationRequestController@index');
+    
+    
+    
+
+});
+Route::prefix('shipping')->middleware('authByRole:shipping')->group(function ()
+{
+   
+    Route::get('shipping-requests', 'Shipping\ShippingRequestController@index');
+    Route::get('shippings/list', 'Shipping\ShippingController@getShippings');
+    Route::get('shipping-requests/list', 'Shipping\ShippingRequestController@getShippingsRequests');
+    Route::get('shipping-requests/{shipping}/edit', 'Shipping\ShippingRequestController@show');
+    Route::put('shipping-requests/{shipping}/status', 'Shipping\ShippingRequestController@update_status');
+    Route::get('shipping-requests/{shipping}/shippings/create', 'Shipping\ShippingController@create');
+    Route::post('shipping-requests/{shipping}/shippings', 'Shipping\ShippingController@store');
+    
+    
+
+});
+Route::prefix('credit')->middleware('authByRole:credit')->group(function ()
+{
     
     
     
@@ -149,12 +182,13 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
 });
 Route::prefix('user')->middleware('authByRole:user')->group(function ()
 {
- 
-    Route::post('/profile/avatars', 'ProfileController@avatar');
-    Route::delete('/profile/avatars/{id}', 'ProfileController@deleteAvatar');
-    Route::put('/{user}', 'UserController@update');
-    Route::get('/quotations', 'UserController@quotations');
-    Route::get('/requests', 'UserController@requests');
+    Route::put('/{user}', 'User\AccountController@update');
+    Route::get('/quotations', 'User\QuotationController@index');
+    Route::get('/requests', 'User\QuotationRequestController@index');
+
+    Route::get('shipping-requests/list', 'User\ShippingRequestController@getShippingsRequests');
+    Route::get('shippings/list', 'User\ShippingController@getShippings');
+  
    
 
 });

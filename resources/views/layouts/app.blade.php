@@ -31,7 +31,7 @@
     @yield('css')
     <link rel="stylesheet" id="css-main" href="/css/oneui.min.css">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{  mix('css/app.css') }}" rel="stylesheet">
    
 </head>
 <body>
@@ -45,7 +45,11 @@
 
             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
                 @include('layouts/partials/sidebar-admin', ["role" => auth()->user()->roles->first()])
-            @else 
+            @elseif(auth()->user()->hasRole('shipping'))
+                @include('layouts/partials/sidebar-shipping')
+            @elseif(auth()->user()->hasRole('credit'))
+                @include('layouts/partials/sidebar-credit')
+            @else
                 @include('layouts/partials/sidebar', ["role" => auth()->user()->roles->first()])
             @endif
             
@@ -75,7 +79,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{  mix('js/app.js') }}"></script>
 
     <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
     <!-- <script src="/js/plugins/bootstrap.min.js"></script> -->
