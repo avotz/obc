@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Shipping;
+namespace App\Http\Controllers\Credit;
 use App\User;
 use App\Repositories\UserRepository;
 use App\Quotation;
 use App\Company;
-use App\Shipping;
-use App\ShippingRequest;
+use App\Credit;
+use App\CreditRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
-class ShippingController extends Controller
+class CreditController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,7 +21,7 @@ class ShippingController extends Controller
      */
     public function __construct(UserRepository $userRepo)
     {
-        $this->middleware('authByRole:shipping');
+        $this->middleware('authByRole:credit');
       
         $this->userRepo = $userRepo;
     }
@@ -33,18 +33,16 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getShippings()
+    public function getCredits()
     {
         $search['q'] = request('q');
         
        $partner = auth()->user()->companies->first();
         
-        $shippings =  Shipping::search($search['q'])->whereHas('suppliers', function($q) use($partner){
-            $q->where('shipping_supplier.supplier_id', $partner->id);
-        })->with('quotation.user','user','shippingRequest')->paginate(10);
+        $credits =  Credit::search($search['q'])->with('quotation.user','user','creditRequest')->paginate(10);
         
 
-        return $shippings;
+        return $credits;
     
     }
 
@@ -53,11 +51,11 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($shippingRequest_id)
+    public function create($creditRequest_id)
     {
-        $shippingRequest = ShippingRequest::find($shippingRequest_id);
+        $creditRequest = CreditRequest::find($creditRequest_id);
         
-        $quotation = $shippingRequest->quotation;
+        $quotation = $creditRequest->quotation;
         
         $partner =  $quotation->user->companies->first();
 
@@ -67,20 +65,24 @@ class ShippingController extends Controller
 
 
 
-        return view('shipping.shippings.create', compact('user','partner','quotation','shippingRequest'));
+        return view('credit.credits.create', compact('user','partner','quotation','creditRequest'));
     }
 
-    public function store($shippingRequest_id)
+    public function store($creditRequest_id)
     {
-        $shippingRequest = ShippingRequest::find($shippingRequest_id);
+        $creditRequest = CreditRequest::find($creditRequest_id);
         
-        $quotation = $shippingRequest->quotation;
+        $quotation = $creditRequest->quotation;
       
-        
+       
         $this->validate(request(), [
-            'delivery_time' => 'required|string|max:255',
-            'cost' => 'required|numeric',
+            'amount' => 'required|numeric',
             'date' => 'required|date',
+            'approval_date' => 'required|date',
+            'payment_date' => 'required|date',
+            'interest' => 'required|numeric',
+            'total' => 'required|numeric',
+            'credit_time' => 'required|numeric',
             'file' => 'mimes:jpeg,bmp,png,pdf',
             
             
@@ -91,18 +93,18 @@ class ShippingController extends Controller
         $data = request()->all();
 
         $data['user_id'] = auth()->id();
-        $data['shipping_request_id'] = $shippingRequest->id;
+        $data['credit_request_id'] = $creditRequest->id;
 
-        $shipping = $quotation->shippings()->create($data);
+        $credit = $quotation->credits()->create($data);
 
-        $shipping->generateTransactionId();
+        $credit->generateTransactionId();
 
         $partner = auth()->user()->companies->first();
 
-         if($partner){
+        /* if($partner){
 
-            $shipping->suppliers()->sync([$partner->id]);
-         }
+            $credit->suppliers()->sync([$partner->id]);
+         }*/
 
 
 
@@ -126,10 +128,10 @@ class ShippingController extends Controller
                     
                    
     
-                    $fileUploaded = $file->storeAs("shippings/". $shipping->id ."/files", $shipping->id.'-'.$onlyName.'.'.$ext,'public');
+                    $fileUploaded = $file->storeAs("credits/". $credit->id ."/files", $credit->id.'-'.$onlyName.'.'.$ext,'public');
     
-                    $shipping->file = $shipping->id.'-'.$onlyName.'.'.$ext;
-                    $shipping->save();
+                    $credit->file = $credit->id.'-'.$onlyName.'.'.$ext;
+                    $credit->save();
     
                    
                 }
@@ -139,9 +141,9 @@ class ShippingController extends Controller
           
        
 
-        flash('Shipping Saved','success');
+        flash('Credit Saved','success');
         
-        return redirect('shipping/shipping-requests');
+        return redirect('credit/credit-requests');
     }
 
       /**
@@ -151,10 +153,10 @@ class ShippingController extends Controller
      */
     public function edit($id)
     {
-        $shipping = Shipping::find($id);
+        $credit = Credit::find($id);
         
-        $quotation = $shipping->quotation;
-        $shippingRequest = $shipping->shippingRequest;
+        $quotation = $credit->quotation;
+        $creditRequest = $credit->creditRequest;
 
         $partner = $quotation->user->companies->first();
         
@@ -162,12 +164,20 @@ class ShippingController extends Controller
     
 
 
-        return view('shipping.shippings.edit', compact('user','partner','quotation','shipping','shippingRequest'));
+        return view('credit.credits.edit', compact('user','partner','quotation','credit','creditRequest'));
     }
 
     public function update($id)
     {
         $this->validate(request(), [
+
+            'amount' => 'required|numeric',
+            'date' => 'required|date',
+            'approval_date' => 'required|date',
+            'payment_date' => 'required|date',
+            'interest' => 'required|numeric',
+            'total' => 'required|numeric',
+            'credit_time' => 'required|numeric',
             'file' => 'mimes:jpeg,bmp,png,pdf',
             
             
@@ -175,9 +185,9 @@ class ShippingController extends Controller
         ]
         );
 
-        $shipping = Shipping::find($id);
-        $shipping->fill(request()->all());
-        $shipping->save();
+        $credit = Credit::find($id);
+        $credit->fill(request()->all());
+        $credit->save();
 
 
         $mimes = ['jpg','jpeg','bmp','png','pdf'];
@@ -200,10 +210,10 @@ class ShippingController extends Controller
                 
                
 
-                $fileUploaded = $file->storeAs("shippings/". $shipping->id ."/files", $shipping->id.'-'.$onlyName.'.'.$ext,'public');
+                $fileUploaded = $file->storeAs("credits/". $credit->id ."/files", $credit->id.'-'.$onlyName.'.'.$ext,'public');
 
-                $shipping->file = $shipping->id.'-'.$onlyName.'.'.$ext;
-                $shipping->save();
+                $credit->file = $credit->id.'-'.$onlyName.'.'.$ext;
+                $credit->save();
 
                
             }
@@ -213,19 +223,19 @@ class ShippingController extends Controller
       
    
 
-       flash('shipping  updated','success');
+       flash('Credit  updated','success');
         
 
 
-        return redirect('shipping/shipping-requests');
+        return redirect('credit/credit-requests');
     }
 
-    public function deleteFileshipping($id)
+    public function deleteFilecredit($id)
     {
-        $directory= "shippings/". $id."/files";
-        $shipping = Shipping::find($id);
-        $shipping->file = '';
-        $shipping->save();
+        $directory= "credits/". $id."/files";
+        $credit = Credit::find($id);
+        $credit->file = '';
+        $credit->save();
         
         //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
         Storage::disk('public')->deleteDirectory($directory);
@@ -236,41 +246,14 @@ class ShippingController extends Controller
     public function update_status($id)
     {
             
-            $shipping = \DB::table('shippings')
+            $credit = \DB::table('credits')
             ->where('id', $id)
             ->update(['status' => request('status')]); //no asistio a la cita  
 
         return back();
     }
 
-    /**
-     * suppliers list for select.
-     *
-     * @return \Illuminate\Http\Response
-     */
-   /* public function suppliers()
-    {
-         $shippingCompanies = Company::search(request('q'))->whereHas('sectors', function ($q)
-        {
-            $q->whereIn('id',[56,57,58,59]); // shipping sectors
-
-        })->get();
-        //$suppliers = User::search(request('q'))->where('id','<>',auth()->id())->where('activity', 2)->where('active',1)->get();
-
-        $itemsSelect = [];
-
-        foreach($shippingCompanies as $supplier)
-        {
-            $item = [
-                "id"=> $supplier->id,
-                "text"=> $supplier->public_code,
-            ];
-
-            $itemsSelect [] = $item;
-        }
-
-        return $itemsSelect;
-    }*/
+   
 
     /**
      * suppliers list for select.
@@ -279,10 +262,10 @@ class ShippingController extends Controller
      */
     public function destroy($id)
     {
-         $shipping = Shipping::find($id);
-         $directory= "shippings/". $id."/files";
+         $credit = Credit::find($id);
+         $directory= "credits/". $id."/files";
           
-         $shipping->delete();
+         $credit->delete();
 
           //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
          Storage::disk('public')->deleteDirectory($directory);

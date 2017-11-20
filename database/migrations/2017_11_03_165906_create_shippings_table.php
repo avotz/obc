@@ -22,7 +22,7 @@ class CreateShippingsTable extends Migration
             $table->string('transaction_id')->nullable();
             $table->integer('delivery_time'); //1 normal 2 express
             $table->double('cost');
-            $table->string('date');
+            $table->dateTime('date');
             $table->string('file')->nullable();
             $table->text('comments')->nullable();
             $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject
@@ -37,7 +37,7 @@ class CreateShippingsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('transaction_id')->nullable();
             $table->integer('delivery_time'); //1 normal 2 express
-            $table->string('date');
+            $table->dateTime('date');
             $table->string('file')->nullable();
             $table->text('comments')->nullable();
             $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject

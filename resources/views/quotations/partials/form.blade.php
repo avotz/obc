@@ -81,7 +81,7 @@
             <div class="form-material form-material-success">
                
                 <textarea class="form-control" name="comments" id="comments" cols="30" rows="3">{{ isset($quotation) ? $quotation->comments : $quotationRequest->comments  }}</textarea>
-                <label for="comments">Additional comment <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->comments : '' }})</span></label>
+                <label for="comments">Additional comment <span class="label label-danger">({{ str_limit(isset($quotationRequest) ? $quotationRequest->comments : '' , 20) }})</span></label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
                         <strong>{{ $errors->first('comments') }}</strong>

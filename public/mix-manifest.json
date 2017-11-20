@@ -1,9 +1,10 @@
 {
-    "/js/app.js": "/js/app.js?id=01d8992fa4c525f42303",
+    "/js/app.js": "/js/app.js?id=1bd8be1c7d226eddb429",
     "/css/app.css": "/css/app.css?id=599830ad7100c8287d81",
     "/js/shippings.js": "/js/shippings.js?id=897f2f23ff70c496fd54",
     "/js/requests.js": "/js/requests.js?id=9f7d242f8bfef4c41c8d",
     "/js/quotations.js": "/js/quotations.js?id=75441dd7fe071235b91b",
     "/js/questions.js": "/js/questions.js?id=260146c18bdecbe5f11c",
-    "/js/purchases.js": "/js/purchases.js?id=1b42db010d26a9d71667"
+    "/js/purchases.js": "/js/purchases.js?id=1b42db010d26a9d71667",
+    "/js/credits.js": "/js/credits.js?id=50aea03993e247d3a05a"
 }

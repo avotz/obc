@@ -48,6 +48,9 @@ class UserRepository extends DbRepository{
                 $shippingSectors = array_where($data['sectors'], function ($value, $key) {
                     return $value == 56 || $value == 57 || $value == 58 || $value == 59;
                 });
+                $creditSectors = array_where($data['sectors'], function ($value, $key) {
+                    return $value == 60 || $value == 61 || $value == 62 || $value == 63;
+                });
 
               
 
@@ -55,6 +58,12 @@ class UserRepository extends DbRepository{
 
                     $roleShipping =  Role::whereName('shipping')->first();
                     $user->assignRole($roleShipping);
+                }
+
+                 if($creditSectors){
+
+                    $roleCredit =  Role::whereName('credit')->first();
+                    $user->assignRole($roleCredit);
                 }
         
                

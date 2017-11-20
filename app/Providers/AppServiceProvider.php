@@ -37,6 +37,34 @@ class AppServiceProvider extends ServiceProvider
            
             $view->with(compact('creditDays','sectors','deliveryDays'));
         });
+        view()->composer('credits.partials.form', function ($view)
+        {
+            $creditDays = \App\CreditDays::all();
+            
+           
+            $view->with(compact('creditDays'));
+        });
+        view()->composer('creditRequests.partials.form', function ($view)
+        {
+            $creditDays = \App\CreditDays::all();
+            
+           
+            $view->with(compact('creditDays'));
+        });
+         view()->composer('credit.credits.partials.form', function ($view)
+        {
+            $creditDays = \App\CreditDays::all();
+            
+           
+            $view->with(compact('creditDays'));
+        });
+         view()->composer('credit.creditRequests.partials.form', function ($view)
+        {
+            $creditDays = \App\CreditDays::all();
+            
+           
+            $view->with(compact('creditDays'));
+        });
     }
 
     /**

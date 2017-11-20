@@ -21,7 +21,7 @@ class CreateQuotationRequestsTable extends Migration
             $table->double('delivery_time');
             $table->integer('way_of_delivery');
             $table->double('way_to_pay');
-            $table->string('exp_date');
+            $table->dateTime('exp_date');
             $table->string('file')->nullable();
             $table->string('product_photo')->nullable();
             $table->text('comments')->nullable();

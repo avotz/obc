@@ -52,7 +52,7 @@
             @endif
             @if(isset($shippingRequest) && $shippingRequest->file)
               
-                <delete-file :transaction-id="{{ $shippingRequest->id }}" url-file="{{ getShippingRequestFile($shippingRequest) }}" filename="{{ $shippingRequest->file }}" :read="{{ !$shippingRequest->shippings->count() ? 'false' : 'true' }}" url="/shippings-requests/file">Delete Current File</delete-file>
+                <delete-file :transaction-id="{{ $shippingRequest->id }}" url-file="{{ getShippingRequestFile($shippingRequest) }}" filename="{{ $shippingRequest->file }}" :read="{{ !$shippingRequest->shippings->count() ? 'false' : 'true' }}" url="/shipping-requests/file">Delete Current File</delete-file>
               
             @endif
         </div>

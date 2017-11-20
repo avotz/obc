@@ -42,15 +42,22 @@
                             <div class="h5 font-w300 text-muted">Shipping</div>
                         </a>
                         @else
-                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/shippings/create">
+                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/shippings">
                             <div class="push-5"><i class="si si-plane fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Shipping</div>
                         </a>
                         @endif
-                        <a class="col-xs-4" href="#">
+                         @if($quotation->credits)
+                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
                             <div class="push-5"><i class="si si-credit-card fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Financing</div>
                         </a>
+                        @else
+                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
+                            <div class="push-5"><i class="si si-credit-card fa-2x"></i></div>
+                            <div class="h5 font-w300 text-muted">Financing</div>
+                        </a>
+                        @endif
                         <a class="col-xs-4" href="#">
                             <div class="push-5"><i class="si si-check fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted">Send</div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Shipping;
+namespace App\Http\Controllers\Credit;
 use App\User;
 use App\Repositories\UserRepository;
 use App\Company;
@@ -23,7 +23,7 @@ class AccountController extends Controller
      */
     public function __construct(UserRepository $userRepo)
     {
-        $this->middleware('authByRole:shipping');
+        $this->middleware('authByRole:credit');
         $this->userRepo = $userRepo;
     }
 
@@ -99,16 +99,16 @@ class AccountController extends Controller
                 
                 $company->sectors()->sync($data['sectors']);
 
-                $shippingSectors = array_where($data['sectors'], function ($value, $key) {
-                    return $value == 56 || $value == 57 || $value == 58 || $value == 59;
+                $creditSectors = array_where($data['sectors'], function ($value, $key) {
+                    return $value == 60 || $value == 61 || $value == 62 || $value == 63;
                 });
 
-                $roleShipping =  Role::whereName('shipping')->first();
+                $roleCredit =  Role::whereName('credit')->first();
 
-                if(!$shippingSectors){
+                if(!$creditSectors){
 
                     
-                    auth()->user()->roles()->detach($roleShipping);
+                    auth()->user()->roles()->detach($roleCredit);
                      
                 }
                

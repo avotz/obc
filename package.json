@@ -20,6 +20,7 @@
     "vue-select": "github:sagalbot/vue-select"
   },
   "dependencies": {
-    "laravel-vue-pagination": "^1.0.6"
+    "laravel-vue-pagination": "^1.0.6",
+    "moment": "^2.19.2"
   }
 }

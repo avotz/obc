@@ -82,6 +82,27 @@ return [
             
            
         ],
+        'shipping_status_color'  => [
+            '0' => 'warning',
+            '1' => 'success',
+            '2' => 'danger',
+            
+           
+        ],
+        'credit_status'  => [
+            '0' => 'Pending',
+            '1' => 'Approved',
+            '2' => 'Rejected',
+            
+           
+        ],
+         'credit_status_color'  => [
+            '0' => 'warning',
+            '1' => 'success',
+            '2' => 'danger',
+            
+           
+        ],
         'day' => 'Day',
         'days' => 'Days',
         'credit' => 'Credit',

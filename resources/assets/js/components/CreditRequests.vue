@@ -18,11 +18,11 @@
         <div class="block">
             <ul class="nav nav-tabs" data-toggle="tabs">
                
-                <li class="active" @click="currentView('shipping-requests')">
-                    <a href="#search-shippings-request">Shipping Requests</a>
+                <li class="active" @click="currentView('credit-requests')">
+                    <a href="#search-credit-requests">Credit Requests</a>
                 </li>
                 <li >
-                    <a href="#search-shippings" @click="currentView('shippings')">Shippings</a>
+                    <a href="#search-credits" @click="currentView('credits')">Credits</a>
                 </li>
                
                
@@ -30,39 +30,39 @@
             <div class="block-content tab-content bg-white">
                 
                 <!-- Users -->
-                <div class="tab-pane fade fade-up in active" id="search-shippings-request">
+                <div class="tab-pane fade fade-up in active" id="search-credit-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ shippingsRequests.total }} <span class="h5 font-w400 text-muted">Shippings Request Found</span></h2>
+                        <h2 class="push-10">{{ creditRequests.total }} <span class="h5 font-w400 text-muted">Credits Request Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" >ID</th>
-                                <th class="text-center" ><i class="si si-user"></i></th>
-                                <th>Delivery Time</th>
-                                <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs" >Make a Shipping</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center"><i class="si si-user"></i></th>
+                                <th class="text-center">Credit Time</th>
+                                <th class="hidden-xs">Request Date</th>
+                                <th class="hidden-xs">Credits</th>
+                                <th class="text-center" >Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             
-                            <tr v-for="requests in shippingsRequests.data">
+                            <tr v-for="requests in creditRequests.data">
                                 <td class="text-center font-w600">{{ requests.transaction_id }}</td>
                                 <td class="text-center">
                                     
                                     {{ requests.quotation.user.company.public_code }}
                                 </td>
-                                <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
-                                <td class="hidden-xs">{{ requests.date }}</td>
+                                <td class="text-center font-w600">{{ requests.credit_time }} days</td>
+                                <td class="hidden-xs">{{ parseDate(requests.date) }}</td>
                                 <td class="text-center">
-                                     <a :href="urlShippingsRequests +'/'+ requests.id +'/shippings/create'" class="btn btn-xs btn-success" data-toggle="tooltip" title="Make Offer">Make a shipping</a>
+                                     <a :href="'/credit-requests/'+ requests.id +'/credits'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.credits.length }} Credits</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                       <a :href="urlShippingsRequests +'/'+ requests.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-eye"></i></a>
+                                       <a v-show="!requests.credits.length" :href="'/credit-requests/'+ requests.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Credit"><i class="fa fa-eye"></i></a>
                                       
-                                        <button v-show="!requests.shippings.length" class="btn btn-xs btn-danger" type="submit" data-toggle="tooltip" title="Remove Shipping request" form="form-delete" :formaction="'/shipping-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
+                                        <button v-show="!requests.credits.length" class="btn btn-xs btn-danger" type="submit" data-toggle="tooltip" title="Remove credit request" form="form-delete" :formaction="'/credit-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
                                         
                                     </div>
                                 </td>
@@ -71,14 +71,14 @@
                             
                         </tbody>
                     </table>
-                    <laravel-pagination :data="shippingsRequests" v-on:pagination-change-page="getShippingsRequests"></laravel-pagination >
+                    <laravel-pagination :data="creditRequests" v-on:pagination-change-page="getCreditRequests"></laravel-pagination >
                    
                    
                 </div>
                 <!-- END Users -->
-                <div class="tab-pane fade fade-up in " id="search-shippings">
+                <div class="tab-pane fade fade-up in " id="search-credits">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ shippings.total }} <span class="h5 font-w400 text-muted">Shippings Found</span></h2>
+                        <h2 class="push-10">{{ credits.total }} <span class="h5 font-w400 text-muted">Credits Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -86,33 +86,33 @@
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Request</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th>Delivery Time</th>
+                                <th class="text-center">Credit Time</th>
                                 <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs hidden-sm">Status</th>
+                                <th class="hidden-xs hidden-sm" >Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                            
-                            <tr v-for="shipping in shippings.data">
-                                <td class="text-center font-w600">{{ shipping.transaction_id }}</td>
-                                 <td class="text-center font-w600">{{ shipping.shipping_request.transaction_id }}</td>
+                            <tr v-for="credit in credits.data">
+                                <td class="text-center font-w600">{{ credit.transaction_id }}</td>
+                                 <td class="text-center font-w600">{{ credit.credit_request.transaction_id }}</td>
                                 <td class="text-center">
-                                    {{ shipping.quotation.user.company.public_code }}
+                                    {{ credit.quotation.user.company.public_code }}
                                        
                                 </td>
-                                <td class="font-w600">{{ (shipping.delivery_time) ? 'Normal' : 'Express' }}</td>
-                                <td class="hidden-xs">{{ shipping.date }}</td>
+                                <td class="font-w600">{{ credit.credit_time }} days</td>
+                                <td class="hidden-xs">{{ parseDate(credit.date) }}</td>
                                 <td class="hidden-xs hidden-sm">
-                                    <span class="label label-warning" v-show="shipping.status == 0">Pending</span>
-                                    <span class="label label-success" v-show="shipping.status == 1">Granted</span>
-                                    <span class="label label-danger" v-show="shipping.status == 2">Reject</span>
+                                    <span class="label label-warning" v-show="credit.status == 0">Pending</span>
+                                    <span class="label label-success" v-show="credit.status == 1">Granted</span>
+                                    <span class="label label-danger" v-show="credit.status == 2">Reject</span>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a :href="urlShippings +'/'+ shipping.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
+                                        <a :href="'/credits/'+ credit.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit credit"><i class="fa fa-eye"></i></a>
                                       
-                                        <button v-show="shipping.status == 0" class="btn btn-xs btn-danger" type="submit" data-toggle="tooltip" title="Remove Shipping" form="form-delete" :formaction="urlShippings+'/'+ shipping.id" ><i class="fa fa-times"></i></button>
+                                        
                                         
                                     </div>
                                 </td>
@@ -121,7 +121,7 @@
                             
                         </tbody>
                     </table>
-                    <laravel-pagination :data="shippings" v-on:pagination-change-page="getShippings"></laravel-pagination >
+                    <laravel-pagination :data="credits" v-on:pagination-change-page="getCredits"></laravel-pagination >
                    
                 </div>
                 <!-- END Users -->
@@ -142,13 +142,13 @@
 		  
 		  },
          props: {
-		    urlShippings:{
+		    urlCredits:{
                 type:String,
-                default:'/shippings'
+                default:'/credits'
             },
-            urlShippingsRequests:{
+            urlCreditRequests:{
                 type:String,
-                default:'/shipping-requests'
+                default:'/credit-requests'
             }
           
         },
@@ -159,10 +159,10 @@
                 
                 loader:false,
                 errors:[],
-                shippings:{},
-                shippingsRequests:{},
+                credits:{},
+                creditRequests:{},
                 search:'',
-                activeView:'shipping-requests'
+                activeView:'credit-requests'
 
                 
 
@@ -171,29 +171,32 @@
         },
 
         methods:{
+             parseDate(date){
+                return moment(date).format('YYYY-MM-DD')
+            },
             currentView(page) {
                 
                 this.activeView = page
             },
             onSearch:_.debounce(function(search) {
 	           
-                if(this.activeView == 'shipping-requests')
-                    this.getShippingsRequests();
+                if(this.activeView == 'credit-requests')
+                    this.getCreditRequests();
                 else
-                   this.getShippings();
+                   this.getCredits();
 					
 
 		    }, 500),
-            getShippings(page) {
+            getCredits(page) {
 				if (typeof page === 'undefined') {
 					page = 1;
 				}
 				
 
 				// Using vue-resource as an example
-				axios.get(`${this.urlShippings}/list?q=${this.search}&page=${page}`).then((response) => {
+				axios.get(`${this.urlCredits}/list?q=${this.search}&page=${page}`).then((response) => {
                      
-                      this.shippings = response.data;
+                      this.credits = response.data;
                     
                       
                     }, (response) => {
@@ -203,16 +206,16 @@
 
 				
             },
-            getShippingsRequests(page) {
+            getCreditRequests(page) {
 				if (typeof page === 'undefined') {
 					page = 1;
 				}
 				
 
 				// Using vue-resource as an example
-				axios.get(`${this.urlShippingsRequests}/list?q=${this.search}&page=${page}`).then((response) => {
+				axios.get(`${this.urlCreditRequests}/list?q=${this.search}&page=${page}`).then((response) => {
                      
-                      this.shippingsRequests = response.data;
+                      this.creditRequests = response.data;
                     
                       
                     }, (response) => {
@@ -225,10 +228,10 @@
         },
         created() {
            
-            this.getShippings()
-            this.getShippingsRequests()
+            this.getCredits()
+            this.getCreditRequests()
 
-            console.log('Component Shippings.')
+            console.log('Component credits.')
         }
     }
 </script>

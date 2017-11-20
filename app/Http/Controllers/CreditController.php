@@ -5,13 +5,13 @@ use App\User;
 use App\Repositories\UserRepository;
 use App\Quotation;
 use App\Company;
-use App\Shipping;
-use App\ShippingRequest;
+use App\Credit;
+use App\CreditRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
-class ShippingController extends Controller
+class CreditController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -34,11 +34,11 @@ class ShippingController extends Controller
     {
         $search['q'] = request('q');
         $quotation = Quotation::find($quotation_id);
-        $shippings = $quotation->shippings()->search($search['q'])->paginate(10);
+        $credits = $quotation->credits()->search($search['q'])->paginate(10);
         
         
 
-        return view('shippingsRequests.index', compact('shippings','quotation','search'));
+        return view('creditRequests.index', compact('credits','quotation','search'));
     
     }
 
@@ -47,15 +47,15 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shippingsFromRequest($shipping_request_id)
+    public function creditsFromRequest($credit_request_id)
     {
         $search['q'] = request('q');
-        $shippingRequest = ShippingRequest::find($shipping_request_id);
-        $shippings = $shippingRequest->shippings()->with('quotation.user','user','shippingRequest')->search($search['q'])->paginate(10);
+        $creditRequest = CreditRequest::find($credit_request_id);
+        $credits = $creditRequest->credits()->with('quotation.user','user','creditRequest')->search($search['q'])->paginate(10);
         
         
 
-        return view('shippings.index', compact('shippings','shippingRequest','search'));
+        return view('credits.index', compact('credits','creditRequest','search'));
     
     }
 
@@ -64,16 +64,16 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getShippings($quotation_id)
+    public function getCredits($quotation_id)
     {
         $search['q'] = request('q');
         $quotation = Quotation::find($quotation_id);
-        $shippings = $quotation->shippings()->with('quotation.user','user','shippingRequest')->search($search['q'])->paginate(10);
+        $credits = $quotation->credits()->with('quotation.user','user','creditRequest')->search($search['q'])->paginate(10);
         
         
         
 
-        return $shippings;
+        return $credits;
     
     }
 
@@ -84,9 +84,9 @@ class ShippingController extends Controller
      */
     public function edit($id)
     {
-        $shipping = Shipping::find($id);
+        $credit = Credit::find($id);
         
-        $quotation = $shipping->quotation;
+        $quotation = $credit->quotation;
 
         $partner = $quotation->user->companies->first();
         
@@ -94,13 +94,13 @@ class ShippingController extends Controller
     
 
 
-        return view('shippings.edit', compact('user','partner','quotation','shipping'));
+        return view('credits.edit', compact('user','partner','quotation','credit'));
     }
 
     public function update_status($id)
     {
             
-            $shipping = \DB::table('shippings')
+            $credit = \DB::table('credits')
             ->where('id', $id)
             ->update(['status' => request('status')]); //no asistio a la cita  
 
@@ -114,18 +114,18 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function suppliers()
+   /* public function suppliers()
     {
-         $shippingCompanies = Company::search(request('q'))->whereHas('sectors', function ($q)
+         $creditCompanies = Company::search(request('q'))->whereHas('sectors', function ($q)
         {
-            $q->whereIn('id',[56,57,58,59]); // shipping sectors
+            $q->whereIn('id',[60,61,62,63]); // shipping sectors
 
         })->get();
         //$suppliers = User::search(request('q'))->where('id','<>',auth()->id())->where('activity', 2)->where('active',1)->get();
 
         $itemsSelect = [];
 
-        foreach($shippingCompanies as $supplier)
+        foreach($creditCompanies as $supplier)
         {
             $item = [
                 "id"=> $supplier->id,
@@ -136,7 +136,7 @@ class ShippingController extends Controller
         }
 
         return $itemsSelect;
-    }
+    }*/
 
     
 }

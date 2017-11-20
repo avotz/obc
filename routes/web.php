@@ -52,17 +52,30 @@ Route::get('quotations/{quotation}/shippings/list', 'ShippingController@getShipp
 Route::get('quotations/{quotation}/shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
 Route::get('quotations/{quotation}/shipping-requests/create', 'ShippingRequestController@create');
 Route::post('quotations/{quotation}/shipping-requests', 'ShippingRequestController@store');
-//Route::get('quotations/{quotation}/shipping-requests/{request}/edit', 'ShippingRequestController@edit');
-//Route::put('quotations/{quotation}/shipping-requests/{request}', 'ShippingRequestController@update');
-//Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
-//Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
+
+Route::get('quotations/{quotation}/credits', 'CreditController@index');
+Route::get('quotations/{quotation}/credits/list', 'CreditController@getCredits');
+Route::get('quotations/{quotation}/credit-requests/list', 'CreditRequestController@getCreditRequests');
+Route::get('quotations/{quotation}/credit-requests/create', 'CreditRequestController@create');
+Route::post('quotations/{quotation}/credit-requests', 'CreditRequestController@store');
+
 Route::get('shippings/companies', 'ShippingController@suppliers');
-//Route::get('shippings/list', 'ShippingController@getShippings');
-//Route::get('shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
+
 Route::get('shipping-requests/{shipping}/edit', 'ShippingRequestController@edit');
 Route::put('shipping-requests/{shipping}/status', 'ShippingRequestController@update_status');
 Route::delete('shipping-requests/{shipping}', 'ShippingRequestController@destroy');
 Route::delete('shipping-requests/file/{id}', 'ShippingRequestController@deleteFile');
+Route::get('shipping-requests/{shipping}/shippings', 'ShippingController@shippingsFromRequest');
+Route::get('shippings/{shipping}/edit', 'ShippingController@edit');
+Route::put('shippings/{shipping}/status', 'ShippingController@update_status');
+
+Route::get('credit-requests/{credit}/edit', 'CreditRequestController@edit');
+Route::put('credit-requests/{credit}/status', 'CreditRequestController@update_status');
+Route::delete('credit-requests/{credit}', 'CreditRequestController@destroy');
+Route::delete('credit-requests/file/{id}', 'CreditRequestController@deleteFile');
+Route::get('credit-requests/{credit}/credits', 'CreditController@CreditsFromRequest');
+Route::get('credits/{credit}/edit', 'CreditController@edit');
+Route::put('credits/{credit}/status', 'CreditController@update_status');
 
 
 Route::resource('requests', 'QuotationRequestController');
@@ -70,6 +83,8 @@ Route::resource('quotations', 'QuotationController');
 Route::resource('purchases', 'PurchaseController');
 Route::resource('shippings', 'ShippingController');
 Route::resource('shipping-requests', 'ShippingRequestController');
+Route::resource('credits', 'CreditController');
+Route::resource('credit-requests', 'CreditRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {
@@ -182,6 +197,17 @@ Route::prefix('shipping')->middleware('authByRole:shipping')->group(function ()
 Route::prefix('credit')->middleware('authByRole:credit')->group(function ()
 {
     
+    Route::get('credit-requests', 'Credit\CreditRequestController@index');
+    Route::get('credits/list', 'Credit\CreditController@getCredits');
+    Route::get('credit-requests/list', 'Credit\CreditRequestController@getCreditRequests');
+    Route::get('credit-requests/{credit}/edit', 'Credit\CreditRequestController@show');
+    Route::put('credit-requests/{credit}/status', 'Credit\CreditRequestController@update_status');
+    Route::get('credit-requests/{credit}/credits/create', 'Credit\CreditController@create');
+    Route::post('credit-requests/{credit}/credits', 'Credit\CreditController@store');
+    Route::get('credits/{credit}/edit', 'Credit\CreditController@edit');
+    Route::put('credits/{credit}/status', 'Credit\CreditController@update_status');
+
+    Route::resource('credits', 'Credit\CreditController');
     
     
 

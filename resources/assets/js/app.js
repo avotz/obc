@@ -24,6 +24,8 @@ Vue.component('delete-photo-product', require('./components/DeletePhotoProduct.v
 Vue.component('delete-file', require('./components/DeleteFile.vue'));
 Vue.component('shippings', require('./components/Shippings.vue'));
 Vue.component('shipping-requests', require('./components/ShippingRequests.vue'));
+Vue.component('credits', require('./components/Credits.vue'));
+Vue.component('credit-requests', require('./components/CreditRequests.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

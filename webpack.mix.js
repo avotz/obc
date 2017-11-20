@@ -19,6 +19,7 @@ mix.js('resources/assets/js/quotations.js', 'public/js')
 mix.js('resources/assets/js/questions.js', 'public/js')
 mix.js('resources/assets/js/purchases.js', 'public/js')
 mix.js('resources/assets/js/shippings.js', 'public/js')
+mix.js('resources/assets/js/credits.js', 'public/js')
 mix.version();
 
 

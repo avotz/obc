@@ -120,6 +120,36 @@ function getLogo($company)
         
      
 }
+function getCreditRequestFile($creditRequest)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('credit-requests/'. $creditRequest->id.'/files/'. $creditRequest->file))
+        $url = Storage::url('credit-requests/'. $creditRequest->id.'/files/'. $creditRequest->file);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
+function getCreditFile($credit)
+{
+   
+
+    $url = '';
+    
+    if(Storage::disk('public')->exists('credits/'. $credit->id.'/files/'. $credit->file))
+        $url = Storage::url('credits/'. $credit->id.'/files/'. $credit->file);
+    else
+        $url = "#";
+
+    return $url;
+        
+     
+}
 function getShippingRequestFile($shippingRequest)
 {
    

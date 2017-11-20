@@ -37,32 +37,32 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
-                                <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
-                                <th>Delivery Time</th>
-                                <th class="hidden-xs" style="width: 30%;">Request Date</th>
-                                <th class="hidden-xs" style="width: 30%;">Shippings</th>
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center"><i class="si si-user"></i></th>
+                                <th class="text-center">Delivery Time</th>
+                                <th class="hidden-xs">Request Date</th>
+                                <th class="hidden-xs">Shippings</th>
+                                <th class="text-center" >Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                             <tr v-for="requests in shippingsRequests.data">
-                                <td class="font-w600">{{ requests.transaction_id }}</td>
+                                <td class="text-center font-w600">{{ requests.transaction_id }}</td>
                                 <td class="text-center">
                                     
                                     {{ requests.quotation.user.company.public_code }}
                                 </td>
-                                <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
+                                <td class="text-center font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
                                 <td class="text-center">
-                                     <a :href="urlShippingsRequests +'/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.shippings.length }} Shipping</a>
+                                     <a :href="'/shipping-requests/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.shippings.length }} Shipping</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                       <a v-show="!requests.shippings.length" :href="'/shipping-requests/'+ requests.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
+                                       <a v-show="!requests.shippings.length" :href="'/shipping-requests/'+ requests.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-pencil"></i></a>
                                       
-                                        <button v-show="!requests.shippings.length" class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Shipping request" form="form-delete" :formaction="'/shippings-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
+                                        <button v-show="!requests.shippings.length" class="btn btn-xs btn-danger" type="submit" data-toggle="tooltip" title="Remove Shipping request" form="form-delete" :formaction="'/shipping-requests/'+ requests.id" ><i class="fa fa-times"></i></button>
                                         
                                     </div>
                                 </td>
@@ -83,20 +83,20 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
-                                <th class="text-center" style="width: 100px;">Request</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Request</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th style="width: 100px;">Delivery Time</th>
+                                <th class="text-center">Delivery Time</th>
                                 <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th class="hidden-xs hidden-sm" >Status</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                            
                             <tr v-for="shipping in shippings.data">
-                                <td class="font-w600">{{ shipping.transaction_id }}</td>
-                                 <td class="font-w600">{{ shipping.shipping_request.transaction_id }}</td>
+                                <td class="text-center font-w600">{{ shipping.transaction_id }}</td>
+                                 <td class="text-center font-w600">{{ shipping.shipping_request.transaction_id }}</td>
                                 <td class="text-center">
                                     {{ shipping.quotation.user.company.public_code }}
                                        
@@ -110,7 +110,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a :href="urlShippings +'/'+ shipping.id +'/edit'" class="btn btn-xs btn-default" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-eye"></i></a>
+                                        <a :href="'/shippings/'+ shipping.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-eye"></i></a>
                                       
                                         
                                         
