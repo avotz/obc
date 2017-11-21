@@ -10,13 +10,13 @@
                         <div class="block-header bg-primary">
                             <ul class="block-options">
                                 <li>
-                                    <a href="{{ route('password.request') }}">Change Password?</a>
+                                    <a href="{{ route('password.request') }}" title="¿Cambiar la contraseña?">Change Password?</a>
                                 </li>
                                 <li>
                                     <a href="/register" data-toggle="tooltip" data-placement="left" title="New Account"><i class="si si-plus"></i></a>
                                 </li>
                             </ul>
-                            <h3 class="block-title">Login</h3>
+                            <h3 class="block-title" title="INICIAR SESIÓN">Login</h3>
                         </div>
                         <div class="block-content block-content-full block-content-narrow">
                             <!-- Login Title -->
@@ -24,19 +24,19 @@
                                 <h1 class="h2 font-w600 push-5"><img src="/img/logo-obc.png" alt="OBC"></h1>
                             </div>
                             
-                            <p>Welcome, please login.</p>
+                            <p title="Bienvenido, inicia sesión">Welcome, please login.</p>
                             <!-- END Login Title -->
 
                             <!-- Login Form -->
                             <!-- jQuery Validation (.js-validation-login class is initialized in js/pages/base_pages_login.js) -->
                             <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                            <p>   If you do not already have an account, press the "register" option and start using the online platform 24/7.</p> 
+                            <p title="Si aún no tiene una cuenta, presione la opción 'registrarse' y comience a usar la plataforma en línea 24/7">   If you do not already have an account, press the "register" option and start using the online platform 24/7.</p> 
 
-                            <p>Your access data is private information that you should not share with anyone else, OBC will never ask you for your access data by phone, or via email.</p> 
+                            <p title="Sus datos de acceso son información privada que no debe compartir con nadie más, OBC nunca le pedirá sus datos de acceso por teléfono o por correo electrónico.">Your access data is private information that you should not share with anyone else, OBC will never ask you for your access data by phone, or via email.</p> 
 
-                            <p>If you have forgotten your password, you can retrieve it by entering your email address and pressing key recovery, a new password will be sent to the email registered by you, which must be changed within a period of no more than 24 hours.</p> 
+                            <p title="Si ha olvidado su contraseña, puede recuperarla ingresando su dirección de correo electrónico y pulsando la tecla de recuperación, se le enviará una nueva contraseña al correo electrónico registrado por usted, que debe cambiarse en un plazo no mayor a 24 horas.">If you have forgotten your password, you can retrieve it by entering your email address and pressing key recovery, a new password will be sent to the email registered by you, which must be changed within a period of no more than 24 hours.</p> 
 
-                            <p> If you want to replace your access code with a new one, enter your email and press change password.</p> 
+                            <p title="Si desea reemplazar su código de acceso por uno nuevo, ingrese su correo electrónico y presione cambiar contraseña."> If you want to replace your access code with a new one, enter your email and press change password.</p> 
 
                           
                             <form class="js-validation-login form-horizontal push-30-t push-50" method="POST" action="{{ route('login') }}">
@@ -45,7 +45,7 @@
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary floating">
                                             <input class="form-control" type="text" id="email" name="email" {{ old('email') }}>
-                                            <label for="email">Email</label>
+                                            <label for="email" title="Correo">Email</label>
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -58,7 +58,7 @@
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary floating">
                                             <input class="form-control" type="password" id="password" name="password">
-                                            <label for="password">Password</label>
+                                            <label for="password" title="Contraseña">Password</label>
                                             @if ($errors->has('password'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('password') }}</strong>
@@ -70,18 +70,18 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <label class="css-input switch switch-sm switch-primary">
-                                            <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}><span></span> Remember Me?
+                                            <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}><span></span> <b title="¿Recuerdame?">Remember Me?</b> 
                                             
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <button class="btn btn-primary" type="submit"><i class="si si-login pull-right"></i> Login</button>
-                                        <a href="{{ route('register') }}" class="btn btn-success"><i class="si si-user pull-right"></i> Register</a>
+                                        <button class="btn btn-primary" type="submit" title="Inicio de sesión"><i class="si si-login pull-right"></i> Login</button>
+                                        <a href="{{ route('register') }}" class="btn btn-success" title="Registrarse"><i class="si si-user pull-right"></i> Register</a>
                                 
 
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link" href="{{ route('password.request') }}" title="¿Olvidaste tu contraseña?">
                                             Forgot Your Password?
                                         </a>
                                     </div>

@@ -4,7 +4,7 @@
 <!-- Register Content -->
 <div class="content overflow-hidden">
             <div class="row">
-            <h1 class="text-center">User account</h1>
+            <h1 class="text-center" title="Cuenta de usuario">User account</h1>
             <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="{{ route('registerUser') }}">
                                 {{ csrf_field() }}
             <div class="col-md-6">
@@ -13,7 +13,7 @@
                     <div class="block block-themed animated fadeIn">
                         <div class="block-header bg-success">
                             
-                            <h3 class="block-title">Company data</h3>
+                            <h3 class="block-title" title="DATOS DE LA COMPAÑIA">Company data</h3>
                         </div>
                         <div class="block-content block-content-full block-content-narrow">
                                     
@@ -46,20 +46,20 @@
                             <div class="block-header bg-success">
                                 <ul class="block-options">
                                     <li>
-                                        <a href="#" data-toggle="modal" data-target="#modal-terms">View Usage Policy</a>
+                                        <a href="#" data-toggle="modal" data-target="#modal-terms" title="Ver política de uso">View Usage Policy</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('login') }}" data-toggle="tooltip" data-placement="left" title="Log In"><i class="si si-login"></i></a>
                                     </li>
                                 </ul>
-                                <h3 class="block-title">User Account</h3>
+                                <h3 class="block-title" title="Cuenta de usuario">User Account</h3>
                             </div>
                             <div class="block-content block-content-full block-content-narrow">
                             <div class="form-group{{ $errors->has('applicant_name') ? ' has-error' : '' }}">
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name') }}">
-                                                    <label for="applicant_name"> Applicant name</label>
+                                                    <label for="applicant_name" title="Nombre del solicitante"> Applicant name</label>
                                                     @if ($errors->has('applicant_name'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('applicant_name') }}</strong>
@@ -72,7 +72,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ old('first_surname') }}">
-                                                    <label for="first_surname"> First surname</label>
+                                                    <label for="first_surname" title="Primer Apellido"> First surname</label>
                                                     @if ($errors->has('first_surname'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('first_surname') }}</strong>
@@ -85,7 +85,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="second_surname" name="second_surname" value="{{ old('second_surname') }}">
-                                                    <label for="second_surname"> Second surname</label>
+                                                    <label for="second_surname" title="Segundo Apellido"> Second surname</label>
                                                     @if ($errors->has('second_surname'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('second_surname') }}</strong>
@@ -98,7 +98,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="position_held" name="position_held" value="{{ old('position_held') }}">
-                                                    <label for="position_held"> Position held</label>
+                                                    <label for="position_held" title="Cargo que ocupa"> Position held</label>
                                                     @if ($errors->has('position_held'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('position_held') }}</strong>
@@ -111,7 +111,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="phone" name="phone" value="{{ old('phone') }}">
-                                                    <label for="phone">Phone number of the office where you work</label>
+                                                    <label for="phone" title="Número de teléfono de la oficina donde trabaja">Phone number of the office where you work</label>
                                                     @if ($errors->has('phone'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -125,7 +125,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}">
-                                                    <label for="email">Email</label>
+                                                    <label for="email" title="Correo">Email</label>
                                                     @if ($errors->has('email'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('email') }}</strong>
@@ -138,7 +138,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="password" id="password" name="password" >
-                                                    <label for="password">Password</label>
+                                                    <label for="password" title="Contraseña">Password</label>
                                                     @if ($errors->has('password'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('password') }}</strong>
@@ -151,7 +151,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" >
-                                                    <label for="password_confirmation">Confirm Password</label>
+                                                    <label for="password_confirmation" title="Confirmación de contraseña">Confirm Password</label>
                                                     @if ($errors->has('password_confirmation'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -163,13 +163,13 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <label class="css-input switch switch-sm switch-success">
-                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> I agree with usage Policy
+                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> <b title="De acuerdo con las políticas de uso">I agree with usage Policy</b>   
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12 col-sm-6 col-md-5">
-                                                <button class="btn btn-block btn-primary" type="submit"><i class="fa fa-plus pull-right"></i> Sign Up</button>
+                                                <button class="btn btn-block btn-primary" type="submit" title="Regístrate"><i class="fa fa-plus pull-right"></i> Sign Up</button>
                                             </div>
                                         </div>
                             </div>
