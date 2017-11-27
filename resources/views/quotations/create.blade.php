@@ -11,7 +11,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Quotation for Quotation Request -{{ $quotationRequest->id }} </h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn" title="Cotización de la solicitud -- {{ $quotationRequest->id }}">Quotation for Quotation Request -{{ $quotationRequest->id }} </h1>
         
            
     
@@ -50,13 +50,14 @@
             
             <div class="col-sm-12">
                 <div class="block block-link-hover3" href="javascript:void(0)">
-                    <div class="block-content block-content-full text-center">
+                     @include('requests/partials/item', ['request' => $quotationRequest]) 
+                    <!-- <div class="block-content block-content-full text-center">
                         <div>
                         
                             <img src="{{ getLogo($partner) }}" alt="Logo" id="company-logo" class="img-company-logo  " />
                             
                         </div>
-                        <div class="h5 push-15-t push-5">Quotation Request #{{ $quotationRequest->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$quotationRequest->public) }}">{{ trans('utils.public.'.$quotationRequest->public) }}</small>
+                        <div class="h5 push-15-t push-5" title="Solicitud de cotización #{{ $quotationRequest->id }}">Quotation Request #{{ $quotationRequest->id }} </div> <small class="label label-{{ trans('utils.public.colors.'.$quotationRequest->public) }}">{{ trans('utils.public.'.$quotationRequest->public) }}</small>
                         <div class="h5 push-15-t push-5"><b>Product:</b> <span class="js-gallery"><a href="{{ getRequestProductPhoto($quotationRequest) }}" class="img-link" >Photo</a></span> </div>
                     </div>
                     <div class="block-content block-content-mini block-content-full bg-gray-lighter">
@@ -91,7 +92,7 @@
                             
                             
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
            

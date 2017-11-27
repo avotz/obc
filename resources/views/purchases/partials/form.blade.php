@@ -4,7 +4,7 @@
             @if(!isset($purchase) || (isset($purchase) && $purchase->isPending()))
             <div class="form-material form-material-success">
                 <input class="form-control" type="file" id="purchase_file" name="purchase_file">
-                <label for="purchase_file">Purchase Order file</label>
+                <label for="purchase_file" title="Archivo de orden de compra">Purchase Order file</label>
                 @if ($errors->has('purchase_file'))
                     <span class="help-block">
                         <strong>{{ $errors->first('purchase_file') }}</strong>
@@ -25,7 +25,7 @@
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="comments" name="comments" value="{{ isset($purchase) ? $purchase->comments : ''  }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
                  <textarea class="form-control" name="comments" id="comments" cols="30" rows="3" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>{{ isset($purchase) ? $purchase->comments : ''  }}</textarea>
-                <label for="comments">Additional comment</label>
+                <label for="comments" title="Comentarios adicionales">Additional comment</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
                         <strong>{{ $errors->first('comments') }}</strong>
@@ -41,9 +41,9 @@
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
         @if(isset($purchase) && $purchase->isPending() || !isset($purchase))
-            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-success" type="submit" title="Guardar">Save</button>
         @endif
-            <a class="btn btn-default" href="/requests/{{ $quotation->request->id }}/quotations">Back</a>
+            <a class="btn btn-default" href="/requests/{{ $quotation->request->id }}/quotations" title="Atras">Back</a>
         </div>
     </div>
 

@@ -8,14 +8,14 @@
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                     
                    
-                        <option value="0" @if(isset($quotation) && $quotation->delivery_time == 0) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == 0) selected="selected" @endif @endif>{{ trans('utils.immediate') }}</option>
+                        <option value="0" @if(isset($quotation) && $quotation->delivery_time == 0) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == 0) selected="selected" @endif @endif title="Inmediato">{{ trans('utils.immediate') }}</option>
                         @foreach($deliveryDays as $day)    
-                            <option value="{{ $day }}" @if(isset($quotation) && $quotation->delivery_time == $day) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == $day) selected="selected" @endif @endif> {{ $day }} {{ trans('utils.days') }}</option>
+                            <option value="{{ $day }}" @if(isset($quotation) && $quotation->delivery_time == $day) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->delivery_time == $day) selected="selected" @endif @endif title="{{ $day }} dias"> {{ $day }} {{ trans('utils.days') }}</option>
                         @endforeach
                        
                    
                 </select>
-                <label for="delivery_time">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span> </label>
+                <label for="delivery_time" title="Tiempo de entrega">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span> </label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
                         <strong>{{ $errors->first('delivery_time') }}</strong>
@@ -34,16 +34,16 @@
                         <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                     
                    
-                        <option value="1" @if(isset($quotation) && $quotation->way_of_delivery == 1) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 1) selected="selected" @endif  @endif>{{ trans('utils.way_of_delivery.1') }}</option>
-                        <option value="2" @if(isset($quotation) && $quotation->way_of_delivery == 2) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 2) selected="selected" @endif @endif>{{ trans('utils.way_of_delivery.2') }}</option>
-                        <option value="3" @if(isset($quotation) && $quotation->way_of_delivery == 3) selected="selected"  @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 3) selected="selected" @endif @endif>{{ trans('utils.way_of_delivery.3') }}</option>
+                        <option value="1" @if(isset($quotation) && $quotation->way_of_delivery == 1) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 1) selected="selected" @endif  @endif title="Recoger">{{ trans('utils.way_of_delivery.1') }}</option>
+                        <option value="2" @if(isset($quotation) && $quotation->way_of_delivery == 2) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 2) selected="selected" @endif @endif title="En la casa">{{ trans('utils.way_of_delivery.2') }}</option>
+                        <option value="3" @if(isset($quotation) && $quotation->way_of_delivery == 3) selected="selected"  @else @if(isset($quotationRequest) && $quotationRequest->way_of_delivery == 3) selected="selected" @endif @endif title="Cargar envio">{{ trans('utils.way_of_delivery.3') }}</option>
 
                      
                         
                   
                    
                 </select>
-                <label for="way_of_delivery">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
+                <label for="way_of_delivery" title="Manera de entrega">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
                 @if ($errors->has('way_of_delivery'))
                     <span class="help-block">
                         <strong>{{ $errors->first('way_of_delivery') }}</strong>
@@ -59,13 +59,13 @@
 
                     <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
                    
-                    <option value="0" @if(isset($quotation) && $quotation->way_to_pay == 0) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_to_pay == 0) selected="selected" @endif @endif >{{ trans('utils.cash') }}</option>
+                    <option value="0" @if(isset($quotation) && $quotation->way_to_pay == 0) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_to_pay == 0) selected="selected" @endif @endif title="Contacto">{{ trans('utils.cash') }}</option>
                     @foreach($creditDays as $creditDay)    
-                        <option value="{{ $creditDay->days }}" @if(isset($quotation) && $quotation->way_to_pay == $creditDay->days) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_to_pay == $creditDay->days) selected="selected" @endif @endif>{{ trans('utils.credit') }} {{ $creditDay->days }} {{ trans('utils.days') }}</option>
+                        <option value="{{ $creditDay->days }}" @if(isset($quotation) && $quotation->way_to_pay == $creditDay->days) selected="selected" @else @if(isset($quotationRequest) && $quotationRequest->way_to_pay == $creditDay->days) selected="selected" @endif @endif title="Crédito {{ $creditDay->days }} dias">{{ trans('utils.credit') }} {{ $creditDay->days }} {{ trans('utils.days') }}</option>
                     @endforeach
                    
                 </select>
-                <label for="way_to_pay">Way to pay <span class="label label-danger">(Credit {{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }} days)</span></label>
+                <label for="way_to_pay" title="Manera de pago">Way to pay <span class="label label-danger">(Credit {{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }} days)</span></label>
                 @if ($errors->has('way_to_pay'))
                     <span class="help-block">
                         <strong>{{ $errors->first('way_to_pay') }}</strong>
@@ -81,7 +81,7 @@
             <div class="form-material form-material-success">
                
                 <textarea class="form-control" name="comments" id="comments" cols="30" rows="3">{{ isset($quotation) ? $quotation->comments : $quotationRequest->comments  }}</textarea>
-                <label for="comments">Additional comment <span class="label label-danger">({{ str_limit(isset($quotationRequest) ? $quotationRequest->comments : '' , 20) }})</span></label>
+                <label for="comments" title="Comentarios adicionales">Additional comment <span class="label label-danger">({{ str_limit(isset($quotationRequest) ? $quotationRequest->comments : '' , 20) }})</span></label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
                         <strong>{{ $errors->first('comments') }}</strong>
@@ -95,7 +95,7 @@
             <div class="form-material form-material-success">
                 @if(!isset($quotation) || (isset($quotation) && !$quotation->purchase)) 
                     <input class="form-control" type="file" id="file" name="file">
-                    <label for="file">File</label>
+                    <label for="file" title="Archivo">File</label>
                     @if ($errors->has('file'))
                         <span class="help-block">
                             <strong>{{ $errors->first('file') }}</strong>
@@ -115,7 +115,7 @@
             <div class="form-material form-material-success">
                 @if(!isset($quotation) || (isset($quotation) && !$quotation->purchase)) 
                     <input class="form-control" type="file" id="product_photo" name="product_photo">
-                    <label for="product_photo">Product Photo</label>
+                    <label for="product_photo" title="Foto del producto">Product Photo</label>
                     @if ($errors->has('product_photo'))
                         <span class="help-block">
                             <strong>{{ $errors->first('product_photo') }}</strong>
@@ -135,8 +135,8 @@
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
         @if(!isset($quotation) || (isset($quotation) && !$quotation->purchase))
-                <button class="btn btn-success" type="submit">Save</button>
+                <button class="btn btn-success" type="submit" title="Guardar">Save</button>
           @endif
-            <a class="btn btn-default" href="/public/requests">Back</a>
+            <a class="btn btn-default" href="/public/requests" title="Regresar">Back</a>
         </div>
     </div>

@@ -2,7 +2,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $partner->company_name }}
-                <label for="company_name">Partner Name</label>
+                <label for="company_name" title="Nombre de asociado">Partner Name</label>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
                     </div>
                     @endforeach
                 
-                <label for="country">Partner Country</label>
+                <label for="country" title="País de asociado">Partner Country</label>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 @foreach ($partner->sectors as $sector)
                     @include('layouts.partials.sector-select', ['company' => $partner->company])
                 @endforeach
-                <label for="sector">Supplier sector</label>
+                <label for="sector" title="Sector suplidor">Supplier sector</label>
             </div>
         </div>
     </div>
@@ -35,23 +35,28 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ trans('utils.geo_type.'.$quotationRequest->geo_type) }}
-                <label for="geo_type">Transaction Type</label>
+                <label for="geo_type" title="Tipo de trasacción">Transaction Type</label>
             </div>
         </div>
     </div>    
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotationRequest->delivery_time }}
-                <label for="delivery_time">Delivery time</label>
+                @if($quotationRequest->delivery_time == 0)
+                   {{ trans('utils.immediate') }}
+                @else
+                   {{ $quotationRequest->delivery_time }} {{ trans('utils.days') }}
+                @endif
+                <label for="delivery_time" title="Tiempo de entrega">Delivery time</label>
             </div>
         </div>
     </div>    
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotationRequest->way_of_delivery }}
-                <label for="way_of_delivery">Way of delivery</label>
+                {{ trans('utils.way_of_delivery.'.$quotationRequest->way_of_delivery) }}
+               
+                <label for="way_of_delivery" title="Manera de entrega">Way of delivery</label>
             </div>
         </div>
     </div> 
@@ -60,7 +65,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 @if( $quotationRequest->way_to_pay ) Credit {{ $quotationRequest->way_to_pay }} Days @else Cash @endif
-                <label for="way_to_pay">Way to pay</label>
+                <label for="way_to_pay" title="Manera de pago">Way to pay</label>
             </div>
         </div>
     </div> 
@@ -68,7 +73,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $quotationRequest->exp_date }}
-                <label for="exp_date">Request valid until</label>
+                <label for="exp_date" title="Solicitud valida hasta">Request valid until</label>
             </div>
         </div>
     </div> 
@@ -77,7 +82,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $quotationRequest->comments }}
-                <label for="comments">Additional comment</label>
+                <label for="comments" title="Comentarios adicionales">Additional comment</label>
             </div>
         </div>
     </div> 
@@ -87,7 +92,7 @@
             <div class="form-material form-material-success">
             <delete-file :transaction-id="{{ $quotationRequest->id }}" url-file="{{ getRequestFile($quotationRequest) }}" filename="{{ $quotationRequest->file }}" :read="{{ $quotationRequest->quotations->count() ? 'true': 'false' }}" url="/requests/file" :read="true">Delete Current file</delete-file>
                 
-                <label for="product_name">File</label>
+                <label for="product_name" title="Archivo">File</label>
             </div>
         </div>
     </div>
@@ -95,7 +100,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <delete-photo-product :transaction-id="{{ $quotationRequest->id }}" url-img="{{ getRequestProductPhoto($quotationRequest) }}" :read="true">Delete Current Photo</delete-photo-product>
-                <label for="product_name">Product Photo</label>
+                <label for="product_name" title="Foto del producto">Product Photo</label>
             </div>
         </div>
     </div>
@@ -103,13 +108,13 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ trans('utils.public.'.$quotationRequest->public) }}
-                <label for="product_name">Visibility</label>
+                <label for="product_name" title="Visibilidad">Visibility</label>
             </div>
         </div>
     </div>
    
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <a class="btn btn-default" href="/public/requests">Back</a>
+            <a class="btn btn-default" href="/public/requests" title="Regresar">Back</a>
         </div>
     </div>

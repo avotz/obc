@@ -7,7 +7,7 @@
  
   <div class="content">
                    
-    <h2 class="content-heading">Quotation Requests</h2>
+    <h2 class="content-heading" title="Solicitudes de cotizaciones">Quotation Requests</h2>
     <div class="row">
         @forelse($quotationRequests as $request)
         <div class="col-sm-6 col-lg-4">
@@ -18,15 +18,15 @@
                     <div class="row items-push text-center">
                         <a class="col-xs-4" href="/requests/{{ $request->id }}/quotations">
                             <div class="h3 push-5"> {{ $request->quotations->count() }}</div>
-                            <div class="h5 font-w300 text-muted">Offers</div>
+                            <div class="h5 font-w300 text-muted" title="Ofertas">Offers</div>
                         </a>
                         <a class="col-xs-4" href="{{ getRequestFile($request) }}" target="_blank">
                             <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted">Download</div>
+                            <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
                         </a>
                         <a class="col-xs-4" href="/requests/{{ $request->id }}/edit">
                             <div class="push-5"><i class="si si-list fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted">Edit</div>
+                            <div class="h5 font-w300 text-muted" title="Editar">Edit</div>
                         </a>
                     
                         
@@ -37,15 +37,15 @@
                     <div class="row items-push text-center">
                         <a class="btn-questions col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $request->user->email }}" data-partner="{{ $request->user->companies->first()->id }}" data-transaction="{{ $request->transaction_id }}" >
                             <div class="push-5"><i class="si si-question fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted">Questions</div>
+                            <div class="h5 font-w300 text-muted" title="Preguntas">Questions</div>
                         </a>
                         <a class="col-xs-4" href="{{ getRequestFile($request) }}" target="_blank">
                             <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted">Download</div>
+                            <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
                         </a>
                         <a class="col-xs-4" href="/requests/{{ $request->id }}/quotations/create">
                             <div class="push-5"><i class="si si-wallet fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted">Submit Offer</div>
+                            <div class="h5 font-w300 text-muted" title="Subir Oferta">Submit Offer</div>
                         </a>
                         
                     </div>
@@ -56,7 +56,7 @@
         </div>
         @empty
         <div class="col-sm-12 text-center" >
-            <p>There is no quotation requests</p>
+            <p title="No hay solicitudes de cotizaciones">There is no quotation requests</p>
         </div>
         @endforelse
      

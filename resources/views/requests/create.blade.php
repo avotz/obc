@@ -9,7 +9,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Quotation Request</h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn" title="Solicitud de cotización">Quotation Request</h1>
         
            
     

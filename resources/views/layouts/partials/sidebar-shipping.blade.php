@@ -22,12 +22,12 @@
                         <div class="side-content">
                             <ul class="nav-main">
                                 <li>
-                                    <a class="active" href="/"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Home</span></a>
+                                    <a class="active" href="/" title="Inicio"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Home</span></a>
                                 </li>
                                 
                                
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/shipping/shipping-requests"><i class="si si-users"></i><span class="sidebar-mini-hide">Shipping Requests</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/shipping/shipping-requests" title="Solicitudes de envio"><i class="si si-users"></i><span class="sidebar-mini-hide">Shipping Requests</span></a>
                                    
                                 </li>
                             

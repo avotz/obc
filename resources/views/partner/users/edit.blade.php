@@ -14,7 +14,7 @@
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>
         <h2 class="h5 text-white-op animated zoomIn">{{ $user->profile->position_held }}</h2>
-        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->public_code }}</h2>
+        <h2 class="h5 text-white-op animated zoomIn" title="Id de usuario">User ID: {{ $user->public_code }}</h2>
         
     
        
@@ -29,23 +29,23 @@
 <div class="content bg-white border-b">
     <div class="row items-push text-uppercase">
             <div class="col-xs-6 col-sm-2">
-                <div class="font-w700 text-gray-darker animated fadeIn">Quotation Requests</div>
+                <div class="font-w700 text-gray-darker animated fadeIn" title="Solicitudes de cotización">Quotation Requests</div>
                     <a class="h2 font-w300 text-primary animated flipInX" href="/partner/users/{{ $user->id }}/requests">{{ $user->requests->count() }}</a>
                 </div>
             <div class="col-xs-6 col-sm-2">
-                <div class="font-w700 text-gray-darker animated fadeIn">Quotations</div>
+                <div class="font-w700 text-gray-darker animated fadeIn" title="Cotizaciones">Quotations</div>
                 <a class="h2 font-w300 text-primary animated flipInX" href="/partner/users/{{ $user->id }}/quotations">{{ $user->quotations->count() }}</a>
             </div>
             <div class="col-xs-6 col-sm-2">
-                <div class="font-w700 text-gray-darker animated fadeIn">Credits</div>
+                <div class="font-w700 text-gray-darker animated fadeIn" title="Creditos">Credits</div>
                 <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
             </div>
             <div class="col-xs-6 col-sm-2">
-                <div class="font-w700 text-gray-darker animated fadeIn">Shippings</div>
+                <div class="font-w700 text-gray-darker animated fadeIn" title="Envios">Shippings</div>
                 <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
             </div>
             <div class="col-xs-6 col-sm-2">
-                <div class="font-w700 text-gray-darker animated fadeIn">Orders</div>
+                <div class="font-w700 text-gray-darker animated fadeIn" title="Ordenes">Orders</div>
                 <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
             </div>
         
@@ -68,7 +68,7 @@
                         </li>
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-home"></i> Permissions</h3>
+                    <h3 class="block-title" title="Permisos"><i class="fa fa-home"></i> Permissions</h3>
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/partner/users/{{$user->id }}">
@@ -87,7 +87,7 @@
                        
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-6 col-md-5">
-                                <button class="btn btn-block btn-success" type="submit">Update</button>
+                                <button class="btn btn-block btn-success" type="submit" title="Actualizar">Update</button>
                             </div>
                         </div>
                     
@@ -103,7 +103,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
+                    <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
                 <form class="js-validation-register form-horizontal push-50" method="POST" action="#">
@@ -112,7 +112,7 @@
                    <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 {{ $user->profile->applicant_name }}
-                                <label for="applicant_name"> Applicant name</label>
+                                <label for="applicant_name" title="Nombre del solicitante"> Applicant name</label>
                                
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 {{ $user->profile->first_surname }}
-                                <label for="first_surname"> First surname</label>
+                                <label for="first_surname" title="Primer apellido"> First surname</label>
                                
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 {{ $user->profile->second_surname  }}
-                                <label for="second_surname"> Second surname</label>
+                                <label for="second_surname" title="Segundo apellido"> Second surname</label>
                                 
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 {{ $user->profile->position_held }}
-                                <label for="position_held"> Position held</label>
+                                <label for="position_held" title="Cargo que ocupa"> Position held</label>
                                
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 {{ $user->profile->phone }}
-                                <label for="position_held"> Phone</label>
+                                <label for="position_held" title="Teléfono"> Phone</label>
                                
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 {{ $user->email }}
-                                <label for="email">Email</label>
+                                <label for="email" title="Correo">Email</label>
                                 
                             </div>
                         </div>

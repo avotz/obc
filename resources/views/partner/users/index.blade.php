@@ -5,14 +5,14 @@
 <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Buscar usuario">
                     Search Users <small></small>
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Users</li>
-                    <li><a class="link-effect" href="">Search Results</a></li>
+                    <li title="Usuarios">Users</li>
+                    <li><a class="link-effect" href="" title="Resultados de busqueda" >Search Results</a></li>
                 </ol>
             </div>
         </div>
@@ -23,7 +23,7 @@
     <div class="content">
         <form action="/partner/users" method="get">
             <div class="input-group input-group-lg">
-                <input class="form-control" name="q" type="text" placeholder="Search user by ID, Name, Email.." value="{{ $search['q'] }}">
+                <input class="form-control" name="q" type="text" placeholder="Search user by ID, Name, Email.." value="{{ $search['q'] }}" title="Buscar usuario por ID, Nombre, correo...">
                 <div class="input-group-btn">
                     <button class="btn btn-default"><i class="fa fa-search"></i></button>
                 </div>
@@ -38,7 +38,7 @@
             <ul class="nav nav-tabs" data-toggle="tabs">
                
                 <li class="active">
-                    <a href="#search-users">Users</a>
+                    <a href="#search-users" title="Usuarios">Users</a>
                 </li>
                
             </ul>
@@ -47,17 +47,17 @@
                 <!-- Users -->
                 <div class="tab-pane fade fade-up in active" id="search-users">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted">Users Found</span></h2>
+                        <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted" title="Usuarios encontrados">Users Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
                                 <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
-                                <th>Name</th>
-                                <th class="hidden-xs" style="width: 30%;">Email</th>
-                                <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th title="Nombre">Name</th>
+                                <th class="hidden-xs" style="width: 30%;" title="Correo">Email</th>
+                                <th class="hidden-xs hidden-sm" style="width: 15%;" title="Estatus">Status</th>
+                                <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,12 +72,12 @@
                                 <td class="hidden-xs hidden-sm">
                                 @if ($user->active)
                                 
-                                        <button type="submit"  class="btn btn-success btn-xs" form="form-active-inactive" formaction="{!! URL::route('users.inactive', [$user->id]) !!}">Active</button>
+                                        <button type="submit"  class="btn btn-success btn-xs" form="form-active-inactive" formaction="{!! URL::route('users.inactive', [$user->id]) !!}" title="Activo">Active</button>
                                     
     
                                 @else
                                     
-                                    <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('users.active', [$user->id]) !!}" >Inactive</button>
+                                    <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('users.active', [$user->id]) !!}" title="Inactivo" >Inactive</button>
     
                                 @endif
                                 </td>

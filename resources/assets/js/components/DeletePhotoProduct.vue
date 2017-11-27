@@ -1,7 +1,7 @@
 <template>
     <div v-show="img">
         <img :src="showImage" alt="photo" style="height:60px" />            
-        <button class="btn btn-danger btn-xs " type="button" @click="removePhoto()" v-if="!loader && !read"> <slot>Delete</slot></button>
+        <button class="btn btn-danger btn-xs " type="button" @click="removePhoto()" v-if="!loader && !read" title="Eliminar"> <slot>Delete</slot></button>
             
  
     </div>

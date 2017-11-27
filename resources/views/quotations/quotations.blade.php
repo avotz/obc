@@ -6,7 +6,7 @@
  
   <div class="content">
                    
-    <h2 class="content-heading">Your Quotations</h2>
+    <h2 class="content-heading" title="Tus Cotizaciones">Your Quotations</h2>
     <div class="row">
         @foreach($quotations as $quotation)
             <div class="col-sm-6 col-lg-4">
@@ -17,16 +17,16 @@
                         @if($quotation->purchase && $quotation->purchase->status == 1)
                             <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id }}/edit">
                                 <div class="h3 push-5 text-success">1</div>
-                                <div class="h5 font-w300 text-muted">Purchase Order</div>
+                                <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order</div>
                             </a>
                         @endif
                             <a class="col-xs-4" href="{{ getQuotationFile($quotation) }}" target="_blank">
                                 <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
-                                <div class="h5 font-w300 text-muted">Download</div>
+                                <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
                             </a>
                             <a class="col-xs-4" href="/quotations/{{ $quotation->id }}/edit">
                                 <div class="push-5"><i class="si si-list fa-2x"></i></div>
-                                <div class="h5 font-w300 text-muted">Edit</div>
+                                <div class="h5 font-w300 text-muted" title="Editar">Edit</div>
                             </a>
                             
                         </div>

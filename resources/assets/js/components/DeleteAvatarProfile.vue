@@ -1,7 +1,7 @@
 <template>
     
                 
-    <button class="btn btn-danger btn-xs btn-block" type="button" @click="removeAvatar()" v-if="!loader"> <slot>Delete</slot></button>
+    <button class="btn btn-danger btn-xs btn-block" type="button" @click="removeAvatar()" v-if="!loader" title="Eliminar"> <slot>Delete</slot></button>
             
  
     

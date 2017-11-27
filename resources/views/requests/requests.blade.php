@@ -6,7 +6,7 @@
  
   <div class="content">
                    
-    <h2 class="content-heading">Your quotation requests</h2>
+    <h2 class="content-heading" title="Tus solicitudes de cotización">Your quotation requests</h2>
     <div class="row">
         @foreach($quotationRequests as $request)
             <div class="col-sm-6 col-lg-4">
@@ -16,15 +16,15 @@
                         <div class="row items-push text-center">
                             <a class="col-xs-4" href="/requests/{{ $request->id }}/quotations">
                                 <div class="h3 push-5"> {{ $request->quotations->count() }}</div>
-                                <div class="h5 font-w300 text-muted">Offers</div>
+                                <div class="h5 font-w300 text-muted" title="Ofertas">Offers</div>
                             </a>
                             <a class="col-xs-4" href="{{ getRequestFile($request) }}" target="_blank">
                                 <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
-                                <div class="h5 font-w300 text-muted">Download</div>
+                                <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
                             </a>
                             <a class="col-xs-4" href="/requests/{{ $request->id }}/edit">
                                 <div class="push-5"><i class="si si-list fa-2x"></i></div>
-                                <div class="h5 font-w300 text-muted">Edit</div>
+                                <div class="h5 font-w300 text-muted" title="Editar">Edit</div>
                             </a>
                             
                         </div>

@@ -15,24 +15,24 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li class="dropdown-header">{{ auth()->user()->profile->applicant_name }} {{ auth()->user()->profile->first_surname }}</li>
                                 <li>
-                                    <a tabindex="-1" href="/support">
+                                    <a tabindex="-1" href="/support" title="Soporte">
                                         <i class="si si-envelope-open pull-right"></i>
                                         IT Support
                                     </a>
                                 </li>
                                 <li>
-                                    <a tabindex="-1" href="/profile">
+                                    <a tabindex="-1" href="/profile" title="Administrar cuenta">
                                         <i class="si si-user pull-right"></i>
                                         Manage Account
                                     </a>
                                 </li>
                                 
                                 <li class="divider"></li>
-                                <li class="dropdown-header">Actions</li>
+                                <li class="dropdown-header" title="Acciones">Actions</li>
                             
                                 <li>
                                     
-                                    <a href="{{ route('logout') }}"
+                                    <a href="{{ route('logout') }}" title="Cerrar sesión"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                      <i class="si si-logout pull-right"></i>Logout

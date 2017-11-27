@@ -2,16 +2,21 @@
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotation->delivery_time }}
-                <label for="delivery_time">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span></label>
+               
+                 @if($quotation->delivery_time == 0)
+                   {{ trans('utils.immediate') }}
+                @else
+                   {{ $quotation->delivery_time }} {{ trans('utils.days') }}
+                @endif
+                <label for="delivery_time" title="Tiempo de entrega">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span></label>
             </div>
         </div>
     </div>    
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotation->way_of_delivery }}
-                <label for="way_of_delivery">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
+                {{ trans('utils.way_of_delivery.'.$quotation->way_of_delivery) }}
+                <label for="way_of_delivery" title="Manera de entrega">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
             </div>
         </div>
     </div> 
@@ -20,7 +25,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 @if( $quotation->way_to_pay ) Credit {{ $quotation->way_to_pay }} Days @else Cash @endif
-                <label for="way_to_pay">Way to pay <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }})</span></label>
+                <label for="way_to_pay" title="Manera de pago">Way to pay <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }})</span></label>
             </div>
         </div>
     </div> 
@@ -29,18 +34,21 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $quotation->comments }}
-                <label for="comments">Additional comment <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->comments : '' }})</span></label>
+                <label for="comments" title="Comentarios adicionales">Additional comment <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->comments : '' }})</span></label>
             </div>
         </div>
     </div> 
+
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                {{ $quotation->product_name }}
-                <label for="product_name">Product Name <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->product_name : '' }})</span></label>
+            <delete-file :transaction-id="{{ $quotation->id }}" url-file="{{ getQuotationFile($quotation) }}" filename="{{ $quotation->file }}" url="/quotations/file" :read="true">Delete Current file</delete-file>
+                
+                <label for="product_name" title="Archivo">File</label>
             </div>
         </div>
     </div>
+   
     <div class="form-group" >
         <div class="col-xs-12">
             <div class="form-material form-material-success">
@@ -52,6 +60,6 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <a class="btn btn-default" href="/user/quotations">Back</a>
+            <a class="btn btn-default" href="/user/quotations" title="Regresar">Back</a>
         </div>
     </div>
