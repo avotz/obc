@@ -10,12 +10,12 @@
         <div class="push-15-r pull-left animated fadeIn">
             <img src="{{ getAvatar($user) }}" alt="Avatar" id="user-avatar" class="img-avatar img-avatar-thumb" />
            
-            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/profile/avatars">Change</a>
+            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/profile/avatars" title="Cambiar">Change</a>
             <delete-avatar-profile :user-id="{{ $user->id }}" url="/profile/avatars"></delete-avatar-profile>
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn">User ID: {{ $user->public_code }} <img src="{{ getFlag($company->countries->first()->code) }}" alt="flag"></h2>
-        <h2 class="h5 text-white-op animated zoomIn">Private Code: </h2>
+        <h2 class="h5 text-white-op animated zoomIn" title="Id de usuario">User ID: {{ $user->public_code }} <img src="{{ getFlag($company->countries->first()->code) }}" alt="flag"></h2>
+        <h2 class="h5 text-white-op animated zoomIn" title="Codigo Privado">Private Code: </h2>
        
         <update-private-code :company-id="{{ $company->id }}" :private-code="'{{ $company->private_code }}'"></update-private-code>    
        
@@ -30,12 +30,12 @@
 <div class="content bg-white border-b">
     <div class="row items-push text-uppercase">
         <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Shipping Requests</div>
+            <div class="font-w700 text-gray-darker animated fadeIn" title="Solicitudes de envio">Shipping Requests</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
        
         <div class="col-xs-6 col-sm-2">
-            <div class="font-w700 text-gray-darker animated fadeIn">Shippings</div>
+            <div class="font-w700 text-gray-darker animated fadeIn" title="Envios">Shippings</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
         </div>
         
@@ -56,7 +56,7 @@
                         </li>
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-home"></i> Company</h3>
+                    <h3 class="block-title" title="Compañia"><i class="fa fa-home"></i> Company</h3>
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
                 <div class="col-xs-12 text-center" >
@@ -65,7 +65,7 @@
                             
                         </div>
                         <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-                                <a class="UploadButton UploadButtonLogo btn btn-xs btn-info btn-block" id="UploadLogo" data-url="/partner/company/logo">Change Logo</a>
+                                <a class="UploadButton UploadButtonLogo btn btn-xs btn-info btn-block" id="UploadLogo" data-url="/partner/company/logo" title="Cambiar logo">Change Logo</a>
                             </div>
                     <form class="js-validation-register form-horizontal push-50-t push-50" method="POST" action="/partner/companies/{{$company->id}}">
                          <input type="hidden" name="_method" value="PUT">
@@ -84,7 +84,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
+                    <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/partner/{{ $user->id }}">

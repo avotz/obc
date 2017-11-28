@@ -4,7 +4,7 @@
               
                  @if($shippingRequest->delivery_time == 1) {{ trans('utils.normal') }} @endif
                   @if($shippingRequest->delivery_time == 2) {{ trans('utils.express') }} @endif
-                <label for="delivery_time">Delivery time</label>
+                <label for="delivery_time" title="Tiempo de entrega">Delivery time</label>
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $shippingRequest->date }}
-                <label for="delivery_date">Request date</label>
+                <label for="delivery_date" title="Fecha de solicitud">Request date</label>
             </div>
         </div>
     </div>    
@@ -32,7 +32,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $shippingRequest->comments }}
-                <label for="comments">Additional comment</label>
+                <label for="comments" title="Comentarios adicionales">Additional comment</label>
             </div>
         </div>
     </div> 
@@ -41,8 +41,8 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-8 col-md-8">
-            <a href="/shipping/shipping-requests/{{ $shippingRequest->id }}/shippings/create" class="btn btn-success" data-toggle="tooltip" title="Make Offer">Make a shipping</a>
-            <a class="btn btn-default" href="/shipping/shipping-requests">Back</a>
+            <a href="/shipping/shipping-requests/{{ $shippingRequest->id }}/shippings/create" class="btn btn-success" data-toggle="tooltip" title="Hacer Envio" >Make a shipping</a>
+            <a class="btn btn-default" href="/shipping/shipping-requests" title="Atras">Back</a>
         </div>
     </div>
 

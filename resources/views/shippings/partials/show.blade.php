@@ -4,7 +4,7 @@
               
                  @if($shipping->delivery_time == 1) {{ trans('utils.normal') }} @endif
                   @if($shipping->delivery_time == 2) {{ trans('utils.express') }} @endif
-                <label for="delivery_time">Delivery time</label>
+                <label for="delivery_time" title="Tiempo de entrega">Delivery time</label>
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
               
                   {{ $shipping->cost }}
                 
-                <label for="delivery_time">Cost</label>
+                <label for="cost" title="Costo">Cost</label>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
               
                   {{ $shipping->date }}
                 
-                <label for="delivery_time">Date</label>
+                <label for="date" title="Fecha">Date</label>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
               
                 @endif
                 
-                <label for="delivery_time">File</label>
+                <label for="file" title="Archivo">File</label>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
             <div class="form-material form-material-success">
               
                  {{ $shipping->comments }}
-                <label for="delivery_time">Additional comment</label>
+                <label for="additional comment" title="Comentarios adicionales">Additional comment</label>
             </div>
         </div>
     </div>
@@ -58,12 +58,12 @@
         <div class="col-xs-12 col-sm-8 col-md-12">
            @if(isset($shipping) && $shipping->isPending())
                            
-                            <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/shippings/{{ $shipping->id }}/status">Aproved</button>
-                            <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/shippings/{{ $shipping->id }}/status">Reject</button>
+                            <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/shippings/{{ $shipping->id }}/status" title="Aprobado">Aproved</button>
+                            <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/shippings/{{ $shipping->id }}/status" title="Rechazado">Reject</button>
             @endif
                           
                       
-            <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/shippings">Back</a>
+            <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/shippings" title="Atras">Back</a>
         </div>
     </div>
 

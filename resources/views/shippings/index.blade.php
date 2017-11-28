@@ -10,7 +10,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Shippings from {{ $shippingRequest->transaction_id }} </h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn" title="Envios de {{ $shippingRequest->transaction_id }}">Shippings from {{ $shippingRequest->transaction_id }} </h1>
         
            
     
@@ -33,13 +33,13 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
                                
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th style="width: 100px;">Delivery Time</th>
-                                <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th style="width: 100px;" title="Tiempo de entrega">Delivery Time</th>
+                                <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
+                                <th class="hidden-xs hidden-sm" style="width: 15%;" title="Estatus">Status</th>
+                                <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,13 +55,13 @@
                                 <td class="hidden-xs">{{ Carbon\Carbon::parse($shipping->date)->format('Y-m-d') }}</td>
                                 <td class="hidden-xs hidden-sm">
                                     @if($shipping->status == 0)
-                                        <span class="label label-warning">Pending</span>
+                                        <span class="label label-warning" title="Pendiente">Pending</span>
                                     @endif
                                     @if($shipping->status == 1)
-                                        <span class="label label-success">Granted</span>
+                                        <span class="label label-success" title="Aprovado">Approved</span>
                                     @endif
                                     @if($shipping->status == 2)
-                                        <span class="label label-danger">Reject</span>
+                                        <span class="label label-danger" title="Rechazado">Reject</span>
                                     @endif
                                     
                                 </td>

@@ -5,15 +5,15 @@
 <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Buscar envios y solicitudes">
                     Search Shipping & Requests<small></small>
                 </h1>
-                <a href="/quotations/{{ $quotation->id }}/shipping-requests/create" class="btn btn-success">Create</a>
+                <a href="/quotations/{{ $quotation->id }}/shipping-requests/create" class="btn btn-success" title="Crear">Create</a>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Shipping & Requests</li>
-                    <li><a class="link-effect" href="">Shipping Results</a></li>
+                    <li title="Envios y solicitudes">Shipping & Requests</li>
+                    <li><a class="link-effect" href="" title="Resultados de envios">Shipping Results</a></li>
                 </ol>
             </div>
         </div>
