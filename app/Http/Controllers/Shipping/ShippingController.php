@@ -89,6 +89,10 @@ class ShippingController extends Controller
         );
        
         $data = request()->all();
+   
+        $data['country_id'] = auth()->user()->companies->first()->id;
+        $data['type'] =  $shippingRequest->type;
+
 
         $data['user_id'] = auth()->id();
         $data['shipping_request_id'] = $shippingRequest->id;

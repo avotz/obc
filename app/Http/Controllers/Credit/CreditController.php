@@ -92,6 +92,9 @@ class CreditController extends Controller
        
         $data = request()->all();
 
+       $data['country_id'] = auth()->user()->companies->first()->id;
+
+
         $data['user_id'] = auth()->id();
         $data['credit_request_id'] = $creditRequest->id;
 

@@ -3,12 +3,12 @@
     
     
         <div class="row items-push">
-                <div class="col-xs-6" v-for="sector in sectors">
+                <div class="col-xs-6" v-for="sector in sectors" :key="sector.id">
                     <label class="css-input css-checkbox css-checkbox-success">
                         <input type="checkbox" name="sectors[]" v-bind:value="sector.id"><span></span> {{ sector.name }}
                     </label>
                     <div>
-                        <div class="col-xs-12" v-for="subsector in sector.subsectors">
+                        <div class="col-xs-12" v-for="subsector in sector.subsectors" :key="subsector.id">
                             <label class="css-input css-checkbox css-checkbox-success">
                                 <input type="checkbox" name="sectors[]" v-bind:value="subsector.id"><span></span> {{ subsector.name }}
                             </label>

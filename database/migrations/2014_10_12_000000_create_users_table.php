@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id'); 
+            $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('public_code')->nullable();
@@ -31,8 +31,8 @@ class CreateUsersTable extends Migration
             $table->foreign('partner_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->primary(array('user_id', 'partner_id'));
-           
-            
+
+
         });*/
     }
 
@@ -43,7 +43,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('partner_user');
+        //Schema::dropIfExists('partner_user');
         Schema::dropIfExists('users');
     }
 }

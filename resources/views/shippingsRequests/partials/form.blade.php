@@ -1,3 +1,26 @@
+    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+        <div class="col-xs-12">
+            <div class="form-material form-material-success">
+               
+                <select name="type" id="type"  class="form-control">
+
+                  
+                    <option value="0" @if(isset($shippingRequest) && $shippingRequest->type == 0) selected="selected" @endif title="Nacional"> {{ trans('utils.national') }}</option>
+                    <option value="1" @if(isset($shippingRequest) && $shippingRequest->type == 1) selected="selected" @endif title="Internacional"> {{ trans('utils.international') }}</option>
+                   
+                       
+                  
+                   
+                </select>
+                <label for="type" title="Tipo">Type</label>
+                @if ($errors->has('type'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('type') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+    </div>
     <div class="form-group{{ $errors->has('delivery_time') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">

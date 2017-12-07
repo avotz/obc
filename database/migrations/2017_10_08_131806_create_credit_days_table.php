@@ -15,8 +15,10 @@ class CreateCreditDaysTable extends Migration
     {
         Schema::create('credit_days', function (Blueprint $table) {
             $table->increments('id');
+            // $table->integer('company_id')->unsigned()->index();
+            // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            // $table->double('interest');
             $table->double('days');
-            
         });
     }
 

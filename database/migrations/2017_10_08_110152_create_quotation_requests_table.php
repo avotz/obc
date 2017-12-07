@@ -27,27 +27,25 @@ class CreateQuotationRequestsTable extends Migration
             $table->text('comments')->nullable();
             $table->tinyInteger('geo_type')->default(1); // 1 Nacional 2 Regional 3 Internacional 4 Global
             $table->tinyInteger('public')->default(1); //1 publica //0 privada
+            $table->integer('country_id');
             $table->timestamps();
         });
         Schema::create('request_supplier', function (Blueprint $table) {
-        
             $table->integer('request_id')->unsigned()->index();
             $table->foreign('request_id')->references('id')->on('quotation_requests')->onDelete('cascade');
 
             $table->integer('supplier_id')->unsigned()->index();
             $table->foreign('supplier_id')->references('id')->on('companies')->onDelete('cascade');
 
-            $table->primary(array('request_id', 'supplier_id'));
+            $table->primary(['request_id', 'supplier_id']);
         });
 
-        Schema::create('request_sector', function(Blueprint $table)
-        {
+        Schema::create('request_sector', function (Blueprint $table) {
             $table->integer('request_id')->unsigned()->index();
             $table->foreign('request_id')->references('id')->on('quotation_requests')->onDelete('cascade');
             $table->integer('sector_id')->unsigned()->index();
             $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('cascade');
             $table->primary(['request_id', 'sector_id']);
-            
         });
     }
 

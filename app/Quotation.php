@@ -12,13 +12,14 @@ class Quotation extends Model
      * @var array
      */
     protected $fillable = [
-        'transaction_id','user_id','delivery_time', 'way_of_delivery', 'way_to_pay', 'comments','geo_type','product_name','product_photo','status'
+        'transaction_id', 'user_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'comments', 'geo_type', 'product_name', 'product_photo', 'status', 'country_id'
     ];
-    public function generateTransactionId(){
-        
+
+    public function generateTransactionId()
+    {
         $transactions = $this->where('request_id', $this->request_id)->count();
-       
-        $this->transaction_id = 'Quotation '. $this->request_id.'-'.$transactions++;
+
+        $this->transaction_id = 'Quotation ' . $this->request_id . '-' . $transactions++;
 
         $quotation = $this->save();
 
@@ -27,43 +28,47 @@ class Quotation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function request()
     {
         return $this->belongsTo(QuotationRequest::class);
     }
+
     public function purchase()
     {
         return $this->hasOne(PurchaseOrder::class);
     }
+
     public function shippings()
     {
         return $this->hasMany(Shipping::class);
     }
+
     public function shippingsRequests()
     {
         return $this->hasMany(ShippingRequest::class);
     }
 
-     public function credits()
+    public function credits()
     {
         return $this->hasMany(Credit::class);
     }
+
     public function creditRequests()
     {
         return $this->hasMany(CreditRequest::class);
     }
+
     /**
       * Determine if the user has the given role.
       *
       * @param  mixed $role
       * @return boolean
       */
-      public function createdBy($user)
-      {
-          
-          return $this->where('user_id',$user->id)->count();
-      }
+    public function createdBy($user)
+    {
+        return $this->where('user_id', $user->id)->count();
+    }
 }

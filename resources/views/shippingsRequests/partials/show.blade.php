@@ -2,6 +2,16 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
               
+                 @if($shippingRequest->type == 0) {{ trans('utils.national') }} @endif
+                  @if($shippingRequest->type == 1) {{ trans('utils.international') }} @endif
+                <label for="type" title="Tipo">Type</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" >
+        <div class="col-xs-12">
+            <div class="form-material form-material-success">
+              
                  @if($shippingRequest->delivery_time == 1) {{ trans('utils.normal') }} @endif
                   @if($shippingRequest->delivery_time == 2) {{ trans('utils.express') }} @endif
                 <label for="delivery_time" title="Tiempo de entrega">Delivery time</label>

@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class PurchaseOrder extends Model
 {
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = [
-        'transaction_id','user_id', 'file', 'comments','geo_type','status'
+        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id'
     ];
 
-    public function generateTransactionId(){
-        
+    public function generateTransactionId()
+    {
         $transactions = $this->where('quotation_id', $this->quotation_id)->count();
-       
-        $this->transaction_id = 'Purchase Order '. $this->quotation_id;
+
+        $this->transaction_id = 'Purchase Order ' . $this->quotation_id;
 
         $purchase = $this->save();
 
@@ -33,12 +33,11 @@ class PurchaseOrder extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function quotation()
     {
         return $this->belongsTo(Quotation::class);
     }
-    
 }

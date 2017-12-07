@@ -1,20 +1,17 @@
 <?php 
 
 return [
-    
-        'activity'  => [
+        'activity' => [
             '1' => 'Consumer',
             '2' => 'Supplier'
-           
         ],
-        'role'  => [
+        'role' => [
             '1' => 'default',
             '2' => 'warning',
             '3' => 'info',
             '4' => 'success',
             '5' => 'danger',
             '6' => 'danger'
-           
         ],
         /*'way_to_pay'  => [
             '0' => 'Cash',
@@ -22,86 +19,70 @@ return [
             '45' => 'Credit 45 days',
             '60' => 'Credit 60 days',
             '90' => 'Credit 90 days'
-         
+
         ],*/
-        'way_of_delivery'  => [
+        'way_of_delivery' => [
             '0' => '',
             '1' => 'Pickup',
             '2' => 'At Home',
             '3' => 'Shipping Charge',
         ],
-        
+
         /*'delivery_time'  => [
             '0' => 'Immediate',
             '1' => '1 day',
             '2' => '2 days',
             '3' => '3 days',
-         
+
         ],*/
-        'geo_type'  => [
+        'geo_type' => [
             '1' => 'National',
             '2' => 'Regional',
             '3' => 'International',
             '4' => 'Global'
-           
         ],
-        'public'  => [
+        'public' => [
             '0' => 'Private',
             '1' => 'Public',
-            'colors' =>[
+            'colors' => [
                 '0' => 'danger',
                 '1' => 'info'
             ]
-           
         ],
-        'purchase_status_color'  => [
+        'purchase_status_color' => [
             '0' => 'warning',
             '1' => 'success',
             '2' => 'danger',
-            
-           
         ],
-        'purchase_status'  => [
+        'purchase_status' => [
             '0' => 'Pending',
             '1' => 'Granted',
             '2' => 'Rejected',
-            
-           
         ],
-        'shipping_status_color'  => [
+        'shipping_status_color' => [
             '0' => 'warning',
             '1' => 'success',
             '2' => 'danger',
-            
-           
         ],
-        'shipping_status'  => [
+        'shipping_status' => [
             '0' => 'Pending',
             '1' => 'Granted',
             '2' => 'Rejected',
-            
-           
         ],
-        'shipping_status_color'  => [
+        'shipping_status_color' => [
             '0' => 'warning',
             '1' => 'success',
             '2' => 'danger',
-            
-           
         ],
-        'credit_status'  => [
+        'credit_status' => [
             '0' => 'Pending',
             '1' => 'Approved',
             '2' => 'Rejected',
-            
-           
         ],
-         'credit_status_color'  => [
+         'credit_status_color' => [
             '0' => 'warning',
             '1' => 'success',
             '2' => 'danger',
-            
-           
         ],
         'day' => 'Day',
         'days' => 'Days',
@@ -110,5 +91,6 @@ return [
         'cash' => 'Cash',
         'normal' => 'Normal',
         'express' => 'Express',
-    
+        'national' => 'Nacional',
+        'international' => 'Internacional',
     ];

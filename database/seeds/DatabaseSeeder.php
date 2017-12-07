@@ -21,31 +21,38 @@ class DatabaseSeeder extends Seeder
     private $permissions = [
         [
          'name' =>'View_all_trans_company',
-         'label' => 'View all company transactions'
+         'label' => 'View all company transactions',
+         'label_es' => 'Ver todas las trasacciones de la compañia'
         ],
         [
             'name' =>'view_cxp',
-            'label' => 'View Cxp'
+            'label' => 'View Cxp',
+            'label_es' => 'Ver Cxp'
         ],
         [
             'name' =>'do_trans_nac',
-            'label' => 'Do national transactions'
+            'label' => 'Do national transactions',
+            'label_es' => 'Hacer transacciones nacionales'
         ],
         [
             'name' =>'do_trans_reg',
-            'label' => 'Do regional transactions'
+            'label' => 'Do regional transactions',
+            'label_es' => 'Hacer transacciones regionales'
         ],
         [
             'name' =>'do_trans_int',
-            'label' => 'Do international transactions'
+            'label' => 'Do international transactions',
+            'label_es' => 'Hacer transacciones internacionales'
         ],
         [
             'name' =>'do_trans_glo',
-            'label' => 'Do global transactions'
+            'label' => 'Do global transactions',
+            'label_es' => 'Hacer transacciones globales'
         ],
         [
             'name' =>'do_trans_priv',
-            'label' => 'Do private transactions'
+            'label' => 'Do private transactions',
+            'label_es' => 'Hacer transacciones privadas'
         ],
        
     ];
@@ -296,7 +303,7 @@ class DatabaseSeeder extends Seeder
         foreach ($this->permissions as $permission) {
            
             \DB::table('permissions')->insert(
-                ['name' => $permission['name'], 'label' => $permission['label']]
+                ['name' => $permission['name'], 'label' => $permission['label'], 'label_es' => $permission['label_es']]
             );
         }
         foreach ($this->sectorsSubsectors as $sector) {

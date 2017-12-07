@@ -32,7 +32,7 @@
                     <div class=" "><b title="Id de trasacción">Transaction ID:</b> {{ $request->transaction_id }}</div>
                     <div class=""><b title="Id de usuario">User ID:</b> {{ $user->public_code }} / {{ $user->profile->fullname }} / {{ $user->profile->position_held }} </div>
                     <div class=" "><b title="Fecha">Date:</b> {{ $request->created_at }} </div>
-                    
+                     <div class=" "><b title="Teléfono y correo">Phone & Email:</b> {{ $partner->phones }} -  {{ $user->email }}</div>
                     
                 </div>
                

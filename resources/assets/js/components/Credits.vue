@@ -47,7 +47,7 @@
                         </thead>
                         <tbody>
                             
-                            <tr v-for="requests in creditRequests.data">
+                            <tr v-for="requests in creditRequests.data" :key="requests.id">
                                 <td class="text-center font-w600">{{ requests.transaction_id }}</td>
                                 <td class="text-center">
                                     
@@ -94,7 +94,7 @@
                         </thead>
                         <tbody>
                            
-                            <tr v-for="credit in credits.data">
+                            <tr v-for="credit in credits.data" :key="credit.id">
                                 <td class="text-center font-w600">{{ credit.transaction_id }}</td>
                                  <td class="text-center font-w600">{{ credit.credit_request.transaction_id }}</td>
                                 <td class="text-center">

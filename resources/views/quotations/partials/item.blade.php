@@ -35,6 +35,8 @@
     <div class=" "><b title="Id de transacción">Transaction ID:</b> {{ $quotation->transaction_id }}</div>
     <div class=""><b title="Id de usuario">User ID:</b> {{ $user->public_code }} / {{ $user->profile->fullname }} / {{ $user->profile->position_held }} </div>
     <div class=" "><b title="Fecha">Date:</b> {{ $quotation->created_at }} </div>
+    <div class=" "><b title="Teléfono y correo">Phone & Email:</b> {{ $partner->phones }} -  {{ $user->email }}</div>
+        
         
     </div>
                 

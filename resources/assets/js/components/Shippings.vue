@@ -39,7 +39,8 @@
                             <tr>
                                 <th class="text-center" >ID</th>
                                 <th class="text-center" ><i class="si si-user"></i></th>
-                                <th>Delivery Time</th>
+                                 <th class="text-center">Type</th>
+                                <th class="text-center">Delivery Time</th>
                                 <th class="hidden-xs" >Request Date</th>
                                 <th class="hidden-xs" >Make a Shipping</th>
                                 <th class="text-center">Actions</th>
@@ -47,12 +48,13 @@
                         </thead>
                         <tbody>
                             
-                            <tr v-for="requests in shippingsRequests.data">
+                            <tr v-for="requests in shippingsRequests.data" :key="requests.id">
                                 <td class="text-center font-w600">{{ requests.transaction_id }}</td>
                                 <td class="text-center">
                                     
                                     {{ requests.quotation.user.company.public_code }}
                                 </td>
+                                 <td class="text-center font-w600">{{ (requests.type) ? 'International' : 'National' }}</td>
                                 <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
                                 <td class="text-center">
@@ -94,7 +96,7 @@
                         </thead>
                         <tbody>
                            
-                            <tr v-for="shipping in shippings.data">
+                            <tr v-for="shipping in shippings.data" :key="shipping.id">
                                 <td class="text-center font-w600">{{ shipping.transaction_id }}</td>
                                  <td class="text-center font-w600">{{ shipping.shipping_request.transaction_id }}</td>
                                 <td class="text-center">

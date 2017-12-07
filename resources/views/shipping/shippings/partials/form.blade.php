@@ -1,3 +1,14 @@
+    
+    <div class="form-group" >
+        <div class="col-xs-12">
+            <div class="form-material form-material-success">
+              
+                 @if(isset($shippingRequest) && $shippingRequest->type == 0) {{ trans('utils.national') }} @endif
+                  @if(isset($shippingRequest) && $shippingRequest->type == 1) {{ trans('utils.international') }} @endif
+                <label for="type" title="Tipo">Type</label>
+            </div>
+        </div>
+    </div>
     <div class="form-group{{ $errors->has('delivery_time') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
