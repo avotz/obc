@@ -56,6 +56,12 @@ class CreditController extends Controller
         $creditRequest = CreditRequest::find($creditRequest_id);
         
         $quotation = $creditRequest->quotation;
+
+        if ($creditRequest->credits()->where('status', 1)->first()) {
+
+            flash('This credit Request already has an approved Credit', 'warning');
+            return back();
+        }
         
         $partner =  $quotation->user->companies->first();
 

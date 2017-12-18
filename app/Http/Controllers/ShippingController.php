@@ -91,10 +91,10 @@ class ShippingController extends Controller
         $partner = $quotation->user->companies->first();
         
         $user = $quotation->user->load('profile');
-    
 
+        $shippingsApproved = $quotation->shippings()->where('status', 1)->first();
 
-        return view('shippings.edit', compact('user','partner','quotation','shipping'));
+        return view('shippings.edit', compact('user','partner','quotation','shipping', 'shippingsApproved'));
     }
 
     public function update_status($id)

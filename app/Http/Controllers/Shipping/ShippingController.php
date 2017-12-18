@@ -58,6 +58,12 @@ class ShippingController extends Controller
         $shippingRequest = ShippingRequest::find($shippingRequest_id);
         
         $quotation = $shippingRequest->quotation;
+
+        if ($shippingRequest->shippings()->where('status', 1)->first()) {
+
+            flash('This shipping Request already has an approved Shipping', 'warning');
+            return back();
+        }
         
         $partner =  $quotation->user->companies->first();
 

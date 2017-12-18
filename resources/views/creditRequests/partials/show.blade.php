@@ -12,15 +12,6 @@
             <div class="form-material form-material-success">
               
                 {{ trans('utils.credit') }} {{ $creditRequest->credit_time }} {{ trans('utils.days') }}
-                <label for="amount">Credit time</label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" >
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-              
-                {{ trans('utils.credit') }} {{ $creditRequest->credit_time }} {{ trans('utils.days') }}
                 <label for="credit_time">Credit time</label>
             </div>
         </div>

@@ -33,6 +33,12 @@ class ShippingRequestController extends Controller
     {
         $quotation = Quotation::find($quotation_id);
 
+        if($quotation->shippings()->where('status',1)->first()){
+
+            flash('This quotation already has an approved shipping', 'warning');
+            return back();
+        }
+
         $partner = $quotation->user->companies->first();
 
         $user = $quotation->user->load('profile');

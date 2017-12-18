@@ -12,7 +12,7 @@ class PurchaseOrder extends Model
     * @var array
     */
     protected $fillable = [
-        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id', 'currency'
+        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id', 'currency', 'shipping_company', 'credit_company','amount'
     ];
 
     public function generateTransactionId()

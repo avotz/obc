@@ -33,6 +33,12 @@ class CreditRequestController extends Controller
     {
         $quotation = Quotation::find($quotation_id);
 
+        if ($quotation->credits()->where('status', 1)->first()) {
+
+            flash('This quotation already has an approved Credit', 'warning');
+            return back();
+        }
+
         $partner = $quotation->user->companies->first();
 
         $user = $quotation->user->load('profile');

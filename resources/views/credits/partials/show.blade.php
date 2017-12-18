@@ -92,8 +92,9 @@
     <div class="form-group">
         <div class="col-xs-12 col-sm-8 col-md-12">
          @if(isset($credit) && $credit->isPending())
-                           
+                           @if(!$creditsApproved)
                             <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/credits/{{ $credit->id }}/status">Aproved</button>
+                            @endif
                             <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/credits/{{ $credit->id }}/status">Reject</button>
             @endif
                                  

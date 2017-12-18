@@ -92,9 +92,9 @@ class CreditController extends Controller
         
         $user = $quotation->user->load('profile');
     
+        $creditsApproved = $quotation->credits()->where('status', 1)->first();
 
-
-        return view('credits.edit', compact('user','partner','quotation','credit'));
+        return view('credits.edit', compact('user','partner','quotation','credit', 'creditsApproved'));
     }
 
     public function update_status($id)

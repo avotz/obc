@@ -49,7 +49,41 @@ class PurchaseController extends Controller
 
         $user = $quotation->user->load('profile');
 
-        return view('purchases.create', compact('user', 'partner', 'quotation'));
+        $shipping_company = null;
+        $credit_company = null;
+        
+        $shipping_Granted = $quotation->shippings()->where('status', 1)->first();
+        
+        if($shipping_Granted)
+            $shipping_company = $shipping_Granted->user->companies->first();
+
+
+        $credit_approved = $quotation->credits()->where('status', 1)->first();
+
+        if ($credit_approved)
+            $credit_company = $credit_approved->user->companies->first();
+
+
+        $company = auth()->user()->companies->first();
+
+        $country = $company->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+
+      
+
+        return view('purchases.create', compact('user', 'partner', 'quotation', 'shipping_company', 'credit_company','currencies'));
     }
 
     public function store($quotation_id)
@@ -112,7 +146,40 @@ class PurchaseController extends Controller
 
         $user = $quotation->user->load('profile');
 
-        return view('purchases.edit', compact('user', 'partner', 'quotation', 'purchase'));
+        $shipping_company = null;
+        $credit_company = null;
+
+        $shipping_Granted = $quotation->shippings()->where('status', 1)->first();
+
+        if ($shipping_Granted)
+            $shipping_company = $shipping_Granted->user->companies->first();
+
+
+        $credit_approved = $quotation->credits()->where('status', 1)->first();
+
+        if ($credit_approved)
+            $credit_company = $credit_approved->user->companies->first();
+
+
+        $company = auth()->user()->companies->first();
+
+        $country = $company->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+
+
+        return view('purchases.edit', compact('user', 'partner', 'quotation', 'purchase', 'shipping_company', 'credit_company', 'currencies'));
     }
 
     public function update($id)
