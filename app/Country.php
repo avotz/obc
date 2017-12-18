@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     protected $fillable = [
-        'name', 'code', 'currency'
+        'name', 'code', 'currency', 'currency_symbol', 'currency_exchange'
     ];
 
     public function scopeSearch($query, $search)

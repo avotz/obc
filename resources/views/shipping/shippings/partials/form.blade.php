@@ -35,9 +35,9 @@
         </div>
     </div>
     <div class="form-group{{ $errors->has('cost') ? ' has-error' : '' }}">
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="cost" name="cost" value="{{ isset($shipping) ? $shipping->cost : ''  }}" {{ (isset($shipping) && !$shipping->isPending()) ? 'readonly' : '' }}>
+        <div class="col-xs-6">
+            <div class="form-material">
+                 <input class="form-control" type="text" id="cost" name="cost" value="{{ isset($shipping) ? $shipping->cost : ''  }}" {{ (isset($shipping) && !$shipping->isPending()) ? 'readonly' : '' }}>
                 <label for="cost" title="Costo">Cost</label>
                 @if ($errors->has('cost'))
                     <span class="help-block">
@@ -46,7 +46,26 @@
                 @endif
             </div>
         </div>
+        <div class="col-xs-6">
+            <div class="form-material">
+                <select name="currency" id="currency"  class="form-control">
+
+                    
+                         
+    
+                        @foreach($currencies as $currency)    
+                            <option value="{{ $currency['currency'] }}" @if(isset($shipping) && $shipping->currency == $currency['currency']) selected="selected" @endif title="{{ $currency['currency'] }}"> {{ $currency['symbol'] }} ({{ $currency['currency'] }})</option>
+                        @endforeach
+                   
+                       
+                  
+                   
+                </select>
+                <label for="delivery_time" title="Moneda">Currency</label>
+            </div>
+        </div>
     </div>
+    
     
     <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
         <div class="col-xs-12">

@@ -21,6 +21,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->string('transaction_id')->nullable();
             $table->string('file')->nullable();
             $table->text('comments')->nullable();
+            $table->string('currency');
             $table->tinyInteger('geo_type')->default(1); // 1 Nacional 2 Regional 3 Internacional 4 Global
             $table->tinyInteger('status')->default(0); //1 Granted
             $table->integer('country_id');

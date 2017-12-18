@@ -79,6 +79,66 @@
         </div>
         <div class="col-sm-5 col-lg-4">
             <!-- Products -->
+             <div class="block">
+                <div class="block-header bg-gray-lighter">
+                    <ul class="block-options">
+                        
+                    </ul>
+                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> % Interest for credits</h3>
+                </div>
+                <div class="block-content">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/credit/companies/{{ $company->id }}/interest">
+                        <input type="hidden" name="_method" value="PUT">
+                        {{ csrf_field() }}
+                            <div class="form-group{{ $errors->has('interest_30') ? ' has-error' : '' }}">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <input class="form-control" type="text" id="interest_30" name="interest_30" value="{{ $company->interest->interest_30 }}">
+                                        <label for="interest_30" title="% Interes para 30 dias"> % Interest for 30 days </label>
+                                        @if ($errors->has('interest_30'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('interest_30') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('interest_45') ? ' has-error' : '' }}">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <input class="form-control" type="text" id="interest_45" name="interest_45" value="{{ $company->interest->interest_45 }}">
+                                        <label for="interest_45" title="% Interes para 45 dias"> % Interest for 45 days </label>
+                                        @if ($errors->has('interest_45'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('interest_45') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('interest_60') ? ' has-error' : '' }}">
+                                <div class="col-xs-12">
+                                    <div class="form-material form-material-success">
+                                        <input class="form-control" type="text" id="interest_60" name="interest_60" value="{{ $company->interest->interest_60 }}">
+                                        <label for="interest_60" title="% Interes para 60 dias"> % Interest for 60 days </label>
+                                        @if ($errors->has('interest_60'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('interest_60') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="col-xs-12 col-sm-6 col-md-5">
+                               
+                                    <button class="btn btn-success" type="submit">Save</button>
+                              
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
             <div class="block">
                 <div class="block-header bg-gray-lighter">
                     <ul class="block-options">

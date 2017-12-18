@@ -64,6 +64,8 @@ class UserRepository extends DbRepository{
 
                     $roleCredit =  Role::whereName('credit')->first();
                     $user->assignRole($roleCredit);
+                    $company->generateDefaultInterests();
+
                 }
         
                

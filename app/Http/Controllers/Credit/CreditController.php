@@ -61,11 +61,43 @@ class CreditController extends Controller
 
         $user =  $quotation->user->load('profile');
 
+        $company_credit = auth()->user()->companies->first();
+
+        $country = $company_credit->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+        
+        $interests = $company_credit->interest;
+        $interest = 0;
+        $total = 0;
+      
+        if($creditRequest->credit_time == 30)
+            $interest = $interests->interest_30;
+        if ($creditRequest->credit_time == 45)
+            $interest = $interests->interest_45;
+        if ($creditRequest->credit_time == 60)
+            $interest = $interests->interest_60;
+
+        
+        $subtotal = ($interest / 100 ) * $creditRequest->amount;
+        $total = $creditRequest->amount + $subtotal;
+
        
 
 
 
-        return view('credit.credits.create', compact('user','partner','quotation','creditRequest'));
+        return view('credit.credits.create', compact('user','partner','quotation','creditRequest','interest', 'interests','total', 'currencies'));
     }
 
     public function store($creditRequest_id)
@@ -92,7 +124,7 @@ class CreditController extends Controller
        
         $data = request()->all();
 
-       $data['country_id'] = auth()->user()->companies->first()->id;
+       $data['country_id'] = auth()->user()->companies->first()->country;
 
 
         $data['user_id'] = auth()->id();
@@ -164,10 +196,42 @@ class CreditController extends Controller
         $partner = $quotation->user->companies->first();
         
         $user = $quotation->user->load('profile');
+
+        $company_credit = auth()->user()->companies->first();
+
+        $country = $company_credit->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+
+        $interests = $company_credit->interest;
+        $interest = 0;
+        $total = 0;
+
+        if ($creditRequest->credit_time == 30)
+            $interest = $interests->interest_30;
+        if ($creditRequest->credit_time == 45)
+            $interest = $interests->interest_45;
+        if ($creditRequest->credit_time == 60)
+            $interest = $interests->interest_60;
+
+
+        $subtotal = ($interest / 100) * $creditRequest->amount;
+        $total = $creditRequest->amount + $subtotal;
     
 
 
-        return view('credit.credits.edit', compact('user','partner','quotation','credit','creditRequest'));
+        return view('credit.credits.edit', compact('user','partner','quotation','credit','creditRequest','interest','interests','total', 'currencies'));
     }
 
     public function update($id)
@@ -231,6 +295,19 @@ class CreditController extends Controller
 
 
         return redirect('credit/credit-requests');
+    }
+
+    public function update_interest($company_id)
+    {
+        
+        $interest = \DB::table('interests')
+            ->where('company_id', $company_id)
+            ->update(['interest_30' => request('interest_30'),
+                      'interest_45' => request('interest_45'),
+                      'interest_60' => request('interest_60')
+                    ]); //no asistio a la cita  
+
+        return back();
     }
 
     public function deleteFilecredit($id)

@@ -199,7 +199,10 @@ class DatabaseSeeder extends Seeder
 
         $country = factory(Country::class, 1)->create([
             'name' => 'Costa Rica',
-            'code' => 'CR'
+            'code' => 'CR',
+            'currency' => 'CRC',
+            'currency_symbol' => '₡',
+            'currency_exchange' => 560
             
         ])->first();
         

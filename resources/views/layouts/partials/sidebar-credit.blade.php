@@ -30,6 +30,11 @@
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/credit/credit-requests" title="Solicitudes de crédito"><i class="si si-users"></i><span class="sidebar-mini-hide">Credit Requests</span></a>
                                    
                                 </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/profile" title="% Interes por días creditos"><i class="si si-graph"></i><span class="sidebar-mini-hide">% Interest for credits</span></a>
+                                   
+                                </li>
+                                
                             
                                 
                                 

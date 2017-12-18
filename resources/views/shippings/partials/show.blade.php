@@ -14,7 +14,7 @@
               
                   {{ $shipping->cost }}
                 
-                <label for="cost" title="Costo">Cost</label>
+                <label for="cost" title="Costo">Cost</label> {{ $shipping->currency }}
             </div>
         </div>
     </div>

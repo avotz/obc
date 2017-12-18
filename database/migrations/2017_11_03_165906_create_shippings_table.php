@@ -23,6 +23,7 @@ class CreateShippingsTable extends Migration
             $table->integer('delivery_time'); //1 normal 2 express
             $table->integer('type')->default(0); //0 nacional 1 internacional
             $table->double('cost');
+            $table->string('currency');
             $table->dateTime('date');
             $table->string('file')->nullable();
             $table->text('comments')->nullable();

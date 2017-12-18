@@ -69,7 +69,9 @@ $factory->define(App\Country::class, function (Faker $faker) {
     return [
         'name'=> $faker->country,
         'code'=> $faker->countryCode,
-        'currency'=> $faker->currencyCode
+        'currency'=> $faker->currencyCode,
+        'currency_symbol' => $faker->currencyCode,
+        'currency_exchange' => 0
         
       
     ];

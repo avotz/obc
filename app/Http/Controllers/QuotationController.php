@@ -77,7 +77,7 @@ class QuotationController extends Controller
 
         $data = request()->all();
 
-        $data['country_id'] = auth()->user()->companies->first()->id;
+        $data['country_id'] = auth()->user()->companies->first()->country;
 
         $data['user_id'] = auth()->id();
         $data['geo_type'] = $quotationRequest->geo_type;

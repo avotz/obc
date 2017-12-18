@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CreditRequest extends Model
 {
     protected $fillable = [
-        'transaction_id', 'user_id', 'file', 'comments', 'date', 'amount', 'credit_time', 'country_id'
+        'transaction_id', 'user_id', 'file', 'comments', 'date', 'amount', 'currency', 'credit_time', 'country_id'
     ];
 
     public function scopeSearch($query, $search)

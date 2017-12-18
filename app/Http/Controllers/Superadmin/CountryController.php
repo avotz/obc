@@ -35,7 +35,7 @@ class CountryController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',
-            //'currency' => 'required|string|max:255',
+            'currency' => 'required|string|max:255',
             
         ]
         );
@@ -78,7 +78,7 @@ class CountryController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',
-            //'currency' => 'required|string|max:255',
+            'currency' => 'required|string|max:255',
             
         ]
         );

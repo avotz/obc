@@ -1,5 +1,5 @@
     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($creditRequest) ? $creditRequest->amount : old('amount') }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }}>
                 <label for="comments">Amount </label>
@@ -9,6 +9,24 @@
                     </span>
                 @endif
             </div>
+        </div>
+         <div class="col-xs-6">
+          <div class="form-material form-material-success">
+            <select name="currency" id="currency"  class="form-control">
+
+                    
+                         
+    
+                        @foreach($currencies as $currency)    
+                            <option value="{{ $currency['currency'] }}" @if(isset($creditRequest) && $creditRequest->currency == $currency['currency']) selected="selected" @endif title="{{ $currency['currency'] }}"> {{ $currency['symbol'] }} ({{ $currency['currency'] }})</option>
+                        @endforeach
+                   
+                       
+                  
+                   
+                </select>
+                <label for="currency" title="Moneda">Currency</label>
+             </div>
         </div>
     </div>
     <div class="form-group{{ $errors->has('credit_time') ? ' has-error' : '' }}">

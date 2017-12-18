@@ -57,7 +57,7 @@ class ShippingRequestController extends Controller
         $data = request()->all();
 
         $data['user_id'] = auth()->id();
-        $data['country_id'] = auth()->user()->companies->first()->id;
+        $data['country_id'] = auth()->user()->companies->first()->country;
 
         $shippingRequest = $quotation->shippingsRequests()->create($data);
         $shippingRequest->generateTransactionId();

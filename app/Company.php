@@ -37,6 +37,15 @@ class Company extends Model
 
         return $company;
     }
+    public function generateDefaultInterests()
+    {
+        return $this->interest()->create();
+    }
+    
+    public function interest()
+    {
+        return $this->hasOne(Interest::class);
+    }
    
     public function users()
     {

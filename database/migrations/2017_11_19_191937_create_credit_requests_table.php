@@ -20,6 +20,7 @@ class CreateCreditRequestsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('transaction_id')->nullable();
             $table->double('amount');
+            $table->string('currency');
             $table->double('credit_time');
             $table->dateTime('date');
             $table->string('file')->nullable();
@@ -38,6 +39,7 @@ class CreateCreditRequestsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('transaction_id')->nullable();
             $table->double('amount');
+            $table->string('currency');
             $table->double('credit_time');
             $table->dateTime('date');
             $table->dateTime('approval_date');

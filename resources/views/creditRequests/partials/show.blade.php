@@ -3,7 +3,7 @@
             <div class="form-material form-material-success">
               
                 {{ $creditRequest->amount }}
-                <label for="amount">Amount</label>
+                <label for="amount">Amount</label> {{ $creditRequest->currency }}
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
         <div class="col-xs-12">
             @if(isset($creditRequest) && $creditRequest->file)
               
-                <delete-file :transaction-id="{{ $creditRequest->id }}" url-file="{{ getCreditRequestFile($creditRequest) }}" filename="{{ $creditRequest->file }}" :read="{{ $creditRequest->isPending() ? 'false' : 'true' }}" url="/credit-requests/file">Delete Current File</delete-file>
+                <delete-file :transaction-id="{{ $creditRequest->id }}" url-file="{{ getCreditRequestFile($creditRequest) }}" filename="{{ $creditRequest->file }}" :read="{{ ($creditRequest->isPending() || $creditRequest->user_id != auth()->id()) ? 'true' : 'false' }}" url="/credit-requests/file">Delete Current File</delete-file>
               
             @endif
         </div>

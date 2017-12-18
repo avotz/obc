@@ -206,6 +206,7 @@ Route::prefix('credit')->middleware('authByRole:credit')->group(function ()
     Route::post('credit-requests/{credit}/credits', 'Credit\CreditController@store');
     Route::get('credits/{credit}/edit', 'Credit\CreditController@edit');
     Route::put('credits/{credit}/status', 'Credit\CreditController@update_status');
+    Route::put('companies/{company}/interest', 'Credit\CreditController@update_interest');
 
     Route::resource('credits', 'Credit\CreditController');
     

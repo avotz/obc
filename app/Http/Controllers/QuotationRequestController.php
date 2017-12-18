@@ -87,7 +87,7 @@ class QuotationRequestController extends Controller
         );
 
         $data = request()->all();
-        $data['country_id'] = auth()->user()->companies->first()->id;
+        $data['country_id'] = auth()->user()->companies->first()->country;
 
         $quotationRequest = auth()->user()->requests()->create($data);
 

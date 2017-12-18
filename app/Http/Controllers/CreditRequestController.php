@@ -37,7 +37,24 @@ class CreditRequestController extends Controller
 
         $user = $quotation->user->load('profile');
 
-        return view('creditRequests.create', compact('user', 'partner', 'quotation'));
+        $company = auth()->user()->companies->first();
+
+        $country = $company->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+
+        return view('creditRequests.create', compact('user', 'partner', 'quotation', 'currencies'));
     }
 
     public function store($quotation_id)
@@ -58,7 +75,7 @@ class CreditRequestController extends Controller
         $data = request()->all();
 
         $data['user_id'] = auth()->id();
-        $data['country_id'] = auth()->user()->companies->first()->id;
+        $data['country_id'] = auth()->user()->companies->first()->country;
 
         $creditRequest = $quotation->creditRequests()->create($data);
         $creditRequest->generateTransactionId();
@@ -120,7 +137,24 @@ class CreditRequestController extends Controller
 
         $user = $quotation->user->load('profile');
 
-        return view('creditRequests.edit', compact('user', 'partner', 'quotation', 'creditRequest'));
+        $company = auth()->user()->companies->first();
+
+        $country = $company->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+
+        return view('creditRequests.edit', compact('user', 'partner', 'quotation', 'creditRequest', 'currencies'));
     }
 
     public function update($id)

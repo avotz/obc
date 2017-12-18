@@ -63,11 +63,26 @@ class ShippingController extends Controller
 
         $user =  $quotation->user->load('profile');
 
+        $company_shipping = auth()->user()->companies->first();
+        $country = $company_shipping->countries->first();
+
        
 
+        $currencies = [
+                [
+                    'currency' => $country->currency,
+                    'symbol' => $country->currency_symbol
+                ],
+                [
+                    'currency' => 'USD',
+                    'symbol' => '$'
+                ]
+            ];
+
+    
 
 
-        return view('shipping.shippings.create', compact('user','partner','quotation','shippingRequest'));
+        return view('shipping.shippings.create', compact('user','partner','quotation','shippingRequest', 'currencies'));
     }
 
     public function store($shippingRequest_id)
@@ -90,7 +105,7 @@ class ShippingController extends Controller
        
         $data = request()->all();
    
-        $data['country_id'] = auth()->user()->companies->first()->id;
+        $data['country_id'] = auth()->user()->companies->first()->country;
         $data['type'] =  $shippingRequest->type;
 
 
@@ -163,10 +178,26 @@ class ShippingController extends Controller
         $partner = $quotation->user->companies->first();
         
         $user = $quotation->user->load('profile');
+
+        $company_shipping = auth()->user()->companies->first();
+        $country = $company_shipping->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
     
 
 
-        return view('shipping.shippings.edit', compact('user','partner','quotation','shipping','shippingRequest'));
+        return view('shipping.shippings.edit', compact('user','partner','quotation','shipping','shippingRequest', 'currencies'));
     }
 
     public function update($id)

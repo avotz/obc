@@ -13,7 +13,7 @@ class Credit extends Model
      */
 
     protected $fillable = [
-        'transaction_id', 'user_id', 'quotation_id', 'credit_request_id', 'file', 'comments', 'amount', 'date', 'approval_date', 'payment_date', 'interest', 'total', 'credit_time', 'country_id'
+        'transaction_id', 'user_id', 'quotation_id', 'credit_request_id', 'file', 'comments', 'amount', 'currency', 'date', 'approval_date', 'payment_date', 'interest', 'total', 'credit_time', 'country_id'
     ];
 
     public function scopeSearch($query, $search)

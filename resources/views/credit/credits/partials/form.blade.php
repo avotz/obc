@@ -1,5 +1,6 @@
+
      <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-        <div class="col-xs-12">
+         <div class="col-xs-6">
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($credit) ? $credit->amount : (isset($creditRequest) ? $creditRequest->amount : old('amount') ) }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }}>
                 <label for="comments">Amount <span class="label label-danger">( {{ isset($creditRequest) ? $creditRequest->amount : '' }} )</span></label>
@@ -8,6 +9,34 @@
                         <strong>{{ $errors->first('amount') }}</strong>
                     </span>
                 @endif
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-material form-material-success">
+                   @foreach($currencies as $currency)    
+                        @if(isset($credit) && $credit->currency == $currency['currency']) 
+
+                            {{ $currency['symbol'] }} ({{ $currency['currency'] }})
+                            <input type="hidden" id="currency" name="currency" value="{{ $currency['currency'] }}">
+                        @elseif(isset($creditRequest) && $creditRequest->currency == $currency['currency'])  
+                             {{ $currency['symbol'] }} ({{ $currency['currency'] }})
+                             <input type="hidden" id="currency" name="currency" value="{{ $currency['currency'] }}">
+                        @endif 
+                   @endforeach
+                <!-- <select name="currency" id="currency"  class="form-control" readonly>
+
+                    
+                         
+    
+                        @foreach($currencies as $currency)    
+                            <option value="{{ $currency['currency'] }}" @if(isset($credit) && $credit->currency == $currency['currency']) selected="selected" @endif title="{{ $currency['currency'] }}"> {{ $currency['symbol'] }} ({{ $currency['currency'] }})</option>
+                        @endforeach
+                   
+                       
+                  
+                   
+                </select> -->
+                <label for="currency" title="Moneda">Currency</label>
             </div>
         </div>
     </div>
@@ -77,7 +106,7 @@
     <div class="form-group{{ $errors->has('interest') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="interest" name="interest" value="{{ isset($credit) ? $credit->interest  : old('interest') }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }}>
+                <input class="form-control" type="text" id="interest" name="interest" value="{{ isset($credit) ? $credit->interest  : $interest }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }} readonly>
                 <label for="comments">Interest</label>
                 @if ($errors->has('interest'))
                     <span class="help-block">
@@ -90,7 +119,7 @@
      <div class="form-group{{ $errors->has('total') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="total" name="total" value="{{ isset($credit) ? $credit->total  : old('total') }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }}>
+                <input class="form-control" type="text" id="total" name="total" value="{{ isset($credit) ? $credit->total  : $total }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }} readonly>
                 <label for="total">Total</label>
                 @if ($errors->has('total'))
                     <span class="help-block">
@@ -115,7 +144,7 @@
             @endif
             @if(isset($credit) && $credit->file)
               
-                <delete-file :transaction-id="{{ $credit->id }}" url-file="{{ getShippingFile($credit) }}" filename="{{ $credit->file }}" :read="{{ $credit->isPending() ? 'false' : 'true' }}">Delete Current File</delete-file>
+                <delete-file :transaction-id="{{ $credit->id }}" url-file="{{ getCreditFile($credit) }}" filename="{{ $credit->file }}" :read="{{ $credit->isPending() ? 'false' : 'true' }}">Delete Current File</delete-file>
               
             @endif
         </div>

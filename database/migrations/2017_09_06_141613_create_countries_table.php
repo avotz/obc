@@ -18,6 +18,8 @@ class CreateCountriesTable extends Migration
             $table->string('name')->unique();
             $table->string('code');
             $table->string('currency')->nullable();
+            $table->string('currency_symbol')->nullable();
+            $table->double('currency_exchange')->default(0);
             $table->timestamps();
         });
 

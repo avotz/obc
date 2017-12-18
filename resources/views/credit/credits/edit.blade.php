@@ -113,11 +113,34 @@
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
 <script src="/js/plugins/magnific-popup/magnific-popup.min.js"></script>
-<script src="{{ mix('/js/shippings.js') }}"></script>
+<script src="{{ mix('/js/credits.js') }}"></script>
 
 <script>
         // Init page helpers (Magnific Popup plugin)
         App.initHelpers('magnific-popup');
+
+         jQuery('select[name=credit_time]').change(function (e) {
+            if (jQuery(this).val() == '30') {
+                jQuery('#interest').val({{ $interests->interest_30 }});
+            } 
+            if (jQuery(this).val() == '45') {
+                jQuery('#interest').val({{ $interests->interest_45 }});
+            } 
+            if (jQuery(this).val() == '60') {
+                jQuery('#interest').val({{ $interests->interest_60 }});
+            } 
+          
+            var amount = parseFloat(jQuery('#amount').val());
+            var interest = parseFloat(jQuery('#interest').val() / 100);
+
+            var subtotal = interest * amount;
+
+            var total = amount + subtotal;
+
+            jQuery('#total').val(total);
+
+        });
+
 
 </script>
 @endsection
