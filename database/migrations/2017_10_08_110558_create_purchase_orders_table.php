@@ -23,7 +23,6 @@ class CreatePurchaseOrdersTable extends Migration
             $table->text('comments')->nullable();
             $table->string('shipping_company')->nullable();
             $table->string('credit_company')->nullable();
-            $table->string('file')->nullable();
             $table->double('amount')->default(0);
             $table->string('currency');
             $table->tinyInteger('geo_type')->default(1); // 1 Nacional 2 Regional 3 Internacional 4 Global
