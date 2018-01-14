@@ -125,7 +125,8 @@ function getCreditRequestFile($creditRequest)
    
 
     $url = '';
-    
+    if (!$creditRequest->file) return "#";
+
     if(Storage::disk('public')->exists('credit-requests/'. $creditRequest->id.'/files/'. $creditRequest->file))
         $url = Storage::url('credit-requests/'. $creditRequest->id.'/files/'. $creditRequest->file);
     else
@@ -140,6 +141,7 @@ function getCreditFile($credit)
    
 
     $url = '';
+    if (!$credit->file) return "#";
     
     if(Storage::disk('public')->exists('credits/'. $credit->id.'/files/'. $credit->file))
         $url = Storage::url('credits/'. $credit->id.'/files/'. $credit->file);
@@ -155,7 +157,8 @@ function getShippingRequestFile($shippingRequest)
    
 
     $url = '';
-    
+    if (!$shippingRequest->file) return "#";
+
     if(Storage::disk('public')->exists('shippings-requests/'. $shippingRequest->id.'/files/'. $shippingRequest->file))
         $url = Storage::url('shippings-requests/'. $shippingRequest->id.'/files/'. $shippingRequest->file);
     else
@@ -170,7 +173,8 @@ function getShippingFile($shipping)
    
 
     $url = '';
-    
+    if (!$shipping->file) return "#";
+
     if(Storage::disk('public')->exists('shippings/'. $shipping->id.'/files/'. $shipping->file))
         $url = Storage::url('shippings/'. $shipping->id.'/files/'. $shipping->file);
     else
@@ -185,6 +189,7 @@ function getQuotationFile($quotation)
    
 
     $url = '';
+    if (!$quotation->file) return "#";
     
     if(Storage::disk('public')->exists('quotations/'. $quotation->id.'/files/'. $quotation->file))
         $url = Storage::url('quotations/'. $quotation->id.'/files/'. $quotation->file);
@@ -200,7 +205,8 @@ function getRequestFile($request)
    
 
     $url = '';
-    
+    if (!$request->file) return "#";
+
     if(Storage::disk('public')->exists('requests/'. $request->id.'/files/'. $request->file))
         $url = Storage::url('requests/'. $request->id.'/files/'. $request->file);
     else
@@ -216,6 +222,8 @@ function getRequestProductPhoto($request)
 
     $url = '';
     
+    if(!$request->product_photo) return "#";
+
     if(Storage::disk('public')->exists('requests/'. $request->id.'/product/'. $request->product_photo))
         $url = Storage::url('requests/'. $request->id.'/product/'. $request->product_photo);
     else
@@ -230,7 +238,8 @@ function getQuotationProductPhoto($quotation)
    
 
     $url = '';
-    
+    if (!$quotation->product_photo) return "#";
+
     if(Storage::disk('public')->exists('quotations/'. $quotation->id.'/product/'. $quotation->product_photo))
         $url = Storage::url('quotations/'. $quotation->id.'/product/'. $quotation->product_photo);
     else
@@ -245,7 +254,9 @@ function getFilePurchase($purchase)
    
 
     $url = '';
-    
+
+    if (!$purchase->file) return "#";
+
     if(Storage::disk('public')->exists('purchases/'. $purchase->id.'/files/'. $purchase->file))
         $url = Storage::url('purchases/'. $purchase->id.'/files/'. $purchase->file);
     else
