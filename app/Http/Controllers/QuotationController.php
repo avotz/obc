@@ -10,6 +10,7 @@ use App\CreditDays;
 use App\Rules\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\GlobalSetting;
 
 class QuotationController extends Controller
 {
@@ -55,8 +56,25 @@ class QuotationController extends Controller
         $user = $quotationRequest->user->load('profile');
 
         // $creditDays = CreditDays::all();
+        $company = auth()->user()->companies->first();
 
-        return view('quotations.create', compact('user', 'partner', 'quotationRequest'));
+        $country = $company->countries->first();
+
+
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+        $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
+
+        return view('quotations.create', compact('user', 'partner', 'quotationRequest', 'currencies','discount'));
     }
 
     public function store($quotation_request_id)
@@ -81,6 +99,7 @@ class QuotationController extends Controller
 
         $data['user_id'] = auth()->id();
         $data['geo_type'] = $quotationRequest->geo_type;
+        $data['discount'] = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
         $quotation = $quotationRequest->quotations()->create($data);
         $quotation->generateTransactionId();

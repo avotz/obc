@@ -64,10 +64,13 @@
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#" title="Comisiones OBC"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
                                     <ul>
                                         <li>
-                                            <a href="#" title="Comisiones pagadas">Commissions Paid</a>
+                                            <a href="/commissions/paid" title="Comisiones pagadas">Commissions Paid</a>
                                         </li>
                                         <li>
-                                            <a href="#" title="Comisiones no pagadas">Unpaid commissions</a>
+                                            <a href="/commissions/intransit" title="Comisiones en transito">Commissions in transit</a>
+                                        </li>
+                                        <li>
+                                            <a href="/commissions/pending" title="Comisiones pendientes de pago">Pending commissions</a>
                                         </li>
                                        
                                         

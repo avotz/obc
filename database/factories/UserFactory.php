@@ -76,3 +76,13 @@ $factory->define(App\Country::class, function (Faker $faker) {
       
     ];
 });
+
+$factory->define(App\GlobalSetting::class, function (Faker $faker) {
+
+
+    return [
+        'discount' => 3,
+       
+
+    ];
+});

@@ -90,6 +90,58 @@
             </div>
         </div>
     </div>
+     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+        <div class="col-xs-6">
+            <div class="form-material form-material-success">
+                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($quotation) ? $quotation->amount : old('amount') }}">
+                <label for="amount" title="Monto original de la oferta">Original amount of the offer </label>
+                @if ($errors->has('amount'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('amount') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+         <div class="col-xs-6">
+          <div class="form-material form-material-success">
+            <select name="currency" id="currency"  class="form-control">
+
+                    
+                         
+    
+                        @foreach($currencies as $currency)    
+                            <option value="{{ $currency['currency'] }}" @if(isset($quotation) && $quotation->currency == $currency['currency']) selected="selected" @endif title="{{ $currency['currency'] }}"> {{ $currency['symbol'] }} ({{ $currency['currency'] }})</option>
+                        @endforeach
+                   
+                       
+                  
+                   
+                </select>
+                <label for="currency" title="Moneda">Currency</label>
+             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-6">
+            <div class="form-material form-material-success">
+                <span id="discount">{{ isset($quotation) ? calculateDiscount($quotation->discount, $quotation->amount) : '0' }}</span>
+                <label for="discount" title="Descuento">Discount OBC( {{ isset($quotation) ? $quotation->discount : $discount }}% ) </label>
+                
+            </div>
+        </div>
+         <div class="col-xs-6">
+          <div class="form-material form-material-success">
+               <input class="form-control" type="text" id="total" name="total" value="{{ isset($quotation) ? $quotation->total : old('total') }}">
+                <label for="total" title="Total">Total </label>
+                @if ($errors->has('total'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('total') }}</strong>
+                    </span>
+                @endif
+          </div>
+        </div>
+    </div>
+   
     <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">

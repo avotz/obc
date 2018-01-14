@@ -77,6 +77,10 @@ Route::get('credit-requests/{credit}/credits', 'CreditController@CreditsFromRequ
 Route::get('credits/{credit}/edit', 'CreditController@edit');
 Route::put('credits/{credit}/status', 'CreditController@update_status');
 
+Route::get('commissions/pending', 'CommissionController@pending');
+Route::get('commissions/intransit', 'CommissionController@intransit');
+Route::get('commissions/paid', 'CommissionController@paid');
+Route::put('commissions/{commission}/status', 'CommissionController@update_status');
 
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');

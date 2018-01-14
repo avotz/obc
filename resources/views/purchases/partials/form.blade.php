@@ -58,7 +58,7 @@
     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
         <div class="col-xs-6">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
+                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : isset($quotation) ? $quotation->total : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
                 <label for="amount">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
@@ -75,7 +75,7 @@
                          
     
                         @foreach($currencies as $currency)    
-                            <option value="{{ $currency['currency'] }}" @if(isset($purchase) && $purchase->currency == $currency['currency']) selected="selected" @endif title="{{ $currency['currency'] }}"> {{ $currency['symbol'] }} ({{ $currency['currency'] }})</option>
+                            <option value="{{ $currency['currency'] }}" @if(isset($purchase) && $purchase->currency == $currency['currency']) selected="selected" @elseif(isset($quotation) && $quotation->currency == $currency['currency']) selected="selected"  @endif title="{{ $currency['currency'] }}"> {{ $currency['symbol'] }} ({{ $currency['currency'] }})</option>
                         @endforeach
                    
                        

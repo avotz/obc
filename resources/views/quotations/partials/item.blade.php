@@ -29,6 +29,9 @@
         <div class=" "><b title="Manera de pago">Way to pay:</b> <span class="{{ ($quotation->request->way_to_pay != $quotation->way_to_pay) ? 'label label-danger' : '' }}">@if( $quotation->way_to_pay ) {{ trans('utils.credit') }} {{ $quotation->way_to_pay }} {{ trans('utils.days') }} @else Cash @endif</span></div>
         <div class=" "><b title="Solicitud valida hasta">Request valid until:</b> {{ $quotation->request->exp_date }} </div>
         <div class=" "><b title="Comentarios adicionales">Additional comment:</b> <span class="{{ ($quotation->request->comments != $quotation->comments) ? 'label label-danger' : '' }}">{{ $quotation->comments }}</span></div>
+        <div class=" "><b title="Monto original de la oferta">Original amount of the offer:</b> <span>{{ $quotation->amount }} {{ $quotation->currency }}</span></div>
+        <div class=" "><b title="Descuento OBC ({{ $quotation->discount }}%), ahorro">OBC discount ({{ $quotation->discount }}%), saving:</b> <span>{{ calculateDiscount($quotation->discount, $quotation->amount) }} {{ $quotation->currency }}</span></div>
+        <div class=" "><b title="Total Oferta">Total:</b> <span>{{ $quotation->total }} {{ $quotation->currency }}</span></div>
     </div>
     <div class="block-content block-content-mini block-content-full bg-gray-lighter">
     <div class=" "><b title="Id de asociado">Partner ID:</b> {{ $partner->public_code }} </div>

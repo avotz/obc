@@ -8,6 +8,7 @@ use App\User;
 use App\Profile;
 use App\Sector;
 use App\CreditDays;
+use App\GlobalSetting;
 class DatabaseSeeder extends Seeder
 {
     private $tables = [
@@ -205,6 +206,8 @@ class DatabaseSeeder extends Seeder
             'currency_exchange' => 560
             
         ])->first();
+
+        factory(GlobalSetting::class, 1)->create();
         
         factory(Role::class, 1)->create([ //superadmin
             'name' => 'superadmin',

@@ -8,6 +8,7 @@ use App\Quotation;
 use App\PurchaseOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Commission;
 
 class PurchaseController extends Controller
 {
@@ -94,6 +95,7 @@ class PurchaseController extends Controller
             request(),
 
             [
+            'amount' => 'required',
             'purchase_file' => 'mimes:jpeg,bmp,png,pdf',
         ]
         );
@@ -107,6 +109,15 @@ class PurchaseController extends Controller
 
         $purchase = $quotation->purchase()->create($data);
         $purchase->generateTransactionId();
+
+        $commission = Commission::create([
+            'company_id' => $quotation->user->companies->first()->id,
+            'purchase_order_id' => $purchase->id,
+            'amount'=> $purchase->amount,
+            'currency' => $purchase->currency,
+            'country_id' => $data['country_id']
+
+        ]);
 
         $mimes = ['jpg', 'jpeg', 'bmp', 'png', 'pdf'];
         $fileUploaded = 'error';
@@ -187,6 +198,7 @@ class PurchaseController extends Controller
         $this->validate(
             request(),
             [
+            'amount' => 'required',
             'purchase_file' => 'mimes:jpeg,bmp,png,pdf',
         ]
         );

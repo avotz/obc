@@ -12,7 +12,7 @@ class Quotation extends Model
      * @var array
      */
     protected $fillable = [
-        'transaction_id', 'user_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'comments', 'geo_type', 'product_name', 'product_photo', 'status', 'country_id'
+        'transaction_id', 'user_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'comments', 'geo_type', 'product_name', 'product_photo', 'status', 'country_id','amount','discount','currency','total'
     ];
 
     public function generateTransactionId()

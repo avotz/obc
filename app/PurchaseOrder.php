@@ -40,4 +40,8 @@ class PurchaseOrder extends Model
     {
         return $this->belongsTo(Quotation::class);
     }
+    public function commission()
+    {
+        return $this->hasOne(Commission::class);
+    }
 }
