@@ -38,6 +38,37 @@
             </div>
         </div>
     </div> 
+     <div class="form-group">
+        <div class="col-xs-6">
+            <div class="form-material form-material-success">
+                {{ $quotation->amount }}
+                <label for="amount" title="Monto original de la oferta">Original amount of the offer </label>
+               
+            </div>
+        </div>
+         <div class="col-xs-6">
+          <div class="form-material form-material-success">
+                {{ $quotation->currency }}
+                <label for="currency" title="Moneda">Currency</label>
+             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-6">
+            <div class="form-material form-material-success">
+                <span id="discount">{{ isset($quotation) ? calculatePercentAmount($quotation->discount, $quotation->amount) : '0' }}</span>
+                <label for="discount" title="Descuento">Discount OBC( {{ isset($quotation) ? $quotation->discount : $discount }}% ) </label>
+                
+            </div>
+        </div>
+         <div class="col-xs-6">
+          <div class="form-material form-material-success">
+               {{ $quotation->total }}
+                <label for="total" title="Total">Total </label>
+               
+          </div>
+        </div>
+    </div>
 
     <div class="form-group" >
         <div class="col-xs-12">

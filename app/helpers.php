@@ -267,7 +267,7 @@ function getFilePurchase($purchase)
      
 }
 
-function calculateDiscount($percent, $amount)
+function calculatePercentAmount($percent, $amount)
 {
    return ($percent / 100) * $amount;
 }

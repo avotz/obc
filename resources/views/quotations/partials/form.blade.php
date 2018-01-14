@@ -124,7 +124,7 @@
     <div class="form-group">
         <div class="col-xs-6">
             <div class="form-material form-material-success">
-                <span id="discount">{{ isset($quotation) ? calculateDiscount($quotation->discount, $quotation->amount) : '0' }}</span>
+                <span id="discount">{{ isset($quotation) ? calculatePercentAmount($quotation->discount, $quotation->amount) : '0' }}</span>
                 <label for="discount" title="Descuento">Discount OBC( {{ isset($quotation) ? $quotation->discount : $discount }}% ) </label>
                 
             </div>

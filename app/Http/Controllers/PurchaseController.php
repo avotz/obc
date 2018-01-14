@@ -113,7 +113,9 @@ class PurchaseController extends Controller
         $commission = Commission::create([
             'company_id' => $quotation->user->companies->first()->id,
             'purchase_order_id' => $purchase->id,
-            'amount'=> $purchase->amount,
+            'amount'=> $quotation->amount,
+            'percent' => $quotation->discount,
+            'total' => $quotation->total,
             'currency' => $purchase->currency,
             'country_id' => $data['country_id']
 

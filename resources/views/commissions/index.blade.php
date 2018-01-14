@@ -18,6 +18,8 @@
                                 <th title="Compañia">Company</th>
                                 <th title="Orden de compra">Purchase Order</th>
                                 <th title="Monto">Amount</th>
+                                <th title="% OBC">% OBC</th>
+                                <th title="Total">Total</th>
                                 <th style="width: 15%;" title="Estatus">Status</th>
                                 <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
@@ -29,7 +31,9 @@
                                 
                                 <td class="font-w600">{{ $commission->purchase->quotation->user->companies->first()->company_name }}</td>
                                 <td class="font-w600">{{ $commission->purchase->transaction_id  }} <a href="#">ver detalle</a></td>
-                                <td class="hidden-xs">{{ $commission->amount }}</td>
+                                <td class="hidden-xs">{{ $commission->amount }} {{ $commission->currency }}</td>
+                                <td class="hidden-xs">{{ $commission->percent }}% - {{ calculatePercentAmount($commission->percent, $commission->amount) }} {{ $commission->currency }}</td>
+                                <td class="hidden-xs">{{ $commission->total }} {{ $commission->currency }}</td>
                                 <td class="hidden-xs hidden-sm">
                                     @if($commission->status == 0)
                                         <span class="label label-danger" title="Pendiente">Pending</span>

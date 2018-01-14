@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Commission extends Model
 {
     protected $fillable = [
-        'company_id', 'purchase_order_id', 'status', 'country_id', 'currency', 'amount'
+        'company_id', 'purchase_order_id', 'status', 'country_id', 'currency', 'amount','percent','total'
     ];
 
     public function company()
@@ -19,5 +19,5 @@ class Commission extends Model
     {
         return $this->belongsTo(PurchaseOrder::class, 'purchase_order_id');
     }
-    
+
 }
