@@ -108,10 +108,15 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-        @if(isset($creditRequest) && $creditRequest->isPending() || !isset($creditRequest))
+        @if(isset($creditRequest) && !$creditRequest->credits->count() || !isset($creditRequest))
             <button class="btn btn-success" type="submit">Save</button>
         @endif
-            <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/credits">Back</a>
+           
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/credits" title="Atras">Back</a>
+            @endif  
         </div>
     </div>
 

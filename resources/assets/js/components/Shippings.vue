@@ -52,7 +52,7 @@
                                 <td class="text-center font-w600">{{ requests.transaction_id }}</td>
                                 <td class="text-center">
                                     
-                                    {{ requests.quotation.user.company.public_code }}
+                                    {{ requests.user.company.public_code }}
                                 </td>
                                  <td class="text-center font-w600">{{ (requests.type) ? 'International' : 'National' }}</td>
                                 <td class="font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
@@ -100,7 +100,7 @@
                                 <td class="text-center font-w600">{{ shipping.transaction_id }}</td>
                                  <td class="text-center font-w600">{{ shipping.shipping_request.transaction_id }}</td>
                                 <td class="text-center">
-                                    {{ shipping.quotation.user.company.public_code }}
+                                    {{ shipping.user.company.public_code }}
                                        
                                 </td>
                                 <td class="font-w600">{{ (shipping.delivery_time) ? 'Normal' : 'Express' }}</td>

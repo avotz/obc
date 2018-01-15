@@ -15,6 +15,21 @@ class Quotation extends Model
         'transaction_id', 'user_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'comments', 'geo_type', 'product_name', 'product_photo', 'status', 'country_id','amount','discount','currency','total'
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('transaction_id', 'like', '%' . $search . '%');
+                /*->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhereHas('profile' , function ($query) use ($search){
+                    $query->where('applicant_name', 'like', '%' . $search . '%');
+                  });*/
+            });
+        }
+
+        return $query;
+    }
+
     public function generateTransactionId()
     {
         $transactions = $this->where('request_id', $this->request_id)->count();

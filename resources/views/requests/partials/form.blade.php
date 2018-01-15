@@ -235,7 +235,11 @@
             @if(!isset($quotationRequest) || (isset($quotationRequest) && !$quotationRequest->quotations->count())) 
                 <button class="btn btn-success" type="submit" title="Guardar">Save</button>
           @endif
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/public/requests" title="Atras">Back</a>
+            @endif  
            
-            <a class="btn btn-default" href="/public/requests" title="Atras">Back</a>
         </div>
     </div>

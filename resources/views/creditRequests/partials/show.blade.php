@@ -58,7 +58,12 @@
     <div class="form-group">
         <div class="col-xs-12 col-sm-8 col-md-8">
             <a href="/credit/credit-requests/{{ $creditRequest->id }}/credits/create" class="btn btn-success" data-toggle="tooltip" title="Make Offer">Make a Credit Answer</a>
-            <a class="btn btn-default" href="/credit/credit-requests">Back</a>
+           
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/credit/credit-requests" title="Atras">Back</a>
+            @endif  
         </div>
     </div>
 

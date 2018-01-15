@@ -97,8 +97,12 @@
                             @endif
                             <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/credits/{{ $credit->id }}/status">Reject</button>
             @endif
-                                 
-            <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/credits">Back</a>
+             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/credits" title="Atras">Back</a>
+            @endif                     
+            
         </div>
     </div>
 

@@ -26,6 +26,7 @@ Vue.component('shippings', require('./components/Shippings.vue'));
 Vue.component('shipping-requests', require('./components/ShippingRequests.vue'));
 Vue.component('credits', require('./components/Credits.vue'));
 Vue.component('credit-requests', require('./components/CreditRequests.vue'));
+Vue.component('transactions', require('./components/Transactions.vue'));
 window.bus = new Vue();
 
 const app = new Vue({

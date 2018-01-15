@@ -52,7 +52,12 @@
     <div class="form-group">
         <div class="col-xs-12 col-sm-8 col-md-8">
             <a href="/shipping/shipping-requests/{{ $shippingRequest->id }}/shippings/create" class="btn btn-success" data-toggle="tooltip" title="Hacer Envio" >Make a shipping</a>
-            <a class="btn btn-default" href="/shipping/shipping-requests" title="Atras">Back</a>
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/shipping/shipping-requests" title="Atras">Back</a>
+            @endif    
+            
         </div>
     </div>
 

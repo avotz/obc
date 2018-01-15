@@ -150,11 +150,12 @@ class QuotationRequestController extends Controller
     {
         $quotationRequest = QuotationRequest::find($id);
 
-        if (!$quotationRequest || !$quotationRequest->createdBy(auth()->user())) {
+        
+        if (!$quotationRequest || (!$quotationRequest->createdBy(auth()->user()) && !auth()->user()->hasRole('admin') && !auth()->user()->hasRole('superadmin'))) {
             return redirect('/public/requests');
         }
 
-        $partner = auth()->user()->companies->first();
+        $partner = (auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin')) ? $quotationRequest->user->companies->first() : auth()->user()->companies->first();
         // $creditDays = CreditDays::all();
         // $sectors = Sector::get()->toTree();
         // $deliveryDays = range(1, 100);

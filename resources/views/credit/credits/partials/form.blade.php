@@ -173,7 +173,13 @@
         @if(isset($credit) && $credit->isPending() || !isset($credit))
             <button class="btn btn-success" type="submit">Save</button>
         @endif
-            <a class="btn btn-default" href="/credit/credit-requests">Back</a>
+            
+           @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/credit/credit-requests" title="Atras">Back</a>
+            @endif  
+           
         </div>
     </div>
 

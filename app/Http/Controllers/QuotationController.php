@@ -151,7 +151,7 @@ class QuotationController extends Controller
     {
         $quotation = Quotation::find($id);
 
-        if (!$quotation->createdBy(auth()->user())) {
+        if (!$quotation->createdBy(auth()->user()) && !auth()->user()->hasRole('admin') && !auth()->user()->hasRole('superadmin')) {
             return redirect('/public/requests');
         }
 

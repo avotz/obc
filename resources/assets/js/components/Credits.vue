@@ -51,7 +51,7 @@
                                 <td class="text-center font-w600">{{ requests.transaction_id }}</td>
                                 <td class="text-center">
                                     
-                                    {{ requests.quotation.user.company.public_code }}
+                                    {{ requests.user.company.public_code }}
                                 </td>
                                 <td class="font-w600">{{ requests.credit_time  }} Days</td>
                                 <td class="hidden-xs">{{ parseDate(requests.date) }}</td>
@@ -98,7 +98,7 @@
                                 <td class="text-center font-w600">{{ credit.transaction_id }}</td>
                                  <td class="text-center font-w600">{{ credit.credit_request.transaction_id }}</td>
                                 <td class="text-center">
-                                    {{ credit.quotation.user.company.public_code }}
+                                    {{ credit.user.company.public_code }}
                                        
                                 </td>
                                 <td class="font-w600">{{ credit.credit_time }} days</td>

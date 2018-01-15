@@ -31,10 +31,15 @@
                                 </li>
                                 @if($role->name == 'superadmin')
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/countries" title="Lista de Paises"><i class="si si-users"></i><span class="sidebar-mini-hide">Country List</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/countries" title="Lista de Paises"><i class="si si-globe"></i><span class="sidebar-mini-hide">Country List</span></a>
                                    
                                 </li>
                                 @endif
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
+                                   
+                                </li>
+                                 @if($role->name == 'admin')
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#" title="Comisiones OBC"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
                                     <ul>
@@ -51,7 +56,13 @@
                                         
                                     </ul>
                                 </li>
-                                
+                                 @endif
+                                 @if($role->name == 'superadmin')
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/profile" title="% descuento OBC"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">% Discount OBC</span></a>
+                                   
+                                </li>
+                                @endif
                                 
                             </ul>
                         </div>

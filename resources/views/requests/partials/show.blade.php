@@ -115,6 +115,11 @@
    
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <a class="btn btn-default" href="/public/requests" title="Regresar">Back</a>
+            
+             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/public/requests" title="Atras">Back</a>
+            @endif  
         </div>
     </div>

@@ -82,6 +82,7 @@ Route::get('commissions/intransit', 'CommissionController@intransit');
 Route::get('commissions/paid', 'CommissionController@paid');
 Route::put('commissions/{commission}/status', 'CommissionController@update_status');
 
+
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');
 Route::resource('purchases', 'PurchaseController');
@@ -92,7 +93,7 @@ Route::resource('credit-requests', 'CreditRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {
-    
+    Route::put('/discount', 'Superadmin\UserController@updateDiscount');
     Route::put('/{admin}', 'Superadmin\AccountController@update');
 
     Route::get('/users', 'Superadmin\UserController@index');
@@ -118,6 +119,16 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::get('/countries/{country}/edit', 'Superadmin\CountryController@edit');
     Route::put('/countries/{country}', 'Superadmin\CountryController@update');
 
+    Route::get('transactions', 'Superadmin\TransactionController@index');
+    Route::get('quotation-requests/list', 'Superadmin\TransactionController@getQuotationRequests');
+    Route::get('quotations/list', 'Superadmin\TransactionController@getQuotations');
+    Route::get('shipping-requests/list', 'Superadmin\TransactionController@getShippingsRequests');
+    Route::get('shippings/list', 'Superadmin\TransactionController@getShippings');
+    Route::get('credit-requests/list', 'Superadmin\TransactionController@getCreditRequests');
+    Route::get('credits/list', 'Superadmin\TransactionController@getCredits');
+    Route::get('purchase-orders/list', 'Superadmin\TransactionController@getPurchaseOrders');
+    
+
 });
 
 Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
@@ -131,6 +142,16 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
     Route::put('/users/{user}', 'Admin\UserController@update');
     Route::get('/users/{user}/edit', 'Admin\UserController@edit');
     Route::put('/companies/{company}', 'Admin\UserController@updateCompany');
+
+    Route::get('transactions', 'Admin\TransactionController@index');
+    Route::get('quotation-requests/list', 'Admin\TransactionController@getQuotationRequests');
+    Route::get('quotations/list', 'Admin\TransactionController@getQuotations');
+    Route::get('shipping-requests/list', 'Admin\TransactionController@getShippingsRequests');
+    Route::get('shippings/list', 'Admin\TransactionController@getShippings');
+    Route::get('credit-requests/list', 'Admin\TransactionController@getCreditRequests');
+    Route::get('credits/list', 'Admin\TransactionController@getCredits');
+    Route::get('purchase-orders/list', 'Admin\TransactionController@getPurchaseOrders');
+
 
     foreach (['active', 'inactive','trial','notrial'] as $key)
     {

@@ -236,6 +236,8 @@ class User extends Authenticatable
         return [
             
             'email' => $this->email,
+            'public_code' => $this->public_code,
+            'profile' => $this->profile,
             'company' => $this->companies->first()
         ];
     }

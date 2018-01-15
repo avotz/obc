@@ -9,4 +9,5 @@ class GlobalSetting extends Model
     protected $fillable = [
         'discount'
     ];
+    public $timestamps = false;
 }

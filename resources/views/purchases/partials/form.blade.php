@@ -32,7 +32,7 @@
     <div class="form-group{{ $errors->has('shipping_company') ? ' has-error' : '' }}">
          <div class="col-xs-6">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="shipping_company" name="shipping_company" value="{{ isset($purchase) ? $purchase->shipping_company : ($shipping_company) ? $shipping_company->company_name : 'N/A' }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }} placeholder="N/A" readonly>
+                <input class="form-control" type="text" id="shipping_company" name="shipping_company" value="{{ isset($purchase) ? $purchase->shipping_company :  $shipping_company  }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }} placeholder="N/A" readonly>
                 <label for="shipping_company" title="Compañia de envio">Shipping Company </label>
                 @if ($errors->has('shipping_company'))
                     <span class="help-block">
@@ -45,7 +45,7 @@
      <div class="form-group{{ $errors->has('credit_company') ? ' has-error' : '' }}">
          <div class="col-xs-6">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="credit_company" name="credit_company" value="{{ isset($purchase) ? $purchase->credit_company : ($credit_company) ? $credit_company->company_name : 'N/A' }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }} placeholder="N/A" readonly>
+                <input class="form-control" type="text" id="credit_company" name="credit_company" value="{{ isset($purchase) ? $purchase->credit_company : $credit_company }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }} placeholder="N/A" readonly>
                 <label for="credit_company" title="Entidad de crédito">Credit Company </label>
                 @if ($errors->has('credit_company'))
                     <span class="help-block">
@@ -130,7 +130,12 @@
         @if(isset($purchase) && $purchase->isPending() || !isset($purchase))
             <button class="btn btn-success" type="submit" title="Guardar">Save</button>
         @endif
-            <a class="btn btn-default" href="/requests/{{ $quotation->request->id }}/quotations" title="Atras">Back</a>
+            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/requests/{{ $quotation->request->id }}/quotations" title="Atras">Back</a>
+            @endif  
+           
         </div>
     </div>
 

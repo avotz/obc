@@ -7,6 +7,7 @@ use App\Country;
 use App\Sector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\GlobalSetting;
 
 class ProfileController extends Controller
 {
@@ -55,8 +56,9 @@ class ProfileController extends Controller
           
             
             $admins =  User::count();
+            $global = GlobalSetting::first();
 
-            return view('superadmin.profile', compact('user','admins'));
+            return view('superadmin.profile', compact('user','admins', 'global'));
         }
 
         if($user->hasRole('admin')){

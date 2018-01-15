@@ -15,6 +15,21 @@ class QuotationRequest extends Model
         'transaction_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'exp_date', 'comments', 'geo_type', 'product_name', 'product_photo', 'public', 'country_id'
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('transaction_id', 'like', '%' . $search . '%');
+                /*->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhereHas('profile' , function ($query) use ($search){
+                    $query->where('applicant_name', 'like', '%' . $search . '%');
+                  });*/
+            });
+        }
+
+        return $query;
+    }
+
     public function generateTransactionId()
     {
         $this->transaction_id = 'Quotation Request -' . $this->id;

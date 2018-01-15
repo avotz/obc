@@ -143,7 +143,7 @@ class CreditRequestController extends Controller
 
         $user = $quotation->user->load('profile');
 
-        $company = auth()->user()->companies->first();
+        $company = (auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin')) ? $creditRequest->user->companies->first() : auth()->user()->companies->first();
 
         $country = $company->countries->first();
 

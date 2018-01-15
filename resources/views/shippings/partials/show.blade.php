@@ -63,8 +63,12 @@
                             <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/shippings/{{ $shipping->id }}/status" title="Rechazado">Reject</button>
             @endif
                           
-                      
-            <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/shippings" title="Atras">Back</a>
+              @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
+                <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>
+            @else 
+                <a class="btn btn-default" href="/quotations/{{ $quotation->id }}/shippings" title="Atras">Back</a>
+            @endif         
+            
         </div>
     </div>
 

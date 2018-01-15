@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\GlobalSetting;
 
 class UserController extends Controller
 {
@@ -183,6 +184,30 @@ class UserController extends Controller
          //$admin->save();
          
          return $admin;
+    }
+
+
+    /**
+     * Mostrar vista de editar informacion basica del medico
+     */
+    public function updateDiscount()
+    {
+
+        $this->validate(
+            request(),
+            [
+                'discount' => 'required',
+               
+            ]
+        );
+
+        $global = GlobalSetting::first();
+        $global->discount = request('discount');
+        $global->save();
+
+
+        return back();
+
     }
    
    
