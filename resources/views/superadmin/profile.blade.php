@@ -150,6 +150,7 @@
            
         </div>
         <div class="col-sm-5 col-lg-4">
+        @if(auth()->user()->hasPermission('global_settings'))
            <div class="block">
                 <div class="block-header bg-gray-lighter">
                     <ul class="block-options">
@@ -186,7 +187,7 @@
                 </div>
             </div>
 
-           
+           @endif
 
             
         </div>

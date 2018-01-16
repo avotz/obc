@@ -37,6 +37,7 @@ class TransactionController extends Controller
     
     public function index()
     {
+        if (!auth()->user()->hasPermission('View_all_trans_company')) return redirect('/');
 
         $search['q'] = request('q');
        

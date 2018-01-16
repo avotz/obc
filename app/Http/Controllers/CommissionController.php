@@ -28,6 +28,8 @@ class CommissionController extends Controller
      */
     public function pending()
     {
+        if (!auth()->user()->hasPermission('view_commissions')) return redirect('/');
+
         $commissions = $this->getCommissions(0);
 
 
@@ -35,6 +37,8 @@ class CommissionController extends Controller
     }
     public function intransit()
     {
+        if (!auth()->user()->hasPermission('view_commissions')) return redirect('/');
+
         $commissions = $this->getCommissions(1);
 
 
@@ -42,7 +46,8 @@ class CommissionController extends Controller
     }
     public function paid()
     {
-        
+        if (!auth()->user()->hasPermission('view_commissions')) return redirect('/');
+           
         $commissions = $this->getCommissions(2);
 
 

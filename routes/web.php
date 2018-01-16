@@ -103,6 +103,7 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::put('/users/{user}', 'Superadmin\UserController@update');
     Route::get('/users/{user}/edit', 'Superadmin\UserController@edit');
     Route::put('/users/{user}/country', 'Superadmin\UserController@updateCountry');
+    Route::put('/users/{user}/permissions', 'Superadmin\UserController@updatePermissions');
 
     foreach (['active', 'inactive','trial','notrial'] as $key)
     {
@@ -142,6 +143,7 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
     Route::put('/users/{user}', 'Admin\UserController@update');
     Route::get('/users/{user}/edit', 'Admin\UserController@edit');
     Route::put('/companies/{company}', 'Admin\UserController@updateCompany');
+    Route::put('/users/{user}/permissions', 'Admin\UserController@updatePermissions');
 
     Route::get('transactions', 'Admin\TransactionController@index');
     Route::get('quotation-requests/list', 'Admin\TransactionController@getQuotationRequests');
@@ -151,6 +153,7 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
     Route::get('credit-requests/list', 'Admin\TransactionController@getCreditRequests');
     Route::get('credits/list', 'Admin\TransactionController@getCredits');
     Route::get('purchase-orders/list', 'Admin\TransactionController@getPurchaseOrders');
+    
 
 
     foreach (['active', 'inactive','trial','notrial'] as $key)

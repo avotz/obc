@@ -70,7 +70,42 @@
             <!-- END Products -->
         </div>
         <div class="col-sm-5 col-lg-4">
-            
+            <!-- Company Data -->
+            <div class="block">
+                <div class="block-header bg-gray-lighter">
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                        </li>
+                        
+                    </ul>
+                    <h3 class="block-title" title="Permisos"><i class="fa fa-home"></i> Permissions</h3>
+                </div>
+                <div class="block-content block-content-full block-content-narrow">
+                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/superadmin/users/{{$user->id }}/permissions">
+                         <input type="hidden" name="_method" value="PUT">
+                                {{ csrf_field() }}
+                        @foreach($permissions as $permission)
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="css-input switch switch-success">
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"  @if ($user->can($permission->name) ) checked @endif><span></span> {{ $permission->label }}
+                                </label>
+                            </div>
+                            
+                        </div>
+                        @endforeach
+                       
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-6 col-md-5">
+                                <button class="btn btn-block btn-success" type="submit" title="Actualizar">Update</button>
+                            </div>
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+            <!-- END Company Data -->
 
            
         </div>

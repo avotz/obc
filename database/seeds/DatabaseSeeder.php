@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
          'label_es' => 'Ver todas las trasacciones de la compañia'
         ],
         [
-            'name' =>'view_cxp',
-            'label' => 'View Cxp',
-            'label_es' => 'Ver Cxp'
+            'name' =>'view_commisions',
+            'label' => 'View Commissions',
+            'label_es' => 'Ver Comisiones'
         ],
         [
             'name' =>'do_trans_nac',
@@ -54,6 +54,21 @@ class DatabaseSeeder extends Seeder
             'name' =>'do_trans_priv',
             'label' => 'Do private transactions',
             'label_es' => 'Hacer transacciones privadas'
+        ],
+        [
+            'name' => 'create_countries',
+            'label' => 'Create countries',
+            'label_es' => 'Crear paises'
+        ],
+        [
+            'name' => 'create_users',
+            'label' => 'Create users',
+            'label_es' => 'Crear usuarios'
+        ],
+        [
+            'name' => 'global_settings',
+            'label' => 'Global settings',
+            'label_es' => 'Opciones globales'
         ],
        
     ];
@@ -225,6 +240,13 @@ class DatabaseSeeder extends Seeder
         factory(Role::class, 1)->create([ //credit
             'name' => 'credit',
         ]);
+
+        foreach ($this->permissions as $permission) {
+
+            \DB::table('permissions')->insert(
+                ['name' => $permission['name'], 'label' => $permission['label'], 'label_es' => $permission['label_es']]
+            );
+        }
         
         
         $superadmin = factory(User::class, 1)->create([
@@ -233,6 +255,22 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str_random(10),
             'active' => 1,
         ])->first();
+
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 1, 'user_id' => $superadmin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 2, 'user_id' => $superadmin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 8, 'user_id' => $superadmin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 9, 'user_id' => $superadmin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 10, 'user_id' => $superadmin->id]
+        );
 
         $profileSuperAdmin = factory(Profile::class, 1)->create([
             'user_id' => $superadmin->id,
@@ -245,6 +283,23 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str_random(10),
             'active' => 1,
         ])->first();
+
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 1, 'user_id' => $admin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 2, 'user_id' => $admin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 8, 'user_id' => $admin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 9, 'user_id' => $admin->id]
+        );
+        \DB::table('permission_user')->insert(
+            ['permission_id' => 10, 'user_id' => $admin->id]
+        );
+
 
         $profileadmin = factory(Profile::class, 1)->create([
             'user_id' => $admin->id,
@@ -306,12 +361,7 @@ class DatabaseSeeder extends Seeder
         
        
 
-        foreach ($this->permissions as $permission) {
-           
-            \DB::table('permissions')->insert(
-                ['name' => $permission['name'], 'label' => $permission['label'], 'label_es' => $permission['label_es']]
-            );
-        }
+     
         foreach ($this->sectorsSubsectors as $sector) {
             
             Sector::create($sector);

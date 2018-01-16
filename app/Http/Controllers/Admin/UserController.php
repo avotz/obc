@@ -10,6 +10,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Permission;
 
 class UserController extends Controller
 {
@@ -29,12 +30,14 @@ class UserController extends Controller
     
     public function index()
     {
-
+        if (!auth()->user()->hasPermission('create_users')) return redirect('/');
+        
         $search['q'] = request('q');
        
 
         $users = User::whereHas('roles', function($q){
              $q->where('name', 'partner')
+             ->orWhere('name', 'admin')
              ->orWhere('name', 'user');
 
         });
@@ -54,11 +57,58 @@ class UserController extends Controller
         return view('admin.users.index', compact('users','search'));
     }
 
+    public function create()
+    {
+        if (!auth()->user()->hasPermission('create_users')) return redirect('/');
+
+        $roles = Role::where(function ($q) {
+            $q->where('name', 'admin');
+
+        })->get();
+
+        $permissions = Permission::where(function ($q) {
+            $q->where('name', 'view_commissions')
+                ->orWhere('name', 'View_all_trans_company')
+                ->orWhere('name', 'create_users');
+                
+
+        })->get();
+
+        return view('admin.users.create', compact('roles', 'permissions'));
+    }
+
+    public function store()
+    {
+
+        $this->validate(request(), [
+            'applicant_name' => 'required|string|max:255',
+            'first_surname' => 'required|string|max:255',
+            'second_surname' => 'required|string|max:255',
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => 'required|string|min:6',
+            'role' => 'required',
+
+        ]);
+        $data = request()->all();
+        $data['role'] = Role::where('id', $data['role'])->first();
+        $data['country'] = auth()->user()->countries->first()->id;
+
+        $user = $this->userRepo->store($data);
+
+        $user->permissions()->sync(request('permissions'));
+
+
+        flash('User Saved', 'success');
+
+        return redirect('/admin/users');
+    }
+
      /**
      * Mostrar vista de editar informacion basica del medico
      */
      public function edit(User $user)
      {
+        if (!auth()->user()->hasPermission('create_users')) return redirect('/');
        
         if($user->countries->first()->id != auth()->user()->countries->first()->id) //si el usuario a editar no es del mismo pais que el admin del pais sacarlo
        {
@@ -70,10 +120,18 @@ class UserController extends Controller
               ->orWhere('name', 'user');
 
        })->get();
+
+        $permissions = Permission::where(function ($q) {
+            $q->where('name', 'view_commissions')
+                ->orWhere('name', 'View_all_trans_company')
+                ->orWhere('name', 'create_users');
+
+
+        })->get();
         
        $sectors = Sector::get()->toTree();
         
-         return view('admin.users.edit',compact('user','roles','sectors'));
+         return view('admin.users.edit',compact('user','roles','sectors','permissions'));
  
      }
 
@@ -100,6 +158,20 @@ class UserController extends Controller
          return Redirect('/admin/users');
          
      }
+    /**
+     * Actualizar informacion basica del medico
+     */
+    public function updatePermissions(User $user)
+    {
+
+        $user->permissions()->sync(request('permissions'));
+
+
+        flash('Cuenta Actualizada', 'success');
+
+        return back();
+
+    }
 
      public function updateCompany(Company $company)
      {

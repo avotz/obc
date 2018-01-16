@@ -23,7 +23,7 @@
 <!-- Page Content -->
 <div class="content content-boxed">
     <div class="row">
-     <form class="js-validation-register form-horizontal push-50" method="POST" action="/superadmin/users">
+     <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users">
         <div class="col-sm-7 col-lg-8">
 
         <div class="block">
@@ -33,7 +33,7 @@
                                         
                         {{ csrf_field() }}
                         
-                        @include('superadmin/users/partials/form')
+                        @include('admin/users/partials/form')
                         
                     
                   

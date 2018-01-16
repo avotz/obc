@@ -67,6 +67,7 @@
                 <div class="tab-pane fade fade-up in active" id="search-users">
                
                     <div class="border-b push-30">
+                     <a href="/admin/users/create" class="btn btn-info pull-right">Create Admin User</a>
                         <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted">Users Found</span></h2>
                        
                         

@@ -24,22 +24,25 @@
                                 <li>
                                     <a class="active" href="/" title="Inicio"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Home</span></a>
                                 </li>
-                                
+                                @if(auth()->user()->hasPermission('create_users'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/users" title="Lista de usuarios"><i class="si si-users"></i><span class="sidebar-mini-hide">User List</span></a>
                                    
                                 </li>
-                                @if($role->name == 'superadmin')
+                                @endif
+                                @if($role->name == 'superadmin' && auth()->user()->hasPermission('create_countries'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/countries" title="Lista de Paises"><i class="si si-globe"></i><span class="sidebar-mini-hide">Country List</span></a>
                                    
                                 </li>
                                 @endif
+                                 @if(auth()->user()->hasPermission('View_all_trans_company'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
                                    
                                 </li>
-                                 @if($role->name == 'admin')
+                                @endif
+                                @if($role->name == 'admin' && auth()->user()->hasPermission('view_commissions') )
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#" title="Comisiones OBC"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
                                     <ul>
@@ -57,7 +60,7 @@
                                     </ul>
                                 </li>
                                  @endif
-                                 @if($role->name == 'superadmin')
+                                 @if($role->name == 'superadmin' && auth()->user()->hasPermission('global_settings'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/profile" title="% descuento OBC"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">% Discount OBC</span></a>
                                    

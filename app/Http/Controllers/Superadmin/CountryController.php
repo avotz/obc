@@ -25,7 +25,8 @@ class CountryController extends Controller
 
     public function create()
     {
-        
+        if (!auth()->user()->hasPermission('create_countries')) return redirect('/');
+
         return view('superadmin.countries.create');
     }
 
@@ -50,6 +51,7 @@ class CountryController extends Controller
 
     public function index()
     {
+        if (!auth()->user()->hasPermission('create_countries')) return redirect('/');
 
         $search['q'] = request('q');
       
@@ -67,7 +69,9 @@ class CountryController extends Controller
      */
      public function edit(Country $country)
      {
-       
+        if (!auth()->user()->hasPermission('create_countries')) return redirect('/');
+        
+
          return view('superadmin.countries.edit',compact('country'));
  
      }
