@@ -118,6 +118,19 @@
         // Init page helpers (Magnific Popup plugin)
         App.initHelpers('magnific-popup');
 
+        jQuery('input[name=amount]').keyup(function() {
+          
+            var amount = jQuery('#amount').val() ? parseFloat(jQuery('#amount').val()) : 0;
+            var discount = parseFloat({{ $discount }} / 100);
+
+            var subtotal = discount * amount;
+
+            var total = amount - subtotal;
+
+            jQuery('#total').val(total);
+            jQuery('#discount').text(subtotal);
+        });
+
 </script>
 @endsection
 

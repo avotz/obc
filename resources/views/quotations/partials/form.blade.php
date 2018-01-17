@@ -131,7 +131,7 @@
         </div>
          <div class="col-xs-6">
           <div class="form-material form-material-success">
-               <input class="form-control" type="text" id="total" name="total" value="{{ isset($quotation) ? $quotation->total : old('total') }}">
+               <input class="form-control" type="text" id="total" name="total" value="{{ isset($quotation) ? $quotation->total : old('total') }}" readonly>
                 <label for="total" title="Total">Total </label>
                 @if ($errors->has('total'))
                     <span class="help-block">

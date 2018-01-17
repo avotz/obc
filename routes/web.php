@@ -93,7 +93,7 @@ Route::resource('credit-requests', 'CreditRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
 {
-    Route::put('/discount', 'Superadmin\UserController@updateDiscount');
+    Route::put('/settings', 'Superadmin\UserController@updateSettings');
     Route::put('/{admin}', 'Superadmin\AccountController@update');
 
     Route::get('/users', 'Superadmin\UserController@index');

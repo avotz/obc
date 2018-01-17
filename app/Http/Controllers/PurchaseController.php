@@ -9,6 +9,7 @@ use App\PurchaseOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Commission;
+use App\GlobalSetting;
 
 class PurchaseController extends Controller
 {
@@ -82,9 +83,9 @@ class PurchaseController extends Controller
             ]
         ];
 
-      
+        $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-        return view('purchases.create', compact('user', 'partner', 'quotation', 'shipping_company', 'credit_company','currencies'));
+        return view('purchases.create', compact('user', 'partner', 'quotation', 'shipping_company', 'credit_company','currencies', 'discount'));
     }
 
     public function store($quotation_id)
@@ -106,20 +107,10 @@ class PurchaseController extends Controller
 
         $data['user_id'] = auth()->id();
         $data['geo_type'] = $quotation->geo_type;
+        $data['discount'] = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
         $purchase = $quotation->purchase()->create($data);
         $purchase->generateTransactionId();
-
-        $commission = Commission::create([
-            'company_id' => $quotation->user->companies->first()->id,
-            'purchase_order_id' => $purchase->id,
-            'amount'=> $quotation->amount,
-            'percent' => $quotation->discount,
-            'total' => $quotation->total,
-            'currency' => $purchase->currency,
-            'country_id' => $data['country_id']
-
-        ]);
 
         $mimes = ['jpg', 'jpeg', 'bmp', 'png', 'pdf'];
         $fileUploaded = 'error';
@@ -190,9 +181,9 @@ class PurchaseController extends Controller
                 'symbol' => '$'
             ]
         ];
-        //dd(isset($shipping_company) && $shipping_company);
+        $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-        return view('purchases.edit', compact('user', 'partner', 'quotation', 'purchase', 'shipping_company', 'credit_company', 'currencies'));
+        return view('purchases.edit', compact('user', 'partner', 'quotation', 'purchase', 'shipping_company', 'credit_company', 'currencies', 'discount'));
     }
 
     public function update($id)
@@ -251,6 +242,41 @@ class PurchaseController extends Controller
             ->where('id', $id)
             ->update(['status' => request('status')]); //no asistio a la cita
 
+        if(request('status') == 1 )
+        {
+            $purchase = PurchaseOrder::find($id);
+
+            $quotation = $purchase->quotation;
+            $gross_commission = GlobalSetting::first() ? GlobalSetting::first()->gross_commission : 0;
+            $commission = Commission::create([
+                'company_id' => $quotation->user->companies->first()->id,
+                'purchase_order_id' => $purchase->id,
+                'amount' => $purchase->amount,
+                'discount' => $purchase->discount,
+                'gross_commission' => $gross_commission,
+                'total' => calculatePercentAmount($gross_commission, $purchase->amount) - calculatePercentAmount($purchase->discount, $purchase->amount),
+                'currency' => $purchase->currency,
+                'country_id' => auth()->user()->companies->first()->country
+
+            ]);
+        }
+
         return back();
+    }
+
+    /**
+     * Eliminar consulta(cita)
+     */
+    public function destroy($id)
+    {
+
+        $purchase = PurchaseOrder::find($id);
+        $requestId = $purchase->quotation->request->id;
+        $purchase->delete();
+
+        flash('Purchase Order Deleted', 'success');
+
+        return redirect('requests/' . $requestId . '/quotations');
+
     }
 }

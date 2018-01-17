@@ -112,6 +112,22 @@
 <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
 <script src="{{ mix('/js/quotations.js') }}"></script>
+<script>
+        
 
+         jQuery('input[name=amount]').keyup(function() {
+          
+            var amount = jQuery('#amount').val() ? parseFloat(jQuery('#amount').val()) : 0;
+            var discount = parseFloat({{ $discount }} / 100);
+
+            var subtotal = discount * amount;
+
+            var total = amount - subtotal;
+
+            jQuery('#total').val(total);
+            jQuery('#discount').text(subtotal);
+        });
+
+</script>
 @endsection
 

@@ -229,19 +229,21 @@ class UserController extends Controller
     /**
      * Mostrar vista de editar informacion basica del medico
      */
-    public function updateDiscount()
+    public function updateSettings()
     {
 
         $this->validate(
             request(),
             [
                 'discount' => 'required',
+                'gross_commission' => 'required',
                
             ]
         );
 
         $global = GlobalSetting::first();
         $global->discount = request('discount');
+        $global->gross_commission = request('gross_commission');
         $global->save();
 
 

@@ -12,7 +12,7 @@ class PurchaseOrder extends Model
     * @var array
     */
     protected $fillable = [
-        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id', 'currency', 'shipping_company', 'credit_company','amount'
+        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id', 'shipping_company', 'credit_company', 'amount', 'discount', 'currency', 'total'
     ];
 
     public function scopeSearch($query, $search)
@@ -58,5 +58,16 @@ class PurchaseOrder extends Model
     public function commission()
     {
         return $this->hasOne(Commission::class);
+    }
+
+    /**
+     * Determine if the user has the given role.
+     *
+     * @param  mixed $role
+     * @return boolean
+     */
+    public function createdBy($user)
+    {
+        return $this->where('user_id', $user->id)->count();
     }
 }

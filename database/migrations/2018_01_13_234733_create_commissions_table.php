@@ -20,7 +20,8 @@ class CreateCommissionsTable extends Migration
             $table->integer('purchase_order_id')->unsigned()->index();
             $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('cascade');
             $table->double('amount')->default(0);
-            $table->double('percent')->default(0);
+            $table->double('discount')->default(0);
+            $table->double('gross_commision')->default(0);
             $table->double('total')->default(0);
             $table->string('currency');
             $table->tinyInteger('status')->default(0); //1 in transit //2 paid

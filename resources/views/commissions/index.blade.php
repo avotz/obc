@@ -4,7 +4,7 @@
 @endsection
 @section('content')
  
-  <div class="content content-boxed">
+  <div class="content">
     <div class="row">
         <div class="col-sm-12 col-lg-12">
 
@@ -18,8 +18,10 @@
                                 <th title="Compañia">Company</th>
                                 <th title="Orden de compra">Purchase Order</th>
                                 <th title="Monto">Amount</th>
-                                <th title="% OBC">% OBC</th>
-                                <th title="Total">Total</th>
+                                
+                                <th title="Comisión Bruta OBC">Gross Commission OBC </th>
+                                <th title="Descuento OBC">Discount OBC </th>
+                                <th title="Comisión Neta OBC">Net Commission OBC</th>
                                 <th style="width: 15%;" title="Estatus">Status</th>
                                 <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
@@ -32,8 +34,9 @@
                                 <td class="font-w600">{{ $commission->purchase->quotation->user->companies->first()->company_name }}</td>
                                 <td class="font-w600">{{ $commission->purchase->transaction_id  }} <a href="#">ver detalle</a></td>
                                 <td class="hidden-xs">{{ $commission->amount }} {{ $commission->currency }}</td>
-                                <td class="hidden-xs">{{ $commission->percent }}% - {{ calculatePercentAmount($commission->percent, $commission->amount) }} {{ $commission->currency }}</td>
-                                <td class="hidden-xs">{{ $commission->total }} {{ $commission->currency }}</td>
+                                <td class="hidden-xs">{{ calculatePercentAmount($commission->gross_commission, $commission->amount) }} {{ $commission->currency }} ({{ $commission->gross_commission }}%) </td>
+                                <td class="hidden-xs">{{ calculatePercentAmount($commission->discount, $commission->amount) }} {{ $commission->currency }} ({{ $commission->discount }}%) </td>
+                                <td class="hidden-xs"> {{ $commission->total }} {{ $commission->currency }} ({{ $commission->gross_commission - $commission->discount }}%)</td>
                                 <td class="hidden-xs hidden-sm">
                                     @if($commission->status == 0)
                                         <span class="label label-danger" title="Pendiente">Pending</span>

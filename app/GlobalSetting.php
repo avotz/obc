@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GlobalSetting extends Model
 {
     protected $fillable = [
-        'discount'
+        'discount', 'gross_commission'
     ];
     public $timestamps = false;
 }

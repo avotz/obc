@@ -58,7 +58,7 @@
     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
         <div class="col-xs-6">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : isset($quotation) ? $quotation->total : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
+                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : isset($quotation) ? $quotation->amount : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending() || !$purchase->createdBy(auth()->user())) ? 'readonly' : '' }}>
                 <label for="amount">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
@@ -69,7 +69,7 @@
         </div>
          <div class="col-xs-6">
           <div class="form-material form-material-success">
-            <select name="currency" id="currency"  class="form-control">
+            <select name="currency" id="currency"  class="form-control" {{ (!$purchase->createdBy(auth()->user())) ? 'readonly': '' }}>
 
                     
                          
@@ -84,6 +84,26 @@
                 </select>
                 <label for="currency" title="Moneda">Currency</label>
              </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-6">
+            <div class="form-material form-material-success">
+                <span id="discount">{{ isset($purchase) ? calculatePercentAmount($purchase->discount, $purchase->amount) : isset($quotation) ? calculatePercentAmount($quotation->discount, $quotation->amount) : '0' }}</span>
+                <label for="discount" title="Descuento">Discount OBC( {{ isset($purchase) ? $purchase->discount : $discount }}% ) </label>
+                
+            </div>
+        </div>
+         <div class="col-xs-6">
+          <div class="form-material form-material-success">
+               <input class="form-control" type="text" id="total" name="total" value="{{ isset($purchase) ? $purchase->total : isset($quotation) ? $quotation->total : old('total') }}" readonly>
+                <label for="total" title="Total">Total </label>
+                @if ($errors->has('total'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('total') }}</strong>
+                    </span>
+                @endif
+          </div>
         </div>
     </div>
     <div class="form-group{{ $errors->has('purchase_file') ? ' has-error' : '' }}">
@@ -127,7 +147,7 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-        @if(isset($purchase) && $purchase->isPending() || !isset($purchase))
+        @if(isset($purchase) && $purchase->isPending() && $purchase->createdBy(auth()->user()) || !isset($purchase))
             <button class="btn btn-success" type="submit" title="Guardar">Save</button>
         @endif
             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))

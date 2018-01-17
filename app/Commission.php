@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Commission extends Model
 {
     protected $fillable = [
-        'company_id', 'purchase_order_id', 'status', 'country_id', 'currency', 'amount','percent','total'
+        'company_id', 'purchase_order_id', 'status', 'country_id', 'currency', 'amount', 'discount','total', 'gross_commission'
     ];
 
     public function company()

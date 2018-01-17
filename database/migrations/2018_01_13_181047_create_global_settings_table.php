@@ -16,6 +16,7 @@ class CreateGlobalSettingsTable extends Migration
         Schema::create('global_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->double('discount');
+            $table->double('gross_commission');
         });
     }
 

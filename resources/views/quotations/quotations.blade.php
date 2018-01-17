@@ -14,7 +14,7 @@
                     @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->companies->first(),  'user' => $quotation->user ])
                     <div class="block-content">
                         <div class="row items-push text-center">
-                        @if($quotation->purchase && $quotation->purchase->status == 1)
+                        @if($quotation->purchase)
                             <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id }}/edit">
                                 <div class="h3 push-5 text-success">1</div>
                                 <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order</div>
