@@ -68,7 +68,7 @@ class UserController extends Controller
 
         $permissions = Permission::where(function ($q) {
             $q->where('name', 'view_commissions')
-                ->orWhere('name', 'View_all_trans_company')
+                ->orWhere('name', 'view_all_trans_company')
                 ->orWhere('name', 'create_users');
                 
 
@@ -123,7 +123,7 @@ class UserController extends Controller
 
         $permissions = Permission::where(function ($q) {
             $q->where('name', 'view_commissions')
-                ->orWhere('name', 'View_all_trans_company')
+                ->orWhere('name', 'view_all_trans_company')
                 ->orWhere('name', 'create_users');
 
 

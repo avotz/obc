@@ -82,6 +82,7 @@ $factory->define(App\GlobalSetting::class, function (Faker $faker) {
 
     return [
         'discount' => 3,
+        'gross_commission' => 7,
        
 
     ];

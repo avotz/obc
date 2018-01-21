@@ -58,7 +58,7 @@
     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
         <div class="col-xs-6">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : isset($quotation) ? $quotation->amount : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending() || !$purchase->createdBy(auth()->user())) ? 'readonly' : '' }}>
+                <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : isset($quotation) ? $quotation->amount : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending() || isset($purchase) && !$purchase->createdBy(auth()->user())) ? 'readonly' : '' }}>
                 <label for="amount">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
@@ -69,7 +69,7 @@
         </div>
          <div class="col-xs-6">
           <div class="form-material form-material-success">
-            <select name="currency" id="currency"  class="form-control" {{ (!$purchase->createdBy(auth()->user())) ? 'readonly': '' }}>
+            <select name="currency" id="currency"  class="form-control" {{ ( isset($purchase) && !$purchase->createdBy(auth()->user())) ? 'readonly': '' }}>
 
                     
                          

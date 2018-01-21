@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Credit;
+
 use App\User;
 use App\Repositories\UserRepository;
 use App\Quotation;
-use App\Company;
 use App\Credit;
 use App\CreditRequest;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
@@ -22,13 +21,11 @@ class CreditController extends Controller
     public function __construct(UserRepository $userRepo)
     {
         $this->middleware('authByRole:credit');
-      
+
         $this->userRepo = $userRepo;
     }
 
-  
-
-      /**
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -36,17 +33,15 @@ class CreditController extends Controller
     public function getCredits()
     {
         $search['q'] = request('q');
-        
-       $partner = auth()->user()->companies->first();
-        
-        $credits =  Credit::search($search['q'])->with('quotation.user','user','creditRequest')->paginate(10);
-        
+
+        $partner = auth()->user()->companies->first();
+
+        $credits = Credit::search($search['q'])->with('quotation.user', 'user', 'creditRequest')->paginate(10);
 
         return $credits;
-    
     }
 
-       /**
+    /**
      * create the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -54,24 +49,21 @@ class CreditController extends Controller
     public function create($creditRequest_id)
     {
         $creditRequest = CreditRequest::find($creditRequest_id);
-        
+
         $quotation = $creditRequest->quotation;
 
         if ($creditRequest->credits()->where('status', 1)->first()) {
-
             flash('This credit Request already has an approved Credit', 'warning');
             return back();
         }
-        
-        $partner =  $quotation->user->companies->first();
 
-        $user =  $quotation->user->load('profile');
+        $partner = $quotation->user->companies->first();
+
+        $user = $quotation->user->load('profile');
 
         $company_credit = auth()->user()->companies->first();
 
         $country = $company_credit->countries->first();
-
-
 
         $currencies = [
             [
@@ -83,37 +75,37 @@ class CreditController extends Controller
                 'symbol' => '$'
             ]
         ];
-        
+
         $interests = $company_credit->interest;
         $interest = 0;
         $total = 0;
-      
-        if($creditRequest->credit_time == 30)
-            $interest = $interests->interest_30;
-        if ($creditRequest->credit_time == 45)
-            $interest = $interests->interest_45;
-        if ($creditRequest->credit_time == 60)
-            $interest = $interests->interest_60;
 
-        
-        $subtotal = ($interest / 100 ) * $creditRequest->amount;
+        if ($creditRequest->credit_time == 30) {
+            $interest = $interests->interest_30;
+        }
+        if ($creditRequest->credit_time == 45) {
+            $interest = $interests->interest_45;
+        }
+        if ($creditRequest->credit_time == 60) {
+            $interest = $interests->interest_60;
+        }
+
+        $subtotal = ($interest / 100) * $creditRequest->amount;
         $total = $creditRequest->amount + $subtotal;
 
-       
-
-
-
-        return view('credit.credits.create', compact('user','partner','quotation','creditRequest','interest', 'interests','total', 'currencies'));
+        return view('credit.credits.create', compact('user', 'partner', 'quotation', 'creditRequest', 'interest', 'interests', 'total', 'currencies'));
     }
 
     public function store($creditRequest_id)
     {
         $creditRequest = CreditRequest::find($creditRequest_id);
-        
+
         $quotation = $creditRequest->quotation;
-      
-       
-        $this->validate(request(), [
+
+        $this->validate(
+            request(),
+
+            [
             'amount' => 'required|numeric',
             'date' => 'required|date',
             'approval_date' => 'required|date',
@@ -122,16 +114,13 @@ class CreditController extends Controller
             'total' => 'required|numeric',
             'credit_time' => 'required|numeric',
             'file' => 'mimes:jpeg,bmp,png,pdf',
-            
-            
-            
         ]
         );
-       
+
         $data = request()->all();
 
-       $data['country_id'] = auth()->user()->companies->first()->country;
-
+        $data['country_id'] = auth()->user()->companies->first()->country;
+        $data['company_id'] = auth()->user()->companies->first()->id;
 
         $data['user_id'] = auth()->id();
         $data['credit_request_id'] = $creditRequest->id;
@@ -147,47 +136,30 @@ class CreditController extends Controller
             $credit->suppliers()->sync([$partner->id]);
          }*/
 
+        $mimes = ['jpg', 'jpeg', 'bmp', 'png', 'pdf'];
+        $fileUploaded = 'error';
 
+        if (request()->file('file')) {
+            $file = request()->file('file');
 
-            $mimes = ['jpg','jpeg','bmp','png','pdf'];
-            $fileUploaded = "error";
-    
-        
-       
-            if(request()->file('file'))
-            {
-            
-                $file = request()->file('file');
-               
-                $name = $file->getClientOriginalName();
-                $ext = $file->guessClientExtension();
-                $onlyName = str_slug(pathinfo($name)['filename'], '-');
-                
-            
-            
-                if(in_array($ext, $mimes)){
-                    
-                   
-    
-                    $fileUploaded = $file->storeAs("credits/". $credit->id ."/files", $credit->id.'-'.$onlyName.'.'.$ext,'public');
-    
-                    $credit->file = $credit->id.'-'.$onlyName.'.'.$ext;
-                    $credit->save();
-    
-                   
-                }
-                
+            $name = $file->getClientOriginalName();
+            $ext = $file->guessClientExtension();
+            $onlyName = str_slug(pathinfo($name)['filename'], '-');
+
+            if (in_array($ext, $mimes)) {
+                $fileUploaded = $file->storeAs('credits/' . $credit->id . '/files', $credit->id . '-' . $onlyName . '.' . $ext, 'public');
+
+                $credit->file = $credit->id . '-' . $onlyName . '.' . $ext;
+                $credit->save();
             }
-    
-          
-       
+        }
 
-        flash('Credit Saved','success');
-        
+        flash('Credit Saved', 'success');
+
         return redirect('credit/credit-requests');
     }
 
-      /**
+    /**
      * create the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -195,19 +167,17 @@ class CreditController extends Controller
     public function edit($id)
     {
         $credit = Credit::find($id);
-        
+
         $quotation = $credit->quotation;
         $creditRequest = $credit->creditRequest;
 
         $partner = $quotation->user->companies->first();
-        
+
         $user = $quotation->user->load('profile');
 
         $company_credit = auth()->user()->companies->first();
 
         $country = $company_credit->countries->first();
-
-
 
         $currencies = [
             [
@@ -224,26 +194,27 @@ class CreditController extends Controller
         $interest = 0;
         $total = 0;
 
-        if ($creditRequest->credit_time == 30)
+        if ($creditRequest->credit_time == 30) {
             $interest = $interests->interest_30;
-        if ($creditRequest->credit_time == 45)
+        }
+        if ($creditRequest->credit_time == 45) {
             $interest = $interests->interest_45;
-        if ($creditRequest->credit_time == 60)
+        }
+        if ($creditRequest->credit_time == 60) {
             $interest = $interests->interest_60;
-
+        }
 
         $subtotal = ($interest / 100) * $creditRequest->amount;
         $total = $creditRequest->amount + $subtotal;
-    
 
-
-        return view('credit.credits.edit', compact('user','partner','quotation','credit','creditRequest','interest','interests','total', 'currencies'));
+        return view('credit.credits.edit', compact('user', 'partner', 'quotation', 'credit', 'creditRequest', 'interest', 'interests', 'total', 'currencies'));
     }
 
     public function update($id)
     {
-        $this->validate(request(), [
-
+        $this->validate(
+            request(),
+            [
             'amount' => 'required|numeric',
             'date' => 'required|date',
             'approval_date' => 'required|date',
@@ -252,9 +223,6 @@ class CreditController extends Controller
             'total' => 'required|numeric',
             'credit_time' => 'required|numeric',
             'file' => 'mimes:jpeg,bmp,png,pdf',
-            
-            
-            
         ]
         );
 
@@ -262,84 +230,62 @@ class CreditController extends Controller
         $credit->fill(request()->all());
         $credit->save();
 
+        $mimes = ['jpg', 'jpeg', 'bmp', 'png', 'pdf'];
+        $fileUploaded = 'error';
 
-        $mimes = ['jpg','jpeg','bmp','png','pdf'];
-        $fileUploaded = "error";
-
-    
-   
-        if(request()->file('file'))
-        {
-        
+        if (request()->file('file')) {
             $file = request()->file('file');
-           
+
             $name = $file->getClientOriginalName();
             $ext = $file->guessClientExtension();
             $onlyName = str_slug(pathinfo($name)['filename'], '-');
-            
-        
-        
-            if(in_array($ext, $mimes)){
-                
-               
 
-                $fileUploaded = $file->storeAs("credits/". $credit->id ."/files", $credit->id.'-'.$onlyName.'.'.$ext,'public');
+            if (in_array($ext, $mimes)) {
+                $fileUploaded = $file->storeAs('credits/' . $credit->id . '/files', $credit->id . '-' . $onlyName . '.' . $ext, 'public');
 
-                $credit->file = $credit->id.'-'.$onlyName.'.'.$ext;
+                $credit->file = $credit->id . '-' . $onlyName . '.' . $ext;
                 $credit->save();
-
-               
             }
-            
         }
 
-      
-   
-
-       flash('Credit  updated','success');
-        
-
+        flash('Credit  updated', 'success');
 
         return redirect('credit/credit-requests');
     }
 
     public function update_interest($company_id)
     {
-        
         $interest = \DB::table('interests')
             ->where('company_id', $company_id)
             ->update(['interest_30' => request('interest_30'),
                       'interest_45' => request('interest_45'),
                       'interest_60' => request('interest_60')
-                    ]); //no asistio a la cita  
+                    ]); //no asistio a la cita
 
         return back();
     }
 
     public function deleteFilecredit($id)
     {
-        $directory= "credits/". $id."/files";
+        $directory = 'credits/' . $id . '/files';
         $credit = Credit::find($id);
         $credit->file = '';
         $credit->save();
-        
+
         //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
         Storage::disk('public')->deleteDirectory($directory);
-        
+
         return 'ok';
-         
     }
+
     public function update_status($id)
     {
-            
-            $credit = \DB::table('credits')
+        $credit = \DB::table('credits')
             ->where('id', $id)
-            ->update(['status' => request('status')]); //no asistio a la cita  
+            ->update(['status' => request('status')]); //no asistio a la cita
 
         return back();
     }
-
-   
 
     /**
      * suppliers list for select.
@@ -348,23 +294,14 @@ class CreditController extends Controller
      */
     public function destroy($id)
     {
-         $credit = Credit::find($id);
-         $directory= "credits/". $id."/files";
-          
-         $credit->delete();
+        $credit = Credit::find($id);
+        $directory = 'credits/' . $id . '/files';
 
-          //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
-         Storage::disk('public')->deleteDirectory($directory);
-        
+        $credit->delete();
+
+        //Storage::disk('public')->delete("avatars/". $id, "avatar.jpg");
+        Storage::disk('public')->deleteDirectory($directory);
+
         return back();
-         
     }
-
-
-
-   
-
-
-
-    
 }

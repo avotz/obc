@@ -36,7 +36,7 @@
                                    
                                 </li>
                                 @endif
-                                 @if(auth()->user()->hasPermission('View_all_trans_company'))
+                                 @if(auth()->user()->hasPermission('view_all_trans_company'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
                                    

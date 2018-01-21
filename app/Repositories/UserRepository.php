@@ -3,6 +3,7 @@
 
 use App\Role;
 use App\User;
+use App\Permission;
 
 
 class UserRepository extends DbRepository{
@@ -39,6 +40,14 @@ class UserRepository extends DbRepository{
         if( $role->name == 'partner'){
             $company = $user->companies()->create($data);
             $company->countries()->attach($data['country']);
+
+             $permission1 = Permission::whereName('view_all_trans_company')->first();
+             $user->givePermissionTo($permission1);
+
+             $permission2 = Permission::whereName('view_commissions')->first();
+             $user->givePermissionTo($permission2);
+
+
            
             
             if(isset($data['sectors'])){

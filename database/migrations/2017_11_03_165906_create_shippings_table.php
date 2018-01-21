@@ -29,6 +29,8 @@ class CreateShippingsTable extends Migration
             $table->text('comments')->nullable();
             $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject
             $table->integer('country_id');
+            $table->integer('company_id')->unsigned()->index();
+
             $table->timestamps();
         });
 
@@ -46,6 +48,8 @@ class CreateShippingsTable extends Migration
             $table->tinyInteger('status')->default(0); //0 pending 1 Granted 2 reject
             $table->tinyInteger('public')->default(1); //1 publica //0 privada
             $table->integer('country_id');
+            $table->integer('company_id')->unsigned()->index();
+
             $table->timestamps();
         });
 

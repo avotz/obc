@@ -58,6 +58,9 @@
                  <li >
                     <a href="#search-purchase-orders" @click="currentView('purchase-orders')">Purchase Orders</a>
                 </li>
+                 <li >
+                    <a href="#search-saving-obc" @click="currentView('saving-obc')">Saving History OBC</a>
+                </li>
                
                
             </ul>
@@ -389,6 +392,47 @@
                 </div>
                 <!-- END purchase-orders -->
 
+                <div class="tab-pane fade fade-up in " id="search-saving-obc">
+                    <div class="border-b push-30">
+                        <h2 class="push-10">{{ purchaseOrdersApproved.total }} <span class="h5 font-w400 text-muted">Saving OBC Found</span></h2>
+                    </div>
+                    <table class="table table-striped table-vcenter">
+                        <thead>
+                            <tr>
+                    
+                                <th class="text-center">Purchase Order</th>
+                                <th class="text-center"><i class="si si-user"></i></th>
+                                <th class="text-center">Original Amount</th>
+                                <th class="text-center">Final Amount</th>
+                                <th class="text-center" >Saving OBC</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr v-for="purchase in purchaseOrdersApproved.data" :key="purchase.id">
+                               
+                                <td class="text-center font-w600">{{ purchase.transaction_id }}</td>
+                                <td class="text-center">
+                                    {{ purchase.user.company.public_code }}
+                                       
+                                </td>
+                                <td class="font-w600 text-center">{{ purchase.amount }} {{ purchase.currency }}</td>
+                                 <td class="font-w600 text-center">{{ purchase.total }} {{ purchase.currency }}</td>
+
+                                <td class="text-center">{{ calculatePercentAmount(purchase.discount, purchase.amount) }} {{ purchase.currency }}</td>
+                                
+                                
+                            </tr>
+                           
+                            
+                        </tbody>
+                    </table>
+                    <laravel-pagination :data="purchaseOrdersApproved" v-on:pagination-change-page="getPurchaseOrdersApproved"></laravel-pagination >
+                   
+                </div>
+                <!-- END ahorro obc -->
+
 
                
             </div>
@@ -442,7 +486,8 @@
              country:{
                 type:Object,
 
-            }
+            },
+              
           
         },
         
@@ -459,13 +504,15 @@
                 credits:{},
                 creditRequests:{},
                 purchaseOrders:{},
+                purchaseOrdersApproved:{},
                 search:'',
                 country_id:'',
                 country_list:[],
                 date_start:moment().startOf('month').format('YYYY-MM-DD'),
                 date_end: moment().endOf('month').format('YYYY-MM-DD'),
                 activeView:'quotation-requests',
-                disabled: true
+                disabled: true,
+                savingObcTotal: 0
 
                 
 
@@ -474,6 +521,10 @@
         },
 
         methods:{
+            calculatePercentAmount(percent, amount)
+            {
+                return (percent / 100) * amount;
+            },
              onBlurDateStart(e){
                 const value = e.target.value;
 
@@ -513,6 +564,9 @@
                 
                 if(this.activeView == 'purchase-orders')
                     this.getPurchaseOrders();
+                    
+                 if(this.activeView == 'saving-obc')
+                    this.getPurchaseOrdersApproved();
             },
             onSearch:_.debounce(function(search) {
 	           
@@ -536,6 +590,9 @@
                 
                 if(this.activeView == 'purchase-orders')
                     this.getPurchaseOrders();
+
+                 if(this.activeView == 'saving-obc')
+                    this.getPurchaseOrdersApproved();
 					
 
 		    }, 0),
@@ -668,8 +725,27 @@
 				// Using vue-resource as an example
 				axios.get(`${this.urlPurchaseOrders}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
-                      this.purchaseOrders = response.data;
+                      this.purchaseOrders = response.data.paginateData;
                     
+                      
+                    }, (response) => {
+                        console.log(response.data)
+                               
+                    });
+
+				
+			},
+            getPurchaseOrdersApproved(page) {
+				if (typeof page === 'undefined') {
+					page = 1;
+				}
+				
+
+				// Using vue-resource as an example
+				axios.get(`${this.urlPurchaseOrders}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&status=1&page=${page}`).then((response) => {
+                    
+                      this.purchaseOrdersApproved = response.data.paginateData;
+                      this.savingObcTotal = response.data.total;
                       
                     }, (response) => {
                         console.log(response.data)
@@ -691,13 +767,13 @@
                  this.disabled = true; 
             }
 
-            this.getQuotations()
+            //this.getQuotations()
             this.getQuotationRequests()
-            this.getShippings()
-            this.getShippingsRequests()
-            this.getCredits()
-            this.getCreditRequests()
-            this.getPurchaseOrders()
+            //this.getShippings()
+            //this.getShippingsRequests()
+            //this.getCredits()
+            //this.getCreditRequests()
+            //this.getPurchaseOrders()
 
             console.log('Component Transactions.')
         }

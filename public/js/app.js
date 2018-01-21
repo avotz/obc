@@ -3516,6 +3516,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3575,19 +3619,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             credits: {},
             creditRequests: {},
             purchaseOrders: {},
+            purchaseOrdersApproved: {},
             search: '',
             country_id: '',
             country_list: [],
             date_start: moment().startOf('month').format('YYYY-MM-DD'),
             date_end: moment().endOf('month').format('YYYY-MM-DD'),
             activeView: 'quotation-requests',
-            disabled: true
+            disabled: true,
+            savingObcTotal: 0
 
         };
     },
 
 
     methods: {
+        calculatePercentAmount: function calculatePercentAmount(percent, amount) {
+            return percent / 100 * amount;
+        },
         onBlurDateStart: function onBlurDateStart(e) {
             var value = e.target.value;
 
@@ -3618,6 +3667,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.activeView == 'credits') this.getCredits();
 
             if (this.activeView == 'purchase-orders') this.getPurchaseOrders();
+
+            if (this.activeView == 'saving-obc') this.getPurchaseOrdersApproved();
         },
 
         onSearch: _.debounce(function (search) {
@@ -3635,6 +3686,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.activeView == 'credits') this.getCredits();
 
             if (this.activeView == 'purchase-orders') this.getPurchaseOrders();
+
+            if (this.activeView == 'saving-obc') this.getPurchaseOrdersApproved();
         }, 0),
         getQuotations: function getQuotations(page) {
             var _this = this;
@@ -3741,7 +3794,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // Using vue-resource as an example
             axios.get(this.urlPurchaseOrders + '/list?q=' + this.search + '&country=' + this.country_id + '&date_start=' + this.date_start + '&date_end=' + this.date_end + '&page=' + page).then(function (response) {
 
-                _this7.purchaseOrders = response.data;
+                _this7.purchaseOrders = response.data.paginateData;
+            }, function (response) {
+                console.log(response.data);
+            });
+        },
+        getPurchaseOrdersApproved: function getPurchaseOrdersApproved(page) {
+            var _this8 = this;
+
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+
+            // Using vue-resource as an example
+            axios.get(this.urlPurchaseOrders + '/list?q=' + this.search + '&country=' + this.country_id + '&date_start=' + this.date_start + '&date_end=' + this.date_end + '&status=1&page=' + page).then(function (response) {
+
+                _this8.purchaseOrdersApproved = response.data.paginateData;
+                _this8.savingObcTotal = response.data.total;
             }, function (response) {
                 console.log(response.data);
             });
@@ -3759,13 +3828,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.disabled = true;
         }
 
-        this.getQuotations();
+        //this.getQuotations()
         this.getQuotationRequests();
-        this.getShippings();
-        this.getShippingsRequests();
-        this.getCredits();
-        this.getCreditRequests();
-        this.getPurchaseOrders();
+        //this.getShippings()
+        //this.getShippingsRequests()
+        //this.getCredits()
+        //this.getCreditRequests()
+        //this.getPurchaseOrders()
 
         console.log('Component Transactions.');
     }
@@ -50905,7 +50974,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.currentView('purchase-orders')
       }
     }
-  }, [_vm._v("Purchase Orders")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Purchase Orders")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#search-saving-obc"
+    },
+    on: {
+      "click": function($event) {
+        _vm.currentView('saving-obc')
+      }
+    }
+  }, [_vm._v("Saving History OBC")])])]), _vm._v(" "), _c('div', {
     staticClass: "block-content tab-content bg-white"
   }, [_c('div', {
     staticClass: "tab-pane fade fade-up in active",
@@ -51333,6 +51411,40 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "pagination-change-page": _vm.getPurchaseOrders
     }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "tab-pane fade fade-up in ",
+    attrs: {
+      "id": "search-saving-obc"
+    }
+  }, [_c('div', {
+    staticClass: "border-b push-30"
+  }, [_c('h2', {
+    staticClass: "push-10"
+  }, [_vm._v(_vm._s(_vm.purchaseOrdersApproved.total) + " "), _c('span', {
+    staticClass: "h5 font-w400 text-muted"
+  }, [_vm._v("Saving OBC Found")])])]), _vm._v(" "), _c('table', {
+    staticClass: "table table-striped table-vcenter"
+  }, [_vm._m(7), _vm._v(" "), _c('tbody', _vm._l((_vm.purchaseOrdersApproved.data), function(purchase) {
+    return _c('tr', {
+      key: purchase.id
+    }, [_c('td', {
+      staticClass: "text-center font-w600"
+    }, [_vm._v(_vm._s(purchase.transaction_id))]), _vm._v(" "), _c('td', {
+      staticClass: "text-center"
+    }, [_vm._v("\n                                    " + _vm._s(purchase.user.company.public_code) + "\n                                       \n                                ")]), _vm._v(" "), _c('td', {
+      staticClass: "font-w600 text-center"
+    }, [_vm._v(_vm._s(purchase.amount) + " " + _vm._s(purchase.currency))]), _vm._v(" "), _c('td', {
+      staticClass: "font-w600 text-center"
+    }, [_vm._v(_vm._s(purchase.total) + " " + _vm._s(purchase.currency))]), _vm._v(" "), _c('td', {
+      staticClass: "text-center"
+    }, [_vm._v(_vm._s(_vm.calculatePercentAmount(purchase.discount, purchase.amount)) + " " + _vm._s(purchase.currency))])])
+  }))]), _vm._v(" "), _c('laravel-pagination', {
+    attrs: {
+      "data": _vm.purchaseOrdersApproved
+    },
+    on: {
+      "pagination-change-page": _vm.getPurchaseOrdersApproved
+    }
   })], 1)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', {
@@ -51454,6 +51566,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Status")]), _vm._v(" "), _c('th', {
     staticClass: "text-center"
   }, [_vm._v("Actions")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Purchase Order")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_c('i', {
+    staticClass: "si si-user"
+  })]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Original Amount")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Final Amount")]), _vm._v(" "), _c('th', {
+    staticClass: "text-center"
+  }, [_vm._v("Saving OBC")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

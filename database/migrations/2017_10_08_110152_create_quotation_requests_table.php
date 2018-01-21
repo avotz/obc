@@ -28,6 +28,8 @@ class CreateQuotationRequestsTable extends Migration
             $table->tinyInteger('geo_type')->default(1); // 1 Nacional 2 Regional 3 Internacional 4 Global
             $table->tinyInteger('public')->default(1); //1 publica //0 privada
             $table->integer('country_id');
+            $table->integer('company_id')->unsigned()->index();
+
             $table->timestamps();
         });
         Schema::create('request_supplier', function (Blueprint $table) {

@@ -34,7 +34,6 @@ class CreditRequestController extends Controller
         $quotation = Quotation::find($quotation_id);
 
         if ($quotation->credits()->where('status', 1)->first()) {
-
             flash('This quotation already has an approved Credit', 'warning');
             return back();
         }
@@ -46,8 +45,6 @@ class CreditRequestController extends Controller
         $company = auth()->user()->companies->first();
 
         $country = $company->countries->first();
-
-
 
         $currencies = [
             [
@@ -82,6 +79,7 @@ class CreditRequestController extends Controller
 
         $data['user_id'] = auth()->id();
         $data['country_id'] = auth()->user()->companies->first()->country;
+        $data['company_id'] = auth()->user()->companies->first()->id;
 
         $creditRequest = $quotation->creditRequests()->create($data);
         $creditRequest->generateTransactionId();
@@ -146,8 +144,6 @@ class CreditRequestController extends Controller
         $company = (auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin')) ? $creditRequest->user->companies->first() : auth()->user()->companies->first();
 
         $country = $company->countries->first();
-
-
 
         $currencies = [
             [

@@ -12,7 +12,7 @@ class Shipping extends Model
     * @var array
     */
     protected $fillable = [
-        'transaction_id', 'user_id', 'quotation_id', 'shipping_request_id', 'file', 'comments', 'cost','currency', 'date', 'delivery_time', 'country_id','type'
+        'transaction_id', 'user_id', 'quotation_id', 'shipping_request_id', 'file', 'comments', 'cost', 'currency', 'date', 'delivery_time', 'country_id', 'type', 'company_id'
     ];
 
     public function scopeSearch($query, $search)
@@ -49,6 +49,11 @@ class Shipping extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function quotation()

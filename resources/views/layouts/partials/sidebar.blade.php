@@ -60,6 +60,13 @@
                                    
                                 </li>
                                 @endif
+                                 @if(auth()->user()->hasPermission('view_all_trans_company'))
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
+                                   
+                                </li>
+                                @endif
+                                @if(auth()->user()->hasPermission('view_commissions'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#" title="Comisiones OBC"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
                                     <ul>
@@ -76,6 +83,7 @@
                                         
                                     </ul>
                                 </li>
+                                 @endif
                                 
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/profile" title="Administrar cuenta"><i class="si si-wrench"></i><span class="sidebar-mini-hide">Manage Account</span></a>

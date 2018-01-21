@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
     ];
     private $permissions = [
         [
-         'name' =>'View_all_trans_company',
+         'name' =>'view_all_trans_company',
          'label' => 'View all company transactions',
          'label_es' => 'Ver todas las trasacciones de la compañia'
         ],
         [
-            'name' =>'view_commisions',
+            'name' =>'view_commissions',
             'label' => 'View Commissions',
             'label_es' => 'Ver Comisiones'
         ],

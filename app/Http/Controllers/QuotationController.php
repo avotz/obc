@@ -60,8 +60,6 @@ class QuotationController extends Controller
 
         $country = $company->countries->first();
 
-
-
         $currencies = [
             [
                 'currency' => $country->currency,
@@ -74,7 +72,7 @@ class QuotationController extends Controller
         ];
         $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-        return view('quotations.create', compact('user', 'partner', 'quotationRequest', 'currencies','discount'));
+        return view('quotations.create', compact('user', 'partner', 'quotationRequest', 'currencies', 'discount'));
     }
 
     public function store($quotation_request_id)
@@ -96,6 +94,7 @@ class QuotationController extends Controller
         $data = request()->all();
 
         $data['country_id'] = auth()->user()->companies->first()->country;
+        $data['company_id'] = auth()->user()->companies->first()->id;
 
         $data['user_id'] = auth()->id();
         $data['geo_type'] = $quotationRequest->geo_type;
@@ -162,8 +161,10 @@ class QuotationController extends Controller
         $user = $quotationRequest->user->load('profile');
 
         //$creditDays = CreditDays::all();
+        $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-        return view('quotations.edit', compact('user', 'partner', 'quotation', 'quotationRequest'));
+
+        return view('quotations.edit', compact('user', 'partner', 'quotation', 'quotationRequest','discount'));
     }
 
     /**

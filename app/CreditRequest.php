@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CreditRequest extends Model
 {
     protected $fillable = [
-        'transaction_id', 'user_id', 'file', 'comments', 'date', 'amount', 'currency', 'credit_time', 'country_id'
+        'transaction_id', 'user_id', 'file', 'comments', 'date', 'amount', 'currency', 'credit_time', 'country_id', 'company_id'
     ];
 
     public function scopeSearch($query, $search)
@@ -44,6 +44,11 @@ class CreditRequest extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function quotation()

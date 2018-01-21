@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingRequest extends Model
 {
     protected $fillable = [
-        'transaction_id', 'user_id', 'file', 'comments', 'date', 'delivery_time', 'country_id','type'
+        'transaction_id', 'user_id', 'file', 'comments', 'date', 'delivery_time', 'country_id', 'type', 'company_id'
     ];
 
     public function scopeSearch($query, $search)
@@ -44,6 +44,11 @@ class ShippingRequest extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function quotation()

@@ -12,7 +12,7 @@ class PurchaseOrder extends Model
     * @var array
     */
     protected $fillable = [
-        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id', 'shipping_company', 'credit_company', 'amount', 'discount', 'currency', 'total'
+        'transaction_id', 'user_id', 'file', 'comments', 'geo_type', 'status', 'country_id', 'shipping_company', 'credit_company', 'amount', 'discount', 'currency', 'total', 'company_id'
     ];
 
     public function scopeSearch($query, $search)
@@ -51,10 +51,16 @@ class PurchaseOrder extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
     public function quotation()
     {
         return $this->belongsTo(Quotation::class);
     }
+
     public function commission()
     {
         return $this->hasOne(Commission::class);

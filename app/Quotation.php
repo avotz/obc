@@ -12,7 +12,7 @@ class Quotation extends Model
      * @var array
      */
     protected $fillable = [
-        'transaction_id', 'user_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'comments', 'geo_type', 'product_name', 'product_photo', 'status', 'country_id','amount','discount','currency','total'
+        'transaction_id', 'user_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'comments', 'geo_type', 'product_name', 'product_photo', 'status', 'country_id', 'amount', 'discount', 'currency', 'total', 'company_id'
     ];
 
     public function scopeSearch($query, $search)
@@ -44,6 +44,11 @@ class Quotation extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function request()

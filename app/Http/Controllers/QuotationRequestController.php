@@ -88,6 +88,7 @@ class QuotationRequestController extends Controller
 
         $data = request()->all();
         $data['country_id'] = auth()->user()->companies->first()->country;
+        $data['company_id'] = auth()->user()->companies->first()->id;
 
         $quotationRequest = auth()->user()->requests()->create($data);
 
@@ -150,7 +151,6 @@ class QuotationRequestController extends Controller
     {
         $quotationRequest = QuotationRequest::find($id);
 
-        
         if (!$quotationRequest || (!$quotationRequest->createdBy(auth()->user()) && !auth()->user()->hasRole('admin') && !auth()->user()->hasRole('superadmin'))) {
             return redirect('/public/requests');
         }

@@ -53,24 +53,22 @@ class PurchaseController extends Controller
 
         $shipping_company = 'N/A';
         $credit_company = 'N/A';
-        
-        $shipping_Granted = $quotation->shippings()->where('status', 1)->first();
-        
-        if($shipping_Granted)
-            $shipping_company = $shipping_Granted->user->companies->first()->company_name;
 
+        $shipping_Granted = $quotation->shippings()->where('status', 1)->first();
+
+        if ($shipping_Granted) {
+            $shipping_company = $shipping_Granted->user->companies->first()->company_name;
+        }
 
         $credit_approved = $quotation->credits()->where('status', 1)->first();
 
-        if ($credit_approved)
+        if ($credit_approved) {
             $credit_company = $credit_approved->user->companies->first()->company_name;
-
+        }
 
         $company = auth()->user()->companies->first();
 
         $country = $company->countries->first();
-
-
 
         $currencies = [
             [
@@ -85,7 +83,7 @@ class PurchaseController extends Controller
 
         $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-        return view('purchases.create', compact('user', 'partner', 'quotation', 'shipping_company', 'credit_company','currencies', 'discount'));
+        return view('purchases.create', compact('user', 'partner', 'quotation', 'shipping_company', 'credit_company', 'currencies', 'discount'));
     }
 
     public function store($quotation_id)
@@ -104,6 +102,7 @@ class PurchaseController extends Controller
         $data = request()->all();
 
         $data['country_id'] = auth()->user()->companies->first()->country;
+        $data['company_id'] = auth()->user()->companies->first()->id;
 
         $data['user_id'] = auth()->id();
         $data['geo_type'] = $quotation->geo_type;
@@ -155,21 +154,19 @@ class PurchaseController extends Controller
 
         $shipping_Granted = $quotation->shippings()->where('status', 1)->first();
 
-        if ($shipping_Granted)
+        if ($shipping_Granted) {
             $shipping_company = $shipping_Granted->user->companies->first()->company_name;
-
+        }
 
         $credit_approved = $quotation->credits()->where('status', 1)->first();
 
-        if ($credit_approved)
+        if ($credit_approved) {
             $credit_company = $credit_approved->user->companies->first()->company_name;
-
+        }
 
         $company = (auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin')) ? $purchase->user->companies->first() : auth()->user()->companies->first();
 
         $country = $company->countries->first();
-
-
 
         $currencies = [
             [
@@ -242,8 +239,7 @@ class PurchaseController extends Controller
             ->where('id', $id)
             ->update(['status' => request('status')]); //no asistio a la cita
 
-        if(request('status') == 1 )
-        {
+        if (request('status') == 1) {
             $purchase = PurchaseOrder::find($id);
 
             $quotation = $purchase->quotation;
@@ -257,7 +253,6 @@ class PurchaseController extends Controller
                 'total' => calculatePercentAmount($gross_commission, $purchase->amount) - calculatePercentAmount($purchase->discount, $purchase->amount),
                 'currency' => $purchase->currency,
                 'country_id' => auth()->user()->companies->first()->country
-
             ]);
         }
 
@@ -269,7 +264,6 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-
         $purchase = PurchaseOrder::find($id);
         $requestId = $purchase->quotation->request->id;
         $purchase->delete();
@@ -277,6 +271,5 @@ class PurchaseController extends Controller
         flash('Purchase Order Deleted', 'success');
 
         return redirect('requests/' . $requestId . '/quotations');
-
     }
 }

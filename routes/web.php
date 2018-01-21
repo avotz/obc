@@ -46,7 +46,6 @@ Route::delete('/requests/file/{id}', 'QuotationRequestController@deleteFile');
 Route::delete('/quotations/file/{id}', 'QuotationController@deleteFile');
 Route::put('purchases/{purchase}/status', 'PurchaseController@update_status');
 
-
 Route::get('quotations/{quotation}/shippings', 'ShippingController@index');
 Route::get('quotations/{quotation}/shippings/list', 'ShippingController@getShippings');
 Route::get('quotations/{quotation}/shipping-requests/list', 'ShippingRequestController@getShippingsRequests');
@@ -82,7 +81,6 @@ Route::get('commissions/intransit', 'CommissionController@intransit');
 Route::get('commissions/paid', 'CommissionController@paid');
 Route::put('commissions/{commission}/status', 'CommissionController@update_status');
 
-
 Route::resource('requests', 'QuotationRequestController');
 Route::resource('quotations', 'QuotationController');
 Route::resource('purchases', 'PurchaseController');
@@ -91,8 +89,7 @@ Route::resource('shipping-requests', 'ShippingRequestController');
 Route::resource('credits', 'CreditController');
 Route::resource('credit-requests', 'CreditRequestController');
 
-Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function ()
-{
+Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function () {
     Route::put('/settings', 'Superadmin\UserController@updateSettings');
     Route::put('/{admin}', 'Superadmin\AccountController@update');
 
@@ -105,12 +102,11 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::put('/users/{user}/country', 'Superadmin\UserController@updateCountry');
     Route::put('/users/{user}/permissions', 'Superadmin\UserController@updatePermissions');
 
-    foreach (['active', 'inactive','trial','notrial'] as $key)
-    {
-        Route::post('/users/{user}/' . $key, array(
-            'as'   => 'superadmin.users.' . $key,
+    foreach (['active', 'inactive', 'trial', 'notrial'] as $key) {
+        Route::post('/users/{user}/' . $key, [
+            'as' => 'superadmin.users.' . $key,
             'uses' => 'Superadmin\UserController@' . $key,
-        ));
+        ]);
     }
 
     Route::get('/countries', 'Superadmin\CountryController@index');
@@ -128,13 +124,9 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::get('credit-requests/list', 'Superadmin\TransactionController@getCreditRequests');
     Route::get('credits/list', 'Superadmin\TransactionController@getCredits');
     Route::get('purchase-orders/list', 'Superadmin\TransactionController@getPurchaseOrders');
-    
-
 });
 
-Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
-{
-    
+Route::prefix('admin')->middleware('authByRole:admin')->group(function () {
     Route::put('/{admin}', 'Admin\AccountController@update');
     Route::get('/users', 'Admin\UserController@index');
     Route::get('/users/create', 'Admin\UserController@create');
@@ -153,26 +145,16 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function ()
     Route::get('credit-requests/list', 'Admin\TransactionController@getCreditRequests');
     Route::get('credits/list', 'Admin\TransactionController@getCredits');
     Route::get('purchase-orders/list', 'Admin\TransactionController@getPurchaseOrders');
-    
 
-
-    foreach (['active', 'inactive','trial','notrial'] as $key)
-    {
-        Route::post('/users/{user}/' . $key, array(
-            'as'   => 'admin.users.' . $key,
+    foreach (['active', 'inactive', 'trial', 'notrial'] as $key) {
+        Route::post('/users/{user}/' . $key, [
+            'as' => 'admin.users.' . $key,
             'uses' => 'Admin\UserController@' . $key,
-        ));
+        ]);
     }
-
-
-
 });
 
-Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
-{
-    
-    
-
+Route::prefix('partner')->middleware('authByRole:partner')->group(function () {
     Route::post('/company/logo', 'Partner\AccountController@logoCompany');
     Route::put('/companies/{company}', 'Partner\AccountController@updateCompany');
     Route::put('/companies/{company}/privatecode', 'Partner\AccountController@updatePrivateCode');
@@ -185,28 +167,29 @@ Route::prefix('partner')->middleware('authByRole:partner')->group(function ()
     Route::get('/users/{user}/requests', 'Partner\UserController@quotationRequests');
     Route::get('/users/{user}/quotations', 'Partner\UserController@quotations');
 
-    foreach (['active', 'inactive','trial','notrial'] as $key)
-    {
-        Route::post('/users/{user}/' . $key, array(
-            'as'   => 'users.' . $key,
+    foreach (['active', 'inactive', 'trial', 'notrial'] as $key) {
+        Route::post('/users/{user}/' . $key, [
+            'as' => 'users.' . $key,
             'uses' => 'Partner\UserController@' . $key,
-        ));
+        ]);
     }
 
     //Route::get('shipping-requests/list', 'Partner\ShippingRequestController@getShippingsRequests');
     //Route::get('shippings/list', 'Partner\ShippingController@getShippings');
 
-
     Route::get('/quotations', 'Partner\QuotationController@index');
     Route::get('/requests', 'Partner\QuotationRequestController@index');
-    
-    
-    
 
+    Route::get('transactions', 'Partner\TransactionController@index');
+    Route::get('quotation-requests/list', 'Partner\TransactionController@getQuotationRequests');
+    Route::get('quotations/list', 'Partner\TransactionController@getQuotations');
+    Route::get('shipping-requests/list', 'Partner\TransactionController@getShippingsRequests');
+    Route::get('shippings/list', 'Partner\TransactionController@getShippings');
+    Route::get('credit-requests/list', 'Partner\TransactionController@getCreditRequests');
+    Route::get('credits/list', 'Partner\TransactionController@getCredits');
+    Route::get('purchase-orders/list', 'Partner\TransactionController@getPurchaseOrders');
 });
-Route::prefix('shipping')->middleware('authByRole:shipping')->group(function ()
-{
-   
+Route::prefix('shipping')->middleware('authByRole:shipping')->group(function () {
     Route::get('shipping-requests', 'Shipping\ShippingRequestController@index');
     Route::get('shippings/list', 'Shipping\ShippingController@getShippings');
     Route::get('shipping-requests/list', 'Shipping\ShippingRequestController@getShippingsRequests');
@@ -218,13 +201,8 @@ Route::prefix('shipping')->middleware('authByRole:shipping')->group(function ()
     Route::put('shippings/{shipping}/status', 'Shipping\ShippingController@update_status');
 
     Route::resource('shippings', 'Shipping\ShippingController');
-    
-    
-
 });
-Route::prefix('credit')->middleware('authByRole:credit')->group(function ()
-{
-    
+Route::prefix('credit')->middleware('authByRole:credit')->group(function () {
     Route::get('credit-requests', 'Credit\CreditRequestController@index');
     Route::get('credits/list', 'Credit\CreditController@getCredits');
     Route::get('credit-requests/list', 'Credit\CreditRequestController@getCreditRequests');
@@ -237,24 +215,15 @@ Route::prefix('credit')->middleware('authByRole:credit')->group(function ()
     Route::put('companies/{company}/interest', 'Credit\CreditController@update_interest');
 
     Route::resource('credits', 'Credit\CreditController');
-    
-    
-
 });
-Route::prefix('user')->middleware('authByRole:user')->group(function ()
-{
+Route::prefix('user')->middleware('authByRole:user')->group(function () {
     Route::put('/{user}', 'User\AccountController@update');
     Route::get('/quotations', 'User\QuotationController@index');
     Route::get('/requests', 'User\QuotationRequestController@index');
 
     //Route::get('shipping-requests/list', 'User\ShippingRequestController@getShippingsRequests');
     //Route::get('shippings/list', 'User\ShippingController@getShippings');
-  
-   
-
 });
-
-
 
 //Auth::routes();
 // Authentication Routes...

@@ -33,8 +33,7 @@ class ShippingRequestController extends Controller
     {
         $quotation = Quotation::find($quotation_id);
 
-        if($quotation->shippings()->where('status',1)->first()){
-
+        if ($quotation->shippings()->where('status', 1)->first()) {
             flash('This quotation already has an approved shipping', 'warning');
             return back();
         }
@@ -64,6 +63,7 @@ class ShippingRequestController extends Controller
 
         $data['user_id'] = auth()->id();
         $data['country_id'] = auth()->user()->companies->first()->country;
+        $data['company_id'] = auth()->user()->companies->first()->id;
 
         $shippingRequest = $quotation->shippingsRequests()->create($data);
         $shippingRequest->generateTransactionId();
