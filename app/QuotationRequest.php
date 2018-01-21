@@ -12,7 +12,12 @@ class QuotationRequest extends Model
      * @var array
      */
     protected $fillable = [
-        'transaction_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'exp_date', 'comments', 'geo_type', 'product_name', 'product_photo', 'public', 'country_id', 'company_id'
+        'transaction_id', 'delivery_time', 'way_of_delivery', 'way_to_pay', 'exp_date', 'comments', 'geo_type', 'product_name', 'product_photo', 'public', 'country_id', 'company_id', 'status'
+    ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'exp_date'
     ];
 
     public function scopeSearch($query, $search)

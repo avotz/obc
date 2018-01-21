@@ -38,7 +38,7 @@
                          @endif
                         </div>
                     @else 
-                        @if(isset($purchase) && !$purchase->status == 1)
+                        @if(isset($purchase) && $purchase->status != 1)
                         <div class="form-group">
                             <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Eliminar" form="form-delete" formaction="{!! url('/purchases/'.$purchase->id) !!}">Delete</button>
                          </div>

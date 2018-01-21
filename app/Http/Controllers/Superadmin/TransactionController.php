@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Superadmin;
+
 use App\User;
 use App\Country;
-use App\Company;
-use App\Role;
-use App\Sector;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Shipping;
 use App\ShippingRequest;
@@ -31,24 +28,18 @@ class TransactionController extends Controller
         $this->middleware('authByRole:superadmin');
         $this->userRepo = $userRepo;
     }
-    
 
-
-    
     public function index()
     {
-        if (!auth()->user()->hasPermission('view_all_trans_company')) return redirect('/');
-        
+        if (!auth()->user()->hasPermission('view_all_trans_company')) {
+            return redirect('/');
+        }
+
         $search['q'] = request('q');
-       
 
-       
         $countries = Country::all();
-       
-        
-    
 
-        return view('superadmin.transactions.index', compact('countries','search'));
+        return view('superadmin.transactions.index', compact('countries', 'search'));
     }
 
     public function getQuotations()
@@ -64,11 +55,7 @@ class TransactionController extends Controller
             ['created_at', '<=', $date_end->endOfDay()]
         ])->where('country_id', $country_id)->with('request.user', 'user.profile')->search($search['q'])->paginate(10);
 
-
-
-
         return $quotations;
-
     }
 
     public function getQuotationRequests()
@@ -78,8 +65,7 @@ class TransactionController extends Controller
 
         $date_start = request('date_start') ? Carbon::parse(request('date_start')) : Carbon::now();
         $date_end = request('date_end') ? Carbon::parse(request('date_end')) : Carbon::now();
-        
-      
+
         $quotationRequests = QuotationRequest::where([
             ['created_at', '>=', $date_start],
             ['created_at', '<=', $date_end->endOfDay()]
@@ -88,7 +74,6 @@ class TransactionController extends Controller
         return $quotationRequests;
     }
 
-    
     public function getShippings()
     {
         $search['q'] = request('q');
@@ -102,11 +87,7 @@ class TransactionController extends Controller
             ['date', '<=', $date_end->endOfDay()]
         ])->where('country_id', $country_id)->with('quotation.user', 'user', 'shippingRequest')->search($search['q'])->paginate(10);
 
-
-
-
         return $shippings;
-
     }
 
     public function getShippingsRequests()
@@ -153,11 +134,7 @@ class TransactionController extends Controller
             ['date', '<=', $date_end->endOfDay()]
         ])->where('country_id', $country_id)->with('quotation.user', 'user', 'creditRequest')->search($search['q'])->paginate(10);
 
-
-
-
         return $credits;
-
     }
 
     public function getPurchaseOrders()
@@ -177,25 +154,16 @@ class TransactionController extends Controller
             $purchases = $purchases->where('status', $status);
         }
 
-                // $purchasesAmountTotal = $purchases->sum('amount');
-                // $purchasesTotal = $purchases->sum('total');
+        // $purchasesAmountTotal = $purchases->sum('amount');
+        // $purchasesTotal = $purchases->sum('total');
 
-                // $purchaseTotalFinal = $purchasesAmountTotal - $purchasesTotal;
+        // $purchaseTotalFinal = $purchasesAmountTotal - $purchasesTotal;
 
-                $data = [
+        $data = [
                     'paginateData' => $purchases->paginate(10),
                     'total' => 0
                 ];
 
-                return $data;
-
-
+        return $data;
     }
-
-
-   
-
-   
-   
-   
 }

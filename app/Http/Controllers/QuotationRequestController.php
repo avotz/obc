@@ -32,7 +32,7 @@ class QuotationRequestController extends Controller
      */
     public function public()
     {
-        $quotationRequests = QuotationRequest::where('public', 1);
+        $quotationRequests = QuotationRequest::where('status', 1)->where('public', 1);
 
         $quotationRequests = $quotationRequests->orderBy('created_at', 'DESC')->paginate(10);
 
@@ -48,7 +48,7 @@ class QuotationRequestController extends Controller
     {
         $partner = auth()->user()->companies->first();
 
-        $quotationRequests = QuotationRequest::where('public', 0)->whereHas('suppliers', function ($q) use ($partner) {
+        $quotationRequests = QuotationRequest::where('status', 1)->where('public', 0)->whereHas('suppliers', function ($q) use ($partner) {
             $q->where('request_supplier.supplier_id', $partner->id);
         });
 

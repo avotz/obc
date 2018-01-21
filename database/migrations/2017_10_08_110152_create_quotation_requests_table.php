@@ -29,6 +29,7 @@ class CreateQuotationRequestsTable extends Migration
             $table->tinyInteger('public')->default(1); //1 publica //0 privada
             $table->integer('country_id');
             $table->integer('company_id')->unsigned()->index();
+            $table->tinyInteger('status')->default(1); //0 no visible 1 visible
 
             $table->timestamps();
         });
