@@ -171,12 +171,24 @@ class TransactionController extends Controller
         $purchases = PurchaseOrder::where([
             ['created_at', '>=', $date_start],
             ['created_at', '<=', $date_end->endOfDay()]
-        ])->where('country_id', $country_id)->with('quotation.user', 'user')->search($search['q'])->paginate(10);
+        ])->where('country_id', $country_id)->with('quotation.user', 'user')->search($search['q']);
 
+        if ($status) {
+            $purchases = $purchases->where('status', $status);
+        }
 
+                // $purchasesAmountTotal = $purchases->sum('amount');
+                // $purchasesTotal = $purchases->sum('total');
 
+                // $purchaseTotalFinal = $purchasesAmountTotal - $purchasesTotal;
 
-        return $purchases;
+                $data = [
+                    'paginateData' => $purchases->paginate(10),
+                    'total' => 0
+                ];
+
+                return $data;
+
 
     }
 

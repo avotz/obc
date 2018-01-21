@@ -164,6 +164,8 @@ class TransactionController extends Controller
     {
         $search['q'] = request('q');
         $country_id = request('country');
+        $status = request('status');
+
 
         $date_start = request('date_start') ? Carbon::parse(request('date_start')) : Carbon::now();
         $date_end = request('date_end') ? Carbon::parse(request('date_end')) : Carbon::now();
@@ -171,12 +173,26 @@ class TransactionController extends Controller
         $purchases = PurchaseOrder::where([
             ['created_at', '>=', $date_start],
             ['created_at', '<=', $date_end->endOfDay()]
-        ])->where('country_id', $country_id)->with('quotation.user', 'user')->search($search['q'])->paginate(10);
+        ])->where('country_id', $country_id)->with('quotation.user', 'user')->search($search['q']);
+
+        if ($status) {
+            $purchases = $purchases->where('status', $status);
+        }
+
+        // $purchasesAmountTotal = $purchases->sum('amount');
+        // $purchasesTotal = $purchases->sum('total');
+
+        // $purchaseTotalFinal = $purchasesAmountTotal - $purchasesTotal;
+
+          $data = [
+            'paginateData' => $purchases->paginate(10),
+            'total' => 0
+        ];
+
+        return $data;
 
 
 
-
-        return $purchases;
 
     }
 
