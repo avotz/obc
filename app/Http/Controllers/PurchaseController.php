@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Commission;
 use App\GlobalSetting;
+use App\Mail\NewPurchaseOrder;
+use App\Mail\StatusPurchase;
 
 class PurchaseController extends Controller
 {
@@ -129,6 +131,12 @@ class PurchaseController extends Controller
             }
         }
 
+        try {
+            \Mail::to([$quotation->user->email])->send(new NewPurchaseOrder($purchase));
+        } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
+            \Log::error($e->getMessage());
+        }
+
         flash('Purchase order Saved', 'success');
 
         return redirect('requests/' . $quotation->request->id . '/quotations');
@@ -239,9 +247,9 @@ class PurchaseController extends Controller
             ->where('id', $id)
             ->update(['status' => request('status')]); //no asistio a la cita
 
-        if (request('status') == 1) {
-            $purchase = PurchaseOrder::find($id);
+        $purchase = PurchaseOrder::find($id);
 
+        if (request('status') == 1) {
             $quotation = $purchase->quotation;
             $gross_commission = GlobalSetting::first() ? GlobalSetting::first()->gross_commission : 0;
             $commission = Commission::create([
@@ -254,6 +262,12 @@ class PurchaseController extends Controller
                 'currency' => $purchase->currency,
                 'country_id' => auth()->user()->companies->first()->country
             ]);
+        }
+
+        try {
+            \Mail::to([$purchase->user->email])->send(new StatusPurchase($purchase));
+        } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
+            \Log::error($e->getMessage());
         }
 
         return back();

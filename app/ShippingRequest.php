@@ -65,4 +65,15 @@ class ShippingRequest extends Model
     {
         return $this->hasMany(Shipping::class);
     }
+
+    /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+    public function createdBy($user)
+    {
+        return $this->where('user_id', $user->id)->count();
+    }
 }

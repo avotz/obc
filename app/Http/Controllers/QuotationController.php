@@ -11,6 +11,7 @@ use App\Rules\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\GlobalSetting;
+use App\Mail\NewQuotation;
 
 class QuotationController extends Controller
 {
@@ -136,6 +137,12 @@ class QuotationController extends Controller
             }
         }
 
+        try {
+            \Mail::to([$quotationRequest->user->email])->send(new NewQuotation($quotation));
+        } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
+            \Log::error($e->getMessage());
+        }
+
         flash('Quotation Saved', 'success');
 
         return redirect('/public/requests');
@@ -163,8 +170,7 @@ class QuotationController extends Controller
         //$creditDays = CreditDays::all();
         $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-
-        return view('quotations.edit', compact('user', 'partner', 'quotation', 'quotationRequest','discount'));
+        return view('quotations.edit', compact('user', 'partner', 'quotation', 'quotationRequest', 'discount'));
     }
 
     /**

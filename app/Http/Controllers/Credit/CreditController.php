@@ -10,6 +10,7 @@ use App\CreditRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Mail\NewCredit;
 
 class CreditController extends Controller
 {
@@ -152,6 +153,12 @@ class CreditController extends Controller
                 $credit->file = $credit->id . '-' . $onlyName . '.' . $ext;
                 $credit->save();
             }
+        }
+
+        try {
+            \Mail::to([$creditRequest->user->email])->send(new NewCredit($credit));
+        } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
+            \Log::error($e->getMessage());
         }
 
         flash('Credit Saved', 'success');

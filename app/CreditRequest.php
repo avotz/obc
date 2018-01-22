@@ -64,4 +64,15 @@ class CreditRequest extends Model
     {
         return $this->hasMany(Credit::class);
     }
+
+    /**
+      * Determine if the user has the given role.
+      *
+      * @param  mixed $role
+      * @return boolean
+      */
+    public function createdBy($user)
+    {
+        return $this->where('user_id', $user->id)->count();
+    }
 }

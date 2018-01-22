@@ -9,6 +9,7 @@ use App\Company;
 use App\ShippingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\NewShippingRequest;
 
 class ShippingRequestController extends Controller
 {
@@ -70,6 +71,19 @@ class ShippingRequestController extends Controller
 
         if (!$shippingRequest->public && request('suppliers')) {
             $shippingRequest->suppliers()->sync(request('suppliers'));
+
+            foreach (request('suppliers') as $company_id) {
+                $company = Company::find($company_id);
+                $partners = $company->users()->whereHas('roles', function ($q) {
+                    $q->where('name', 'partner'); // shipping sectors
+                })->pluck('email');
+            }
+
+            try {
+                \Mail::to($partners)->send(new NewShippingRequest($shippingRequest));
+            } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
+                \Log::error($e->getMessage());
+            }
         }
         //  }else{
 
@@ -128,6 +142,10 @@ class ShippingRequestController extends Controller
     public function edit($id)
     {
         $shippingRequest = ShippingRequest::find($id);
+
+        if (!$shippingRequest->createdBy(auth()->user()) && !auth()->user()->hasRole('admin') && !auth()->user()->hasRole('superadmin')) {
+            return redirect('/');
+        }
 
         $quotation = $shippingRequest->quotation;
 

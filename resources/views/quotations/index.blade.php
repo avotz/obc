@@ -14,56 +14,58 @@
             <div class="block block-link-hover3" href="javascript:void(0)">
                  @include('quotations/partials/item', ['quotation' => $quotation, 'partner' =>  $quotation->user->companies->first(),  'user' => $quotation->user ])
                 <div class="block-content">
-                    <div class="row items-push text-center">
-                        <a class="col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $quotation->user->email }}" data-partner="{{ $quotation->user->companies->first()->id }}" data-transaction="{{ $quotation->transaction_id }}"  >
-                            <div class="push-5"><i class="si si-question fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Preguntas">Questions</div>
-                        </a>
-                       
-                        <a class="col-xs-4" href="{{ getQuotationFile($quotation) }}" target="_blank">
-                            <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
-                        </a>
-                        @if($quotation->purchase)
-                        <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id}}/edit">
-                            <div class="h3 push-5 text-{{ trans('utils.purchase_status_color.'.$quotation->purchase->status) }}"> {{  $quotation->purchase->count() }}</div>
-                            <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order </div>
-                        </a>
-                        @else
-                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/purchases/create">
-                            <div class="push-5"><i class="si si-handbag fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order </div>
-                        </a> 
+                        <div class="row items-push text-center">
+                            <a class="col-xs-4" href="#" data-toggle="modal" data-target="#modal-questions" data-user="{{ $quotation->user->email }}" data-partner="{{ $quotation->user->companies->first()->id }}" data-transaction="{{ $quotation->transaction_id }}"  >
+                                <div class="push-5"><i class="si si-question fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted" title="Preguntas">Questions</div>
+                            </a>
                         
-                        @endif
-                        @if($quotation->shippings)
-                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/shippings">
-                            <div class="h3 push-5 text-success"> {{  $quotation->shippings->count() }}</div>
-                            <div class="h5 font-w300 text-muted" title="Envio">Shipping</div>
-                        </a>
-                        @else
-                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/shippings">
-                            <div class="push-5"><i class="si si-plane fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Envio">Shipping</div>
-                        </a>
-                        @endif
-                         @if($quotation->credits)
-                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
-                            <div class="push-5"><i class="si si-credit-card fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Financiar">Financing</div>
-                        </a>
-                        @else
-                        <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
-                            <div class="push-5"><i class="si si-credit-card fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Financiar">Financing</div>
-                        </a>
-                        @endif
-                        <a class="col-xs-4" href="#">
-                            <div class="push-5"><i class="si si-check fa-2x"></i></div>
-                            <div class="h5 font-w300 text-muted" title="Enviar">Send</div>
-                        </a>
-                        
-                    </div>
+                            <a class="col-xs-4" href="{{ getQuotationFile($quotation) }}" target="_blank">
+                                <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
+                            </a>
+                            @if($quotation->purchase->count())
+                            <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id}}/edit">
+                                <div class="h3 push-5 text-{{ trans('utils.purchase_status_color.'.$quotation->purchase->status) }}"> 1</div>
+                                <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order </div>
+                            </a>
+                            @else
+                            <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/purchases/create">
+                                <div class="push-5"><i class="si si-handbag fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order </div>
+                            </a> 
+                            
+                            @endif
+                        </div>
+                        <div class="row items-push text-center">
+                            @if($quotation->shippings->count())
+                            <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/shippings">
+                                <div class="h3 push-5 text-success"> {{  $quotation->shippings->count() }}</div>
+                                <div class="h5 font-w300 text-muted" title="Envio">Shipping</div>
+                            </a>
+                            @else
+                            <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/shippings">
+                                <div class="push-5"><i class="si si-plane fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted" title="Envio">Shipping</div>
+                            </a>
+                            @endif
+                            @if($quotation->credits->count())
+                            <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
+                                <div class="h3 push-5 text-success">{{  $quotation->shippings->count() }}</div>
+                                <div class="h5 font-w300 text-muted" title="Financiar">Financing</div>
+                            </a>
+                            @else
+                            <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
+                                <div class="push-5"><i class="si si-credit-card fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted" title="Financiar">Financing</div>
+                            </a>
+                            @endif
+                            <!-- <a class="col-xs-4" href="#">
+                                <div class="push-5"><i class="si si-check fa-2x"></i></div>
+                                <div class="h5 font-w300 text-muted" title="Enviar">Send</div>
+                            </a> -->
+                        </div>
+                    
                 </div>
             </div>
         </div>

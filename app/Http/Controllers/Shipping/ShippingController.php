@@ -11,6 +11,7 @@ use App\ShippingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Mail\NewShipping;
 
 class ShippingController extends Controller
 {
@@ -133,6 +134,12 @@ class ShippingController extends Controller
                 $shipping->file = $shipping->id . '-' . $onlyName . '.' . $ext;
                 $shipping->save();
             }
+        }
+
+        try {
+            \Mail::to([$shippingRequest->user->email])->send(new NewShipping($shipping));
+        } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
+            \Log::error($e->getMessage());
         }
 
         flash('Shipping Saved', 'success');
