@@ -5,16 +5,16 @@
 <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Busqueda creditos y solicitudes">
                     Search Credits & Requests<small></small>
                 </h1>
-                <a href="/quotations/{{ $quotation->id }}/credit-requests/create" class="btn btn-success">Create</a>
+                <a href="/quotations/{{ $quotation->id }}/credit-requests/create" class="btn btn-success" title="Crear">Create</a>
                 <a href="/requests/{{ $quotation->request_id }}/quotations" class="btn btn-info" title="Regresar a las cotizaciones">Back to quotations</a>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Credits & Requests</li>
-                    <li><a class="link-effect" href="">Credit Results</a></li>
+                    <li title="Creditos y solicitudes">Credits & Requests</li>
+                    <li><a class="link-effect" href="" title="Resultados de creditos">Credit Results</a></li>
                 </ol>
             </div>
         </div>

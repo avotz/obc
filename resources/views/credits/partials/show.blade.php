@@ -4,7 +4,7 @@
               
                   {{ $credit->amount }}
                 
-                <label for="amount">Amount</label>
+                <label for="amount" title="Monto">Amount</label>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
             <div class="form-material form-material-success">
               
                 {{ trans('utils.credit') }} {{ $credit->credit_time }} {{ trans('utils.days') }}
-                <label for="credit_time">Credit time</label>
+                <label for="credit_time" title="Tiempo de crédito">Credit time</label>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="form-material form-material-success">
               
                 {{ $credit->date }} 
-                <label for="date">Request Date</label>
+                <label for="date" title="Fecha de solicitud">Request Date</label>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
             <div class="form-material form-material-success">
               
                 {{ $credit->approval_date }} 
-                <label for="approval_date">Approval Date</label>
+                <label for="approval_date" title="Fecha de aprovación">Approval Date</label>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
             <div class="form-material form-material-success">
               
                 {{ $credit->payment_date }} 
-                <label for="payment_date">Payment Date</label>
+                <label for="payment_date" title="Fecha de pago">Payment Date</label>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
             <div class="form-material form-material-success">
               
                 {{ $credit->interest }} 
-                <label for="interest">Interest</label>
+                <label for="interest" title="Interes">Interest</label>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
             <div class="form-material form-material-success">
               
                 {{ $credit->total }} 
-                <label for="total">Total</label>
+                <label for="total" title="Total">Total</label>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
               
                 @endif
                 
-                <label for="file">File</label>
+                <label for="file" title="Archivo">File</label>
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
             <div class="form-material form-material-success">
               
                 {{ $credit->comments }} 
-                <label for="comments">Additional comment</label>
+                <label for="comments" title="Comentario adicional">Additional comment</label>
             </div>
         </div>
     </div>
@@ -93,9 +93,9 @@
         <div class="col-xs-12 col-sm-8 col-md-12">
          @if(isset($credit) && $credit->isPending())
                            @if(!$creditsApproved)
-                            <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/credits/{{ $credit->id }}/status">Aproved</button>
+                            <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/credits/{{ $credit->id }}/status" title="Aprovado">Aproved</button>
                             @endif
-                            <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/credits/{{ $credit->id }}/status">Reject</button>
+                            <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/credits/{{ $credit->id }}/status" title="Rechazado">Reject</button>
             @endif
              @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
                 <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>

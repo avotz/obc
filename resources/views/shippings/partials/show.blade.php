@@ -58,9 +58,9 @@
         <div class="col-xs-12 col-sm-8 col-md-12">
            @if(isset($shipping) && $shipping->isPending())
                             @if(!$shippingsApproved)
-                            <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/shippings/{{ $shipping->id }}/status" title="Aprobado">Aproved</button>
+                            <button class="btn btn-success" type="submit" form="form-status-approved" formaction="/shippings/{{ $shipping->id }}/status" title="Aprobar">Approve</button>
                             @endif
-                            <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/shippings/{{ $shipping->id }}/status" title="Rechazado">Reject</button>
+                            <button class="btn btn-danger" type="submit" form="form-status-reject" formaction="/shippings/{{ $shipping->id }}/status" title="Rechazar">Reject</button>
             @endif
                           
               @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))

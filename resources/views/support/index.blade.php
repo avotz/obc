@@ -9,7 +9,7 @@
    <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Soporte. Tienes una consulta">
                 IT Support <small>Do you have a questions.</small>
                 </h1>
             </div>
@@ -28,7 +28,7 @@
         <div class="block-content block-content-full block-content-narrow">
           
             <!-- Contact Form -->
-            <h2 class="h3 font-w600 push-50-t push">Do you have any further questions?</h2>
+            <h2 class="h3 font-w600 push-50-t push" title="¿Tienes alguna pregunta?">Do you have any further questions?</h2>
             <div id="faq4" class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -44,7 +44,7 @@
                                     <div class="col-xs-6 col-sm-4">
                                         <div class="form-material form-material-primary">
                                             <input class="form-control" type="text" id="faq-contact-firstname" name="firstname" placeholder="Enter your firstname.." value="{{ old('firstname') }}">
-                                            <label for="firstname">Firstname</label>
+                                            <label for="firstname" title="Nombre">Firstname</label>
                                             @if ($errors->has('firstname'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('firstname') }}</strong>
@@ -55,7 +55,7 @@
                                     <div class="col-xs-6 col-sm-4">
                                         <div class="form-material form-material-primary">
                                             <input class="form-control" type="text" id="faq-contact-lastname" name="lastname" placeholder="Enter your lastname.." value="{{ old('lastname') }}">
-                                            <label for="lastname">Lastname</label>
+                                            <label for="lastname" title="Apellidos">Lastname</label>
                                             
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                     <div class="col-sm-8">
                                         <div class="form-material form-material-primary input-group">
                                             <input class="form-control" type="email" id="faq-contact-email" name="email" placeholder="Enter your email.." value="{{ old('email') }}">
-                                            <label for="email">Email</label>
+                                            <label for="email" title="Correo">Email</label>
                                             <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
                                           
                                         </div>
@@ -79,11 +79,11 @@
                                     <div class="col-sm-4">
                                         <div class="form-material form-material-primary">
                                             <select class="form-control" id="faq-contact-subject" name="subject" size="1">
-                                                <option value="Support">Support</option>
-                                                <option value="Management">Management</option>
-                                                <option value="Feature Request">Feature Request</option>
+                                                <option value="Support" title="Soporte">Support</option>
+                                                <option value="Management" title="Administracion">Management</option>
+                                                <option value="Feature Request" title="Solicitud de función">Feature Request</option>
                                             </select>
-                                            <label for="subject">Where?</label>
+                                            <label for="subject" title="¿Donde?">Where?</label>
                                             @if ($errors->has('subject'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('subject') }}</strong>
@@ -96,7 +96,7 @@
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary">
                                             <textarea class="form-control" id="faq-contact-msg" name="msg" rows="7" placeholder="Enter your message..">{{ old('msg') }}</textarea>
-                                            <label for="msg">Message</label>
+                                            <label for="msg" title="Mensaje">Message</label>
                                             @if ($errors->has('msg'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('msg') }}</strong>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="form-group remove-margin-b">
                                     <div class="col-xs-12">
-                                        <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-send push-5-r"></i> Send Message</button>
+                                        <button class="btn btn-sm btn-primary" type="submit" title="Enviar mensaje"><i class="fa fa-send push-5-r"></i> Send Message</button>
                                     </div>
                                 </div>
                             </form>

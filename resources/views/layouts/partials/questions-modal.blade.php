@@ -9,7 +9,7 @@
                             <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                         </li>
                     </ul>
-                    <h3 class="block-title">Questions</h3>
+                    <h3 class="block-title" title="Preguntas">Questions</h3>
                 </div>
                 <div class="block-content">
                     <form class="form-horizontal push-10-t" action="#" method="post" onsubmit="return false;" id="modal-questions-form">
@@ -19,7 +19,7 @@
                             <div class="col-sm-12">
                                 <div class="form-material form-material-primary input-group">
                                     <input class="form-control" type="text" id="modal-questions-subject" name="modal_questions_subject" placeholder="">
-                                    <label for="modal_questions_subject">Subjet</label>
+                                    <label for="modal_questions_subject" title="Asunto">Subjet</label>
                                     <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
                                     @if ($errors->has('modal_questions_subject'))
                                         <span class="help-block">
@@ -35,7 +35,7 @@
                             <div class="col-xs-12">
                                 <div class="form-material form-material-primary">
                                     <textarea class="form-control" id="modal-questions-msg" name="modal_questions_msg" rows="7" placeholder="Enter your message.."></textarea>
-                                    <label for="modal_questions_msg">Message</label>
+                                    <label for="modal_questions_msg" title="Mensaje">Message</label>
                                     @if ($errors->has('modal_questions_msg'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('modal_questions_msg') }}</strong>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group remove-margin-b">
                             <div class="col-xs-12">
-                                <button class="btn btn-sm btn-primary modal-question-btn-send" type="submit"><i class="fa fa-send push-5-r"></i> Send Message</button>
+                                <button class="btn btn-sm btn-primary modal-question-btn-send" type="submit" title="Enviar mensaje"><i class="fa fa-send push-5-r"></i> Send Message</button>
                                 <span class="fa fa-cog fa-spin"></span>
                             </div>
                         </div>
@@ -55,8 +55,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> Ok</button>
+                <button class="btn btn-sm btn-default" type="button" data-dismiss="modal" title="Cerrar">Close</button>
+                <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal" title="OK"><i class="fa fa-check"></i> Ok</button>
             </div>
         </div>
     </div>

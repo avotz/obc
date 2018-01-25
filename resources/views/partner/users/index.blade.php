@@ -47,7 +47,7 @@
                 <!-- Users -->
                 <div class="tab-pane fade fade-up in active" id="search-users">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted" title="Usuarios encontrados">Users Found</span></h2>
+                        <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted" title="{{ $users->total() }} Usuarios encontrados">Users Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>

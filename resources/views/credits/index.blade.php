@@ -10,7 +10,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Credits from {{ $creditRequest->transaction_id }} </h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn" title="Créditos de {{ $creditRequest->transaction_id }}">Credits from {{ $creditRequest->transaction_id }} </h1>
         
            
     
@@ -33,13 +33,13 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
                                
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th style="width: 100px;">Credit Time</th>
-                                <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th style="width: 100px;" title="Tiempo de crédito">Credit Time</th>
+                                <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
+                                <th class="hidden-xs hidden-sm" style="width: 15%;" title="Estatus">Status</th>
+                                <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +67,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="/credits/{{ $credit->id }}/edit" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Credit"><i class="fa fa-eye"></i></a>
+                                        <a href="/credits/{{ $credit->id }}/edit" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar"><i class="fa fa-eye"></i></a>
                                       
                                         
                                         

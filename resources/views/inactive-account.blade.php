@@ -9,17 +9,17 @@
                     <div class="block block-themed animated fadeIn">
                         <div class="block-header bg-primary">
                             
-                            <h3 class="block-title">Innactive Account</h3>
+                            <h3 class="block-title" title="Cuenta inactiva">Innactive Account</h3>
                         </div>
                         <div class="block-content block-content-full block-content-narrow">
                             <!-- Login Title -->
                             <h1 class="h2 font-w600 push-30-t push-5">OBC</h1>
-                            <p>Welcome, your account is inactive</p>
+                            <p title="Bienvenido, tu cuenta esta inactiva">Welcome, your account is inactive</p>
                             <!-- END Login Title -->
 
-                            <p> Your request to open a account is being evaluated by the commercial department of OBC, we will respond soon.</p> 
+                            <p title="Su solicitud para abrir una cuenta está siendo evaluada por el departamento comercial de OBC, le responderemos pronto"> Your request to open a account is being evaluated by the commercial department of OBC, we will respond soon.</p> 
 
-                            <a href="/" class="btn btn-success"><i class="si si-login pull-right"></i> Back to home</a>
+                            <a href="/" class="btn btn-success" title="Regresar a inicio "><i class="si si-login pull-right"></i> Back to home</a>
 
                         </div>
                     </div>

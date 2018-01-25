@@ -67,7 +67,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="/shippings/{{ $shipping->id }}/edit" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit Shipping"><i class="fa fa-eye"></i></a>
+                                        <a href="/shippings/{{ $shipping->id }}/edit" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Editar"><i class="fa fa-eye"></i></a>
                                       
                                         
                                         

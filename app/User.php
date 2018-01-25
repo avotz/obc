@@ -15,14 +15,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'public_code' ,'active'
+        'email', 'password', 'public_code', 'active'
     ];
 
-    
     /*protected $appends = array('public_code','usr_public_code');
-    
-    
-    
+
+
+
     public function getPublicCodeAttribute()
     {
         // foreach($this->company->countries as $country)
@@ -44,21 +43,19 @@ class User extends Authenticatable
         return 'USR-'. zerofill($this->id,3);
     }*/
 
-    public function generatePublicCode(){
-        
-       /* if( $this->hasRole('partner')){
-            $this->public_code = trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3).'-'.$this->company->countries->first()->code;
-        }else*/
-        
-        $this->public_code = 'USR-'. zerofill($this->id,3);
+    public function generatePublicCode()
+    {
+        /* if( $this->hasRole('partner')){
+             $this->public_code = trans('utils.activity.'.$this->activity) . ' '. zerofill($this->id,3).'-'.$this->company->countries->first()->code;
+         }else*/
+
+        $this->public_code = 'USR-' . zerofill($this->id, 3);
 
         $user = $this->save();
 
         return $user;
     }
 
-       
-         
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -70,16 +67,13 @@ class User extends Authenticatable
 
     public function scopeSearch($query, $search)
     {
-        if($search){
-
-            return $query->where(function ($query) use ($search)
-            {
-                $query->where('public_code', 'like', '%'. $search .'%')
+        if ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('public_code', 'like', '%' . $search . '%')
                     ->orWhere('email', 'like', '%' . $search . '%')
-                    ->orWhereHas('profile' , function ($query) use ($search){
+                    ->orWhereHas('profile', function ($query) use ($search) {
                         $query->where('applicant_name', 'like', '%' . $search . '%');
-                      });
-                
+                    });
             });
         }
 
@@ -91,76 +85,96 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-     public function roles()
-     {
-         return $this->belongsToMany(Role::class);
-     }
- 
-     /**
-      * Assign the given role to the user.
-      *
-      * @param  string $role
-      * @return mixed
-      */
-     public function assignRole($role)
-     {
-         if (is_object($role)) {
-             return $this->roles()->attach($role);
-        
-         }
-        
-         return $this->roles()->sync($role);
-        
-     }
- 
-     /**
-      * Determine if the user has the given role.
-      *
-      * @param  mixed $role
-      * @return boolean
-      */
-     public function hasRole($role)
-     {
-         if (is_string($role)) {
-             return $this->roles->contains('name', $role);
-         }
- 
-         return !! $role->intersect($this->roles)->count();
-     }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
-      /**
-      * Determine if the user has the given role.
-      *
-      * @param  mixed $role
-      * @return boolean
-      */
-      public function hasRequest($request)
-      {
-          if (is_string($request) || is_numeric($request)) {
-              return $this->requests->contains('id', $request);
-          }
-  
-          return !! $request->intersect($this->requests)->count();
-      }
+    /**
+     * Assign the given role to the user.
+     *
+     * @param  string $role
+     * @return mixed
+     */
+    public function assignRole($role)
+    {
+        if (is_object($role)) {
+            return $this->roles()->attach($role);
+        }
 
-     
-    
-     public function requests()
-     {
-         return $this->hasMany(QuotationRequest::class);
-     }
-     public function quotations()
-     {
-         return $this->hasMany(Quotation::class);
-     }
+        return $this->roles()->sync($role);
+    }
+
+    /**
+     * Determine if the user has the given role.
+     *
+     * @param  mixed $role
+     * @return boolean
+     */
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    /**
+    * Determine if the user has the given role.
+    *
+    * @param  mixed $role
+    * @return boolean
+    */
+    public function hasRequest($request)
+    {
+        if (is_string($request) || is_numeric($request)) {
+            return $this->requests->contains('id', $request);
+        }
+
+        return !!$request->intersect($this->requests)->count();
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(QuotationRequest::class);
+    }
+
+    public function quotations()
+    {
+        return $this->hasMany(Quotation::class);
+    }
+
     public function requests_suppliers() // private quotation request to supplier
     {
-         return $this->belongsToMany(QuotationRequest::class);
+        return $this->belongsToMany(QuotationRequest::class);
     }
+
     public function shippings()
-     {
-         return $this->hasMany(Shippings::class);
-     }
+    {
+        return $this->hasMany(Shipping::class);
+    }
+
+    public function shippingRequests()
+    {
+        return $this->hasMany(Shipping::class);
+    }
+
+    public function credits()
+    {
+        return $this->hasMany(Credit::class);
+    }
+
+    public function creditRequests()
+    {
+        return $this->hasMany(CreditRequest::class);
+    }
+
+    public function purchaseOrders()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
+
     /*public function partners() //associates
     {
         return $this->belongsToMany(User::class, 'partner_user', 'user_id', 'partner_id');
@@ -169,72 +183,71 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'partner_user', 'partner_id', 'user_id');
     }*/
-    
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
+
     public function companies()
     {
         return $this->belongsToMany(Company::class);
     }
+
     public function countries() //users
     {
         return $this->belongsToMany(Country::class);
     }
+
     /**
      * A role may be given various permissions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-     public function permissions()
-     {
-         return $this->belongsToMany(Permission::class);
-     }
- 
-     /**
-      * Grant the given permission to a role.
-      *
-      * @param  Permission $permission
-      * @return mixed
-      */
-     public function givePermissionTo(Permission $permission)
-     {
-         return $this->permissions()->save($permission);
-     }
-     /**
-     * Determine if the user may perform the given permission.
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
+
+    /**
+     * Grant the given permission to a role.
      *
      * @param  Permission $permission
-     * @return boolean
+     * @return mixed
      */
+    public function givePermissionTo(Permission $permission)
+    {
+        return $this->permissions()->save($permission);
+    }
+
+    /**
+    * Determine if the user may perform the given permission.
+    *
+    * @param  Permission $permission
+    * @return boolean
+    */
     public function hasPermission($permission)
     {
-        
         if (is_string($permission)) {
             return $this->permissions->contains('name', $permission);
         }
 
-        return !! $permission->intersect($this->permissions)->count();
-       
+        return !!$permission->intersect($this->permissions)->count();
     }
 
     public function addToCompany(Company $company)
     {
         $this->companies()->attach($company->id);
-        
     }
 
     public function removeCompany(Company $company)
     {
         $this->companies()->detach($company->id);
-       
     }
 
     public function toArray()
     {
         return [
-            
             'email' => $this->email,
             'public_code' => $this->public_code,
             'profile' => $this->profile,

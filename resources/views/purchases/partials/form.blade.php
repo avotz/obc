@@ -25,7 +25,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 @if( $quotation->way_to_pay ) Credit {{ $quotation->way_to_pay }} Days @else Cash @endif
-                <label for="way_to_pay" title="Manera de pago">Way to pay</label>
+                <label for="way_to_pay" title="Forma de pago">Way to pay</label>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
         <div class="col-xs-6">
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($purchase) ? $purchase->amount : isset($quotation) ? $quotation->amount : old('amount') }}" {{ (isset($purchase) && !$purchase->isPending() || isset($purchase) && !$purchase->createdBy(auth()->user())) ? 'readonly' : '' }}>
-                <label for="amount">Amount </label>
+                <label for="amount" title="Monto">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
                         <strong>{{ $errors->first('amount') }}</strong>
@@ -90,7 +90,7 @@
         <div class="col-xs-6">
             <div class="form-material form-material-success">
                 <span id="discount">{{ isset($purchase) ? calculatePercentAmount($purchase->discount, $purchase->amount) : isset($quotation) ? calculatePercentAmount($quotation->discount, $quotation->amount) : '0' }}</span>
-                <label for="discount" title="Descuento">Discount OBC( {{ isset($purchase) ? $purchase->discount : $discount }}% ) </label>
+                <label for="discount" title="Descuento OBC( {{ isset($purchase) ? $purchase->discount : $discount }}% )">Discount OBC( {{ isset($purchase) ? $purchase->discount : $discount }}% ) </label>
                 
             </div>
         </div>
@@ -132,7 +132,7 @@
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="comments" name="comments" value="{{ isset($purchase) ? $purchase->comments : ''  }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
                  <textarea class="form-control" name="comments" id="comments" cols="30" rows="3" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>{{ isset($purchase) ? $purchase->comments : ''  }}</textarea>
-                <label for="comments" title="Comentarios adicionales">Additional comment</label>
+                <label for="comments" title="Comentario adicional">Additional comment</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
                         <strong>{{ $errors->first('comments') }}</strong>

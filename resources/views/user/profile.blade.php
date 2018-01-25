@@ -39,15 +39,15 @@
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn" title="Creditos">Credits</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">{{ auth()->user()->creditRequests->count() }}</a>
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn" title="Envios">Shippings</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">{{ auth()->user()->shippingRequests->count() }}</a>
         </div>
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn" title="Ordenes">Orders</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">{{ auth()->user()->purchaseOrders->count() }}</a>
         </div>
        
     </div>

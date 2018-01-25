@@ -35,7 +35,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
+                    <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users/{{ $user->id }}">
@@ -79,7 +79,7 @@
                        
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-6 col-md-5">
-                                <button class="btn btn-block btn-success" type="submit" title="Actualizar">Update</button>
+                                <button class="btn btn-block btn-success" type="submit" title="Actualizar" >Update</button>
                             </div>
                         </div>
                     

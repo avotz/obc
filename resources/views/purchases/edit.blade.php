@@ -33,14 +33,14 @@
 
                          <div class="form-group">
                          @if(isset($purchase) && $purchase->isPending())
-                            <button class="btn btn-success" type="submit" data-toggle="tooltip" title="Aprobar" form="form-approve" formaction="{!! url('/purchases/'.$purchase->id .'/status') !!}">Approve</button>
-                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Rechazar" form="form-reject" formaction="{!! url('/purchases/'.$purchase->id .'/status') !!}">Reject</button>
+                            <button class="btn btn-success" type="submit" data-toggle="tooltip" title="Aprobar" form="form-approve" formaction="{!! url('/purchases/'.$purchase->id .'/status') !!}" title="Aprovar">Approve</button>
+                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Rechazar" form="form-reject" formaction="{!! url('/purchases/'.$purchase->id .'/status') !!}" title="Rechazar">Reject</button>
                          @endif
                         </div>
                     @else 
                         @if(isset($purchase) && $purchase->status != 1)
                         <div class="form-group">
-                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Eliminar" form="form-delete" formaction="{!! url('/purchases/'.$purchase->id) !!}">Delete</button>
+                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Eliminar" form="form-delete" formaction="{!! url('/purchases/'.$purchase->id) !!}" title="Eliminar">Delete</button>
                          </div>
                          @endif
                     @endif

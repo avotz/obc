@@ -120,7 +120,7 @@
                     @endforeach
                    
                 </select>
-                <label for="way_to_pay" title="Manera de pago">Way to pay</label>
+                <label for="way_to_pay" title="Forma de pago">Way to pay</label>
                 @if ($errors->has('way_to_pay'))
                     <span class="help-block">
                         <strong>{{ $errors->first('way_to_pay') }}</strong>
@@ -226,7 +226,7 @@
                     
                 </select>
                     
-                <label for="suppliers">  Suppliers</label>
+                <label for="suppliers" title="Suplidores">  Suppliers</label>
             </div>
         </div>
     </div>

@@ -56,7 +56,7 @@
             <ul class="nav nav-tabs" data-toggle="tabs">
                
                 <li class="active">
-                    <a href="#search-users">Admin users</a>
+                    <a href="#search-users" title="Usuarios administrativos">Admin users</a>
                 </li>
                 
                
@@ -67,8 +67,8 @@
                 <div class="tab-pane fade fade-up in active" id="search-users">
                
                     <div class="border-b push-30">
-                     <a href="/admin/users/create" class="btn btn-info pull-right">Create Admin User</a>
-                        <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted">Users Found</span></h2>
+                     <a href="/admin/users/create" class="btn btn-info pull-right" title="Crear usuario administrativo">Create Admin User</a>
+                        <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted" title="usuarios encontrados">Users Found</span></h2>
                        
                         
                 
@@ -77,15 +77,15 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
                                 <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
-                                <th>Name</th>
+                                <th title="Nombre">Name</th>
                                
-                                <th class="hidden-xs" style="width: 30%;">Email</th>
+                                <th class="hidden-xs" style="width: 30%;" title="Correo">Email</th>
                                 
-                                <th class="hidden-xs">Role</th>
-                                <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th class="hidden-xs" title="Rol">Role</th>
+                                <th class="hidden-xs hidden-sm" style="width: 15%;" title="Estatus">Status</th>
+                                <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,21 +105,21 @@
                                 <td class="hidden-xs hidden-sm">
                                 @if ($user->active)
                                 
-                                        <button type="submit"  class="btn btn-success btn-xs" form="form-active-inactive" formaction="{!! URL::route('admin.users.inactive', [$user->id]) !!}">Active</button>
+                                        <button type="submit"  class="btn btn-success btn-xs" form="form-active-inactive" formaction="{!! URL::route('admin.users.inactive', [$user->id]) !!}" title="Activo">Active</button>
                                     
     
                                 @else
                                     
-                                    <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('admin.users.active', [$user->id]) !!}" >Inactive</button>
+                                    <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('admin.users.active', [$user->id]) !!}" title="Inactivo">Inactive</button>
     
                                 @endif
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                    
-                                        <a href="/admin/users/{{ $user->id }}/edit" class="btn btn-xs btn-default"data-toggle="tooltip" title="Edit User"><i class="fa fa-pencil"></i></a>
+                                        <a href="/admin/users/{{ $user->id }}/edit" class="btn btn-xs btn-default"data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                                    
-                                        <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove User" form="form-delete" formaction="{!! url('/admin/users/'.$user->id) !!}"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Eliminar" form="form-delete" formaction="{!! url('/admin/users/'.$user->id) !!}"><i class="fa fa-times"></i></button>
                                     
                                     </div>
                                 </td>

@@ -14,7 +14,7 @@
             <delete-avatar-profile :user-id="{{ $user->id }}" url="/profile/avatars"></delete-avatar-profile>
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn" title="Id de usuario">User ID: {{ $user->public_code }} <img src="{{ getFlag($company->countries->first()->code) }}" alt="flag"></h2>
+        <h2 class="h5 text-white-op animated zoomIn" title="Id de usuario: {{ $user->public_code }}">User ID: {{ $user->public_code }} <img src="{{ getFlag($company->countries->first()->code) }}" alt="flag"></h2>
         <h2 class="h5 text-white-op animated zoomIn" title="Codigo Privado">Private Code: </h2>
        
         <update-private-code :company-id="{{ $company->id }}" :private-code="'{{ $company->private_code }}'"></update-private-code>    
@@ -31,12 +31,12 @@
     <div class="row items-push text-uppercase">
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn" title="Solicitudes de envio">Shipping Requests</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">{{ auth()->user()->shippingRequests->count()}}</a>
         </div>
        
         <div class="col-xs-6 col-sm-2">
             <div class="font-w700 text-gray-darker animated fadeIn" title="Envios">Shippings</div>
-            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">0</a>
+            <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)">{{ auth()->user()->shippings->count()}}</a>
         </div>
         
     </div>

@@ -2,7 +2,7 @@
         <div class="col-xs-6">
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="amount" name="amount" value="{{ isset($creditRequest) ? $creditRequest->amount : old('amount') }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }}>
-                <label for="comments">Amount </label>
+                <label for="amount" title="Monto">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
                         <strong>{{ $errors->first('amount') }}</strong>
@@ -42,7 +42,7 @@
                     @endforeach
                    
                 </select>
-                <label for="credit_time">Credit time</label>
+                <label for="credit_time" title="Tiempo de credito">Credit time</label>
                 @if ($errors->has('credit_time'))
                     <span class="help-block">
                         <strong>{{ $errors->first('credit_time') }}</strong>
@@ -57,7 +57,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <input class="js-datepicker form-control" type="text" id="date" name="date" value="{{ isset($creditRequest) ? $creditRequest->date : old('date') }}" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
-                <label for="date">Request Date </label>
+                <label for="date" title="Fecha de solicitud">Request Date </label>
                 @if ($errors->has('date'))
                     <span class="help-block">
                         <strong>{{ $errors->first('date') }}</strong>
@@ -67,12 +67,12 @@
         </div>
     </div>
     
-    <div class="form-group{{ $errors->has('purchase_file') ? ' has-error' : '' }}">
+    <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             @if(!isset($creditRequest) || (isset($creditRequest) && $creditRequest->isPending()))
             <div class="form-material form-material-success">
                 <input class="form-control" type="file" id="file" name="file">
-                <label for="purchase_file">file</label>
+                <label for="file" title="Archivo">file</label>
                 @if ($errors->has('file'))
                     <span class="help-block">
                         <strong>{{ $errors->first('file') }}</strong>
@@ -93,7 +93,7 @@
             <div class="form-material form-material-success">
                
                 <textarea class="form-control" name="comments" id="comments" cols="30" rows="3" {{ (isset($creditRequest) && !$creditRequest->isPending()) ? 'readonly' : '' }}>{{ isset($creditRequest) ? $creditRequest->comments : old('comments')  }}</textarea>
-                <label for="comments">Additional comment </label>
+                <label for="comments" title="Comentario adicional">Additional comment </label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
                         <strong>{{ $errors->first('comments') }}</strong>
@@ -109,7 +109,7 @@
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
         @if(isset($creditRequest) && !$creditRequest->credits->count() || !isset($creditRequest))
-            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-success" type="submit" title="Guardar">Save</button>
         @endif
            
             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))

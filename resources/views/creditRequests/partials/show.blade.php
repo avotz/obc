@@ -3,7 +3,7 @@
             <div class="form-material form-material-success">
               
                 {{ $creditRequest->amount }}
-                <label for="amount">Amount</label> {{ $creditRequest->currency }}
+                <label for="amount" title="Monto">Amount</label> {{ $creditRequest->currency }}
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
             <div class="form-material form-material-success">
               
                 {{ trans('utils.credit') }} {{ $creditRequest->credit_time }} {{ trans('utils.days') }}
-                <label for="credit_time">Credit time</label>
+                <label for="credit_time" title="Tiempo de credito">Credit time</label>
             </div>
         </div>
     </div>
@@ -21,19 +21,11 @@
             <div class="form-material form-material-success">
               
                 {{ $creditRequest->date }}
-                <label for="amount">Request Date</label>
+                <label  title="Fecha de solicitud">Request Date</label>
             </div>
         </div>
     </div>
-    <div class="form-group" >
-        <div class="col-xs-12">
-            <div class="form-material form-material-success">
-              
-                {{ $creditRequest->date }}
-                <label for="amount">Request Date</label>
-            </div>
-        </div>
-    </div>
+
     <div class="form-group" >
         <div class="col-xs-12">
             @if(isset($creditRequest) && $creditRequest->file)
@@ -48,7 +40,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 {{ $creditRequest->comments }}
-                <label for="comments">Additional comment</label>
+                <label for="comments" title="Comentario adicional">Additional comment</label>
             </div>
         </div>
     </div> 
@@ -57,7 +49,7 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-8 col-md-8">
-            <a href="/credit/credit-requests/{{ $creditRequest->id }}/credits/create" class="btn btn-success" data-toggle="tooltip" title="Make Offer">Make a Credit Answer</a>
+            <a href="/credit/credit-requests/{{ $creditRequest->id }}/credits/create" class="btn btn-success" data-toggle="tooltip" title="Hacer un credito a la solicitud">Make a Credit Answer</a>
            
             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin'))
                 <a class="btn btn-default" href="{{ url()->previous() }}" title="Atras">Back</a>

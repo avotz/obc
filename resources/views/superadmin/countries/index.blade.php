@@ -7,14 +7,14 @@
 <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Busqueda de paises">
                     Search Countries 
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Countries</li>
-                    <li><a class="link-effect" href="">Search Results</a></li>
+                    <li title="Paises">Countries</li>
+                    <li><a class="link-effect" href="" title="Resultados de busqueda">Search Results</a></li>
                 </ol>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <ul class="nav nav-tabs" data-toggle="tabs">
                
                 <li class="active">
-                    <a href="#search-users">Countries</a>
+                    <a href="#search-users" title="Paises">Countries</a>
                 </li>
                 
                
@@ -52,7 +52,7 @@
                 <div class="tab-pane fade fade-up in active" id="search-users">
                 <a href="/superadmin/countries/create" class="btn btn-info pull-right">Create Country</a>
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ $countries->total() }} <span class="h5 font-w400 text-muted">Countries Found</span></h2>
+                        <h2 class="push-10" title="{{ $countries->total() }} Paises encontrados">{{ $countries->total() }} <span class="h5 font-w400 text-muted">Countries Found</span></h2>
                        
                        
                 
@@ -60,14 +60,14 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;">ID</th>
+                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
                                 <th class="text-center" style="width: 100px;"><i class="si si-flag"></i></th>
-                                <th>Name</th>
+                                <th title="Nombre">Name</th>
                                
-                                <th class="hidden-xs" style="width: 30%;">Code</th>
+                                <th class="hidden-xs" style="width: 30%;" title="Codigo">Code</th>
                                 <!-- <th class="hidden-xs" style="width: 30%;">Currency</th> -->
                                
-                                <th class="text-center" style="width: 80px;">Actions</th>
+                                <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,7 +77,7 @@
                                 <td class="text-center">
                                     <img  src="{{ getFlag($country->code) }}" alt="Flag">
                                 </td>
-                                <td class="font-w600">{{ $country->name }}</td>
+                                <td class="font-w600" >{{ $country->name }}</td>
                                 <td class="hidden-xs">{{ $country->code }}</td>
                                 <!-- <td class="hidden-xs">
                                 {{ $country->currency }}
@@ -86,9 +86,9 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                     @if (auth()->user()->hasRole('superadmin'))
-                                        <a href="/superadmin/countries/{{ $country->id }}/edit" class="btn btn-xs btn-default"data-toggle="tooltip" title="Edit Country"><i class="fa fa-pencil"></i></a>
+                                        <a href="/superadmin/countries/{{ $country->id }}/edit" class="btn btn-xs btn-default"data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></a>
                                     
-                                        <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Remove Country" form="form-delete" formaction="{!! url('/superadmin/countries/'.$country->id) !!}"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Eliminar" form="form-delete" formaction="{!! url('/superadmin/countries/'.$country->id) !!}"><i class="fa fa-times"></i></button>
                                     @endif
                                     </div>
                                 </td>

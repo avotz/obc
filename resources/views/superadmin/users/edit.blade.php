@@ -53,7 +53,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> User Account</h3>
+                    <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-fw fa-user"></i> User Account</h3>
                 </div>
                 <div class="block-content">
                 <form class="js-validation-register form-horizontal push-50" method="POST" action="/superadmin/users/{{ $user->id }}">

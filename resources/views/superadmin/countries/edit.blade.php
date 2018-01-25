@@ -6,7 +6,7 @@
  <div class="content bg-image" style="background-image: url('/img/photo-profile.jpg');">
     <div class="push-50-t push-15 clearfix">
         
-        <h1 class="h2 text-white push-5-t animated zoomIn">Country Edit</h1>
+        <h1 class="h2 text-white push-5-t animated zoomIn" title="Editar País">Country Edit</h1>
          
         
     </div>

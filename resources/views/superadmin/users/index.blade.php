@@ -7,14 +7,14 @@
     <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Busqueda de usuarios">
                     Search Users 
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Users</li>
-                    <li><a class="link-effect" href="">Search Results</a></li>
+                    <li title="Usuarios">Users</li>
+                    <li><a class="link-effect" href="" title="Resultado de busqueda">Search Results</a></li>
                 </ol>
             </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                     
                         <select name="search_country" id="search_country"  class="js-select2 form-control input-lg" data-placeholder="Country">
-                                    <option value="">All</option>
+                                    <option value="" title="Todos">All</option>
                                     @foreach ($countries as $c)
                                     <option value="{{ $c->id}}"  @if($c->id == $search['search_country']) selected="selected" @endif> {{ $c->name }}</option>
                                     @endforeach
@@ -66,7 +66,7 @@
             <ul class="nav nav-tabs" data-toggle="tabs">
                
                 <li class="active">
-                    <a href="#search-users">Admin users</a>
+                    <a href="#search-users" title="Usuarios administrativos">Admin users</a>
                 </li>
                 
                
@@ -75,23 +75,23 @@
                 
                 <!-- Users -->
                     <div class="tab-pane fade fade-up in active" id="search-users">
-                        <a href="/superadmin/users/create" class="btn btn-info pull-right">Create User</a>
+                        <a href="/superadmin/users/create" class="btn btn-info pull-right" title="Crear usuario">Create User</a>
                         <div class="border-b push-30">
-                            <h2 class="push-10">{{ $users->total() }} <span class="h5 font-w400 text-muted">Users Found</span></h2>
+                            <h2 class="push-10" title="{{ $users->total() }} Usuarios encontrados">{{ $users->total() }} <span class="h5 font-w400 text-muted">Users Found</span></h2>
                         </div>
                     
                         <table class="table table-striped table-vcenter">
                             <thead>
                                 <tr>
-                                    <th class="text-center" style="width: 100px;">ID</th>
+                                    <th class="text-center" style="width: 100px;" title="ID">ID</th>
                                     <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
-                                    <th>Name</th>
+                                    <th title="Nombre">Name</th>
                                 
-                                    <th class="hidden-xs" style="width: 30%;">Email</th>
-                                    <th class="hidden-xs" style="width: 30%;">Country</th>
+                                    <th class="hidden-xs" style="width: 30%;" title="Correo">Email</th>
+                                    <th class="hidden-xs" style="width: 30%;" title="País">Country</th>
                                     <th class="hidden-xs">Role</th>
-                                    <th class="hidden-xs hidden-sm" style="width: 15%;">Status</th>
-                                    <th class="text-center" style="width: 80px;">Actions</th>
+                                    <th class="hidden-xs hidden-sm" style="width: 15%;" title="Estatus">Status</th>
+                                    <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

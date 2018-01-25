@@ -5,15 +5,15 @@
 <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Busqueda de creditos y solicitudes">
                     Search Credits & Requests<small></small>
                 </h1>
                 
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Credits & Requests</li>
-                    <li><a class="link-effect" href="">Credits Results</a></li>
+                    <li title="Creditos y solicitudes">Credits & Requests</li>
+                    <li title="Resultado de creditos"><a class="link-effect" href="">Credits Results</a></li>
                 </ol>
             </div>
         </div>

@@ -10,7 +10,7 @@
         <div class="push-15-r pull-left animated fadeIn">
             <img src="{{ getAvatar($user) }}" alt="Avatar" id="user-avatar" class="img-avatar img-avatar-thumb" />
            
-            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/profile/avatars">Change</a>
+            <a class="UploadButton btn btn-xs btn-default btn-block" id="UploadPhoto" data-url="/profile/avatars" title="Cambiar">Change</a>
             <delete-avatar-profile :user-id="{{ $user->id }}"></delete-avatar-profile> 
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>
@@ -29,11 +29,11 @@
 <div class="content bg-white border-b">
     <div class="row items-push text-uppercase">
         <div class="col-xs-6 col-sm-3">
-            <div class="font-w700 text-gray-darker animated fadeIn">Countries</div>
+            <div class="font-w700 text-gray-darker animated fadeIn" title="Paises">Countries</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="/superadmin/countries">{{ $countries->count() }}</a>
         </div>
         <div class="col-xs-6 col-sm-3">
-            <div class="font-w700 text-gray-darker animated fadeIn">Users</div>
+            <div class="font-w700 text-gray-darker animated fadeIn" title="Usuarios">Users</div>
             <a class="h2 font-w300 text-primary animated flipInX" href="/superadmin/users">{{ $admins }}</a>
         </div>
         
@@ -52,7 +52,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i> Super Admin Account</h3>
+                    <h3 class="block-title" title="Cuenta de super administrador"><i class="fa fa-fw fa-user"></i> Super Admin Account</h3>
                 </div>
                 <div class="block-content">
                 <form class="js-validation-register form-horizontal push-50" method="POST" action="/superadmin/{{ $user->id }}">
@@ -62,7 +62,7 @@
                    <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="applicant_name" name="applicant_name" value="{{ $user->profile->applicant_name }}">
-                                <label for="applicant_name"> Name</label>
+                                <label for="applicant_name" title="Nombre"> Name</label>
                                 @if ($errors->has('applicant_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('applicant_name') }}</strong>
@@ -75,7 +75,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ $user->profile->first_surname }}">
-                                <label for="first_surname"> First surname</label>
+                                <label for="first_surname" title="Primer apellido"> First surname</label>
                                 @if ($errors->has('first_surname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('first_surname') }}</strong>
@@ -88,7 +88,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="second_surname" name="second_surname" value="{{ $user->profile->second_surname  }}">
-                                <label for="second_surname"> Second surname</label>
+                                <label for="second_surname" title="Segundo apellido"> Second surname</label>
                                 @if ($errors->has('second_surname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('second_surname') }}</strong>
@@ -102,7 +102,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="phone" name="phone" value="{{ $user->profile->phone }}">
-                                <label for="position_held"> Phone</label>
+                                <label for="position_held" title="Teléfono"> Phone</label>
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -116,7 +116,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="email" id="email" name="email" value="{{ $user->email }}">
-                                <label for="email">Email</label>
+                                <label for="email" title="Correo">Email</label>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -129,7 +129,7 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="password" id="password" name="password">
-                                <label for="password">Change Password</label>
+                                <label for="password" title="Cambiar contraseña">Change Password</label>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6 col-md-5">
-                            <button class="btn btn-block btn-success" type="submit">Update</button>
+                            <button class="btn btn-block btn-success" type="submit" title="Actualizar">Update</button>
                         </div>
                     </div>
                 </form>
@@ -156,7 +156,7 @@
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title"><i class="fa fa-fw fa-user"></i>Global Settings OBC</h3>
+                    <h3 class="block-title" title="Opciones globales de OBC"><i class="fa fa-fw fa-user"></i>Global Settings OBC</h3>
                 </div>
                 <div class="block-content">
                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/superadmin/settings">
@@ -192,7 +192,7 @@
                              <div class="form-group">
                                 <div class="col-xs-12 col-sm-6 col-md-5">
                                
-                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <button class="btn btn-success" type="submit" title="Guardar">Save</button>
                               
                                 </div>
                             </div>

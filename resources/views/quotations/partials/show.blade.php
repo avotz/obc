@@ -84,7 +84,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <delete-photo-product :transaction-id="{{ $quotation->id }}" url-img="{{ getQuotationProductPhoto($quotation) }}" :read="true">Delete Current Photo</delete-photo-product>
-                <label for="product_name">Product Photo</label>
+                <label for="product_name" title="Foto de producto">Product Photo</label>
             </div>
         </div>
     </div>
