@@ -64,6 +64,19 @@
             </div>
         </div>
     </div>
+     <div class="form-group{{ $errors->has('chat_id') ? ' has-error' : '' }}">
+        <div class="col-xs-12">
+            <div class="form-material form-material-success">
+                <input class="form-control" type="text" id="chat_id" name="chat_id" value="{{ isset($country) ? $country->chat_id : old('chat_id') }}">
+                <label for="chat_id" title="ID Chat"> Chat Id</label>
+                @if ($errors->has('chat_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('chat_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+    </div>
     
 
    

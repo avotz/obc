@@ -7,18 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     protected $fillable = [
-        'name', 'code', 'currency', 'currency_symbol', 'currency_exchange'
+        'name', 'code', 'currency', 'currency_symbol', 'currency_exchange', 'chat_id'
     ];
 
     public function scopeSearch($query, $search)
     {
-        if($search){
-
-            return $query->where(function ($query) use ($search)
-            {
-                $query->where('code', 'like', '%'. $search .'%')
+        if ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('code', 'like', '%' . $search . '%')
                     ->orWhere('name', 'like', '%' . $search . '%');
-                
             });
         }
 
@@ -29,6 +26,7 @@ class Country extends Model
     {
         return $this->belongsToMany(Company::class);
     }
+
     public function users()
     {
         return $this->belongsToMany(User::class);
