@@ -20,9 +20,7 @@ class CreateCountriesTable extends Migration
             $table->string('currency')->nullable();
             $table->string('currency_symbol')->nullable();
             $table->double('currency_exchange')->default(0);
-            $table->string('currency_symbol')->nullable();
             $table->string('chat_id')->nullable();
-
             $table->timestamps();
         });
 
