@@ -32,7 +32,7 @@
                                 <td class="font-w600">{{ $commission->id }}</td>
                                 
                                 <td class="font-w600">{{ $commission->purchase->quotation->user->companies->first()->company_name }}</td>
-                                <td class="font-w600">{{ $commission->purchase->transaction_id  }} <a href="#">ver detalle</a></td>
+                                <td class="font-w600"><a href="/purchases/{{ $commission->purchase->id  }}/edit">{{ $commission->purchase->transaction_id  }}</a></td>
                                 <td class="hidden-xs">{{ $commission->amount }} {{ $commission->currency }}</td>
                                 <td class="hidden-xs">{{ calculatePercentAmount($commission->gross_commission, $commission->amount) }} {{ $commission->currency }} ({{ $commission->gross_commission }}%) </td>
                                 <td class="hidden-xs">{{ calculatePercentAmount($commission->discount, $commission->amount) }} {{ $commission->currency }} ({{ $commission->discount }}%) </td>

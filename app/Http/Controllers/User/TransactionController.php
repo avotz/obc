@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Partner;
+namespace App\Http\Controllers\User;
 
 use App\User;
 use App\Country;
@@ -25,7 +25,7 @@ class TransactionController extends Controller
      */
     public function __construct(UserRepository $userRepo)
     {
-        $this->middleware('authByRole:partner');
+        $this->middleware('authByRole:user');
         $this->userRepo = $userRepo;
     }
 
@@ -39,7 +39,7 @@ class TransactionController extends Controller
 
         $country = auth()->user()->countries->first();
 
-        return view('partner.transactions.index', compact('country', 'search'));
+        return view('user.transactions.index', compact('country', 'search'));
     }
 
     public function getQuotations()

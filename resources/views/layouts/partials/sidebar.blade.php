@@ -34,6 +34,13 @@
                                         <li>
                                             <a href="/private/requests" title="Zona privada">Private Zone</a>
                                         </li>
+                                        
+                                        <li>
+                                            <a href="/{{ $role->name }}/requests" title="Zona privada">Your Requests</a>
+                                        </li>
+                                        <li>
+                                            <a href="/{{ $role->name }}/quotations" title="Zona privada">Your Quotations</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>

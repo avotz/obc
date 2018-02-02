@@ -43,8 +43,8 @@ class RegisterPartnerController extends Controller
     {
         $this->userRepo = $userRepo;
         $this->middleware('guest');
-        $this->administrators = User::whereHas('roles', function ($query){
-            $query->where('name',  'admin');
+        $this->administrators = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
         })->get();
     }
 
@@ -56,7 +56,6 @@ class RegisterPartnerController extends Controller
      */
     protected function validator(array $data)
     {
-        
         $v = Validator::make($data, [
             'company_name' => 'required|string|max:255',
             'identification_number' => 'required|string|max:255',
@@ -93,37 +92,29 @@ class RegisterPartnerController extends Controller
      */
     protected function create(array $data)
     {
-       
         $data['role'] = Role::whereName('partner')->first();
-       
+
         $user = $this->userRepo->store($data);
 
         try {
-            
-            \Mail::to($this->administrators)->send(new NewPartner($user));
-
-        }catch (\Swift_TransportException $e)  //Swift_RfcComplianceException
-        {
+            \Mail::to($user)->send(new NewPartner($user));
+        } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
             \Log::error($e->getMessage());
         }
-        
+
         return $user;
     }
 
-     /**
-     * Show the application registration form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-     public function showRegistrationForm()
-     {
-         
-          //$sectors = Sector::whereNull('parent_id')->get();//Sector::with('descendants')->get();
-          $sectors = Sector::get()->toTree();
-         
-         return view('auth.register-partner', compact('sectors'));
-     }
+    /**
+    * Show the application registration form.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function showRegistrationForm()
+    {
+        //$sectors = Sector::whereNull('parent_id')->get();//Sector::with('descendants')->get();
+        $sectors = Sector::get()->toTree();
 
-
-
+        return view('auth.register-partner', compact('sectors'));
+    }
 }

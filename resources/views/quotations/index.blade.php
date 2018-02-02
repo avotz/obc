@@ -24,7 +24,7 @@
                                 <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                                 <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
                             </a>
-                            @if($quotation->purchase->count())
+                            @if($quotation->purchase)
                             <a class="col-xs-4" href="/purchases/{{ $quotation->purchase->id}}/edit">
                                 <div class="h3 push-5 text-{{ trans('utils.purchase_status_color.'.$quotation->purchase->status) }}"> 1</div>
                                 <div class="h5 font-w300 text-muted" title="Orden de compra">Purchase Order </div>
@@ -51,7 +51,7 @@
                             @endif
                             @if($quotation->credits->count())
                             <a class="col-xs-4" href="/quotations/{{ $quotation->id}}/credits">
-                                <div class="h3 push-5 text-success">{{  $quotation->shippings->count() }}</div>
+                                <div class="h3 push-5 text-success">{{  $quotation->credits->count() }}</div>
                                 <div class="h5 font-w300 text-muted" title="Financiar">Financing</div>
                             </a>
                             @else

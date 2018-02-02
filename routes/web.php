@@ -221,6 +221,15 @@ Route::prefix('user')->middleware('authByRole:user')->group(function () {
     Route::get('/quotations', 'User\QuotationController@index');
     Route::get('/requests', 'User\QuotationRequestController@index');
 
+    Route::get('transactions', 'User\TransactionController@index');
+    Route::get('quotation-requests/list', 'User\TransactionController@getQuotationRequests');
+    Route::get('quotations/list', 'User\TransactionController@getQuotations');
+    Route::get('shipping-requests/list', 'User\TransactionController@getShippingsRequests');
+    Route::get('shippings/list', 'User\TransactionController@getShippings');
+    Route::get('credit-requests/list', 'User\TransactionController@getCreditRequests');
+    Route::get('credits/list', 'User\TransactionController@getCredits');
+    Route::get('purchase-orders/list', 'User\TransactionController@getPurchaseOrders');
+
     //Route::get('shipping-requests/list', 'User\ShippingRequestController@getShippingsRequests');
     //Route::get('shippings/list', 'User\ShippingController@getShippings');
 });
