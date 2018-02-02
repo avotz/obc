@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Partner;
-use App\User;
+
 use App\Repositories\UserRepository;
 use App\Company;
-use App\QuotationRequest;
-use App\Quotation;
 use App\Role;
-
-use App\Permission;
 use App\Rules\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -27,53 +23,51 @@ class AccountController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    
-
     public function update($id)
     {
-        $this->validate(request(), [
+        $this->validate(
+            request(),
+            [
             'applicant_name' => 'required|string|max:255',
             'first_surname' => 'required|string|max:255',
             'second_surname' => 'required|string|max:255',
             'position_held' => 'required|string|max:255',
-            'email' => ['required','email', Rule::unique('users')->ignore($id) ],
-            
+            'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
         ]
     );
-        
+
         $user = $this->userRepo->update($id, request()->all());
 
-        flash('Partner Updated','success');
-        
+        flash('Partner Updated', 'success');
+
         return redirect()->back();
-        
     }
+
     /**
      * Guardar avatar del company
      */
-     public function logoCompany()
-     {
-         
-         $mimes = ['jpg','jpeg','bmp','png'];
-         $fileUploaded = "error";
-        
-         if(request()->file('photo'))
-         {
-         
-             $file = request()->file('photo');
-             $ext = $file->guessClientExtension();
-            
-             if(in_array($ext, $mimes))
-                 $fileUploaded = $file->storeAs("companies/". auth()->user()->company->id, "logo.jpg",'public');
-         }
- 
-         return $fileUploaded;
- 
-     }
+    public function logoCompany()
+    {
+        $mimes = ['jpg', 'jpeg', 'bmp', 'png'];
+        $fileUploaded = 'error';
+
+        if (request()->file('photo')) {
+            $file = request()->file('photo');
+            $ext = $file->guessClientExtension();
+
+            if (in_array($ext, $mimes)) {
+                $fileUploaded = $file->storeAs('companies/' . auth()->user()->company->id, 'logo.jpg', 'public');
+            }
+        }
+
+        return $fileUploaded;
+    }
 
     public function updateCompany(Company $company)
     {
-        $this->validate(request(), [
+        $this->validate(
+            request(),
+            [
                     'activity' => 'required',
                     'phones' => 'required|string|max:255',
                     'physical_address' => 'required|string|max:255',
@@ -84,51 +78,49 @@ class AccountController extends Controller
                     'legal_first_surname' => 'required|string|max:255',
                     'legal_second_surname' => 'required|string|max:255',
                     'legal_email' => 'required|string|email|max:255',
-                
                 ]
             );
-        
+
         $data = request()->all();
         $company->fill($data);
         $company->save();
 
         $company->countries()->sync($data['country']);
-        
-         if(isset($data['sectors'])){
-                
-                $company->sectors()->sync($data['sectors']);
 
-                $shippingSectors = array_where($data['sectors'], function ($value, $key) {
-                    return $value == 56 || $value == 57 || $value == 58 || $value == 59;
-                });
+        if (isset($data['sectors'])) {
+            $company->sectors()->sync($data['sectors']);
 
-                 $roleShipping =  Role::whereName('shipping')->first();
+            $shippingSectors = array_where($data['sectors'], function ($value, $key) {
+                return $value == 56 || $value == 57 || $value == 58 || $value == 59;
+            });
 
-                if($shippingSectors){
+            $roleShipping = Role::whereName('shipping')->first();
 
-                   
-                     auth()->user()->roles()->attach($roleShipping);
-                     
-                }else{
-                    auth()->user()->roles()->detach($roleShipping);
-                }
-               
+            if ($shippingSectors) {
+                auth()->user()->roles()->attach($roleShipping);
+            } else {
+                auth()->user()->roles()->detach($roleShipping);
             }
+        }
 
-        flash('Company Updated','success');
-        
+        flash('Company Updated', 'success');
+
         return redirect()->back();
     }
 
     public function updatePrivateCode($partner_id)
     {
-         $company = Company::find($partner_id);
-         $company->private_code = request('private_code');
-         $company->save();
-         
-         return $company;
+        $this->validate(
+            request(),
+                [
+                    'private_code' => ['required', Rule::unique('companies')->ignore($partner_id)],
+                ]
+            );
+
+        $company = Company::find($partner_id);
+        $company->private_code = request('private_code');
+        $company->save();
+
+        return $company;
     }
-
-   
-
 }
