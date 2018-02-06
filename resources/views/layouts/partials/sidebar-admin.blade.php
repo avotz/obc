@@ -36,6 +36,12 @@
                                    
                                 </li>
                                 @endif
+                                 @if($role->name == 'superadmin')
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/superadmin/sectors" title="Sectores y subsectores"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">Sectors & subsectors</span></a>
+                                   
+                                </li>
+                                @endif
                                  @if(auth()->user()->hasPermission('view_all_trans_company'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
@@ -66,6 +72,7 @@
                                    
                                 </li>
                                 @endif
+                               
                                 
                             </ul>
                         </div>

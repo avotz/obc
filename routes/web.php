@@ -116,6 +116,14 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::get('/countries/{country}/edit', 'Superadmin\CountryController@edit');
     Route::put('/countries/{country}', 'Superadmin\CountryController@update');
 
+    Route::get('/sectors', 'Superadmin\SectorController@index');
+    Route::get('/sectors/create', 'Superadmin\SectorController@create');
+    Route::post('/sectors', 'Superadmin\SectorController@store');
+    Route::delete('/sectors/{sector}', 'Superadmin\SectorController@delete');
+    Route::get('/sectors/{sector}/edit', 'Superadmin\SectorController@edit');
+    Route::put('/sectors/{sector}', 'Superadmin\SectorController@update');
+
+
     Route::get('transactions', 'Superadmin\TransactionController@index');
     Route::get('quotation-requests/list', 'Superadmin\TransactionController@getQuotationRequests');
     Route::get('quotations/list', 'Superadmin\TransactionController@getQuotations');
