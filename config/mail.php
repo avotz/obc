@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Mail Driver
@@ -56,7 +55,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@obc.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'itsupport@obc.red'),
         'name' => env('MAIL_FROM_NAME', 'IT Support'),
     ],
 
@@ -119,5 +118,4 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-
 ];
