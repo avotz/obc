@@ -5,7 +5,7 @@
                 <label for="amount" title="Monto">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('amount') }}</strong>
+                        <strong title="{{ validationRequiredES('Monto') }}">{{ $errors->first('amount') }}</strong>
                     </span>
                 @endif
             </div>
@@ -45,7 +45,7 @@
                 <label for="credit_time" title="Tiempo de credito">Credit time</label>
                 @if ($errors->has('credit_time'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('credit_time') }}</strong>
+                        <strong title="{{ validationRequiredES('Tiempo de credito') }}">{{ $errors->first('credit_time') }}</strong>
                     </span>
                 @endif
             </div>
@@ -60,7 +60,7 @@
                 <label for="date" title="Fecha de solicitud">Request Date </label>
                 @if ($errors->has('date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('date') }}</strong>
+                        <strong title="{{ validationRequiredES('Fecha de solicitud') }}">{{ $errors->first('date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -75,7 +75,7 @@
                 <label for="file" title="Archivo">file</label>
                 @if ($errors->has('file'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('file') }}</strong>
+                        <strong title="{{ validationRequiredES('Archivo') }}">{{ $errors->first('file') }}</strong>
                     </span>
                 @endif
             </div>
@@ -96,7 +96,7 @@
                 <label for="comments" title="Comentario adicional">Additional comment </label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentario adicional') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>

@@ -97,7 +97,7 @@
                                         <label for="interest_30" title="% Interes para 30 dias"> % Interest for 30 days </label>
                                         @if ($errors->has('interest_30'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('interest_30') }}</strong>
+                                                <strong title="{{ validationRequiredES('% Interes para 30 dias') }}">{{ $errors->first('interest_30') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -110,7 +110,7 @@
                                         <label for="interest_45" title="% Interes para 45 dias"> % Interest for 45 days </label>
                                         @if ($errors->has('interest_45'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('interest_45') }}</strong>
+                                                <strong title="{{ validationRequiredES('% Interes para 45 dias') }}">{{ $errors->first('interest_45') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -123,7 +123,7 @@
                                         <label for="interest_60" title="% Interes para 60 dias"> % Interest for 60 days </label>
                                         @if ($errors->has('interest_60'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('interest_60') }}</strong>
+                                                <strong title="{{ validationRequiredES('% Interes para 60 dias') }}">{{ $errors->first('interest_60') }}</strong>
                                             </span>
                                         @endif
                                     </div>

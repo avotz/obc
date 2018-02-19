@@ -59,10 +59,10 @@
                    <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="applicant_name" name="applicant_name" value="{{ $user->profile->applicant_name }}">
-                                <label for="applicant_name"> Name</label>
+                                <label for="applicant_name" title="Nombre"> Name</label>
                                 @if ($errors->has('applicant_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('applicant_name') }}</strong>
+                                        <strong title="{{ validationRequiredES('Nombre') }}">{{ $errors->first('applicant_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -72,10 +72,10 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ $user->profile->first_surname }}">
-                                <label for="first_surname"> First surname</label>
+                                <label for="first_surname" title="Primer Apellido"> First surname</label>
                                 @if ($errors->has('first_surname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('first_surname') }}</strong>
+                                        <strong title="{{ validationRequiredES('Primer Apellido') }}">{{ $errors->first('first_surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -85,10 +85,10 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="second_surname" name="second_surname" value="{{ $user->profile->second_surname  }}">
-                                <label for="second_surname"> Second surname</label>
+                                <label for="second_surname" title="Segundo Apellido"> Second surname</label>
                                 @if ($errors->has('second_surname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('second_surname') }}</strong>
+                                        <strong title="{{ validationRequiredES('Segundo Apellido') }}">{{ $errors->first('second_surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -99,10 +99,10 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="text" id="phone" name="phone" value="{{ $user->profile->phone }}">
-                                <label for="position_held"> Phone</label>
+                                <label for="position_held" title="Teléfono"> Phone</label>
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong title="{{ validationRequiredES('Teléfono') }}">{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -113,10 +113,10 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="email" id="email" name="email" value="{{ $user->email }}">
-                                <label for="email">Email</label>
+                                <label for="email" title="Correo">Email</label>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -126,10 +126,10 @@
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
                                 <input class="form-control" type="password" id="password" name="password">
-                                <label for="password">Change Password</label>
+                                <label for="password" title="Cambiar contraseña">Change Password</label>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong title="{{ validationRequiredES('Contraseña') }}">{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
                             </div>

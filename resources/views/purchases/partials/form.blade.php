@@ -36,7 +36,7 @@
                 <label for="shipping_company" title="Compañia de envio">Shipping Company </label>
                 @if ($errors->has('shipping_company'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('shipping_company') }}</strong>
+                        <strong title="{{ validationRequiredES('Compañia de envio') }}">{{ $errors->first('shipping_company') }}</strong>
                     </span>
                 @endif
             </div>
@@ -49,7 +49,7 @@
                 <label for="credit_company" title="Entidad de crédito">Credit Company </label>
                 @if ($errors->has('credit_company'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('credit_company') }}</strong>
+                        <strong title="{{ validationRequiredES('Entidad de crédito') }}">{{ $errors->first('credit_company') }}</strong>
                     </span>
                 @endif
             </div>
@@ -62,7 +62,7 @@
                 <label for="amount" title="Monto">Amount </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('amount') }}</strong>
+                        <strong title="{{ validationRequiredES('Monto') }}">{{ $errors->first('amount') }}</strong>
                     </span>
                 @endif
             </div>
@@ -100,7 +100,7 @@
                 <label for="total" title="Total">Total </label>
                 @if ($errors->has('total'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('total') }}</strong>
+                        <strong title="{{ validationRequiredES('Total') }}">{{ $errors->first('total') }}</strong>
                     </span>
                 @endif
           </div>
@@ -114,7 +114,7 @@
                 <label for="purchase_file" title="Archivo de orden de compra">Purchase Order file</label>
                 @if ($errors->has('purchase_file'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('purchase_file') }}</strong>
+                        <strong title="{{ validationRequiredES('Archivo de orden de compra') }}">{{ $errors->first('purchase_file') }}</strong>
                     </span>
                 @endif
             </div>
@@ -135,7 +135,7 @@
                 <label for="comments" title="Comentario adicional">Additional comment</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentario adicional') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>

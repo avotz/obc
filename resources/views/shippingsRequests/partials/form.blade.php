@@ -15,7 +15,7 @@
                 <label for="type" title="Tipo">Type</label>
                 @if ($errors->has('type'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('type') }}</strong>
+                        <strong title="{{ validationRequiredES('Tipo') }}">{{ $errors->first('type') }}</strong>
                     </span>
                 @endif
             </div>
@@ -40,7 +40,7 @@
                 <label for="delivery_time" title="Tiempo de entrega">Delivery time</label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('delivery_time') }}</strong>
+                        <strong title="{{ validationRequiredES('Tiempo de entrega') }}">{{ $errors->first('delivery_time') }}</strong>
                     </span>
                 @endif
             </div>
@@ -54,7 +54,7 @@
                 <label for="date" title="Fecha de solicitud">Request Date</label>
                 @if ($errors->has('date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('date') }}</strong>
+                        <strong title="{{ validationRequiredES('Fecha de solicitud') }}">{{ $errors->first('date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -68,7 +68,7 @@
                 <label for="shipping_file" title="Archivo">file</label>
                 @if ($errors->has('file'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('file') }}</strong>
+                        <strong title="{{ validationRequiredES('Archivo') }}">{{ $errors->first('file') }}</strong>
                     </span>
                 @endif
             </div>
@@ -89,7 +89,7 @@
                 <label for="comments" title="Comentarios adicionales">Additional comments</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentarios adicionales') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>
@@ -109,7 +109,7 @@
                 <label for="public" title="Compañia de envio">  Shipping Company</label>
                 @if ($errors->has('public'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('public') }}</strong>
+                        <strong title="{{ validationRequiredES('Compañia de envio') }}">{{ $errors->first('public') }}</strong>
                     </span>
                 @endif
             </div>

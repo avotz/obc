@@ -6,7 +6,7 @@
                 <label for="amount" title="Monto">Amount <span class="label label-danger">( {{ isset($creditRequest) ? $creditRequest->amount : '' }} )</span></label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('amount') }}</strong>
+                        <strong title="{{ validationRequiredES('Monto') }}">{{ $errors->first('amount') }}</strong>
                     </span>
                 @endif
             </div>
@@ -56,7 +56,7 @@
                 <label for="credit_time" title="Tiempo de credito">Credit time <span class="label label-danger">(Credit {{ isset($creditRequest) ? $creditRequest->credit_time : '' }} days)</span></label>
                 @if ($errors->has('credit_time'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('credit_time') }}</strong>
+                        <strong title="{{ validationRequiredES('Tiempo de credito') }}">{{ $errors->first('credit_time') }}</strong>
                     </span>
                 @endif
             </div>
@@ -71,7 +71,7 @@
                 <label for="date" title="Fecha de la solicitud">Request Date <span class="label label-danger">({{ isset($creditRequest) ? $creditRequest->date : '' }})</span></label>
                 @if ($errors->has('date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('date') }}</strong>
+                        <strong title="{{ validationRequiredES('Fecha de la solicitud') }}">{{ $errors->first('date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -81,10 +81,10 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <input class="js-datepicker form-control" type="text" id="approval_date" name="approval_date" value="{{ isset($credit) ? $credit->approval_date : old('approval_date') }}" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
-                <label for="approval_date" title="FEcha de aprobación">Approval Date </label>
+                <label for="approval_date" title="Fecha de aprobación">Approval Date </label>
                 @if ($errors->has('approval_date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('approval_date') }}</strong>
+                        <strong title="{{ validationRequiredES('Fecha de la solicitud') }}">{{ $errors->first('approval_date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -97,7 +97,7 @@
                 <label for="payment_date" title="Fecha de pago">Payment Date </label>
                 @if ($errors->has('payment_date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('payment_date') }}</strong>
+                        <strong title="{{ validationRequiredES('Fecha de pago') }}">{{ $errors->first('payment_date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -107,10 +107,10 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <input class="form-control" type="text" id="interest" name="interest" value="{{ isset($credit) ? $credit->interest  : $interest }}" {{ (isset($credit) && !$credit->isPending()) ? 'readonly' : '' }} readonly>
-                <label for="comments" title="Interes">Interest</label>
+                <label for="interest" title="Interes">Interest</label>
                 @if ($errors->has('interest'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('interest') }}</strong>
+                        <strong title="{{ validationRequiredES('Interes') }}">{{ $errors->first('interest') }}</strong>
                     </span>
                 @endif
             </div>
@@ -123,7 +123,7 @@
                 <label for="total" title="Total">Total</label>
                 @if ($errors->has('total'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('total') }}</strong>
+                        <strong title="{{ validationRequiredES('Total') }}">{{ $errors->first('total') }}</strong>
                     </span>
                 @endif
             </div>
@@ -137,7 +137,7 @@
                 <label for="file" title="Archivo">file</label>
                 @if ($errors->has('file'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('file') }}</strong>
+                        <strong title="{{ validationRequiredES('Archivo') }}">{{ $errors->first('file') }}</strong>
                     </span>
                 @endif
             </div>
@@ -158,7 +158,7 @@
                 <label for="comments" title="Comentario adicional">Additional comment <span class="label label-danger">( {{ str_limit(isset($creditRequest) ? $creditRequest->comments : '' , 20) }} )</span></label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentario adicional') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>

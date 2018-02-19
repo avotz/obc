@@ -6,7 +6,7 @@
                 <label for="name" title="Nombre"> Name</label>
                 @if ($errors->has('name'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong title="{{ validationRequiredES('Nombre') }}">{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
             </div>
@@ -19,7 +19,7 @@
                 <label for="name_es" title="Traducción"> Translate</label>
                 @if ($errors->has('name_es'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('name_es') }}</strong>
+                        <strong title="{{ validationRequiredES('Traducción') }}">{{ $errors->first('name_es') }}</strong>
                     </span>
                 @endif
             </div>
@@ -40,7 +40,7 @@
                 <label for="sectors" title="Sector Padre"> Parent Sector</label>
                 @if ($errors->has('parent_id'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('parent_id') }}</strong>
+                    <strong title="{{ validationRequiredES('Sector Padre') }}">{{ $errors->first('parent_id') }}</strong>
                 </span>
             @endif
         </div>

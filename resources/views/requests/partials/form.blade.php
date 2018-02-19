@@ -18,7 +18,7 @@
                     <label for="sectors" title="Sectores y subsectores">  Sectors and subsectors</label>
                     @if ($errors->has('sectors'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('sectors') }}</strong>
+                        <strong title="{{ validationRequiredES('Sectores y subsectores') }}">{{ $errors->first('sectors') }}</strong>
                     </span>
                 @endif
             </div>
@@ -52,7 +52,7 @@
                 <label for="geo_type" title="Tipo de transacción">  Transaction Type</label>
                 @if ($errors->has('geo_type'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('geo_type') }}</strong>
+                        <strong title="{{ validationRequiredES('Tipo de transacción') }}">{{ $errors->first('geo_type') }}</strong>
                     </span>
                 @endif
             </div>
@@ -76,7 +76,7 @@
                 <label for="delivery_time" title="Tiempo de entrega">Delivery time</label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('delivery_time') }}</strong>
+                        <strong title="{{ validationRequiredES('Tiempo de entrega') }}">{{ $errors->first('delivery_time') }}</strong>
                     </span>
                 @endif
             </div>
@@ -102,7 +102,7 @@
                 <label for="way_of_delivery" title="Manera de entrega">Way of delivery</label>
                 @if ($errors->has('way_of_delivery'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('way_of_delivery') }}</strong>
+                        <strong title="{{ validationRequiredES('Manera de entrega') }}">{{ $errors->first('way_of_delivery') }}</strong>
                     </span>
                 @endif
             </div>
@@ -123,7 +123,7 @@
                 <label for="way_to_pay" title="Forma de pago">Way to pay</label>
                 @if ($errors->has('way_to_pay'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('way_to_pay') }}</strong>
+                        <strong title="{{ validationRequiredES('Forma de pago') }}">{{ $errors->first('way_to_pay') }}</strong>
                     </span>
                 @endif
             </div>
@@ -137,7 +137,7 @@
                 <label for="exp_date" title="Solicitud valida hasta">Request valid until</label>
                 @if ($errors->has('exp_date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('exp_date') }}</strong>
+                        <strong title="{{ validationRequiredES('Solicitud valida hasta') }}">{{ $errors->first('exp_date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -151,7 +151,7 @@
                 <label for="comments" title="Comentarios adicionales">Additional comment</label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentarios adicionales') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>
@@ -165,7 +165,7 @@
                     <label for="file" title="Archivo">File</label>
                     @if ($errors->has('file'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('file') }}</strong>
+                            <strong title="{{ validationRequiredES('Archivo') }}">{{ $errors->first('file') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -184,7 +184,7 @@
                 <label for="product_photo" title="Foto del producto">Product Photo</label>
                 @if ($errors->has('product_photo'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('product_photo') }}</strong>
+                        <strong title="{{ validationRequiredES('Foto del producto') }}">{{ $errors->first('product_photo') }}</strong>
                     </span>
                 @endif
             </div>
@@ -212,7 +212,7 @@
                 <label for="public" title="Visibilidad">  Visibility</label>
                 @if ($errors->has('public'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('public') }}</strong>
+                        <strong title="{{ validationRequiredES('Visibilidad') }}">{{ $errors->first('public') }}</strong>
                     </span>
                 @endif
             </div>

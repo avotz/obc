@@ -18,7 +18,7 @@
                 <label for="delivery_time" title="Tiempo de entrega">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span> </label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('delivery_time') }}</strong>
+                        <strong title="{{ validationRequiredES('Tiempo de entrega') }}">{{ $errors->first('delivery_time') }}</strong>
                     </span>
                 @endif
             </div>
@@ -46,7 +46,7 @@
                 <label for="way_of_delivery" title="Manera de entrega">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
                 @if ($errors->has('way_of_delivery'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('way_of_delivery') }}</strong>
+                        <strong title="{{ validationRequiredES('Manera de entrega') }}">{{ $errors->first('way_of_delivery') }}</strong>
                     </span>
                 @endif
             </div>
@@ -68,7 +68,7 @@
                 <label for="way_to_pay" title="Manera de pago">Way to pay <span class="label label-danger">(Credit {{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }} days)</span></label>
                 @if ($errors->has('way_to_pay'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('way_to_pay') }}</strong>
+                        <strong title="{{ validationRequiredES('Manera de pago') }}">{{ $errors->first('way_to_pay') }}</strong>
                     </span>
                 @endif
             </div>
@@ -84,7 +84,7 @@
                 <label for="comments" title="Comentarios adicionales">Additional comment <span class="label label-danger">({{ str_limit(isset($quotationRequest) ? $quotationRequest->comments : '' , 20) }})</span></label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentarios adicionales') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>
@@ -97,7 +97,7 @@
                 <label for="amount" title="Monto original de la oferta">Original amount of the offer </label>
                 @if ($errors->has('amount'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('amount') }}</strong>
+                        <strong title="{{ validationRequiredES('Monto original de la oferta') }}">{{ $errors->first('amount') }}</strong>
                     </span>
                 @endif
             </div>
@@ -135,7 +135,7 @@
                 <label for="total" title="Total">Total </label>
                 @if ($errors->has('total'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('total') }}</strong>
+                        <strong title="{{ validationRequiredES('Total') }}">{{ $errors->first('total') }}</strong>
                     </span>
                 @endif
           </div>
@@ -150,7 +150,7 @@
                     <label for="file" title="Archivo">File</label>
                     @if ($errors->has('file'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('file') }}</strong>
+                            <strong title="{{ validationRequiredES('Archivo') }}">{{ $errors->first('file') }}</strong>
                         </span>
                     @endif
                 @endif 
@@ -170,7 +170,7 @@
                     <label for="product_photo" title="Foto del producto">Product Photo</label>
                     @if ($errors->has('product_photo'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('product_photo') }}</strong>
+                            <strong title="{{ validationRequiredES('Foto del producto') }}">{{ $errors->first('product_photo') }}</strong>
                         </span>
                     @endif
                 @endif 

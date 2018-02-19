@@ -5,7 +5,7 @@
                 <label for="applicant_name" title="Nombre"> Name</label>
                 @if ($errors->has('applicant_name'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('applicant_name') }}</strong>
+                        <strong title="{{ validationRequiredES('Nombre') }}">{{ $errors->first('applicant_name') }}</strong>
                     </span>
                 @endif
             </div>
@@ -18,7 +18,7 @@
                 <label for="first_surname" title="Primer apellido"> First surname</label>
                 @if ($errors->has('first_surname'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('first_surname') }}</strong>
+                        <strong title="{{ validationRequiredES('Primer apellido') }}">{{ $errors->first('first_surname') }}</strong>
                     </span>
                 @endif
             </div>
@@ -31,7 +31,7 @@
                 <label for="second_surname" title="Segundo apellido"> Second surname</label>
                 @if ($errors->has('second_surname'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('second_surname') }}</strong>
+                        <strong title="{{ validationRequiredES('Segundo apellido') }}">{{ $errors->first('second_surname') }}</strong>
                     </span>
                 @endif
             </div>
@@ -46,7 +46,7 @@
                 <label for="email" title="Correo">Email</label>
                 @if ($errors->has('email'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
             </div>
@@ -65,7 +65,7 @@
                 <label for="country" title="País"> Country</label>
                 @if ($errors->has('country'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('country') }}</strong>
+                        <strong title="{{ validationRequiredES('País') }}">{{ $errors->first('country') }}</strong>
                     </span>
                 @endif
             </div>
@@ -83,7 +83,7 @@
                 <label for="role" title="Rol"> Role</label>
                 @if ($errors->has('role'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('role') }}</strong>
+                        <strong title="{{ validationRequiredES('Rol') }}">{{ $errors->first('role') }}</strong>
                     </span>
                 @endif
             </div>
@@ -96,7 +96,7 @@
                 <label for="password" title="Cambio de contraseña">Change Password</label>
                 @if ($errors->has('password'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
+                        <strong title="{{ validationRequiredES('Contraseña') }}">{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
             </div>

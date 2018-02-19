@@ -265,3 +265,8 @@ function get_depth($depth)
 {
     return str_repeat('<span class="depth">—</span>', $depth);
 }
+
+function validationRequiredES($field)
+{
+    return 'El campo '.$field.' es requerido';
+}

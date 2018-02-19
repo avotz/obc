@@ -6,7 +6,7 @@
                 <label for="name" title="Nombre"> Name</label>
                 @if ($errors->has('name'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong title="{{ validationRequiredES('Nombre') }}">{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
             </div>
@@ -19,7 +19,7 @@
                 <label for="code" title="Código (ISO 3166-1 alpha-2)"> Code <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" target="_blank">(ISO 3166-1 alpha-2)</a></label>
                 @if ($errors->has('code'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('code') }}</strong>
+                        <strong title="{{ validationRequiredES('Código') }}">{{ $errors->first('code') }}</strong>
                     </span>
                 @endif
             </div>
@@ -32,7 +32,7 @@
                 <label for="currency" title="Moneda (ISO 4217)"> Currency <a href="https://es.wikipedia.org/wiki/ISO_4217" target="_blank">(ISO 4217)</a></label>
                 @if ($errors->has('currency'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('currency') }}</strong>
+                        <strong title="{{ validationRequiredES('Moneda') }}">{{ $errors->first('currency') }}</strong>
                     </span>
                 @endif
             </div>
@@ -45,7 +45,7 @@
                 <label for="currency" title="Simbolo Moneda"> Currency Symbol</label>
                 @if ($errors->has('currency_symbol'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('currency_symbol') }}</strong>
+                        <strong title="{{ validationRequiredES('Simbolo Moneda') }}">{{ $errors->first('currency_symbol') }}</strong>
                     </span>
                 @endif
             </div>
@@ -58,7 +58,7 @@
                 <label for="currency_exchange" title="Tipo de Cambio Moneda"> Currency Exchange</label>
                 @if ($errors->has('currency_exchange'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('currency_exchange') }}</strong>
+                        <strong title="{{ validationRequiredES('Tipo de Cambio Moneda') }}">{{ $errors->first('currency_exchange') }}</strong>
                     </span>
                 @endif
             </div>
@@ -71,7 +71,7 @@
                 <label for="chat_id" title="ID Chat"> Chat Id</label>
                 @if ($errors->has('chat_id'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('chat_id') }}</strong>
+                        <strong title="{{ validationRequiredES('Chat ID') }}">{{ $errors->first('chat_id') }}</strong>
                     </span>
                 @endif
             </div>

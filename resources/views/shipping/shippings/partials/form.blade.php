@@ -28,7 +28,7 @@
                 <label for="delivery_time" title="Tiempo de entrega">Delivery time <span class="label label-danger">({{ isset($shippingRequest) ? ($shippingRequest->delivery_time == 1) ? trans('utils.normal')  :  trans('utils.express')  : '' }})</span></label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('delivery_time') }}</strong>
+                        <strong title="{{ validationRequiredES('Tiempo de entrega') }}">{{ $errors->first('delivery_time') }}</strong>
                     </span>
                 @endif
             </div>
@@ -41,7 +41,7 @@
                 <label for="cost" title="Costo">Cost</label>
                 @if ($errors->has('cost'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('cost') }}</strong>
+                        <strong title="{{ validationRequiredES('Costo') }}">{{ $errors->first('cost') }}</strong>
                     </span>
                 @endif
             </div>
@@ -74,7 +74,7 @@
                 <label for="date" title="Fecha de solicitud">Request Date <span class="label label-danger">({{ isset($shippingRequest) ? $shippingRequest->date : '' }})</span></label>
                 @if ($errors->has('date'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('date') }}</strong>
+                        <strong title="{{ validationRequiredES('Fecha de solicitud') }}">{{ $errors->first('date') }}</strong>
                     </span>
                 @endif
             </div>
@@ -88,7 +88,7 @@
                 <label for="file" title="Archivo">file</label>
                 @if ($errors->has('file'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('file') }}</strong>
+                        <strong title="{{ validationRequiredES('Archivo') }}">{{ $errors->first('file') }}</strong>
                     </span>
                 @endif
             </div>
@@ -109,7 +109,7 @@
                 <label for="comments" title="Comentarios adicionales">Additional comment <span class="label label-danger">( {{ str_limit(isset($shippingRequest) ? $shippingRequest->comments : '' , 20) }} )</span></label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('comments') }}</strong>
+                        <strong title="{{ validationRequiredES('Comentarios adicionales') }}">{{ $errors->first('comments') }}</strong>
                     </span>
                 @endif
             </div>

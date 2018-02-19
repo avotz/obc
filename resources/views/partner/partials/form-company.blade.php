@@ -34,7 +34,7 @@
                                 <label for="activity" title="Actividad en la plataforma OBC">  Activity on the OBC platform</label>
                                 @if ($errors->has('activity'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('activity') }}</strong>
+                                        <strong title="{{ validationRequiredES('Actividad') }}">{{ $errors->first('activity') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -61,7 +61,7 @@
                                 <label for="phones" title="Teléfonos"> Phones</label>
                                 @if ($errors->has('phones'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('phones') }}</strong>
+                                        <strong title="{{ validationRequiredES('Teléfonos') }}">{{ $errors->first('phones') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -74,7 +74,7 @@
                                 <label for="physical_address" title="Dirección física"> Physical address</label>
                                 @if ($errors->has('physical_address'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('physical_address') }}</strong>
+                                        <strong title="{{ validationRequiredES('Dirección física') }}">{{ $errors->first('physical_address') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -92,7 +92,7 @@
                                 <label for="country" title="País"> Country</label>
                                 @if ($errors->has('country'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('country') }}</strong>
+                                        <strong title="{{ validationRequiredES('País') }}">{{ $errors->first('country') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -106,7 +106,7 @@
                                 <label for="towns" title="Ciudad"> Towns</label>
                                 @if ($errors->has('towns'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('towns') }}</strong>
+                                        <strong title="{{ validationRequiredES('Ciudad') }}">{{ $errors->first('towns') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -119,7 +119,7 @@
                                 <label for="web_address" title="Dirección Web"> Web address</label>
                                 @if ($errors->has('web_address'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('web_address') }}</strong>
+                                        <strong title="{{ validationRequiredES('Dirección Web') }}">{{ $errors->first('web_address') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -132,7 +132,7 @@
                                 <label for="legal_name" title="Nombre del representante legal"> Name of the legal representative</label>
                                 @if ($errors->has('legal_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('legal_name') }}</strong>
+                                        <strong title="{{ validationRequiredES('Nombre del representante legal') }}">{{ $errors->first('legal_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -145,7 +145,7 @@
                                 <label for="legal_first_surname" title="Primer apellido"> First surname</label>
                                 @if ($errors->has('legal_first_surname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('legal_first_surname') }}</strong>
+                                        <strong title="{{ validationRequiredES('Primer apellido') }}">{{ $errors->first('legal_first_surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -158,7 +158,7 @@
                                 <label for="legal_second_surname" title="Segundo apellido"> Second surname</label>
                                 @if ($errors->has('legal_second_surname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('legal_second_surname') }}</strong>
+                                        <strong title="{{ validationRequiredES('Segundo apellido') }}">{{ $errors->first('legal_second_surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -171,7 +171,7 @@
                                 <label for="legal_email" title="Correo">Email</label>
                                 @if ($errors->has('legal_email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('legal_email') }}</strong>
+                                        <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('legal_email') }}</strong>
                                     </span>
                                 @endif
                             </div>

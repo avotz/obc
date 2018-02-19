@@ -18,15 +18,15 @@
                         <div class="block-content block-content-full block-content-narrow">
                                     
                             <check-partner></check-partner>
-                            <div class="err-lara {{ $errors->has('applicant_name') ? ' has-error' : '' }}">
+                            <div class="err-lara {{ $errors->has('associate_private_code') ? ' has-error' : '' }}">
                                 @if ($errors->has('associate_private_code'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('associate_private_code') }}</strong>
+                                        <strong title="{{ validationRequiredES('Código privado del asociado (Partner)') }}">{{ $errors->first('associate_private_code') }}</strong>
                                     </span>
                                 @endif
                                 @if ($errors->has('associate_private_code_not_found'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('associate_private_code_not_found') }} </strong>
+                                        <strong title="Código privado del asociado (Partner) no encontrado">{{ $errors->first('associate_private_code_not_found') }} </strong>
                                     </span>
                                 @endif	
                             </div>
@@ -62,7 +62,7 @@
                                                     <label for="applicant_name" title="Nombre del solicitante"> Applicant name *</label>
                                                     @if ($errors->has('applicant_name'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('applicant_name') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Nombre del solicitante') }}">{{ $errors->first('applicant_name') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -75,7 +75,7 @@
                                                     <label for="first_surname" title="Primer Apellido"> First surname *</label>
                                                     @if ($errors->has('first_surname'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('first_surname') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Primer Apellido') }}">{{ $errors->first('first_surname') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -88,7 +88,7 @@
                                                     <label for="second_surname" title="Segundo Apellido"> Second surname *</label>
                                                     @if ($errors->has('second_surname'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('second_surname') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Segundo Apellido') }}">{{ $errors->first('second_surname') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -101,7 +101,7 @@
                                                     <label for="position_held" title="Cargo que ocupa"> Position held *</label>
                                                     @if ($errors->has('position_held'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('position_held') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Cargo que ocupa') }}">{{ $errors->first('position_held') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -114,7 +114,7 @@
                                                     <label for="phone" title="Número de teléfono de la oficina donde trabaja">Phone number of the office where you work *</label>
                                                     @if ($errors->has('phone'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('phone') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Número de teléfono') }}">{{ $errors->first('phone') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -128,7 +128,7 @@
                                                     <label for="email" title="Correo">Email *</label>
                                                     @if ($errors->has('email'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('email') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>
@@ -141,7 +141,7 @@
                                                     <label for="password" title="Contraseña">Password *</label>
                                                     @if ($errors->has('password'))
                                                         <span class="help-block">
-                                                            <strong>{{ $errors->first('password') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Contraseña') }} y/o no coinciden">{{ $errors->first('password') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>

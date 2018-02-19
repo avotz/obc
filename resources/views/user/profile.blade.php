@@ -174,7 +174,7 @@
                                 <label for="applicant_name" title="Nombre del solicitante"> Applicant name</label>
                                 @if ($errors->has('applicant_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('applicant_name') }}</strong>
+                                        <strong title="{{ validationRequiredES('Nombre del solicitante') }}">{{ $errors->first('applicant_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -187,7 +187,7 @@
                                 <label for="first_surname" title="Primer apellido"> First surname</label>
                                 @if ($errors->has('first_surname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('first_surname') }}</strong>
+                                        <strong title="{{ validationRequiredES('Primer apellido') }}">{{ $errors->first('first_surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -200,7 +200,7 @@
                                 <label for="second_surname" title="Segundo apellido"> Second surname</label>
                                 @if ($errors->has('second_surname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('second_surname') }}</strong>
+                                        <strong title="{{ validationRequiredES('Segundo apellido') }}">{{ $errors->first('second_surname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -213,7 +213,7 @@
                                 <label for="position_held" title="Cargo que ocupa"> Position held</label>
                                 @if ($errors->has('position_held'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('position_held') }}</strong>
+                                        <strong title="{{ validationRequiredES('Cargo que ocupa') }}">{{ $errors->first('position_held') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -226,7 +226,7 @@
                                 <label for="position_held" title="Teléfono"> Phone</label>
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong title="{{ validationRequiredES('Teléfono') }}">{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -240,7 +240,7 @@
                                 <label for="email" title="Correo">Email</label>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -253,7 +253,7 @@
                                 <label for="password" title="Cambiar contraseña">Change Password</label>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong title="{{ validationRequiredES('Contraseña') }}">{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
                             </div>
