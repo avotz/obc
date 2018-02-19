@@ -6,6 +6,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="block block-themed animated fadeIn">
                 <div class="block-header bg-primary">
+                     <ul class="block-options">
+                        <li>
+                            <a href="{{ route('login') }}" data-toggle="tooltip" data-placement="left" title="Log In"><i class="si si-login"></i></a>
+                        </li>
+                    </ul>
                     <h3 class="block-title" title="Restablecer la contraseña">Reset Password</h3>
                 </div>
                 <div class="block-content block-content-full block-content-narrow">

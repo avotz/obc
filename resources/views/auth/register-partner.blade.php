@@ -67,7 +67,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
                                             
-                                            <select name="sectors[]" id="sectors"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector" title="Escriba para buscar un sector"> 
+                                            <select name="sectors[]" id="sectors"  class="select-sectors form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector" title="Escriba para buscar un sector"> 
                                                 @foreach ($sectors as $sector)
                                                         @include('layouts.partials.sector-select')
                                                     @endforeach
@@ -384,7 +384,46 @@
 @section('scripts')
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script>
-    jQuery('.js-select2').select2();
+    function matchEsLabel(params, data) {
+       
+       // If there are no search terms, return all of the data
+        if ($.trim(params.term) === '') {
+            return data;
+        }
+
+        // Skip if there is no 'children' property
+        if (typeof data.children === 'undefined') {
+            return null;
+        }
+
+        // `data.children` contains the actual options that we are matching against
+        var filteredChildren = [];
+        $.each(data.children, function (idx, child) {
+            if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0 || child.title.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
+            filteredChildren.push(child);
+            }
+        });
+
+        // If we matched any of the timezone group's children, then set the matched children on the group
+        // and return the group object
+        if (filteredChildren.length) {
+            var modifiedData = $.extend({}, data, true);
+            modifiedData.children = filteredChildren;
+
+            // You can return modified objects from here
+            // This includes matching the `children` how you want in nested data sets
+            return modifiedData;
+        }
+
+        // Return `null` if the term should not be displayed
+        return null;
+    }
+
+
+    jQuery('.select-sectors').select2({
+        matcher: matchEsLabel
+    });
+    
     jQuery('select[name=activity]').change(function(e){
         if(jQuery(this).val() == '1'){
             jQuery('#sectors').attr('disabled','disabled');
