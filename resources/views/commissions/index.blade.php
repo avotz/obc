@@ -15,12 +15,12 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 100px;" title="ID">ID</th>
-                                <th title="Compañia">Company</th>
+                                <th title="Asociado comisionista">Commission Partner</th>
                                 <th title="Orden de compra">Purchase Order</th>
-                                <th title="Monto">Amount</th>
+                                <th title="Monto transacción">Transaction Amount</th>
                                 
                                 <th title="Comisión Bruta OBC">Gross Commission OBC </th>
-                                <th title="Descuento OBC">Discount OBC </th>
+                                <th title="Descuento Cliente OBC">Discount OBC </th>
                                 <th title="Comisión Neta OBC">Net Commission OBC</th>
                                 <th style="width: 15%;" title="Estatus">Status</th>
                                 <th class="text-center" style="width: 80px;" title="Acciones">Actions</th>

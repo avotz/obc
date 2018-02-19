@@ -88,7 +88,7 @@
                         @foreach($permissions as $permission)
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <label class="css-input switch switch-success">
+                                <label class="css-input switch switch-success" title="{{ $permission->label_es }}">
                                     <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"  @if ($user->can($permission->name) ) checked @endif><span></span> {{ $permission->label }}
                                 </label>
                             </div>
@@ -119,7 +119,18 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script src="/js/plugins/ajaxupload.js"></script>
 <script>
-    jQuery('.js-select2').select2();
+   
+
+    jQuery('.select-country').select2({
+         language: {
+            noResults: function (params) {
+                return '<span title="País no encontrado">Country not found.</span>';
+            }
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        }
+    });
     $("#UploadPhoto").ajaxUpload({
       url : $("#UploadPhoto").data('url'),
       name: "photo",

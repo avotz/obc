@@ -56,7 +56,7 @@
     <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <select class="js-select2 form-control" name="country" id="country" >
+                <select class="select-country form-control" name="country" id="country" >
                     <!-- <option></option>Required for data-placeholder attribute to work with Chosen plugin -->
                     @foreach($countries as $country)    
                         <option value="{{ $country->id }}" @if(isset($user) && $user->countries->first()->id == $country->id) selected="selected" @endif>{{ $country->name }}</option>

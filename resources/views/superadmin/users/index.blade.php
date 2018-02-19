@@ -39,7 +39,7 @@
                 
             <div class="form-group">
                     
-                        <select name="search_country" id="search_country"  class="js-select2 form-control input-lg" data-placeholder="Country">
+                        <select name="search_country" id="search_country"  class="select-country form-control input-lg" data-placeholder="Country">
                                     <option value="" title="Todos">All</option>
                                     @foreach ($countries as $c)
                                     <option value="{{ $c->id}}"  @if($c->id == $search['search_country']) selected="selected" @endif> {{ $c->name }}</option>
@@ -168,8 +168,15 @@
 <script src="/js/plugins/select2/select2.full.min.js"></script>
 <script>
 
-    jQuery('.js-select2').select2({
-        allowClear:true
+    jQuery('.select-country').select2({
+         language: {
+            noResults: function (params) {
+                return '<span title="País no encontrado">Country not found.</span>';
+            }
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        }
     });
 
      function submitForm(){

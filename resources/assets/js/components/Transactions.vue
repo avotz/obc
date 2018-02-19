@@ -38,28 +38,28 @@
             <ul class="nav nav-tabs" data-toggle="tabs">
                
                 <li class="active" @click="currentView('quotation-requests')">
-                    <a href="#search-quotation-requests">Quotation Requests</a>
+                    <a href="#search-quotation-requests" title="Solicitudes de cotización">Quotation Requests</a>
                 </li>
                 <li >
-                    <a href="#search-quotations" @click="currentView('quotations')">Quotation</a>
+                    <a href="#search-quotations" @click="currentView('quotations')" title="Cotizaciones">Quotation</a>
                 </li>
                 <li >
-                    <a href="#search-shipping-requests" @click="currentView('shipping-requests')">Shipping Requests</a>
+                    <a href="#search-shipping-requests" @click="currentView('shipping-requests')" title="Solicitudes de envio">Shipping Requests</a>
                 </li>
                 <li >
-                    <a href="#search-shippings" @click="currentView('shippings')">Shippings</a>
+                    <a href="#search-shippings" @click="currentView('shippings')" title="Envios">Shippings</a>
                 </li>
                 <li >
-                    <a href="#search-credit-requests" @click="currentView('credit-requests')">Credit Requests</a>
+                    <a href="#search-credit-requests" @click="currentView('credit-requests')" title="Solicitudes de crédito">Credit Requests</a>
                 </li>
                  <li >
-                    <a href="#search-credits" @click="currentView('credits')">Credits</a>
+                    <a href="#search-credits" @click="currentView('credits')" title="Créditos">Credits</a>
                 </li>
                  <li >
-                    <a href="#search-purchase-orders" @click="currentView('purchase-orders')">Purchase Orders</a>
+                    <a href="#search-purchase-orders" @click="currentView('purchase-orders')" title="Ordenes de compra">Purchase Orders</a>
                 </li>
                  <li >
-                    <a href="#search-saving-obc" @click="currentView('saving-obc')">Saving History OBC</a>
+                    <a href="#search-saving-obc" @click="currentView('saving-obc')" title="Historial de ahorro OBC">Saving History OBC</a>
                 </li>
                
                
@@ -68,18 +68,18 @@
                 <!-- quotation-requests -->
                 <div class="tab-pane fade fade-up in active" id="search-quotation-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ quotationRequests.total }} <span class="h5 font-w400 text-muted">Quotation Requests Found</span></h2>
+                        <h2 class="push-10" title="{{ quotationRequests.total }} Solicitudes de cotización encontradas">{{ quotationRequests.total }} <span class="h5 font-w400 text-muted" >Quotation Requests Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
+                                <th class="text-center" title="ID">ID</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">User Id</th>
+                                <th class="text-center" title="ID usuario">User Id</th>
                                 
-                                <th class="hidden-xs">Request Date</th>
-                                <th class="hidden-xs">Quotations</th>
-                                <th class="text-center" >Ver</th>
+                                <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
+                                <th class="hidden-xs" title="Cotizaciones">Quotations</th>
+                                <th class="text-center" title="Ver">See</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +94,7 @@
                                
                                 <td class="hidden-xs">{{ requests.created_at }}</td>
                                 <td class="text-center">
-                                     <a :href="'/requests/'+ requests.id +'/quotations'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.quotations.length }} Quotations</a>
+                                     <a :href="'/requests/'+ requests.id +'/quotations'" class="btn btn-xs btn-success" data-toggle="tooltip" title="{{ requests.quotations.length }} Cotizacion(es)">{{ requests.quotations.length }} Quotations</a>
                                 </td>
                                 <td class="text-center">
                                    <a :href="'/requests/'+ requests.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i></a>
@@ -111,17 +111,17 @@
                 <!-- END quotation-requests -->
                 <div class="tab-pane fade fade-up in " id="search-quotations">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ quotations.total }} <span class="h5 font-w400 text-muted">Quotations Found</span></h2>
+                        <h2 class="push-10" title="{{ quotations.total }} Cotizaciones encontradas">{{ quotations.total }} <span class="h5 font-w400 text-muted" >Quotations Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
-                                 <th class="text-center">Request</th>
-                                <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">User Id</th>
-                                <th class="hidden-xs" >Quotation Date</th>
-                                <th class="hidden-xs hidden-sm" >Ver</th>
+                                <th class="text-center" title="ID">ID</th>
+                                 <th class="text-center" title="Solicitud">Request</th>
+                                <th class="text-center" ><i class="si si-user"></i></th>
+                                <th class="text-center" title="ID Usuario">User Id</th>
+                                <th class="hidden-xs" title="Fecha cotización">Quotation Date</th>
+                                <th class="hidden-xs hidden-sm" title="Ver">See</th>
                                 
                             </tr>
                         </thead>
@@ -152,18 +152,18 @@
                 <!-- shipping-requests -->
                 <div class="tab-pane fade fade-up in " id="search-shipping-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ shippingsRequests.total }} <span class="h5 font-w400 text-muted">Shippings Request Found</span></h2>
+                        <h2 class="push-10" title="{{ shippingsRequests.total }} Solicitudes de envio encontradas">{{ shippingsRequests.total }} <span class="h5 font-w400 text-muted" >Shippings Request Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
+                                <th class="text-center" title="ID">ID</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">Type</th>
-                                <th class="text-center">Delivery Time</th>
-                                <th class="hidden-xs">Request Date</th>
-                                <th class="hidden-xs">Shippings</th>
-                                <th class="text-center" >Actions</th>
+                                <th class="text-center" title="Tipo">Type</th>
+                                <th class="text-center" title="Tiempo de entrega">Delivery Time</th>
+                                <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
+                                <th class="hidden-xs" title="Envios">Shippings</th>
+                                <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,7 +178,7 @@
                                 <td class="text-center font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
                                 <td class="text-center">
-                                     <a :href="'/shipping-requests/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.shippings.length }} Shipping</a>
+                                     <a :href="'/shipping-requests/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" title="{{ requests.shippings.length }} Envios">{{ requests.shippings.length }} Shipping</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -200,18 +200,18 @@
                 <!-- END shipping-requests -->
                 <div class="tab-pane fade fade-up in " id="search-shippings">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ shippings.total }} <span class="h5 font-w400 text-muted">Shippings Found</span></h2>
+                        <h2 class="push-10" title="{{ shippings.total }} Envios encontrados">{{ shippings.total }} <span class="h5 font-w400 text-muted">Shippings Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Request</th>
+                                <th class="text-center" title="ID">ID</th>
+                                <th class="text-center" title="Solicitud">Request</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">Delivery Time</th>
-                                <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs hidden-sm" >Status</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center" title="Tiempo de entrega">Delivery Time</th>
+                                <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
+                                <th class="hidden-xs hidden-sm" title="Estado">Status</th>
+                                <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -226,9 +226,9 @@
                                 <td class="font-w600">{{ (shipping.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ shipping.date }}</td>
                                 <td class="hidden-xs hidden-sm">
-                                    <span class="label label-warning" v-show="shipping.status == 0">Pending</span>
-                                    <span class="label label-success" v-show="shipping.status == 1">Granted</span>
-                                    <span class="label label-danger" v-show="shipping.status == 2">Reject</span>
+                                    <span class="label label-warning" v-show="shipping.status == 0" title="Pendiente">Pending</span>
+                                    <span class="label label-success" v-show="shipping.status == 1" title="Concedido">Granted</span>
+                                    <span class="label label-danger" v-show="shipping.status == 2" title="Rechazado">Reject</span>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -249,17 +249,17 @@
                 <!-- END Shippings -->
                 <div class="tab-pane fade fade-up in" id="search-credit-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ creditRequests.total }} <span class="h5 font-w400 text-muted">Credits Request Found</span></h2>
+                        <h2 class="push-10" title="{{ creditRequests.total }} Solicitudes de crédito encontradas ">{{ creditRequests.total }} <span class="h5 font-w400 text-muted">Credits Request Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">Credit Time</th>
-                                <th class="hidden-xs">Request Date</th>
-                                <th class="hidden-xs">Credits</th>
-                                <th class="text-center" >Actions</th>
+                                <th class="text-center" title="ID">ID</th>
+                                <th class="text-center" ><i class="si si-user"></i></th>
+                                <th class="text-center" title="Tiempo de crédito">Credit Time</th>
+                                <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
+                                <th class="hidden-xs" title="Créditos">Credits</th>
+                                <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -273,7 +273,7 @@
                                 <td class="text-center font-w600">{{ requests.credit_time }} days</td>
                                 <td class="hidden-xs">{{ parseDate(requests.date) }}</td>
                                 <td class="text-center">
-                                     <a :href="'/credit-requests/'+ requests.id +'/credits'" class="btn btn-xs btn-success" data-toggle="tooltip" title="">{{ requests.credits.length }} Credits</a>
+                                     <a :href="'/credit-requests/'+ requests.id +'/credits'" class="btn btn-xs btn-success" data-toggle="tooltip" title="{{ requests.credits.length }} créditos">{{ requests.credits.length }} Credits</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -295,18 +295,18 @@
                 <!-- END credit-requests -->
                 <div class="tab-pane fade fade-up in " id="search-credits">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ credits.total }} <span class="h5 font-w400 text-muted">Credits Found</span></h2>
+                        <h2 class="push-10" title="{{ credits.total }} Créditos encontrados">{{ credits.total }} <span class="h5 font-w400 text-muted">Credits Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Request</th>
+                                <th class="text-center" title="ID">ID</th>
+                                <th class="text-center" title="Solicitud">Request</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">Credit Time</th>
-                                <th class="hidden-xs" >Request Date</th>
-                                <th class="hidden-xs hidden-sm" >Status</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center" title="Tiempo de crédito">Credit Time</th>
+                                <th class="hidden-xs" title="Fecha de solicitud" >Request Date</th>
+                                <th class="hidden-xs hidden-sm" title="Estado">Status</th>
+                                <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -321,9 +321,9 @@
                                 <td class="font-w600">{{ credit.credit_time }} days</td>
                                 <td class="hidden-xs">{{ parseDate(credit.date) }}</td>
                                 <td class="hidden-xs hidden-sm">
-                                    <span class="label label-warning" v-show="credit.status == 0">Pending</span>
-                                    <span class="label label-success" v-show="credit.status == 1">Granted</span>
-                                    <span class="label label-danger" v-show="credit.status == 2">Reject</span>
+                                    <span class="label label-warning" v-show="credit.status == 0" title="Pendiente">Pending</span>
+                                    <span class="label label-success" v-show="credit.status == 1" title="Concedido">Granted</span>
+                                    <span class="label label-danger" v-show="credit.status == 2" title="Rechazado">Reject</span>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -344,18 +344,18 @@
                 <!-- END credits -->
                  <div class="tab-pane fade fade-up in " id="search-purchase-orders">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ purchaseOrders.total }} <span class="h5 font-w400 text-muted">Purchase Orders Found</span></h2>
+                        <h2 class="push-10" title="{{ purchaseOrders.total }} Ordenes de compra encontradas">{{ purchaseOrders.total }} <span class="h5 font-w400 text-muted">Purchase Orders Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center">ID</th>
-                                <th class="text-center">Quotation</th>
+                                <th class="text-center" title="ID">ID</th>
+                                <th class="text-center" title="Cotización">Quotation</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">Amount</th>
-                                <th class="hidden-xs" >Purchase Date</th>
-                                <th class="hidden-xs hidden-sm" >Status</th>
-                                <th class="text-center">Actions</th>
+                                <th class="text-center" title="Monto">Amount</th>
+                                <th class="hidden-xs" title="Fecha de compra">Purchase Date</th>
+                                <th class="hidden-xs hidden-sm" title="Estado">Status</th>
+                                <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -370,9 +370,9 @@
                                 <td class="font-w600">{{ purchase.amount }} {{ purchase.currency }}</td>
                                 <td class="hidden-xs">{{ parseDate(purchase.created_at) }}</td>
                                 <td class="hidden-xs hidden-sm">
-                                    <span class="label label-warning" v-show="purchase.status == 0">Pending</span>
-                                    <span class="label label-success" v-show="purchase.status == 1">Granted</span>
-                                    <span class="label label-danger" v-show="purchase.status == 2">Reject</span>
+                                    <span class="label label-warning" v-show="purchase.status == 0" title="Pendiente">Pending</span>
+                                    <span class="label label-success" v-show="purchase.status == 1" title="Concedido">Granted</span>
+                                    <span class="label label-danger" v-show="purchase.status == 2" title="Rechazado">Reject</span>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -394,17 +394,17 @@
 
                 <div class="tab-pane fade fade-up in " id="search-saving-obc">
                     <div class="border-b push-30">
-                        <h2 class="push-10">{{ purchaseOrdersApproved.total }} <span class="h5 font-w400 text-muted">Saving OBC Found</span></h2>
+                        <h2 class="push-10" title="{{ purchaseOrdersApproved.total }} Ahorros de OBC encontrados">{{ purchaseOrdersApproved.total }} <span class="h5 font-w400 text-muted">Saving OBC Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
                     
-                                <th class="text-center">Purchase Order</th>
-                                <th class="text-center"><i class="si si-user"></i></th>
-                                <th class="text-center">Original Amount</th>
-                                <th class="text-center">Final Amount</th>
-                                <th class="text-center" >Saving OBC</th>
+                                <th class="text-center" title="Orden de compra">Purchase Order</th>
+                                <th class="text-center" ><i class="si si-user"></i></th>
+                                <th class="text-center" title="Monto original">Original Amount</th>
+                                <th class="text-center" title="Monto final">Final Amount</th>
+                                <th class="text-center" title="Ahorro OBC">Saving OBC</th>
                                 
                             </tr>
                         </thead>

@@ -8,7 +8,7 @@
         </div>
         <div class="bg-white" style="padding: .5rem;" v-show="edit">
             
-                <v-select :value.sync="country" :on-change="selectCountry" :options="countries" label="name"></v-select>
+                <v-select :value.sync="country" :on-change="selectCountry" :options="countries" label="name"> <span slot="no-options" title="País no encontrado">Country not found.</span></v-select>
                 <!-- <select name="country" id="country" v-model="country" class="js-select2 form-control input-lg" style="width:100%" data-placeholder="Country">
                    
                     @foreach ($countries as $c)

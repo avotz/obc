@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="block block-themed animated fadeIn">
                     <div class="block-header bg-primary">
-                        <h3 class="block-title">Reset Password</h3>
+                        <h3 class="block-title" title="Restablecer la contraseña">Reset Password</h3>
                     </div>
                     <div class="block-content block-content-full block-content-narrow">
                     @if (session('status'))
@@ -19,7 +19,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label" title="Correo electrónico">E-Mail Address</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -34,7 +34,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success" title="Enviar enlace de restablecer contraseña">
                                     Send Password Reset Link
                                 </button>
                             </div>

@@ -88,7 +88,16 @@
 <script src="/js/plugins/ajaxupload.js"></script>
 <script>
     
-    jQuery('.js-select2').select2();
+    jQuery('.select-country').select2({
+          language: {
+            noResults: function (params) {
+                return '<span title="País no encontrado">Country not found.</span>';
+            }
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        }
+    });
 
     $("#UploadPhoto").ajaxUpload({
       url : $("#UploadPhoto").data('url'),
