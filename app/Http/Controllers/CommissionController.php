@@ -30,38 +30,57 @@ class CommissionController extends Controller
     {
         if (!auth()->user()->hasPermission('view_commissions')) return redirect('/');
 
-        $commissions = $this->getCommissions(0);
+        $urlSearch = '/commissions/pending';
+    
+        $search['search_country'] = request('search_country');
+
+        $commissions = $this->getCommissions(0, $search['search_country']);
 
 
-        return view('commissions.index', compact('commissions'));
+        return view('commissions.index', compact('commissions','search', 'urlSearch'));
     }
     public function intransit()
     {
         if (!auth()->user()->hasPermission('view_commissions')) return redirect('/');
+        
+        $urlSearch = '/commissions/intransit';
 
-        $commissions = $this->getCommissions(1);
+        $search['search_country'] = request('search_country');
+
+        $commissions = $this->getCommissions(1, $search['search_country']);
 
 
-        return view('commissions.index', compact('commissions'));
+        return view('commissions.index', compact('commissions', 'search', 'urlSearch'));
     }
     public function paid()
     {
         if (!auth()->user()->hasPermission('view_commissions')) return redirect('/');
-           
-        $commissions = $this->getCommissions(2);
+
+        $urlSearch = '/commissions/paid';
+
+        $search['search_country'] = request('search_country');
+
+        $commissions = $this->getCommissions(2, $search['search_country']);
 
 
-        return view('commissions.index', compact('commissions'));
+        return view('commissions.index', compact('commissions', 'search', 'urlSearch'));
     }
-    public function getCommissions($status = 0)
+    public function getCommissions($status = 0, $country_id = null)
     {
         $company = auth()->user()->companies->first();
-        $country = auth()->user()->countries->first();
+       
+        if (auth()->user()->hasRole('superadmin')){
+            $country_id = ($country_id) ? $country_id : 1;
+        } else {
+            $country_id = ($country_id) ? $country_id : auth()->user()->countries->first()->id;
+        }
 
         if ($company)
             $commissions = Commission::where('status', $status)->where('company_id', $company->id)->with('purchase.quotation.user.companies')->paginate(10);
+        elseif($country_id)
+            $commissions = Commission::where('status', $status)->where('country_id', $country_id)->with('purchase.quotation.user.companies')->paginate(10);
         else
-            $commissions = Commission::where('status', $status)->where('country_id', $country->id)->with('purchase.quotation.user.companies')->paginate(10); 
+            $commissions = Commission::where('status', $status)->with('purchase.quotation.user.companies')->paginate(10); 
         
         return $commissions;
     }

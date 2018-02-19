@@ -39,7 +39,7 @@
                                    
                                 </li>
                                 @endif
-                                @if($role->name == 'admin' && auth()->user()->hasPermission('view_commissions') )
+                                @if(($role->name == 'admin' || $role->name == 'superadmin') && auth()->user()->hasPermission('view_commissions') )
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="#" title="Comisiones OBC"><i class="si si-calculator"></i><span class="sidebar-mini-hide">OBC Commissions</span></a>
                                     <ul>

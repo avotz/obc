@@ -89,6 +89,7 @@ class QuotationController extends Controller
             'way_to_pay' => 'required|string|max:255',
             'file' => 'mimes:jpeg,bmp,png,pdf',
             'product_photo' => 'mimes:jpeg,bmp,png,pdf',
+            'amount' => 'required'
         ]
         );
 
@@ -188,6 +189,7 @@ class QuotationController extends Controller
             'way_to_pay' => 'required|string|max:255',
             'file' => 'mimes:jpeg,bmp,png,pdf',
             'product_photo' => 'mimes:jpeg,bmp,png',
+            'amount' => 'required'
         ]
         );
 

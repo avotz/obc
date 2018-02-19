@@ -9,7 +9,32 @@
         <div class="col-sm-12 col-lg-12">
 
         <div class="block">
-                
+                <div class="block-header filters">
+                    @if(auth()->user()->hasRole('superadmin'))
+                    <form action="{{ $urlSearch }}" method="get" class="form-inline">
+        
+                        <div class="form-group">
+                                
+                                    <select name="search_country" id="search_country"  class="select-country form-control input-lg" data-placeholder="Country">
+                                                <!-- <option value="" title=""></option> -->
+                                                @foreach ($countries as $c)
+                                                <option value="{{ $c->id}}"  @if($c->id == $search['search_country']) selected="selected" @endif> {{ $c->name }}</option>
+                                                @endforeach
+                                                
+                                            </select>
+                                
+                        </div>
+                                            
+                                        
+                                        
+                                        
+                                    
+                            
+            
+                    
+                    </form>
+                    @endif
+                </div>
                 <div class="block-content">
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -66,7 +91,7 @@
                      @if($commissions->count())
                     <div class="row">
                         <div class="col-sm-12 text-center" >
-                            <div class="pagination-container">{!!$commissions->render()!!}</div>
+                            <div class="pagination-container">{!!$commissions->appends(['search_country' => $search['search_country']])->render()!!}</div>
                         </div>
                     </div>
                     @endif
@@ -103,6 +128,13 @@
 <script>
         // Init page helpers (Magnific Popup plugin)
         App.initHelpers('magnific-popup');
+
+         function submitForm(){
+            $('.filters').find('form').submit();
+        }
+
+
+        $('select[name=search_country]').change(submitForm);
 
 </script>
 @endsection

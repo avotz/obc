@@ -2,7 +2,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                     
-                    <select name="sectors[]" id="sectors"  class="js-select2 form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector" title="Escribe para buscar un sector"> 
+                    <select name="sectors[]" id="sectors"  class="select-sectors form-control" style="width:100%;" multiple data-placeholder="Type to search for a sector" title="Escribe para buscar un sector"> 
                         @if(isset($quotationRequest))
                             @foreach ($sectors as $sector)
                                     @include('layouts.partials.sector-select', ['element' => $quotationRequest])
