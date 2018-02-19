@@ -31,7 +31,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong title="{{ validationRequiredES('Correo') }} y/o válido">{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>

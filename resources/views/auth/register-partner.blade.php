@@ -214,7 +214,7 @@
                                                 <label for="legal_email" title="Correo">Email *</label>
                                                 @if ($errors->has('legal_email'))
                                                     <span class="help-block">
-                                                        <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('legal_email') }}</strong>
+                                                        <strong title="{{ validationRequiredES('Correo') }} y/o válido">{{ $errors->first('legal_email') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>
@@ -298,7 +298,7 @@
                                                     <label for="email" title="Correo">Email *</label>
                                                     @if ($errors->has('email'))
                                                         <span class="help-block">
-                                                            <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('email') }}</strong>
+                                                            <strong title="{{ validationRequiredES('Correo') }} y/o válido">{{ $errors->first('email') }}</strong>
                                                         </span>
                                                     @endif
                                                 </div>

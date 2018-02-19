@@ -27,7 +27,7 @@
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong title="{{ validationRequiredES('Correo') }} y/o válido">{{ $errors->first('email') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -41,7 +41,7 @@
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
+                                            <strong title="{{ validationRequiredES('Contraseña') }} y/o no coinciden">{{ $errors->first('password') }}</strong>
                                         </span>
                                     @endif
                                 </div>
