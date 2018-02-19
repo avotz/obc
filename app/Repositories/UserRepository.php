@@ -55,10 +55,10 @@ class UserRepository extends DbRepository{
                 $company->sectors()->sync($data['sectors']);
 
                 $shippingSectors = array_where($data['sectors'], function ($value, $key) {
-                    return $value == 56 || $value == 57 || $value == 58 || $value == 59;
+                    return $value == 55 || $value == 56 || $value == 57 || $value == 58;
                 });
                 $creditSectors = array_where($data['sectors'], function ($value, $key) {
-                    return $value == 60 || $value == 61 || $value == 62 || $value == 63;
+                    return $value == 59 || $value == 60;
                 });
 
               

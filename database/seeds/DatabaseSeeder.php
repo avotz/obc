@@ -168,9 +168,8 @@ class DatabaseSeeder extends Seeder
                     'name' => 'Financial Services',
                     'name_es' => 'Servicios Financieros',
                     'children' => [
-                          ['name' => 'Thirty days financing', 'name_es' => 'Financiamientos de 30 dias'],
-                          ['name' => 'Forty five days financing', 'name_es' => 'Financiamientos de 45 días'],
-                          ['name' => 'Sixty days financing', 'name_es' => 'Financiamiento de 60 días']
+                          ['name' => 'Financial Services', 'name_es' => 'Servicios Financieros']
+                          
                       ]
                   ],
                   [
