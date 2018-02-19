@@ -24,7 +24,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
                                         <input class="form-control" type="text" id="company_name" name="company_name" value="{{ old('company_name') }}" >
-                                        <label for="company_name" title="Nombre de la compañia">Company Name</label>
+                                        <label for="company_name" title="Nombre de la compañia">Company Name *</label>
                                         @if ($errors->has('company_name'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('company_name') }}</strong>
@@ -37,7 +37,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
                                         <input class="form-control" type="text" id="identification_number" name="identification_number" value="{{ old('identification_number') }}">
-                                        <label for="identification_number" title="Número de identificación de la compañía"> Company identification number</label>
+                                        <label for="identification_number" title="Número de identificación de la compañía"> Company identification number *</label>
                                         @if ($errors->has('identification_number'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('identification_number') }}</strong>
@@ -54,7 +54,7 @@
                                             <option value="1" @if(1 == old('activity')) selected="selected" @endif title="Consumidor">Consumer</option>
                                             <option value="2" @if(2 == old('activity')) selected="selected" @endif title="Suplidor">Supplier</option>
                                         </select>
-                                        <label for="activity" title="Actividad en la plataforma OBC">  Activity on the OBC platform</label>
+                                        <label for="activity" title="Actividad en la plataforma OBC">  Activity on the OBC platform *</label>
                                         @if ($errors->has('activity'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('activity') }}</strong>
@@ -74,7 +74,7 @@
                                             </select>
                                        
                                          <!-- <sector-subsectors :sectors="{{ $sectors }}"></sector-subsectors> -->
-                                         <label for="sectors" title="Sectores y subsectores">  Sectors and subsectors</label>
+                                         <label for="sectors" title="Sectores y subsectores">  Sectors and subsectors *</label>
                                          @if ($errors->has('sectors'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('sectors') }}</strong>
@@ -87,7 +87,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
                                         <input class="form-control" type="text" id="phones" name="phones" value="{{ old('phones') }}">
-                                        <label for="phones" title="Teléfonos"> Phones</label>
+                                        <label for="phones" title="Teléfonos"> Phones *</label>
                                         @if ($errors->has('phones'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('phones') }}</strong>
@@ -100,7 +100,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
                                         <input class="form-control" type="text" id="physical_address" name="physical_address" value="{{ old('physical_address') }}">
-                                        <label for="physical_address" title="Dirección"> Physical address</label>
+                                        <label for="physical_address" title="Dirección"> Physical address *</label>
                                         @if ($errors->has('physical_address'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('physical_address') }}</strong>
@@ -118,7 +118,7 @@
                                                 <option value="{{ $country->id }}" @if($country->id == old('country')) selected="selected" @endif>{{ $country->name }}</option>
                                             @endforeach
                                         </select>
-                                        <label for="country" title="País"> Country</label>
+                                        <label for="country" title="País"> Country *</label>
                                         @if ($errors->has('country'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('country') }}</strong>
@@ -132,7 +132,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-success">
                                         <input class="form-control" type="text" id="towns" name="towns" value="{{ old('towns') }}">
-                                        <label for="towns" title="Ciudad"> Towns</label>
+                                        <label for="towns" title="Ciudad"> Towns *</label>
                                         @if ($errors->has('towns'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('towns') }}</strong>
@@ -172,7 +172,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-material form-material-success">
                                                 <input class="form-control" type="text" id="legal_name" name="legal_name" value="{{ old('legal_name') }}">
-                                                <label for="legal_name" title="Nombre del representante legal"> Name of the legal representative</label>
+                                                <label for="legal_name" title="Nombre del representante legal"> Name of the legal representative *</label>
                                                 @if ($errors->has('legal_name'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('legal_name') }}</strong>
@@ -185,7 +185,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-material form-material-success">
                                                 <input class="form-control" type="text" id="legal_first_surname" name="legal_first_surname" value="{{ old('legal_first_surname') }}">
-                                                <label for="legal_first_surname" title="Primer Apellido"> First surname</label>
+                                                <label for="legal_first_surname" title="Primer Apellido"> First surname *</label>
                                                 @if ($errors->has('legal_first_surname'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('legal_first_surname') }}</strong>
@@ -198,7 +198,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-material form-material-success">
                                                 <input class="form-control" type="text" id="legal_second_surname" name="legal_second_surname" value="{{ old('legal_second_surname') }}">
-                                                <label for="legal_second_surname" title="Segundo Apellido"> Second surname</label>
+                                                <label for="legal_second_surname" title="Segundo Apellido"> Second surname *</label>
                                                 @if ($errors->has('legal_second_surname'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('legal_second_surname') }}</strong>
@@ -211,7 +211,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-material form-material-success">
                                                 <input class="form-control" type="email" id="legal_email" name="legal_email" value="{{ old('legal_email') }}">
-                                                <label for="legal_email" title="Correo">Email</label>
+                                                <label for="legal_email" title="Correo">Email *</label>
                                                 @if ($errors->has('legal_email'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('legal_email') }}</strong>
@@ -235,14 +235,14 @@
                                         <a href="{{ route('login') }}" data-toggle="tooltip" data-placement="left" title="Log In"><i class="si si-login"></i></a>
                                     </li>
                                 </ul>
-                                <h3 class="block-title" title="Cuenta de asociado">Associate Account</h3>
+                                <h3 class="block-title" title="Cuenta de asociado">Partner Account</h3>
                             </div>
                             <div class="block-content block-content-full block-content-narrow">
                             <div class="form-group{{ $errors->has('applicant_name') ? ' has-error' : '' }}">
                                         <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name') }}">
-                                                    <label for="applicant_name" title="Nombre del solicitante"> Applicant name</label>
+                                                    <label for="applicant_name" title="Nombre del solicitante"> Applicant name *</label>
                                                     @if ($errors->has('applicant_name'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('applicant_name') }}</strong>
@@ -255,7 +255,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ old('first_surname') }}">
-                                                    <label for="first_surname" title="Primer Apellido"> First surname</label>
+                                                    <label for="first_surname" title="Primer Apellido"> First surname *</label>
                                                     @if ($errors->has('first_surname'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('first_surname') }}</strong>
@@ -268,7 +268,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="second_surname" name="second_surname" value="{{ old('second_surname') }}">
-                                                    <label for="second_surname" title="Segundo Apellido"> Second surname</label>
+                                                    <label for="second_surname" title="Segundo Apellido"> Second surname *</label>
                                                     @if ($errors->has('second_surname'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('second_surname') }}</strong>
@@ -281,7 +281,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="position_held" name="position_held" value="{{ old('position_held') }}">
-                                                    <label for="position_held" title="Cargo que ocupa"> Position held</label>
+                                                    <label for="position_held" title="Cargo que ocupa"> Position held *</label>
                                                     @if ($errors->has('position_held'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('position_held') }}</strong>
@@ -295,7 +295,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}">
-                                                    <label for="email" title="Correo">Email</label>
+                                                    <label for="email" title="Correo">Email *</label>
                                                     @if ($errors->has('email'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('email') }}</strong>
@@ -308,7 +308,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="password" id="password" name="password">
-                                                    <label for="password" title="Contraseña">Password</label>
+                                                    <label for="password" title="Contraseña">Password *</label>
                                                     @if ($errors->has('password'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('password') }}</strong>
@@ -321,7 +321,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" >
-                                                    <label for="password_confirmation" title="Confirmación de Contraseña">Confirm Password</label>
+                                                    <label for="password_confirmation" title="Confirmación de Contraseña">Confirm Password *</label>
                                                     @if ($errors->has('password_confirmation'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -333,7 +333,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <label class="css-input switch switch-sm switch-success">
-                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> <a href="#" data-toggle="modal" data-target="#modal-terms" title="De acuerdo con la Política de uso">I agree with usage Policy</a> 
+                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> <a href="#" data-toggle="modal" data-target="#modal-terms" title="De acuerdo con la Política de uso">I agree with usage Policy *</a> 
                                                 </label>
                                             </div>
                                         </div>
@@ -362,19 +362,19 @@
                                     <button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
                                 </li>
                             </ul>
-                            <h3 class="block-title">Usage Policy</h3>
+                            <h3 class="block-title" title="Política de Uso">Usage Policy</h3>
                         </div>
                         <div class="block-content">
-                        <p>
+                        <p title="Todos los campos con asteriscos son obligatorios, recuerde que el correo electrónico será su nombre de usuario, por consiguiente, introduzca una dirección de correo valida con el fin de poder recuperar su clave de acceso por medio de este correo electrónico en caso de perdida u olvido.">
                         All fields with asterisks are mandatory, remember that the email will be your username, therefore, enter a valid email address in order to be able to retrieve your password by means of this email in case of lost or forgotten .</p>   
                         
-                        <p> By registering your company, you authorize OBC to confirm all the data provided in the account creation form of associates, once confirmed that data, OBC will authorize the use of your account and you will be able to use the online platform 24/7.</p>   
+                        <p title="Al registrar su empresa, usted autoriza a OBC a confirmar todos los datos suministrados en el formulario de creación de cuentas de asociados, una vez confirmado dichos datos, OBC autorizará su cuenta y usted podrá utilizar la plataforma en línea 24/7."> By registering your company, you authorize OBC to confirm all the data provided in the account creation form of partners, once confirmed that data, OBC will authorize the use of your account and you will be able to use the online platform 24/7.</p>   
                         
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> I agree</button>
+                        <button class="btn btn-sm btn-default" type="button" data-dismiss="modal" title="Cerrar">Close</button>
+                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal" title="Estoy de acuerdo"><i class="fa fa-check"></i> I agree</button>
                     </div>
                 </div>
             </div>

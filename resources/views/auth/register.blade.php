@@ -26,15 +26,15 @@
                             <!-- END Login Title -->
 
                             
-                            <p title="OBC permite el registro de empresas y personas en su plataforma, las empresas adquieren estatus de asociado y el estado de los usuarios, por razones de seguridad OBC se reserva el derecho de aceptar o rechazar las solicitudes de los asociados, por lo tanto, OBC verificará los datos proporcionados en el socio formulario de aplicación."> OBC allows the registration of companies and persons in its platform, companies acquire associate status and people the status of users, for security reasons OBC reserves the right to accept or deny the requests of the associates, therefore OBC will check the data provided in the partner application form.</p> 
+                            <p title="OBC permite el registro de empresas y personas en su plataforma, las empresas adquieren el estatus de asociado y las personas el de usuario, por razones de seguridad OBC se reserva el derecho de aceptar o denegar las solicitudes de los asociados, por consiguiente, OBC comprobará los datos suministrado en el formulario de solicitud de asociado."> OBC allows the registration of companies and persons in its platform, companies acquire partner status and people the status of users, for security reasons OBC reserves the right to accept or deny the requests of the partners, therefore OBC will check the data provided in the partner application form.</p> 
 
-                            <p title="Si la cuenta que desea crear es una cuenta de usuario, debe tener en cuenta que necesitará los datos del socio (Compañía) al que pertenece más el código privado de esa compañía para poder crear su cuenta de usuario, una vez enviada. el formulario, el asociado debe aprobar su solicitud, y hasta entonces puede usar la plataforma en línea y los servicios de OBC 24/7.">If the account you want to create is a user account, you must take into account that you will need the data of the partner (Company) to which you belong plus the private code of that company in order to create your user account, once sent the form, the associate must approve your request, and until then you can use the online platform and services of OBC 24/7.</p> 
+                            <p title="Si la cuenta que deseas crear es una cuenta de usuario, debes tener en cuenta que necesitaras los datos del asociado (Empresa),  a la que perteneces más el código privado de dicha empresa para crear la cuentas de usuario, una vez enviado el formulario, el asociado deberá aprobar tu solicitud para que puedas empezar a utilizar la plataforma en línea y los servicios de OBC 24/7.">If the account you want to create is a user account, you must take into account that you will need the data of the partner (Company) to which you belong plus the private code of that company in order to create your user account, once sent the form, the partner must approve your request, and until then you can use the online platform and services of OBC 24/7.</p> 
 
                             <div class="text-center">
                             <h3 title="Elija la cuenta que desea crear">Choose the account you want to create</h3>
                             <br>
                             <a class="btn btn-primary" href="/partners/register" title="Cuentas de asociados">
-                                Associate Accounts
+                                Partner Accounts
                             </a>
                             <a class="btn btn-success" href="/users/register"  title="Cuentas de usuarios">
                                 User Accounts

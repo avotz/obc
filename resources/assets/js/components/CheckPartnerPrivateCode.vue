@@ -5,7 +5,7 @@
                 <div class="form-material form-material-success">
                     <input class="form-control" type="text" v-model="associate_private_code" name="associate_private_code"  @keydown="keydown()">
                     
-                    <label for="associate_private_code">Associate private code</label><span class="fa fa-cog fa-spin" v-show="loader"></span>
+                    <label for="associate_private_code">Partner private code *</label><span class="fa fa-cog fa-spin" v-show="loader"></span>
                     <form-error v-if="errors.associate_private_code" :errors="errors">
                         {{ errors.associate_private_code[0] }}
                     </form-error>
@@ -31,7 +31,7 @@
         <div class="form-group" v-show="company.activity">
             <div class="col-xs-12">
                 <div class="form-material form-material-success">
-                    {{ company.activity }}
+                    {{ getActivityName(company.activity) }}
                     <label for="activity">Activity on the OBC platform</label>
                 </div>
             </div>
@@ -96,7 +96,8 @@
                 partner:{},
                 company:{},
                 loader:false,
-                errors:[]
+                errors:[],
+                activity: ['Consumer','Supplier'],
 
             }
           
@@ -112,6 +113,9 @@
                         this.searchPartner(this.associate_private_code)
                     },
                 500),
+            getActivityName(id){
+                return this.activity[id-1];
+            },
             searchPartner(private_code) {
                 this.loader = true;
                 axios.get(`/companies/${private_code}/check/`,{

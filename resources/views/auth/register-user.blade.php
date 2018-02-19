@@ -59,7 +59,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name') }}">
-                                                    <label for="applicant_name" title="Nombre del solicitante"> Applicant name</label>
+                                                    <label for="applicant_name" title="Nombre del solicitante"> Applicant name *</label>
                                                     @if ($errors->has('applicant_name'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('applicant_name') }}</strong>
@@ -72,7 +72,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ old('first_surname') }}">
-                                                    <label for="first_surname" title="Primer Apellido"> First surname</label>
+                                                    <label for="first_surname" title="Primer Apellido"> First surname *</label>
                                                     @if ($errors->has('first_surname'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('first_surname') }}</strong>
@@ -85,7 +85,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="second_surname" name="second_surname" value="{{ old('second_surname') }}">
-                                                    <label for="second_surname" title="Segundo Apellido"> Second surname</label>
+                                                    <label for="second_surname" title="Segundo Apellido"> Second surname *</label>
                                                     @if ($errors->has('second_surname'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('second_surname') }}</strong>
@@ -98,7 +98,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="position_held" name="position_held" value="{{ old('position_held') }}">
-                                                    <label for="position_held" title="Cargo que ocupa"> Position held</label>
+                                                    <label for="position_held" title="Cargo que ocupa"> Position held *</label>
                                                     @if ($errors->has('position_held'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('position_held') }}</strong>
@@ -111,7 +111,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="text" id="phone" name="phone" value="{{ old('phone') }}">
-                                                    <label for="phone" title="Número de teléfono de la oficina donde trabaja">Phone number of the office where you work</label>
+                                                    <label for="phone" title="Número de teléfono de la oficina donde trabaja">Phone number of the office where you work *</label>
                                                     @if ($errors->has('phone'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -125,7 +125,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="email" id="email" name="email" value="{{ old('email') }}">
-                                                    <label for="email" title="Correo">Email</label>
+                                                    <label for="email" title="Correo">Email *</label>
                                                     @if ($errors->has('email'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('email') }}</strong>
@@ -138,7 +138,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="password" id="password" name="password" >
-                                                    <label for="password" title="Contraseña">Password</label>
+                                                    <label for="password" title="Contraseña">Password *</label>
                                                     @if ($errors->has('password'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('password') }}</strong>
@@ -151,7 +151,7 @@
                                             <div class="col-xs-12">
                                                 <div class="form-material form-material-success">
                                                     <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" >
-                                                    <label for="password_confirmation" title="Confirmación de contraseña">Confirm Password</label>
+                                                    <label for="password_confirmation" title="Confirmación de contraseña">Confirm Password *</label>
                                                     @if ($errors->has('password_confirmation'))
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -163,7 +163,7 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <label class="css-input switch switch-sm switch-success">
-                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> <b title="De acuerdo con las políticas de uso">I agree with usage Policy</b>   
+                                                    <input type="checkbox" id="register-terms" name="register-terms" required><span></span> <b title="De acuerdo con las políticas de uso">I agree with usage Policy *</b>   
                                                 </label>
                                             </div>
                                         </div>
@@ -194,16 +194,16 @@
                             <h3 class="block-title">Usage Policy</h3>
                         </div>
                         <div class="block-content">
-                        <p>
+                        <p title="Todos los campos con asteriscos son obligatorios, recuerde que el correo electrónico será su nombre de usuario, por consiguiente, introduzca una dirección de correo valida con el fin de poder recuperar su clave de acceso por medio de este correo electrónico en caso de perdida u olvido.">
                         All fields with asterisks are mandatory, remember that the email will be your username, therefore, enter a valid email address in order to be able to retrieve your password by means of this email in case of lost or forgotten .</p>   
                         
-                        <p> By registering your company, you authorize OBC to confirm all the data provided in the account creation form of associates, once confirmed that data, OBC will authorize the use of your account and you will be able to use the online platform 24/7.</p>   
+                        <p title="Al registrarse, usted autoriza a OBC a confirmar todos los datos suministrados en el formulario de creación de cuentas de usuarios, una vez confirmado dichos datos, OBC autorizará su cuenta y usted podrá utilizar la plataforma en línea 24/7"> By registering, you authorize OBC to confirm all the data provided in the account creation form of users, once confirmed that data, OBC will authorize the use of your account and you will be able to use the online platform 24/7.</p>   
                         
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-default" type="button" data-dismiss="modal">Close</button>
-                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> I agree</button>
+                        <button class="btn btn-sm btn-default" type="button" data-dismiss="modal" title="Cerrar">Close</button>
+                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal" title=" Estoy de acuerdo"><i class="fa fa-check"></i> I agree</button>
                     </div>
                 </div>
             </div>
