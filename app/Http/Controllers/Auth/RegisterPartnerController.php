@@ -11,6 +11,7 @@ use App\Mail\NewPartner;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\NewPartnerWelcome;
 
 class RegisterPartnerController extends Controller
 {
@@ -96,8 +97,15 @@ class RegisterPartnerController extends Controller
 
         $user = $this->userRepo->store($data);
 
+        $adminsAndSupports = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->whereHas('countries', function ($query) use ($data) {
+            $query->where('id', $data['country']);
+        })->get();
+
         try {
-            \Mail::to($user)->send(new NewPartner($user));
+            \Mail::to($user)->send(new NewPartnerWelcome($user));
+            \Mail::to($adminsAndSupports)->send(new NewPartner($user));
         } catch (\Swift_TransportException $e) {  //Swift_RfcComplianceException
             \Log::error($e->getMessage());
         }
