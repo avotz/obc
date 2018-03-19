@@ -22,7 +22,7 @@
                     <div class="input-group">
                         <input class="form-control" name="q" type="text" placeholder="Search by ID.." v-model="search" @keyup.enter="onSearch">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" @click="onSearch"><i class="fa fa-search" v-if="!loader"></i> <i class="fa fa-cog fa-spin" v-if="loader"></i></button>
+                            <button :class="loader ? 'btn btn-success' : 'btn btn-default'" @click="onSearch"><i class="fa fa-search" v-if="!loader"></i> <i class="fa fa-cog fa-spin" v-if="loader"></i></button>
                         </div>
                     </div>
                    
@@ -36,10 +36,11 @@
     <!-- Page Content -->
     <div class="content">
         <div class="block">
+            
             <ul class="nav nav-tabs" data-toggle="tabs">
                
                 <li class="active" @click="currentView('quotation-requests')">
-                    <a href="#search-quotation-requests" title="Solicitudes de cotización">Quotation Requests</a>
+                    <a href="#search-quotation-requests" title="Solicitudes de cotización">Quotation Requests </a>
                 </li>
                 <li >
                     <a href="#search-quotations" @click="currentView('quotations')" title="Cotizaciones">Quotation</a>
