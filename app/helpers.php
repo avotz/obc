@@ -100,6 +100,7 @@ function getAvatar($user)
 
     if (Storage::disk('public')->exists('avatars/' . $user->id . '/avatar.jpg')) {
         $url = Storage::url('avatars/' . $user->id . '/avatar.jpg');
+        $url = $url .'?' . uniqid();
     } else {
         $url = '/img/default-avatar.jpg';
     }
@@ -112,6 +113,7 @@ function getLogo($company)
 
     if (Storage::disk('public')->exists('companies/' . $company->id . '/logo.jpg')) {
         $url = Storage::url('companies/' . $company->id . '/logo.jpg');
+        $url = $url . '?' . uniqid();
     } else {
         $url = '/img/logo-obc.png';
     }
