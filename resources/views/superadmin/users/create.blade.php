@@ -60,15 +60,8 @@
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
                     
-                        @foreach($permissions as $permission)
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label class="css-input switch switch-success">
-                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"  checked ><span></span> {{ $permission->label }}
-                                </label>
-                            </div>
-                            
-                        </div>
+                       @foreach($permissions as $permission)
+                            @include('layouts.partials.permissionsChecks')
                         @endforeach
                         
                   

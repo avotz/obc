@@ -86,14 +86,7 @@
                          <input type="hidden" name="_method" value="PUT">
                                 {{ csrf_field() }}
                         @foreach($permissions as $permission)
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label class="css-input switch switch-success" title="{{ $permission->label_es }}">
-                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"  @if ($user->can($permission->name) ) checked @endif><span></span> {{ $permission->label }}
-                                </label>
-                            </div>
-                            
-                        </div>
+                            @include('layouts.partials.permissionsChecks')
                         @endforeach
                        
                         <div class="form-group">

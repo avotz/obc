@@ -7,14 +7,14 @@
 <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
-                <h1 class="page-heading">
+                <h1 class="page-heading" title="Buscar usuarios">
                     Search Users 
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Users</li>
-                    <li><a class="link-effect" href="">Search Results</a></li>
+                    <li title="Usuarios">Users</li>
+                    <li><a class="link-effect" href="" title="Resultados de busqueda">Search Results</a></li>
                 </ol>
             </div>
         </div>
@@ -28,7 +28,7 @@
             
             <div class="form-group">
                     <div class="input-group input-group-lg">
-                        <input class="form-control" name="q" type="text" placeholder="Search by Public code, Name, Email.." value="{{ $search['q'] }}">
+                        <input class="form-control" name="q" type="text" placeholder="Search by Public code, Name, Email.." value="{{ $search['q'] }}" title="Buscar por codigo público, nombre, correo...">
                         <div class="input-group-btn">
                             <button class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>

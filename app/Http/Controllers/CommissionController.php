@@ -36,8 +36,12 @@ class CommissionController extends Controller
 
         $commissions = $this->getCommissions(0, $search['search_country']);
 
+        $typeTitle = [
+            'title' =>'Pending',
+            'title_es' => 'Pendiente',
+        ];
 
-        return view('commissions.index', compact('commissions','search', 'urlSearch'));
+        return view('commissions.index', compact('commissions','search', 'urlSearch', 'typeTitle'));
     }
     public function intransit()
     {
@@ -49,8 +53,12 @@ class CommissionController extends Controller
 
         $commissions = $this->getCommissions(1, $search['search_country']);
 
+        $typeTitle = [
+            'title' => 'In Transit',
+            'title_es' => 'En tránsito',
+        ];
 
-        return view('commissions.index', compact('commissions', 'search', 'urlSearch'));
+        return view('commissions.index', compact('commissions', 'search', 'urlSearch', 'typeTitle'));
     }
     public function paid()
     {
@@ -62,8 +70,12 @@ class CommissionController extends Controller
 
         $commissions = $this->getCommissions(2, $search['search_country']);
 
+        $typeTitle = [
+            'title' => 'Paid',
+            'title_es' => 'Pagadas',
+        ];
 
-        return view('commissions.index', compact('commissions', 'search', 'urlSearch'));
+        return view('commissions.index', compact('commissions', 'search', 'urlSearch', 'typeTitle'));
     }
     public function getCommissions($status = 0, $country_id = null)
     {

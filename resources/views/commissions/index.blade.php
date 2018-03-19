@@ -3,7 +3,16 @@
 <link rel="stylesheet" href="/js/plugins/magnific-popup/magnific-popup.min.css">
 @endsection
 @section('content')
- 
+ <div class="content bg-gray-lighter">
+        <div class="row items-push">
+            <div class="col-sm-7">
+                <h1 class="page-heading" title="Comisiones {{ $typeTitle['title_es'] }}">
+                    {{ $typeTitle['title'] }} Commissions 
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- END Page Header -->
   <div class="content">
     <div class="row">
         <div class="col-sm-12 col-lg-12">

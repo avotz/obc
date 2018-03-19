@@ -14,7 +14,7 @@
             <delete-avatar-profile :user-id="{{ $user->id }}" url="/profile/avatars"></delete-avatar-profile> 
         </div>
         <h1 class="h2 text-white push-5-t animated zoomIn">{{ $user->profile->applicant_name}} {{ $user->profile->first_surname}}</h1>
-        <h2 class="h5 text-white-op animated zoomIn">Admin</h2>
+        <h2 class="h5 text-white-op animated zoomIn">Admin - {{ $country->code }} <img src="{{ getFlag($country->code) }}" alt="flag"></h2>
         
     
        

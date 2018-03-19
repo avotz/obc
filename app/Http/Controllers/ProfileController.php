@@ -73,8 +73,9 @@ class ProfileController extends Controller
                 $q->where('id', $user->countries->first()->id);
 
             })->count();
+            $country = $user->countries()->first();
 
-            return view('admin.profile', compact('user','partners'));
+            return view('admin.profile', compact('user','partners', 'country'));
         }
 
         return view('user.profile', compact('user','company'));

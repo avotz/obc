@@ -20,11 +20,12 @@
                 </div>
                 <div class="col-xs-12 col-md-3">
                     <div class="input-group">
-                        <input class="form-control" name="q" type="text" placeholder="Search by ID.." v-model="search" >
+                        <input class="form-control" name="q" type="text" placeholder="Search by ID.." v-model="search" @keyup.enter="onSearch">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" @click="onSearch"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-default" @click="onSearch"><i class="fa fa-search" v-if="!loader"></i> <i class="fa fa-cog fa-spin" v-if="loader"></i></button>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>
@@ -68,7 +69,7 @@
                 <!-- quotation-requests -->
                 <div class="tab-pane fade fade-up in active" id="search-quotation-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ quotationRequests.total }} Solicitudes de cotización encontradas">{{ quotationRequests.total }} <span class="h5 font-w400 text-muted" >Quotation Requests Found</span></h2>
+                        <h2 class="push-10" :title="quotationRequests.total + ' Solicitudes de cotización encontradas'">{{ quotationRequests.total }} <span class="h5 font-w400 text-muted" >Quotation Requests Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -94,7 +95,7 @@
                                
                                 <td class="hidden-xs">{{ requests.created_at }}</td>
                                 <td class="text-center">
-                                     <a :href="'/requests/'+ requests.id +'/quotations'" class="btn btn-xs btn-success" data-toggle="tooltip" title="{{ requests.quotations.length }} Cotizacion(es)">{{ requests.quotations.length }} Quotations</a>
+                                     <a :href="'/requests/'+ requests.id +'/quotations'" class="btn btn-xs btn-success" data-toggle="tooltip" :title="requests.quotations.length +' Cotizacion(es)'">{{ requests.quotations.length }} Quotations</a>
                                 </td>
                                 <td class="text-center">
                                    <a :href="'/requests/'+ requests.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i></a>
@@ -111,7 +112,7 @@
                 <!-- END quotation-requests -->
                 <div class="tab-pane fade fade-up in " id="search-quotations">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ quotations.total }} Cotizaciones encontradas">{{ quotations.total }} <span class="h5 font-w400 text-muted" >Quotations Found</span></h2>
+                        <h2 class="push-10" :title="quotations.total + ' Cotizaciones encontradas'">{{ quotations.total }} <span class="h5 font-w400 text-muted" >Quotations Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -152,7 +153,7 @@
                 <!-- shipping-requests -->
                 <div class="tab-pane fade fade-up in " id="search-shipping-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ shippingsRequests.total }} Solicitudes de envio encontradas">{{ shippingsRequests.total }} <span class="h5 font-w400 text-muted" >Shippings Request Found</span></h2>
+                        <h2 class="push-10" :title="shippingsRequests.total + ' Solicitudes de envio encontradas'">{{ shippingsRequests.total }} <span class="h5 font-w400 text-muted" >Shippings Request Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -178,7 +179,7 @@
                                 <td class="text-center font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
                                 <td class="text-center">
-                                     <a :href="'/shipping-requests/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" title="{{ requests.shippings.length }} Envios">{{ requests.shippings.length }} Shipping</a>
+                                     <a :href="'/shipping-requests/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" :title="requests.shippings.length + ' Envios'">{{ requests.shippings.length }} Shipping</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -200,7 +201,7 @@
                 <!-- END shipping-requests -->
                 <div class="tab-pane fade fade-up in " id="search-shippings">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ shippings.total }} Envios encontrados">{{ shippings.total }} <span class="h5 font-w400 text-muted">Shippings Found</span></h2>
+                        <h2 class="push-10" :title="shippings.total+ ' Envios encontrados'">{{ shippings.total }} <span class="h5 font-w400 text-muted">Shippings Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -249,7 +250,7 @@
                 <!-- END Shippings -->
                 <div class="tab-pane fade fade-up in" id="search-credit-requests">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ creditRequests.total }} Solicitudes de crédito encontradas ">{{ creditRequests.total }} <span class="h5 font-w400 text-muted">Credits Request Found</span></h2>
+                        <h2 class="push-10" :title="creditRequests.total +' Solicitudes de crédito encontradas'">{{ creditRequests.total }} <span class="h5 font-w400 text-muted">Credits Request Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -273,7 +274,7 @@
                                 <td class="text-center font-w600">{{ requests.credit_time }} days</td>
                                 <td class="hidden-xs">{{ parseDate(requests.date) }}</td>
                                 <td class="text-center">
-                                     <a :href="'/credit-requests/'+ requests.id +'/credits'" class="btn btn-xs btn-success" data-toggle="tooltip" title="{{ requests.credits.length }} créditos">{{ requests.credits.length }} Credits</a>
+                                     <a :href="'/credit-requests/'+ requests.id +'/credits'" class="btn btn-xs btn-success" data-toggle="tooltip" :title="requests.credits.length + ' créditos'">{{ requests.credits.length }} Credits</a>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -295,7 +296,7 @@
                 <!-- END credit-requests -->
                 <div class="tab-pane fade fade-up in " id="search-credits">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ credits.total }} Créditos encontrados">{{ credits.total }} <span class="h5 font-w400 text-muted">Credits Found</span></h2>
+                        <h2 class="push-10" :title="credits.total + ' Créditos encontrados'">{{ credits.total }} <span class="h5 font-w400 text-muted">Credits Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -344,7 +345,7 @@
                 <!-- END credits -->
                  <div class="tab-pane fade fade-up in " id="search-purchase-orders">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ purchaseOrders.total }} Ordenes de compra encontradas">{{ purchaseOrders.total }} <span class="h5 font-w400 text-muted">Purchase Orders Found</span></h2>
+                        <h2 class="push-10" :title="purchaseOrders.total + ' Ordenes de compra encontradas'">{{ purchaseOrders.total }} <span class="h5 font-w400 text-muted">Purchase Orders Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -394,7 +395,7 @@
 
                 <div class="tab-pane fade fade-up in " id="search-saving-obc">
                     <div class="border-b push-30">
-                        <h2 class="push-10" title="{{ purchaseOrdersApproved.total }} Ahorros de OBC encontrados">{{ purchaseOrdersApproved.total }} <span class="h5 font-w400 text-muted">Saving OBC Found</span></h2>
+                        <h2 class="push-10" :title="purchaseOrdersApproved.total + ' Ahorros de OBC encontrados'">{{ purchaseOrdersApproved.total }} <span class="h5 font-w400 text-muted">Saving OBC Found</span></h2>
                     </div>
                     <table class="table table-striped table-vcenter">
                         <thead>
@@ -569,7 +570,11 @@
                     this.getPurchaseOrdersApproved();
             },
             onSearch:_.debounce(function(search) {
-	           
+	            
+                if(this.loader) return;
+
+                this.loader = true;
+
                 if(this.activeView == 'shipping-requests')
                     this.getShippingsRequests();
 
@@ -612,11 +617,11 @@
 				axios.get(`${this.urlQuotations}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.quotations = response.data;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false;       
                         console.log(response.data)
-                               
                     });
 
 				
@@ -631,11 +636,11 @@
 				axios.get(`${this.urlQuotationRequests}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.quotationRequests = response.data;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false; 
                         console.log(response.data)
-                               
                     });
 
 				
@@ -650,9 +655,10 @@
 				axios.get(`${this.urlShippings}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.shippings = response.data;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false;
                         console.log(response.data)
                                
                     });
@@ -669,9 +675,10 @@
 				axios.get(`${this.urlShippingsRequests}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.shippingsRequests = response.data;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false;
                         console.log(response.data)
                                
                     });
@@ -688,9 +695,10 @@
 				axios.get(`${this.urlCredits}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.credits = response.data;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false;
                         console.log(response.data)
                                
                     });
@@ -707,9 +715,10 @@
 				axios.get(`${this.urlCreditRequests}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.creditRequests = response.data;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false;
                         console.log(response.data)
                                
                     });
@@ -726,9 +735,10 @@
 				axios.get(`${this.urlPurchaseOrders}/list?q=${this.search}&country=${this.country_id}&date_start=${this.date_start}&date_end=${this.date_end}&page=${page}`).then((response) => {
                      
                       this.purchaseOrders = response.data.paginateData;
-                    
+                      this.loader = false;
                       
                     }, (response) => {
+                        this.loader = false;
                         console.log(response.data)
                                
                     });
@@ -746,8 +756,9 @@
                     
                       this.purchaseOrdersApproved = response.data.paginateData;
                       this.savingObcTotal = response.data.total;
-                      
+                      this.loader = false;
                     }, (response) => {
+                        this.loader = false;
                         console.log(response.data)
                                
                     });
