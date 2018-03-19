@@ -44,11 +44,11 @@
                                 <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary floating">
-                                            <input class="form-control" type="text" id="email" name="email" {{ old('email') }}>
+                                            <input class="form-control" type="email" id="email" name="email" {{ old('email') }}>
                                             <label for="email" title="Correo">Email</label>
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
-                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                    <strong title="{{ validationRequiredES('Correo') }}">{{ $errors->first('email') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -61,7 +61,7 @@
                                             <label for="password" title="Contraseña">Password</label>
                                             @if ($errors->has('password'))
                                                 <span class="help-block">
-                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                    <strong title="{{ validationRequiredES('Contraseña') }}">{{ $errors->first('password') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
