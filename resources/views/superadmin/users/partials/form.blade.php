@@ -75,7 +75,7 @@
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <select class="form-control" name="role" id="role" >
-                    
+                        <option value=""></option>
                     @foreach($roles as $role)    
                         <option value="{{ $role->id }}" @if(isset($user) && $user->hasRole($role->name)) selected="selected" @endif>{{ $role->name }}</option>
                     @endforeach

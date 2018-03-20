@@ -158,6 +158,14 @@
       
       }
   });
+
+    jQuery('select[name=role]').change(function(e){
+         if(jQuery(this).val() != '1'){ //admin
+            jQuery('.global-settings').hide();
+        }else{
+             jQuery('.global-settings').show();
+        }
+    });
 </script>
 @endsection
 

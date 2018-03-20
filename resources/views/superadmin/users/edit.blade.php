@@ -190,6 +190,20 @@
       
       }
   });
+
+  @if(isset($user) && $user->hasRole('superadmin'))
+    jQuery('.global-settings').show();
+  @else 
+    jQuery('.global-settings').hide();
+  @endif
+
+  jQuery('select[name=role]').change(function(e){
+        if(jQuery(this).val() != '1'){ //admin
+            jQuery('.global-settings').hide();
+        }else{
+             jQuery('.global-settings').show();
+        }
+    });
 </script>
 @endsection
 

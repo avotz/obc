@@ -5,6 +5,6 @@
     </button>
     
     <a class="h5 text-white" href="/">
-        <img src="/img/favicons/favicon-32x32.png" alt="OBC"> <span class="h6 font-w600 sidebar-mini-hide">Online Business Centers</span>
+        <!-- <img src="/img/favicons/favicon-32x32.png" alt="OBC"> --> <h2>OBC</h2> <span class="h6 font-w600 sidebar-mini-hide"></span> 
     </a>
 </div>

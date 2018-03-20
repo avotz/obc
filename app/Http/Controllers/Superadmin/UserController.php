@@ -32,10 +32,11 @@ class UserController extends Controller
             return redirect('/');
         }
 
-        $roles = Role::where(function ($q) {
-            $q->where('name', 'admin')
-              ->orWhere('name', 'superadmin');
-        })->get();
+        // $roles = Role::where(function ($q) {
+        //     $q->where('name', 'admin')
+        //       ->orWhere('name', 'superadmin');
+        // })->get();
+        $roles = Role::all();
 
         $permissions = Permission::where(function ($q) {
             $q->where('name', 'view_commissions')
