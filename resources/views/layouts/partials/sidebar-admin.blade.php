@@ -59,7 +59,7 @@
                                  @endif
                                  @if($role->name == 'superadmin' && auth()->user()->hasPermission('global_settings'))
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/profile" title="% descuento OBC"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">% Discount OBC</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/superadmin/settings" title="% descuento OBC"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">% Discount OBC</span></a>
                                    
                                 </li>
                                 @endif

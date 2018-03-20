@@ -79,7 +79,7 @@
                                 @if ($sector->depth > 0 )
                                     {!! get_depth($sector->depth) !!}   {{ $sector->name }}
                                 @else 
-                                     {{ $sector->name }}
+                                     <b class="text-info">{{ $sector->name }}</b>
                                 @endif
                                
                                 </td>

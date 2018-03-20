@@ -90,6 +90,7 @@ Route::resource('credits', 'CreditController');
 Route::resource('credit-requests', 'CreditRequestController');
 
 Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function () {
+    Route::get('/settings', 'Superadmin\UserController@editSettings');
     Route::put('/settings', 'Superadmin\UserController@updateSettings');
     Route::put('/{admin}', 'Superadmin\AccountController@update');
 
@@ -122,7 +123,6 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::delete('/sectors/{sector}', 'Superadmin\SectorController@delete');
     Route::get('/sectors/{sector}/edit', 'Superadmin\SectorController@edit');
     Route::put('/sectors/{sector}', 'Superadmin\SectorController@update');
-
 
     Route::get('transactions', 'Superadmin\TransactionController@index');
     Route::get('quotation-requests/list', 'Superadmin\TransactionController@getQuotationRequests');

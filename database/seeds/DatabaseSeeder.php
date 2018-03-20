@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
     private $permissions = [
         [
          'name' => 'view_all_trans_company',
-         'label' => 'View all company transactions',
-         'label_es' => 'Ver todas las trasacciones de la compañia'
+         'label' => 'View all transactions',
+         'label_es' => 'Ver todas las trasacciones'
         ],
         [
             'name' => 'view_commissions',
@@ -169,7 +169,6 @@ class DatabaseSeeder extends Seeder
                     'name_es' => 'Servicios Financieros',
                     'children' => [
                           ['name' => 'Financial Services', 'name_es' => 'Servicios Financieros']
-                          
                       ]
                   ],
                   [

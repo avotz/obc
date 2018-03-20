@@ -223,6 +223,19 @@ class UserController extends Controller
     /**
      * Mostrar vista de editar informacion basica del medico
      */
+    public function editSettings()
+    {
+        if (!auth()->user()->hasPermission('global_settings')) {
+            return redirect('/');
+        }
+        $global = GlobalSetting::first();
+
+        return view('superadmin.global-settings', compact('global'));
+    }
+
+    /**
+     * Mostrar vista de editar informacion basica del medico
+     */
     public function updateSettings()
     {
         $this->validate(
