@@ -47,7 +47,7 @@ class UserController extends Controller
             return redirect('/partner/users');
         }
 
-        $permissions = Permission::all();
+        $permissions = Permission::where('name', '<>', 'global_settings')->get();
 
         return view('partner.users.edit', compact('user', 'permissions'));
     }
