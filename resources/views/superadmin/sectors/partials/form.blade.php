@@ -54,7 +54,8 @@
     
     <div class="form-group">
         <div class="col-xs-12 col-sm-6 col-md-5">
-            <button class="btn btn-block btn-success" type="submit" title="Guardar">Save</button>
+            <button class="btn btn-success" type="submit" title="Guardar">Save</button>
+            <a href="/superadmin/sectors" class="btn btn-default" title="Atras">Back</a>
         </div>
     </div>
                    

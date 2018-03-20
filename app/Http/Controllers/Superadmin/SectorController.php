@@ -41,7 +41,7 @@ class SectorController extends Controller
 
         flash('Sector Saved', 'success');
 
-        return redirect('/superadmin/sectors');
+        return redirect('/superadmin/sectors/create');
     }
 
     public function index()
@@ -81,7 +81,7 @@ class SectorController extends Controller
 
         flash('Sector updated', 'success');
 
-        return redirect('/superadmin/sectors');
+        return redirect('/superadmin/sectors/' . $id . '/edit');
     }
 
     /**
