@@ -232,6 +232,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456'),
             'remember_token' => str_random(10),
             'active' => 1,
+            'pending' => 0,
         ])->first();
 
         \DB::table('permission_user')->insert(
@@ -259,6 +260,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456'),
             'remember_token' => str_random(10),
             'active' => 1,
+            'pending' => 0,
         ])->first();
 
         \DB::table('permission_user')->insert(

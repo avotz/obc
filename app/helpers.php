@@ -100,7 +100,7 @@ function getAvatar($user)
 
     if (Storage::disk('public')->exists('avatars/' . $user->id . '/avatar.jpg')) {
         $url = Storage::url('avatars/' . $user->id . '/avatar.jpg');
-        $url = $url .'?' . uniqid();
+        $url = $url . '?' . uniqid();
     } else {
         $url = '/img/default-avatar.jpg';
     }
@@ -270,5 +270,10 @@ function get_depth($depth)
 
 function validationRequiredES($field)
 {
-    return 'El campo '.$field.' es requerido';
+    return 'El campo ' . $field . ' es requerido';
+}
+
+function is_blank($value)
+{
+    return empty($value) && !is_numeric($value);
 }

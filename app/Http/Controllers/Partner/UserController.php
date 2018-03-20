@@ -30,10 +30,22 @@ class UserController extends Controller
         $company = auth()->user()->companies->first();
 
         $search['q'] = request('q');
+        $search['search_status'] = request('search_status');
 
-        $users = $company->users()->with('profile')->search($search['q'])->paginate(10);
+        $users = $company->users()->with('profile')->search($search['q']);
 
-        return view('partner.users.index', compact('users', 'search'));
+        if (!is_blank($search['search_status'])) {
+            if ($search['search_status'] == 2) {
+                $users = $users->where('pending', 1);
+            } else {
+                $users = $users->where('active', $search['search_status']);
+            }
+        }
+
+        $users = $users->paginate(10);
+        $pendingUsers = $company->users()->where('id', '<>', auth()->id())->where('pending', 1)->count();
+
+        return view('partner.users.index', compact('users', 'search', 'pendingUsers'));
     }
 
     /**
@@ -80,6 +92,8 @@ class UserController extends Controller
     public function active(User $user)
     {
         $user->active = 1;
+        $user->pending = 0;
+
         $user->save();
         // $this->userRepo->update_active($id, 1);
         try {

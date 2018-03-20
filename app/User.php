@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'public_code', 'active'
+        'email', 'password', 'public_code', 'active', 'pending'
     ];
 
     /*protected $appends = array('public_code','usr_public_code');

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('public_code')->nullable();
             $table->tinyInteger('active')->default(0);
+            $table->tinyInteger('pending')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

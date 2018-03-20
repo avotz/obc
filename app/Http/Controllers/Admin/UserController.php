@@ -34,6 +34,7 @@ class UserController extends Controller
         }
 
         $search['q'] = request('q');
+        $search['search_status'] = request('search_status');
 
         $users = User::whereHas('roles', function ($q) {
             $q->where('name', 'partner')
@@ -45,9 +46,25 @@ class UserController extends Controller
             $q->where('id', auth()->user()->countries->first()->id);
         });
 
+        if (!is_blank($search['search_status'])) {
+            if ($search['search_status'] == 2) {
+                $users = $users->where('pending', 1);
+            } else {
+                $users = $users->where('active', $search['search_status']);
+            }
+        }
+
         $users = $users->search($search['q'])->paginate(10);
 
-        return view('admin.users.index', compact('users', 'search'));
+        $pendingUsers = User::whereHas('roles', function ($q) {
+            $q->where('name', 'partner')
+                    ->orWhere('name', 'admin')
+                    ->orWhere('name', 'user');
+        })->whereHas('countries', function ($q) {
+            $q->where('id', auth()->user()->countries->first()->id);
+        })->where('pending', 1)->count();
+
+        return view('admin.users.index', compact('users', 'search', 'pendingUsers'));
     }
 
     public function create()
@@ -196,6 +213,8 @@ class UserController extends Controller
     public function active(User $user)
     {
         $user->active = 1;
+        $user->pending = 0;
+
         $user->save();
         // $this->userRepo->update_active($id, 1);
         try {

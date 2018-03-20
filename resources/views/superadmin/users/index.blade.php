@@ -28,7 +28,7 @@
             
             <div class="form-group">
                     <div class="input-group input-group-lg">
-                        <input class="form-control" name="q" type="text" placeholder="Name, Email.." value="{{ $search['q'] }}">
+                        <input class="form-control" name="q" type="text" placeholder="Name, Email.." value="{{ $search['q'] }}" title="Nombre, Correo...">
                         <div class="input-group-btn">
                             <button class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
@@ -39,11 +39,23 @@
                 
             <div class="form-group">
                     
-                        <select name="search_country" id="search_country"  class="select-country form-control input-lg" data-placeholder="Country">
+                        <select name="search_country" id="search_country"  class="select-country form-control input-lg" data-placeholder="Country" title="País">
                                     <option value="" title="Todos">All</option>
                                     @foreach ($countries as $c)
                                     <option value="{{ $c->id}}"  @if($c->id == $search['search_country']) selected="selected" @endif> {{ $c->name }}</option>
                                     @endforeach
+                                    
+                                </select>
+                    
+            </div>
+             <div class="form-group">
+                    
+                        <select name="search_status" id="search_status"  class="select-status form-control input-lg" data-placeholder="Status" title="Estatus">
+                                    <option value="" title="Todos">All</option>
+                                   
+                                    <option value="0"  @if('0' == $search['search_status']) selected="selected" @endif title="Inactivo"> Inactive</option> 
+                                    <option value="1"  @if('1' == $search['search_status']) selected="selected" @endif title="Activo"> Active</option> 
+                                    <option value="2"  @if('2' == $search['search_status']) selected="selected" @endif title="Pendiente"> Pending</option> 
                                     
                                 </select>
                     
@@ -77,6 +89,7 @@
                     <div class="tab-pane fade fade-up in active" id="search-users">
                         <a href="/superadmin/users/create" class="btn btn-info pull-right" title="Crear usuario">Create User</a>
                         <div class="border-b push-30">
+                            <span class="text-danger"><b>{{ $pendingUsers }} Pending Users</b></span>
                             <h2 class="push-10" title="{{ $users->total() }} Usuarios encontrados">{{ $users->total() }} <span class="h5 font-w400 text-muted">Users Found</span></h2>
                         </div>
                     
@@ -123,7 +136,9 @@
                                         @else
                                             
                                             <button type="submit"  class="btn btn-danger btn-xs " form="form-active-inactive" formaction="{!! URL::route('superadmin.users.active', [$user->id]) !!}" >Inactive</button>
-            
+                                            @if($user->pending)
+                                                <span class="label label-default" title="Pendiente">Pending</span>
+                                            @endif
                                         @endif
                                         @endif
                                     </td>
@@ -143,7 +158,7 @@
                         </table>
                     @if ($users)
                         <div class="border-t pagination-container">
-                            {!!$users->appends(['q' => $search['q']])->render()!!}
+                            {!!$users->appends(['q' => $search['q'], 'search_country' => $search['search_country'], 'search_status' => $search['search_status']])->render()!!}
                         </div>
                        
                     @endif
@@ -169,9 +184,21 @@
 <script>
 
     jQuery('.select-country').select2({
+         allowClear: true,
          language: {
             noResults: function (params) {
                 return '<span title="País no encontrado">Country not found.</span>';
+            }
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        }
+    });
+    jQuery('.select-status').select2({
+         allowClear: true,
+         language: {
+            noResults: function (params) {
+                return '<span title="Estado no encontrado">Status not found.</span>';
             }
         },
         escapeMarkup: function (markup) {
@@ -185,6 +212,7 @@
 
 
     $('select[name=search_country]').change(submitForm);
+    $('select[name=search_status]').change(submitForm);
 
     $("form[data-confirm]").submit(function() {
         if ( ! confirm($(this).attr("data-confirm"))) {
