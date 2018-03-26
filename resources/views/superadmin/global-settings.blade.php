@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('css')
-    <link rel="stylesheet" href="/js/plugins/select2/select2.min.css">
-@endsection
+
 @section('content')
 <div id="infoBox" class="alert alert-success" ></div>
  <!-- Page Header -->
@@ -74,3 +72,4 @@
     </div>
 </div>
 <!-- END Page Content -->
+@endsection
