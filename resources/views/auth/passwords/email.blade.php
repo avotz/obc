@@ -16,7 +16,7 @@
                     <div class="block-content block-content-full block-content-narrow">
                     @if (session('status'))
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            <span title="¡Le hemos enviado por correo electrónico el enlace de restablecimiento de contraseña!">{{ session('status') }}</span>
                         </div>
                     @endif
 
@@ -31,7 +31,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong title="{{ validationRequiredES('Correo') }} y/o válido">{{ $errors->first('email') }}</strong>
+                                        <strong title="No podemos encontrar un usuario con esa dirección de correo electrónico.">{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
