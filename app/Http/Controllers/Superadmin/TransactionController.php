@@ -141,6 +141,7 @@ class TransactionController extends Controller
     {
         $search['q'] = request('q');
         $country_id = request('country');
+        $status = request('status');
 
         $date_start = request('date_start') ? Carbon::parse(request('date_start')) : Carbon::now();
         $date_end = request('date_end') ? Carbon::parse(request('date_end')) : Carbon::now();

@@ -96,11 +96,11 @@
                         <table class="table table-striped table-vcenter">
                             <thead>
                                 <tr>
-                                    <th class="text-center" style="width: 100px;" title="ID">ID</th>
-                                    <th class="text-center" style="width: 100px;"><i class="si si-user"></i></th>
+                                    <th class="hidden-xs text-center" style="width: 100px;" title="ID">ID</th>
+                                    <th class="hidden-xs text-center" style="width: 100px;"><i class="si si-user"></i></th>
                                     <th title="Nombre">Name</th>
                                 
-                                    <th class="hidden-xs" style="width: 30%;" title="Correo">Email</th>
+                                    <th class="" style="width: 30%;" title="Correo">Email</th>
                                     <th class="hidden-xs" style="width: 30%;" title="País">Country</th>
                                     <th class="hidden-xs">Role</th>
                                     <th class="hidden-xs hidden-sm" style="width: 15%;" title="Estatus">Status</th>
@@ -110,12 +110,12 @@
                             <tbody>
                                 @foreach($users as $user)
                                 <tr>
-                                    <td class="font-w600">{{ $user->id }}</td>
-                                    <td class="text-center">
+                                    <td class="hidden-xs font-w600">{{ $user->id }}</td>
+                                    <td class="hidden-xs text-center">
                                         <img class="img-avatar img-avatar48" src="{{ getAvatar($user) }}" alt="User">
                                     </td>
                                     <td class="font-w600">{{ Optional($user->profile)->applicant_name}}</td>
-                                    <td class="hidden-xs">{{ $user->email }}</td>
+                                    <td class="">{{ $user->email }}</td>
                                     <td class="hidden-xs">
                                     @if($user->countries->first())    
                                         <update-country :user-id="{{ $user->id }}" :current-country="{{ $user->countries->first() }}" :countries="{{ $countries }}"></update-country>   

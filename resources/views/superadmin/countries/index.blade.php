@@ -60,8 +60,8 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
-                                <th class="text-center" style="width: 100px;"><i class="si si-flag"></i></th>
+                                <th class="hidden-xs text-center" style="width: 100px;" title="ID">ID</th>
+                                <th class="hidden-xs text-center" style="width: 100px;"><i class="si si-flag"></i></th>
                                 <th title="Nombre">Name</th>
                                
                                 <th class="hidden-xs" style="width: 30%;" title="Codigo">Code</th>
@@ -73,8 +73,8 @@
                         <tbody>
                             @foreach($countries as $country)
                             <tr>
-                                <td class="font-w600">{{ $country->id }}</td>
-                                <td class="text-center">
+                                <td class="hidden-xs font-w600">{{ $country->id }}</td>
+                                <td class="hidden-xs text-center">
                                     <img  src="{{ getFlag($country->code) }}" alt="Flag">
                                 </td>
                                 <td class="font-w600" >{{ $country->name }}</td>

@@ -60,7 +60,7 @@
                     <table class="table table-striped table-vcenter">
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 100px;" title="ID">ID</th>
+                                <th class="hidden-xs text-center" style="width: 100px;" title="ID">ID</th>
                             
                                 <th title="Nombre">Name</th>
                                
@@ -73,7 +73,7 @@
                         <tbody>
                             @foreach($sectors as $sector)
                             <tr>
-                                <td class="font-w600">{{ $sector->id }}</td>
+                                <td class="hidden-xs font-w600">{{ $sector->id }}</td>
                                
                                 <td class="font-w600" >
                                 @if ($sector->depth > 0 )

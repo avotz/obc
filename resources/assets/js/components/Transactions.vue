@@ -95,7 +95,7 @@
                                 <td class="text-center font-w600">{{ requests.user.public_code }} / {{  requests.user.profile.fullname }} / {{ requests.user.profile.position_held }}</td>
                                
                                 <td class="hidden-xs">{{ requests.created_at }}</td>
-                                <td class="text-center">
+                                <td class="hidden-xs text-center">
                                      <a :href="'/requests/'+ requests.id +'/quotations'" class="btn btn-xs btn-success" data-toggle="tooltip" :title="requests.quotations.length +' Cotizacion(es)'">{{ requests.quotations.length }} Quotations</a>
                                 </td>
                                 <td class="text-center">
@@ -119,11 +119,11 @@
                         <thead>
                             <tr>
                                 <th class="text-center" title="ID">ID</th>
-                                 <th class="text-center" title="Solicitud">Request</th>
+                                 <th class="hidden-xs text-center" title="Solicitud">Request</th>
                                 <th class="text-center" ><i class="si si-user"></i></th>
                                 <th class="text-center" title="ID Usuario">User Id</th>
                                 <th class="hidden-xs" title="Fecha cotización">Quotation Date</th>
-                                <th class="hidden-xs hidden-sm" title="Ver">See</th>
+                                <th class="text-center" title="Ver">See</th>
                                 
                             </tr>
                         </thead>
@@ -131,14 +131,14 @@
                            
                             <tr v-for="quotation in quotations.data" :key="quotation.id">
                                 <td class="text-center font-w600">{{ quotation.transaction_id }}</td>
-                                 <td class="text-center font-w600">{{ quotation.request.transaction_id }}</td>
+                                 <td class="hidden-xs text-center font-w600">{{ quotation.request.transaction_id }}</td>
                                 <td class="text-center">
                                     {{ quotation.user.company.public_code }}
                                        
                                 </td>
                                <td class="text-center font-w600">{{ quotation.user.public_code }} / {{  quotation.user.profile.fullname }} / {{ quotation.user.profile.position_held }}</td>
                                 <td class="hidden-xs">{{ quotation.created_at }}</td>
-                                <td class="hidden-xs hidden-sm">
+                                <td class="text-center">
                                    <a :href="'/quotations/'+ quotation.id +'/edit'" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i></a>
                                 </td>
                                 
@@ -179,7 +179,7 @@
                                 <td class="text-center font-w600">{{ (requests.type) ? 'International' : 'National' }}</td>
                                 <td class="text-center font-w600">{{ (requests.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ requests.date }}</td>
-                                <td class="text-center">
+                                <td class="hidden-xs text-center">
                                      <a :href="'/shipping-requests/'+ requests.id +'/shippings'" class="btn btn-xs btn-success" data-toggle="tooltip" :title="requests.shippings.length + ' Envios'">{{ requests.shippings.length }} Shipping</a>
                                 </td>
                                 <td class="text-center">
@@ -208,11 +208,11 @@
                         <thead>
                             <tr>
                                 <th class="text-center" title="ID">ID</th>
-                                <th class="text-center" title="Solicitud">Request</th>
+                                <th class="hidden-xs text-center" title="Solicitud">Request</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
                                 <th class="text-center" title="Tiempo de entrega">Delivery Time</th>
                                 <th class="hidden-xs" title="Fecha de solicitud">Request Date</th>
-                                <th class="hidden-xs hidden-sm" title="Estado">Status</th>
+                                <th class="text-center" title="Estado">Status</th>
                                 <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
@@ -220,14 +220,14 @@
                            
                             <tr v-for="shipping in shippings.data" :key="shipping.id">
                                 <td class="text-center font-w600">{{ shipping.transaction_id }}</td>
-                                 <td class="text-center font-w600">{{ shipping.shipping_request.transaction_id }}</td>
+                                 <td class="hidden-xs text-center font-w600">{{ shipping.shipping_request.transaction_id }}</td>
                                 <td class="text-center">
                                     {{ shipping.user.company.public_code }}
                                        
                                 </td>
                                 <td class="font-w600">{{ (shipping.delivery_time) ? 'Normal' : 'Express' }}</td>
                                 <td class="hidden-xs">{{ shipping.date }}</td>
-                                <td class="hidden-xs hidden-sm">
+                                <td class="text-center">
                                     <span class="label label-warning" v-show="shipping.status == 0" title="Pendiente">Pending</span>
                                     <span class="label label-success" v-show="shipping.status == 1" title="Concedido">Granted</span>
                                     <span class="label label-danger" v-show="shipping.status == 2" title="Rechazado">Reject</span>
@@ -274,7 +274,7 @@
                                 </td>
                                 <td class="text-center font-w600">{{ requests.credit_time }} days</td>
                                 <td class="hidden-xs">{{ parseDate(requests.date) }}</td>
-                                <td class="text-center">
+                                <td class="hidden-xs text-center">
                                      <a :href="'/credit-requests/'+ requests.id +'/credits'" class="btn btn-xs btn-success" data-toggle="tooltip" :title="requests.credits.length + ' créditos'">{{ requests.credits.length }} Credits</a>
                                 </td>
                                 <td class="text-center">
@@ -303,11 +303,11 @@
                         <thead>
                             <tr>
                                 <th class="text-center" title="ID">ID</th>
-                                <th class="text-center" title="Solicitud">Request</th>
+                                <th class="hidden-xs text-center" title="Solicitud">Request</th>
                                 <th class="text-center"><i class="si si-user"></i></th>
                                 <th class="text-center" title="Tiempo de crédito">Credit Time</th>
                                 <th class="hidden-xs" title="Fecha de solicitud" >Request Date</th>
-                                <th class="hidden-xs hidden-sm" title="Estado">Status</th>
+                                <th class="text-center" title="Estado">Status</th>
                                 <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
@@ -315,14 +315,14 @@
                            
                             <tr v-for="credit in credits.data" :key="credit.id">
                                 <td class="text-center font-w600">{{ credit.transaction_id }}</td>
-                                 <td class="text-center font-w600">{{ credit.credit_request.transaction_id }}</td>
+                                 <td class="hidden-xs text-center font-w600">{{ credit.credit_request.transaction_id }}</td>
                                 <td class="text-center">
                                     {{ credit.user.company.public_code }}
                                        
                                 </td>
                                 <td class="font-w600">{{ credit.credit_time }} days</td>
                                 <td class="hidden-xs">{{ parseDate(credit.date) }}</td>
-                                <td class="hidden-xs hidden-sm">
+                                <td class="text-center">
                                     <span class="label label-warning" v-show="credit.status == 0" title="Pendiente">Pending</span>
                                     <span class="label label-success" v-show="credit.status == 1" title="Concedido">Granted</span>
                                     <span class="label label-danger" v-show="credit.status == 2" title="Rechazado">Reject</span>
@@ -356,7 +356,7 @@
                                 <th class="text-center"><i class="si si-user"></i></th>
                                 <th class="text-center" title="Monto">Amount</th>
                                 <th class="hidden-xs" title="Fecha de compra">Purchase Date</th>
-                                <th class="hidden-xs hidden-sm" title="Estado">Status</th>
+                                <th class="text-center" title="Estado">Status</th>
                                 <th class="text-center" title="Acciones">Actions</th>
                             </tr>
                         </thead>
@@ -371,7 +371,7 @@
                                 </td>
                                 <td class="font-w600">{{ purchase.amount }} {{ purchase.currency }}</td>
                                 <td class="hidden-xs">{{ parseDate(purchase.created_at) }}</td>
-                                <td class="hidden-xs hidden-sm">
+                                <td class="text-center">
                                     <span class="label label-warning" v-show="purchase.status == 0" title="Pendiente">Pending</span>
                                     <span class="label label-success" v-show="purchase.status == 1" title="Concedido">Granted</span>
                                     <span class="label label-danger" v-show="purchase.status == 2" title="Rechazado">Reject</span>
