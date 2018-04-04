@@ -97,7 +97,11 @@
                         <div class="form-group" >
                             <div class="col-xs-12">
                                 <div class="form-material form-material-success">
-                                    {{ $company->activity }}
+                                   @if($company->activity == 1) 
+                                    <span title="Consumidor">Consumer</span>
+                                    @else
+                                    <span title="Suplidor">Supplier</span>
+                                    @endif
                                     <label for="activity" title="Actividad en la plataforma OBC">Activity on the OBC platform</label>
                                 </div>
                             </div>

@@ -130,7 +130,7 @@
     <div class="form-group{{ $errors->has('comments') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="comments" name="comments" value="{{ isset($purchase) ? $purchase->comments : ''  }}" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>
+                
                  <textarea class="form-control" name="comments" id="comments" cols="30" rows="3" {{ (isset($purchase) && !$purchase->isPending()) ? 'readonly' : '' }}>{{ isset($purchase) ? $purchase->comments : ''  }}</textarea>
                 <label for="comments" title="Comentario adicional">Additional comment</label>
                 @if ($errors->has('comments'))

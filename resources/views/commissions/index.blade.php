@@ -87,7 +87,7 @@
                                   @if($commission->status == 0)
                                     <button class="btn btn-success" type="submit" form="form-status-pay" formaction="/commissions/{{ $commission->id }}/status" title="Pagar">Change to Paid</button>
                                      @endif
-                                     @if($commission->status == 1 && auth()->user()->hasRole('admin'))
+                                     @if($commission->status == 1 && (auth()->user()->hasRole('admin') || auth()->user()->hasRole('superadmin')))
                                           <button class="btn btn-success" type="submit" form="form-status-paid" formaction="/commissions/{{ $commission->id }}/status" title="Confirmar Pago">Confirm pay</button>
                                     @endif
                                 </td>
