@@ -168,7 +168,7 @@ class QuotationController extends Controller
 
         $user = $quotationRequest->user->load('profile');
 
-        $company = auth()->user()->companies->first();
+        $company = $user->companies->first();
 
         $country = $company->countries->first();
 
