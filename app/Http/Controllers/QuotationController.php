@@ -168,10 +168,25 @@ class QuotationController extends Controller
 
         $user = $quotationRequest->user->load('profile');
 
+        $company = $user->companies->first();
+
+        $country = $company->countries->first();
+
+        $currencies = [
+            [
+                'currency' => $country->currency,
+                'symbol' => $country->currency_symbol
+            ],
+            [
+                'currency' => 'USD',
+                'symbol' => '$'
+            ]
+        ];
+
         //$creditDays = CreditDays::all();
         $discount = GlobalSetting::first() ? GlobalSetting::first()->discount : 0;
 
-        return view('quotations.edit', compact('user', 'partner', 'quotation', 'quotationRequest', 'discount'));
+        return view('quotations.edit', compact('user', 'partner', 'quotation', 'quotationRequest', 'discount', 'currencies'));
     }
 
     /**
