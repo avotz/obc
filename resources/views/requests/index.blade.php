@@ -13,7 +13,8 @@
         <div class="col-sm-6 col-lg-4">
             <div class="block block-link-hover3" href="javascript:void(0)">
                 @include('requests/partials/item', ['request' => $request, 'partner' =>  $request->user->companies->first(),  'user' =>  $request->user])
-                @if(auth()->user()->companies->first()->id == $request->company_id )
+               
+                @if(auth()->user()->companies->first() && auth()->user()->companies->first()->id == $request->company_id )
                 <div class="block-content">
                     <div class="row items-push text-center">
                         <a class="col-xs-4" href="/requests/{{ $request->id }}/quotations">
@@ -43,10 +44,12 @@
                             <div class="push-5"><i class="si si-cloud-download fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted" title="Descargar">Download</div>
                         </a>
+                        @if(auth()->user()->companies->first())
                         <a class="col-xs-4" href="/requests/{{ $request->id }}/quotations/create">
                             <div class="push-5"><i class="si si-wallet fa-2x"></i></div>
                             <div class="h5 font-w300 text-muted" title="Subir Oferta">Submit Offer</div>
                         </a>
+                        @endif
                         
                     </div>
                 </div>

@@ -15,7 +15,13 @@
                        
                    
                 </select>
-                <label for="delivery_time" title="Tiempo de entrega">Delivery time <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->delivery_time : '' }})</span> </label>
+                <label for="delivery_time" title="Tiempo de entrega">Delivery time 
+                @if(isset($quotation) && isset($quotationRequest) && $quotation->delivery_time != $quotationRequest->delivery_time)
+                    <span class="label label-danger">( {{ $quotationRequest->delivery_time}} {{ trans('utils.days') }})</span>
+                @endif
+                
+                
+                 </label>
                 @if ($errors->has('delivery_time'))
                     <span class="help-block">
                         <strong title="{{ validationRequiredES('Tiempo de entrega') }}">{{ $errors->first('delivery_time') }}</strong>
@@ -43,7 +49,11 @@
                   
                    
                 </select>
-                <label for="way_of_delivery" title="Manera de entrega">Way of delivery <span class="label label-danger">({{ isset($quotationRequest) ? $quotationRequest->way_of_delivery : '' }})</span></label>
+                <label for="way_of_delivery" title="Manera de entrega">Way of delivery 
+                @if(isset($quotation) && isset($quotationRequest) && $quotation->way_of_delivery != $quotationRequest->way_of_delivery)
+                    <span class="label label-danger">({{ trans('utils.way_of_delivery.'.$quotationRequest->way_of_delivery) }})</span>
+                @endif
+                </label>
                 @if ($errors->has('way_of_delivery'))
                     <span class="help-block">
                         <strong title="{{ validationRequiredES('Manera de entrega') }}">{{ $errors->first('way_of_delivery') }}</strong>
@@ -65,7 +75,18 @@
                     @endforeach
                    
                 </select>
-                <label for="way_to_pay" title="Manera de pago">Way to pay <span class="label label-danger">(Credit {{ isset($quotationRequest) ? $quotationRequest->way_to_pay : '' }} days)</span></label>
+                <label for="way_to_pay" title="Manera de pago">Way to pay 
+                 @if(isset($quotation) && isset($quotationRequest) && $quotation->way_to_pay != $quotationRequest->way_to_pay)
+                    <span class="label label-danger">
+                       @if($quotationRequest->way_to_pay)
+                        ( {{ trans('utils.credit') }} {{ $quotationRequest->way_to_pay}} {{ trans('utils.days') }})
+                        @else
+                            {{ trans('utils.cash') }}
+                        @endif
+                    </span>
+                @endif
+            
+                </label>
                 @if ($errors->has('way_to_pay'))
                     <span class="help-block">
                         <strong title="{{ validationRequiredES('Manera de pago') }}">{{ $errors->first('way_to_pay') }}</strong>
@@ -81,7 +102,12 @@
             <div class="form-material form-material-success">
                
                 <textarea class="form-control" name="comments" id="comments" cols="30" rows="3">{{ isset($quotation) ? $quotation->comments : $quotationRequest->comments  }}</textarea>
-                <label for="comments" title="Comentarios adicionales">Additional comment <span class="label label-danger">({{ str_limit(isset($quotationRequest) ? $quotationRequest->comments : '' , 20) }})</span></label>
+                <label for="comments" title="Comentarios adicionales">Additional comment 
+                @if(isset($quotation) && isset($quotationRequest) && $quotation->comments != $quotationRequest->comments)
+                    <span class="label label-danger">({{ str_limit(isset($quotationRequest) ? $quotationRequest->comments : '' , 20) }})</span>
+                @endif
+        
+                </label>
                 @if ($errors->has('comments'))
                     <span class="help-block">
                         <strong title="{{ validationRequiredES('Comentarios adicionales') }}">{{ $errors->first('comments') }}</strong>

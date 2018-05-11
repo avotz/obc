@@ -59,6 +59,8 @@ class QuotationController extends Controller
         // $creditDays = CreditDays::all();
         $company = auth()->user()->companies->first();
 
+        if(!$company) return redirect('/public/requests');
+
         $country = $company->countries->first();
 
         $currencies = [

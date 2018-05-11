@@ -306,6 +306,7 @@ class DatabaseSeeder extends Seeder
         $user = factory(User::class, 1)->create()->first();
 
         $user->AddToCompany($company);
+        $partner->AddToCompany($company);
 
         \DB::table('country_user')->insert(
             ['country_id' => $country->id, 'user_id' => $user->id]

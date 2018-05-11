@@ -73,7 +73,6 @@ class AccountController extends Controller
                     'physical_address' => 'required|string|max:255',
                     'country' => 'required',
                     'towns' => 'required|string|max:255',
-                    'web_address' => 'required|string|max:255',
                     'legal_name' => 'required|string|max:255',
                     'legal_first_surname' => 'required|string|max:255',
                     'legal_second_surname' => 'required|string|max:255',
