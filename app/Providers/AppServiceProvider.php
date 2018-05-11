@@ -65,6 +65,15 @@ class AppServiceProvider extends ServiceProvider
            
             $view->with(compact('creditDays'));
         });
+
+        view()->composer('superadmin.users.edit', function ($view) {
+            $sectors = \App\Sector::get()->toTree();
+
+
+            $view->with(compact('sectors'));
+        });
+
+       
     }
 
     /**

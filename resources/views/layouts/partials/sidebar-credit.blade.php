@@ -15,6 +15,10 @@
                                 <li>
                                     <a class="active" href="/" title="Inicio"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Home</span></a>
                                 </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/public/requests" title="Publicaciones"><i class="si si-layers"></i><span class="sidebar-mini-hide">Publications</span></a>
+
+                                </li>
                                 
                                
                                 <li>

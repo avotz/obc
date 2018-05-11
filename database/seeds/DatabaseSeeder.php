@@ -220,6 +220,9 @@ class DatabaseSeeder extends Seeder
         factory(Role::class, 1)->create([ //credit
             'name' => 'credit',
         ]);
+        factory(Role::class, 1)->create([ //subadmin
+            'name' => 'subadmin',
+        ]);
 
         foreach ($this->permissions as $permission) {
             \DB::table('permissions')->insert(

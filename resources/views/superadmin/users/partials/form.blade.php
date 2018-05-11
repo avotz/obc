@@ -14,7 +14,7 @@
     <div class="form-group{{ $errors->has('first_surname') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ isset($user) ? $user->profile->applicant_name : old('first_surname') }}">
+                <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ isset($user) ? $user->profile->first_surname : old('first_surname') }}">
                 <label for="first_surname" title="Primer apellido"> First surname</label>
                 @if ($errors->has('first_surname'))
                     <span class="help-block">
@@ -53,11 +53,11 @@
         </div>
     </div>
     
-    <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+    <!-- <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
                 <select class="select-country form-control" name="country" id="country" >
-                    <!-- <option></option>Required for data-placeholder attribute to work with Chosen plugin -->
+                    <option></option>Required for data-placeholder attribute to work with Chosen plugin 
                     @foreach($countries as $country)    
                         <option value="{{ $country->id }}" @if(isset($user) && $user->countries->first()->id == $country->id) selected="selected" @endif>{{ $country->name }}</option>
                     @endforeach
@@ -70,11 +70,11 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <select class="form-control" name="role" id="role" >
+                <select class="form-control" name="role" id="role" {{ (isset($user)) ? 'disabled' : '' }}>
                         <option value=""></option>
                     @foreach($roles as $role)    
                         <option value="{{ $role->id }}" @if(isset($user) && $user->hasRole($role->name)) selected="selected" @endif>{{ $role->name }}</option>

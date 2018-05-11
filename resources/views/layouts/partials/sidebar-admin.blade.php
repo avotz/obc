@@ -15,6 +15,10 @@
                                 <li>
                                     <a class="active" href="/" title="Inicio"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Home</span></a>
                                 </li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/public/requests" title="Publicaciones"><i class="si si-layers"></i><span class="sidebar-mini-hide">Publications</span></a>
+
+                                </li>
                                 @if(auth()->user()->hasPermission('create_users'))
                                 <li>
                                     <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/users" title="Lista de usuarios"><i class="si si-users"></i><span class="sidebar-mini-hide">User List</span></a>
@@ -35,7 +39,7 @@
                                 @endif
                                  @if(auth()->user()->hasPermission('view_all_trans_company'))
                                 <li>
-                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="/{{ ($role->name == 'subadmin') ? 'admin' : $role->name }}/transactions" title="Transacciones"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Transactions</span></a>
                                    
                                 </li>
                                 @endif

@@ -30,21 +30,45 @@
         
         <div class="col-sm-7 col-lg-8">
             <!-- Products -->
+             @if($user->hasRole('partner') || $user->hasRole('user'))
             <div class="block">
                 <div class="block-header bg-gray-lighter">
                     <ul class="block-options">
                         
                     </ul>
-                    <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-fw fa-user"></i> User Account</h3>
+                    <h3 class="block-title" title="Compañia"><i class="fa fa-fw fa-user"></i> Company</h3>
                 </div>
                 <div class="block-content">
-                    <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users/{{ $user->id }}">
-                        <input type="hidden" name="_method" value="PUT">
-                        {{ csrf_field() }}
-                         @include('admin/users/partials/form')
+               
+                 <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users/{{ $user->id }}/companies/{{$user->companies->first()->id}}">
+                     <input type="hidden" name="_method" value="PUT">
+                                {{ csrf_field() }}
+                           @include('partner/partials/form-company',['company' => $user->companies->first(), 'sectors'=> $sectors ])
                     </form>
+                    
+             
+                    
+                    
                 </div>
             </div>
+            @else
+                <div class="block">
+                    <div class="block-header bg-gray-lighter">
+                        <ul class="block-options">
+                            
+                        </ul>
+                        <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-fw fa-user"></i> User Account</h3>
+                    </div>
+                    <div class="block-content">
+                        <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users/{{ $user->id }}">
+                            <input type="hidden" name="_method" value="PUT">
+                            {{ csrf_field() }}
+                            @include('admin/users/partials/form')
+                        </form>
+                    </div>
+                </div> 
+
+            @endif
             <!-- END Products -->
 
            
@@ -82,6 +106,27 @@
             @endif
             <!-- END Company Data -->
 
+            @if($user->hasRole('partner') || $user->hasRole('user'))
+            <div class="block">
+                <div class="block-header bg-gray-lighter">
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                        </li>
+                        
+                    </ul>
+                    <h3 class="block-title" title="Cuenta de usuario"><i class="fa fa-home"></i> User Account</h3>
+                </div>
+                <div class="block-content block-content-full block-content-narrow">
+                     <form class="js-validation-register form-horizontal push-50" method="POST" action="/admin/users/{{ $user->id }}">
+                            <input type="hidden" name="_method" value="PUT">
+                            {{ csrf_field() }}
+                            @include('admin/users/partials/form')
+                        </form>
+                </div>
+            </div>
+            @endif
+
            
         </div>
     </div>
@@ -95,6 +140,46 @@
 <script src="/js/plugins/ajaxupload.js"></script>
 <script>
     jQuery('.js-select2').select2();
+
+     function matchEsLabel(params, data) {
+       
+       // If there are no search terms, return all of the data
+        if ($.trim(params.term) === '') {
+            return data;
+        }
+
+        // Skip if there is no 'children' property
+        if (typeof data.children === 'undefined') {
+            return null;
+        }
+
+        // `data.children` contains the actual options that we are matching against
+        var filteredChildren = [];
+        $.each(data.children, function (idx, child) {
+            if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0 || child.title.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
+            filteredChildren.push(child);
+            }
+        });
+
+        // If we matched any of the timezone group's children, then set the matched children on the group
+        // and return the group object
+        if (filteredChildren.length) {
+            var modifiedData = $.extend({}, data, true);
+            modifiedData.children = filteredChildren;
+
+            // You can return modified objects from here
+            // This includes matching the `children` how you want in nested data sets
+            return modifiedData;
+        }
+
+        // Return `null` if the term should not be displayed
+        return null;
+    }
+
+    jQuery('.select-sectors').select2({
+        matcher: matchEsLabel
+    });
+    
     $("#UploadPhoto").ajaxUpload({
       url : $("#UploadPhoto").data('url'),
       name: "photo",

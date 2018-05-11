@@ -30,8 +30,20 @@ class HomeController extends Controller
     {
        
         if(!auth()->user()->active){
+            
+            if(auth()->user()->hasRole('user')){
+
+                auth()->logout();
+
+                return view('inactive-account-user');
+
+            }
+
             auth()->logout();
+
             return view('inactive-account');
+            
+           
         }
 
         

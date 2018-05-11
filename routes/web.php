@@ -102,6 +102,7 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::get('/users/{user}/edit', 'Superadmin\UserController@edit');
     Route::put('/users/{user}/country', 'Superadmin\UserController@updateCountry');
     Route::put('/users/{user}/permissions', 'Superadmin\UserController@updatePermissions');
+    Route::put('/users/{user}/companies/{company}', 'Superadmin\UserController@updateCompany');
 
     foreach (['active', 'inactive', 'trial', 'notrial'] as $key) {
         Route::post('/users/{user}/' . $key, [
@@ -132,6 +133,8 @@ Route::prefix('superadmin')->middleware('authByRole:superadmin')->group(function
     Route::get('credit-requests/list', 'Superadmin\TransactionController@getCreditRequests');
     Route::get('credits/list', 'Superadmin\TransactionController@getCredits');
     Route::get('purchase-orders/list', 'Superadmin\TransactionController@getPurchaseOrders');
+
+   
 });
 
 Route::prefix('admin')->middleware('authByRole:admin')->group(function () {
@@ -142,8 +145,8 @@ Route::prefix('admin')->middleware('authByRole:admin')->group(function () {
     Route::delete('/users/{user}', 'Admin\UserController@delete');
     Route::put('/users/{user}', 'Admin\UserController@update');
     Route::get('/users/{user}/edit', 'Admin\UserController@edit');
-    Route::put('/companies/{company}', 'Admin\UserController@updateCompany');
     Route::put('/users/{user}/permissions', 'Admin\UserController@updatePermissions');
+    Route::put('/users/{user}/companies/{company}', 'Admin\UserController@updateCompany');
 
     Route::get('transactions', 'Admin\TransactionController@index');
     Route::get('quotation-requests/list', 'Admin\TransactionController@getQuotationRequests');

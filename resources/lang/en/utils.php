@@ -11,7 +11,8 @@ return [
             '3' => 'info',
             '4' => 'success',
             '5' => 'danger',
-            '6' => 'danger'
+            '6' => 'danger',
+            '7' => 'danger'
         ],
         /*'way_to_pay'  => [
             '0' => 'Cash',

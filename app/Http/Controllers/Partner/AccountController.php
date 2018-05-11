@@ -68,7 +68,7 @@ class AccountController extends Controller
         $this->validate(
             request(),
             [
-                    'activity' => 'required',
+                    //'activity' => 'required',
                     'phones' => 'required|string|max:255',
                     'physical_address' => 'required|string|max:255',
                     'country' => 'required',

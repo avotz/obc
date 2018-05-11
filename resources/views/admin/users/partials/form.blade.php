@@ -14,7 +14,7 @@
     <div class="form-group{{ $errors->has('first_surname') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ isset($user) ? $user->profile->applicant_name : old('first_surname') }}">
+                <input class="form-control" type="text" id="first_surname" name="first_surname" value="{{ isset($user) ? $user->profile->first_surname : old('first_surname') }}">
                 <label for="first_surname" title="Primer apellido"> First surname</label>
                 @if ($errors->has('first_surname'))
                     <span class="help-block">
@@ -57,7 +57,7 @@
     <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
         <div class="col-xs-12">
             <div class="form-material form-material-success">
-                <select class="form-control" name="role" id="role" >
+                <select class="form-control" name="role" id="role" {{ (isset($user)) ? 'disabled' : '' }}>
                     
                     @foreach($roles as $role)    
                         <option value="{{ $role->id }}" @if(isset($user) && $user->hasRole($role->name)) selected="selected" @endif>{{ $role->name }}</option>

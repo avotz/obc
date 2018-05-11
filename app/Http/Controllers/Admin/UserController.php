@@ -39,6 +39,7 @@ class UserController extends Controller
         $users = User::whereHas('roles', function ($q) {
             $q->where('name', 'partner')
              ->orWhere('name', 'admin')
+              ->orWhere('name', 'subadmin')
              ->orWhere('name', 'user');
         });
 
@@ -59,6 +60,7 @@ class UserController extends Controller
         $pendingUsers = User::whereHas('roles', function ($q) {
             $q->where('name', 'partner')
                     ->orWhere('name', 'admin')
+                    ->orWhere('name', 'subadmin')
                     ->orWhere('name', 'user');
         })->whereHas('countries', function ($q) {
             $q->where('id', auth()->user()->countries->first()->id);
@@ -74,7 +76,7 @@ class UserController extends Controller
         }
 
         $roles = Role::where(function ($q) {
-            $q->where('name', 'admin');
+            $q->where('name', 'subadmin');
         })->get();
 
         $permissions = Permission::where(function ($q) {
@@ -99,8 +101,11 @@ class UserController extends Controller
         $data = request()->all();
         $data['role'] = Role::where('id', $data['role'])->first();
         $data['country'] = auth()->user()->countries->first()->id;
-
+        $data['active'] = 1;
+        $data['pending'] = 0;
         $user = $this->userRepo->store($data);
+
+        $user->assignRole(Role::where('name', 'admin')->first());
 
         $user->permissions()->sync(request('permissions'));
 
@@ -148,7 +153,7 @@ class UserController extends Controller
              'second_surname' => 'required|string|max:255',
              //'position_held' => 'required|string|max:255',
              'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
-             'role' => 'required',
+             //'role' => 'required',
          ]
       );
 
@@ -171,17 +176,16 @@ class UserController extends Controller
         return back();
     }
 
-    public function updateCompany(Company $company)
+    public function updateCompany(User $user, Company $company)
     {
         $this->validate(
              request(),
              [
-                     'activity' => 'required',
+                     //'activity' => 'required',
                      'phones' => 'required|string|max:255',
                      'physical_address' => 'required|string|max:255',
                      'country' => 'required',
                      'towns' => 'required|string|max:255',
-                     'web_address' => 'required|string|max:255',
                      'legal_name' => 'required|string|max:255',
                      'legal_first_surname' => 'required|string|max:255',
                      'legal_second_surname' => 'required|string|max:255',

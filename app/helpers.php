@@ -115,7 +115,7 @@ function getLogo($company)
         $url = Storage::url('companies/' . $company->id . '/logo.jpg');
         $url = $url . '?' . uniqid();
     } else {
-        $url = '/img/logo-obc.png';
+        $url = '/img/logo-default.png';
     }
 
     return $url;

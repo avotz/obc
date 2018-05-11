@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\GlobalSetting;
 use App\Permission;
 use App\Mail\NewUserActivate;
+use App\Company;
 
 class UserController extends Controller
 {
@@ -150,7 +151,7 @@ class UserController extends Controller
             'first_surname' => 'required|string|max:255',
             'second_surname' => 'required|string|max:255',
             'email' => ['required', 'email', Rule::unique('users')->ignore($id)],
-            'role' => 'required',
+            //'role' => 'required',
             'country' => 'required',
         ]
         );
@@ -172,6 +173,38 @@ class UserController extends Controller
         flash('Cuenta Actualizada', 'success');
 
         return back();
+    }
+
+    public function updateCompany(User $user, Company $company)
+    {
+        $this->validate(
+            request(),
+            [
+                //'activity' => 'required',
+                'phones' => 'required|string|max:255',
+                'physical_address' => 'required|string|max:255',
+                'country' => 'required',
+                'towns' => 'required|string|max:255',
+                'legal_name' => 'required|string|max:255',
+                'legal_first_surname' => 'required|string|max:255',
+                'legal_second_surname' => 'required|string|max:255',
+                'legal_email' => 'required|string|email|max:255',
+            ]
+        );
+
+        $data = request()->all();
+        $company->fill($data);
+        $company->save();
+
+        $company->countries()->sync($data['country']);
+
+        if (isset($data['sectors'])) {
+            $company->sectors()->sync($data['sectors']);
+        }
+
+        flash('Company Updated', 'success');
+
+        return redirect()->back();
     }
 
     /**

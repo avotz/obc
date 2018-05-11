@@ -26,7 +26,7 @@
                     <div class="form-group{{ $errors->has('activity') ? ' has-error' : '' }}">
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
-                                <select name="activity" id="activity"  class="form-control">
+                                <select name="activity" id="activity"  class="form-control" disabled>
                                     <option value=""></option>
                                     <option value="1" @if($company->activity == 1) selected="selected" @endif title="Consumidor">Consumer</option>
                                     <option value="2" @if($company->activity == 2) selected="selected" @endif title="Suplidor">Supplier</option>
@@ -40,6 +40,7 @@
                             </div>
                         </div>
                     </div>
+                    @if($company->activity == 2)
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
@@ -54,6 +55,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group{{ $errors->has('phones') ? ' has-error' : '' }}">
                         <div class="col-xs-12">
                             <div class="form-material form-material-success">
